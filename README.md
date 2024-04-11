@@ -11,6 +11,7 @@ También se podrá ver el listado de los miembros del Departamento con sus datos
 - Visualizar los datos de un ciudadano (Nombre, Apellido, Fecha de nacimiento, Nacionalidad, Padres Biológicos*, Mail*, Teléfono*, Dirección*, Estado civil, Pareja de hecho*, Fallecido)
 - Editar los datos de un Ciudadano.
 - Eliminar un Ciudadano.
+  
 _Los campos "*" serán opcionales._
 
 ### Vehículos
