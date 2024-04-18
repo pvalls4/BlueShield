@@ -1,5 +1,5 @@
 
-package model;
+package model.DTO;
 
 public class DireccionDTO {
     
