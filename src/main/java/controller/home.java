@@ -16,8 +16,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Mati
  */
-@WebServlet(name = "servletejemplo", urlPatterns = {"/servletejemplo"})
-public class servletejemplo extends HttpServlet {
+@WebServlet(name = "home", urlPatterns = {"/home"})
+public class home extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +36,10 @@ public class servletejemplo extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet servletejemplo</title>");            
+            out.println("<title>Servlet home</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet servletejemplo at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet home at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
