@@ -1,47 +1,60 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-/**
- *
- * @author CA
- */
 public class VehiculoDTO {
 
-    private String id;
-    private int bastidor;
+    private String bastidor;
+    private String matricula;
+    private CiudadanoDTO ciudadano;
     private ModeloDTO modelo;
-    private String enlaceFotografico;
 
-    public VehiculoDTO(String id, int bastidor, ModeloDTO modelo, String enlaceFotografico) {
-        this.id = id;
+    /**
+     * 
+     * @param bastidor
+     * @param matricula
+     * @param ciudadano
+     * @param modelo 
+     */
+    public VehiculoDTO(String bastidor, String matricula, CiudadanoDTO ciudadano, ModeloDTO modelo) {
         this.bastidor = bastidor;
+        this.matricula = matricula;
+        this.ciudadano = ciudadano;
         this.modelo = modelo;
-        this.enlaceFotografico = enlaceFotografico;
     }
-    
-    public VehiculoDTO(int bastidor, ModeloDTO modelo, String enlaceFotografico) {
-        this.bastidor = bastidor;
+
+    /**
+     * 
+     * @param matricula
+     * @param ciudadano
+     * @param modelo 
+     */
+    public VehiculoDTO(String matricula, CiudadanoDTO ciudadano, ModeloDTO modelo) {
+        this.matricula = matricula;
+        this.ciudadano = ciudadano;
         this.modelo = modelo;
-        this.enlaceFotografico = enlaceFotografico;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public int getBastidor() {
+    public String getBastidor() {
         return bastidor;
     }
 
-    public void setBastidor(int bastidor) {
+    public void setBastidor(String bastidor) {
         this.bastidor = bastidor;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public CiudadanoDTO getCiudadano() {
+        return ciudadano;
+    }
+
+    public void setCiudadano(CiudadanoDTO ciudadano) {
+        this.ciudadano = ciudadano;
     }
 
     public ModeloDTO getModelo() {
@@ -52,19 +65,9 @@ public class VehiculoDTO {
         this.modelo = modelo;
     }
 
-    public String getEnlaceFotografico() {
-        return enlaceFotografico;
-    }
-
-    public void setEnlaceFotografico(String enlaceFotografico) {
-        this.enlaceFotografico = enlaceFotografico;
-    }
-
     @Override
     public String toString() {
-        return "VehiculoDTO{" + "id=" + id + ", bastidor=" + bastidor + ", modelo=" + modelo + ", enlaceFotografico=" + enlaceFotografico + '}';
+        return "VehiculoDTO{" + "bastidor=" + bastidor + ", matricula=" + matricula + ", ciudadano=" + ciudadano + ", modelo=" + modelo + '}';
     }
-    
-    
     
 }

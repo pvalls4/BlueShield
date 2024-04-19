@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 /**
@@ -28,6 +24,13 @@ public class TokensDTO {
         PETICION
     }
 
+    /**
+     * 
+     * @param id
+     * @param token
+     * @param estado
+     * @param tipo 
+     */
     public TokensDTO(int id, String token, Estado estado, Tipo tipo) {
         this.id = id;
         this.token = token;
@@ -35,6 +38,18 @@ public class TokensDTO {
         this.tipo = tipo;
     }
 
+    /**
+     * 
+     * @param token
+     * @param estado
+     * @param tipo 
+     */
+    public TokensDTO(String token, Estado estado, Tipo tipo) {
+        this.token = token;
+        this.estado = estado;
+        this.tipo = tipo;
+    }
+    
     public int getId() {
         return id;
     }

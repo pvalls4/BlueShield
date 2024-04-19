@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 /**
@@ -14,12 +10,23 @@ public class ModeloDTO {
     private String nombreModelo;
     private String nombreMarca;
 
+    /**
+     * 
+     * @param id
+     * @param nombreModelo
+     * @param nombreMarca 
+     */
     public ModeloDTO(int id, String nombreModelo, String nombreMarca) {
         this.id = id;
         this.nombreModelo = nombreModelo;
         this.nombreMarca = nombreMarca;
     }
-
+    
+    /**
+     * 
+     * @param nombreModelo
+     * @param nombreMarca 
+     */
     public ModeloDTO(String nombreModelo, String nombreMarca) {
         this.nombreModelo = nombreModelo;
         this.nombreMarca = nombreMarca;
