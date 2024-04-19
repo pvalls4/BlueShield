@@ -1,9 +1,5 @@
-package model;
+package model.DTO;
 
-/**
- *
- * @author CA
- */
 public class TokensDTO {
     // Atributos
     private int id;

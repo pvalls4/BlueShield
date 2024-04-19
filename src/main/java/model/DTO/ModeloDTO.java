@@ -1,9 +1,5 @@
-package model;
+package model.DTO;
 
-/**
- *
- * @author CA
- */
 public class ModeloDTO {
 
     private int id;
