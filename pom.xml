@@ -13,7 +13,6 @@
         <maven.compile.source>21</maven.compile.source>
         <maven.compiler.target>21</maven.compiler.target>
     </properties>
-    
     <dependencies>
         <dependency>
             <groupId>jakarta.platform</groupId>
@@ -44,7 +43,7 @@
         <resources>
             <resource>
                 <directory>
-                    src/main/resources
+                    src/main/resources/
                 </directory>
             </resource>
         </resources>

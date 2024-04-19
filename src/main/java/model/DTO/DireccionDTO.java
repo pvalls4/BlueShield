@@ -1,4 +1,3 @@
-
 package model.DTO;
 
 public class DireccionDTO {
@@ -10,6 +9,7 @@ public class DireccionDTO {
     private String piso;
     private String puerta;
     private int numero;
+        
     
     /**
      * 
