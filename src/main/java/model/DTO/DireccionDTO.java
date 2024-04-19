@@ -5,13 +5,24 @@ public class DireccionDTO {
     
     private int id;
     private String municipio;
-    private int codigoPostal;
+    private String codigoPostal;
     private String calle;
-    private byte piso;
-    private short puerta;
-    private short numero;
+    private String piso;
+    private String puerta;
+    private int numero;
     
-    public DireccionDTO(int id, String municipio, int codigoPostal, String calle, byte piso, short puerta, short numero) {
+    /**
+     * 
+     * @param id
+     * @param municipio
+     * @param codigoPostal
+     * @param calle
+     * @param piso
+     * @param puerta
+     * @param numero 
+     */
+    
+    public DireccionDTO(int id, String municipio, String codigoPostal, String calle, String piso, String puerta, int numero) {
         this.id = id;
         this.municipio = municipio;
         this.codigoPostal = codigoPostal;
@@ -20,8 +31,18 @@ public class DireccionDTO {
         this.puerta = puerta;
         this.numero = numero;
     }
-
-    public DireccionDTO(String municipio, int codigoPostal, String calle, byte piso, short puerta, short numero) {
+    
+    /**
+     * 
+     * @param municipio
+     * @param codigoPostal
+     * @param calle
+     * @param piso
+     * @param puerta
+     * @param numero 
+     */
+    
+    public DireccionDTO(String municipio, String codigoPostal, String calle, String piso, String puerta, int numero) {
         this.municipio = municipio;
         this.codigoPostal = codigoPostal;
         this.calle = calle;
@@ -30,11 +51,11 @@ public class DireccionDTO {
         this.numero = numero;
     }
 
-    public short getNumero() {
+    public int getNumero() {
         return numero;
     }
 
-    public void setNumero(short numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
     }
     
@@ -55,11 +76,11 @@ public class DireccionDTO {
         this.municipio = municipio;
     }
 
-    public int getCodigoPostal() {
+    public String getCodigoPostal() {
         return codigoPostal;
     }
 
-    public void setCodigoPostal(int codigoPostal) {
+    public void setCodigoPostal(String codigoPostal) {
         this.codigoPostal = codigoPostal;
     }
 
@@ -71,19 +92,19 @@ public class DireccionDTO {
         this.calle = calle;
     }
 
-    public byte getPiso() {
+    public String getPiso() {
         return piso;
     }
 
-    public void setPiso(byte piso) {
+    public void setPiso(String piso) {
         this.piso = piso;
     }
 
-    public short getPuerta() {
+    public String getPuerta() {
         return puerta;
     }
 
-    public void setPuerta(short puerta) {
+    public void setPuerta(String puerta) {
         this.puerta = puerta;
     }
 
