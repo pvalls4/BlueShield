@@ -3,29 +3,34 @@ package model.DTO;
 public class ModeloDTO {
 
     private int id;
-    private String nombreModelo;
-    private String nombreMarca;
+    private String marca;
+    private String modelo;
+    private String imagen;
 
     /**
      * 
      * @param id
-     * @param nombreModelo
-     * @param nombreMarca 
+     * @param marca
+     * @param modelo
+     * @param imagen 
      */
-    public ModeloDTO(int id, String nombreModelo, String nombreMarca) {
+    public ModeloDTO(int id, String marca, String modelo, String imagen) {
         this.id = id;
-        this.nombreModelo = nombreModelo;
-        this.nombreMarca = nombreMarca;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.imagen = imagen;
     }
-    
+
     /**
      * 
-     * @param nombreModelo
-     * @param nombreMarca 
+     * @param marca
+     * @param modelo
+     * @param imagen 
      */
-    public ModeloDTO(String nombreModelo, String nombreMarca) {
-        this.nombreModelo = nombreModelo;
-        this.nombreMarca = nombreMarca;
+    public ModeloDTO(String marca, String modelo, String imagen) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.imagen = imagen;
     }
 
     public int getId() {
@@ -36,25 +41,34 @@ public class ModeloDTO {
         this.id = id;
     }
 
-    public String getNombreModelo() {
-        return nombreModelo;
+    public String getModelo() {
+        return modelo;
     }
 
-    public void setNombreModelo(String nombreModelo) {
-        this.nombreModelo = nombreModelo;
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 
-    public String getNombreMarca() {
-        return nombreMarca;
+    public String getMarca() {
+        return marca;
     }
 
-    public void setNombreMarca(String nombreMarca) {
-        this.nombreMarca = nombreMarca;
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    
     @Override
     public String toString() {
-        return "ModeloDTO{" + "id=" + id + ", nombreModelo=" + nombreModelo + ", nombreMarca=" + nombreMarca + '}';
+        return "ModeloDTO{" + "id=" + id + ", nombreModelo=" + modelo + ", nombreMarca=" + marca + '}';
     }
     
     
