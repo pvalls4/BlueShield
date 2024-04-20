@@ -6,58 +6,60 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.DTO.ModeloDTO;
-import model.DTO.VehiculoDTO;
+import model.DTO.*;
 
-public class ModeloDAO {
+public class TokensDAO {
 
-    private static final String SQL_SELECT_ALL = "SELECT * FROM modelos";
-    private static final String SQL_SELECT = "SELECT * FROM modelos WHERE id= ?";
-    private static final String SQL_INSERT = "INSERT INTO modelos(marca, modelo, imagen) VALUES(?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE modelos SET marca=?, modelo=?, image=? WHERE id = ?";
-    private static final String SQL_DELETE = "DELETE FROM modelos WHERE id=?";
+    private static final String SQL_SELECT_ALL = "SELECT * FROM tokens;";
+    private static final String SQL_SELECT = "SELECT * FROM tokens WHERE id = ?;";
+    private static final String SQL_INSERT = "INSERT INTO tokens(token, estado, tipo, idAdmins, idAgentes) VALUES(?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tokens SET token=?, estado=?, tipo=?, idAdmins=?, idAgentes=? WHERE id = ?";
+    private static final String SQL_DELETE = "DELETE FROM tokens WHERE id=?";
 
-    private ModeloDTO fromResultSet(ResultSet rs) throws SQLException {
-        String marca = rs.getString("marca");
-        String modelo = rs.getString("modelo");
-        String imagen = rs.getString("imagen");
+    private TokensDTO fromResultSet(ResultSet rs) throws SQLException {
+        int id = rs.getInt("id");
+        String token = rs.getString("token");
+        TokensDTO.Estado estado = TokensDTO.Estado.valueOf(rs.getString("estado"));
+        TokensDTO.Tipo tipo = TokensDTO.Tipo.valueOf(rs.getString("tipo"));
+       
+        int idAdmins = rs.getInt("idAdmins");
+        AdminDTO admin=new AdminDAO().select(idAdmins);
+        
+        int idAgentes = rs.getInt("idAgentes");
+        AgenteDTO agente=new AgenteDAO().select(idAgentes);
 
-        ModeloDTO modeloDTO = new ModeloDTO(marca, modelo, imagen);
+        TokensDTO tokensDTO = new TokensDTO(id, token, estado, tipo, admin, agente);
 
-        return modeloDTO;
+        return tokensDTO;
     }
 
-    public List<ModeloDTO> selectAll() throws SQLException {
+    public List<TokensDTO> selectAll() throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        ModeloDTO modeloDTO = null;
-        List<ModeloDTO> modelos = new ArrayList<ModeloDTO>();
+        TokensDTO tokensDTO = null;
+        List<TokensDTO> tokens = new ArrayList<TokensDTO>();
 
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT_ALL);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                modeloDTO = fromResultSet(rs);
-                if (modeloDTO != null) {
-                    modelos.add(modeloDTO);
-                }
+                tokensDTO = fromResultSet(rs);
+                tokens.add(tokensDTO);
             }
         } finally {
             Conexion.close(rs);
             Conexion.close(stmt);
         }
-
-        return modelos;
+        return tokens;
     }
 
-    public ModeloDTO select(int id) throws SQLException {
+    public TokensDTO select(int id) throws SQLException {
+        TokensDTO tokenDTO = null;
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        ModeloDTO modeloDTO = null;
-
         try {
             conn = Conexion.getConnection();
             if (conn != null) {
@@ -65,27 +67,28 @@ public class ModeloDAO {
                 stmt.setInt(1, id);
                 rs = stmt.executeQuery();
                 if (rs.next()) {
-                    modeloDTO = fromResultSet(rs);
+                    tokenDTO = fromResultSet(rs);
                 }
             }
         } finally {
             Conexion.close(rs);
             Conexion.close(stmt);
         }
-
-        return modeloDTO;
+        return tokenDTO;
     }
 
-    public int insert(ModeloDTO modeloDTO) throws SQLException {
+    public int insert(TokensDTO tokens) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1, modeloDTO.getMarca());
-            stmt.setString(2, modeloDTO.getModelo());
-            stmt.setString(3, modeloDTO.getImagen());
+            stmt.setString(1, tokens.getToken());
+            stmt.setString(2, tokens.getEstado().name());
+            stmt.setString(3, tokens.getTipo().name());
+            stmt.setInt(4, tokens.getAdmin().getId());
+            stmt.setInt(5, tokens.getAgente().getPlaca());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -97,7 +100,7 @@ public class ModeloDAO {
         return rows;
     }
 
-    public int update(ModeloDTO modeloDTO) throws SQLException {
+    public int update(TokensDTO tokens) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -106,9 +109,11 @@ public class ModeloDAO {
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, modeloDTO.getMarca());
-            stmt.setString(2, modeloDTO.getModelo());
-            stmt.setString(3, modeloDTO.getImagen());
+            stmt.setString(1, tokens.getToken());
+            stmt.setString(2, tokens.getEstado().name());
+            stmt.setString(3, tokens.getTipo().name());
+            stmt.setInt(4, tokens.getAdmin().getId());
+            stmt.setInt(5, tokens.getAgente().getPlaca());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -120,7 +125,7 @@ public class ModeloDAO {
         return rows;
     }
 
-    public int delete(ModeloDTO modeloDTO) throws SQLException {
+    public int delete(TokensDTO tokens) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -129,7 +134,7 @@ public class ModeloDAO {
             conn = Conexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setInt(1, modeloDTO.getId());
+            stmt.setInt(1, tokens.getId());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
         } finally {

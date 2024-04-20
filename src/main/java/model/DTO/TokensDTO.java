@@ -1,11 +1,13 @@
 package model.DTO;
 
 public class TokensDTO {
-    // Atributos
+
     private int id;
     private String token;
     private Estado estado;
     private Tipo tipo;
+    private AdminDTO admin;
+    private AgenteDTO agente;
 
     // Enum para el estado del token
     public enum Estado {
@@ -21,31 +23,39 @@ public class TokensDTO {
     }
 
     /**
-     * 
+     *
      * @param id
      * @param token
      * @param estado
-     * @param tipo 
+     * @param tipo
+     * @param admin
+     * @param agente
      */
-    public TokensDTO(int id, String token, Estado estado, Tipo tipo) {
+    public TokensDTO(int id, String token, Estado estado, Tipo tipo, AdminDTO admin, AgenteDTO agente) {
         this.id = id;
         this.token = token;
         this.estado = estado;
         this.tipo = tipo;
+        this.admin = admin;
+        this.agente = agente;
     }
 
     /**
-     * 
+     *
      * @param token
      * @param estado
-     * @param tipo 
+     * @param tipo
+     * @param admin
+     * @param agente
      */
-    public TokensDTO(String token, Estado estado, Tipo tipo) {
+    public TokensDTO(String token, Estado estado, Tipo tipo, AdminDTO admin, AgenteDTO agente) {
         this.token = token;
         this.estado = estado;
         this.tipo = tipo;
+        this.admin = admin;
+        this.agente = agente;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -79,11 +89,25 @@ public class TokensDTO {
         this.tipo = tipo;
     }
 
-    @Override
-    public String toString() {
-        return "TokensDTO{" + "id=" + id + ", token=" + token + ", estado=" + estado + ", tipo=" + tipo + '}';
+    public AdminDTO getAdmin() {
+        return admin;
     }
 
-    
-}
+    public void setAdmin(AdminDTO admin) {
+        this.admin = admin;
+    }
 
+    public AgenteDTO getAgente() {
+        return agente;
+    }
+
+    public void setAgente(AgenteDTO agente) {
+        this.agente = agente;
+    }
+
+    @Override
+    public String toString() {
+        return "TokensDTO{" + "id=" + id  + ", estado=" + estado + ", tipo=" + tipo + ", admin=" + admin + ", agente=" + agente + '}';
+    }
+
+}

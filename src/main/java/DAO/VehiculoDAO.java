@@ -3,9 +3,7 @@ package DAO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import model.DTO.CiudadanoDTO;
-import model.DTO.ModeloDTO;
-import model.DTO.VehiculoDTO;
+import model.DTO.*;
 
 public class VehiculoDAO {
 
@@ -18,12 +16,12 @@ public class VehiculoDAO {
     private VehiculoDTO fromResultSet(ResultSet rs) throws SQLException {
         String bastidor = rs.getString("bastidor");
         String matricula = rs.getString("matricula");
-        
-        int dniPropietario=Integer.parseInt(rs.getString("dniPropietario"));
+
+        String dniPropietario = rs.getString("dniPropietario");
         CiudadanoDTO ciudadano = new CiudadanoDAO().select(dniPropietario);
-        
-        int idModelo=Integer.parseInt(rs.getString("idModelo"));
-        ModeloDTO modelo=new ModeloDAO().select(idModelo);
+
+        int idModelo = rs.getInt("idModelo");
+        ModeloDTO modelo = new ModeloDAO().select(idModelo);
 
         VehiculoDTO vehiculo = new VehiculoDTO(bastidor, matricula, ciudadano, modelo);
 
@@ -55,7 +53,7 @@ public class VehiculoDAO {
         return vehiculos;
     }
 
-    public VehiculoDTO select(int bastidor) throws SQLException {
+    public VehiculoDTO select(String bastidor) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -63,11 +61,13 @@ public class VehiculoDAO {
 
         try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(SQL_SELECT);
-            stmt.setInt(1, bastidor);
-            rs = stmt.executeQuery();
-            if (rs.next()) {
-                vehiculo = fromResultSet(rs);
+            if (conn != null) {
+                stmt = conn.prepareStatement(SQL_SELECT);
+                stmt.setString(1, bastidor);
+                rs = stmt.executeQuery();
+                if (rs.next()) {
+                    vehiculo = fromResultSet(rs);
+                }
             }
         } finally {
             Conexion.close(rs);

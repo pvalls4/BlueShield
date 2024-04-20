@@ -51,16 +51,17 @@ public class DireccionDAO{
     }
      
     public DireccionDTO select(int idDireccion) throws SQLException {
-        DireccionDTO result = null;
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
+        DireccionDTO result = null;
+        
         try {
             conn = Conexion.getConnection();
             if (conn != null) {
-                PreparedStatement st = conn.prepareStatement(SQL_SELECT);
-                st.setInt(1, idDireccion);
-                rs = st.executeQuery();
+                stmt = conn.prepareStatement(SQL_SELECT);
+                stmt.setInt(1, idDireccion);
+                rs = stmt.executeQuery();
                 if (rs.next()) {
                     result = fromResultSet(rs);
                 }

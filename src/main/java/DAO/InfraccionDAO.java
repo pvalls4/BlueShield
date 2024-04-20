@@ -38,8 +38,8 @@ public class InfraccionDAO{
             stmt = conn.prepareStatement(SQL_SELECT_ALL);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                InfraccionDTO infraccion = fromResultSet(rs);
-                infracciones.add(infraccion);
+                inf = fromResultSet(rs);
+                infracciones.add(inf);
             }
         } finally {
             Conexion.close(rs);
@@ -49,25 +49,25 @@ public class InfraccionDAO{
     }
      
     public InfraccionDTO select(int idDireccion) throws SQLException {
-        InfraccionDTO result = null;
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
+        InfraccionDTO inf = null;
         try {
             conn = Conexion.getConnection();
             if (conn != null) {
-                PreparedStatement st = conn.prepareStatement(SQL_SELECT);
-                st.setInt(1, idDireccion);
-                rs = st.executeQuery();
+                stmt = conn.prepareStatement(SQL_SELECT);
+                stmt.setInt(1, idDireccion);
+                rs = stmt.executeQuery();
                 if (rs.next()) {
-                    result = fromResultSet(rs);
+                    inf = fromResultSet(rs);
                 }
             }
         }finally {
             Conexion.close(rs);
             Conexion.close(stmt);
         }
-        return result;
+        return inf;
     }
 
     public int insert(InfraccionDTO infraccion) throws SQLException {
@@ -101,8 +101,6 @@ public class InfraccionDAO{
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setString(1, infraccion.getArticulo());
             stmt.setString(2, infraccion.getTitulo());
             stmt.setString(3, infraccion.getDescripcion());
