@@ -18,7 +18,7 @@ public class Conexion {
     public static final Properties properties = new Properties();
 
     static {
-        String filename = "config.properties";
+        String filename = "./config/config.properties";
         try (InputStream input = Conexion.class.getClassLoader().getResourceAsStream(filename)) {
             if(input==null){
                 throw new RuntimeException("Sorry, unable to find " + filename);
