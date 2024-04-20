@@ -1,86 +1,83 @@
 package DAO;
 
-import model.DTO.InfraccionDTO;
+import model.DTO.AdminDTO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InfraccionDAO{
+public class AdminDAO{
 
 
-    private static final String SQL_SELECT_ALL = "SELECT * FROM infracciones;";
-    private static final String SQL_SELECT = "SELECT * FROM infracciones WHERE id = ?;";
-    private static final String SQL_INSERT = "INSERT INTO infracciones(articulo, titulo, descripcion, importe) VALUES(?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE infracciones SET articulo=?, titulo=?, descripcion=?, importe=? WHERE id = ?";
-    private static final String SQL_DELETE = "DELETE FROM infracciones WHERE id=?";
+    private static final String SQL_SELECT_ALL = "SELECT * FROM admins;";
+    private static final String SQL_SELECT = "SELECT * FROM admins WHERE id = ?;";
+    private static final String SQL_INSERT = "INSERT INTO admins(email, password) VALUES(?, ?)";
+    private static final String SQL_UPDATE = "UPDATE admins SET email=?, password=? WHERE id = ?";
+    private static final String SQL_DELETE = "DELETE FROM admins WHERE id=?";
 
-    private InfraccionDTO fromResultSet(ResultSet rs) throws SQLException {
+    private AdminDTO fromResultSet(ResultSet rs) throws SQLException {
         int id = rs.getInt("id");
-        String articulo = rs.getString("articulo");
-        String codigoPostal = rs.getString("titulo");
-        String descripcion = rs.getString("descripcion");
-        float importe = rs.getFloat("importe");
+        String email = rs.getString("email");
+        String password = rs.getString("password");
     
-        InfraccionDTO infraccion = new InfraccionDTO(id, articulo, codigoPostal, descripcion, importe);
+        AdminDTO admin = new AdminDTO(id, email, password);
             
-        return infraccion;
+        return admin;
     } 
     
-    public List<InfraccionDTO> selectAll() throws SQLException {
+    public List<AdminDTO> selectAll() throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        InfraccionDTO inf = null;
-        List<InfraccionDTO> infracciones = new ArrayList<InfraccionDTO>();
+        AdminDTO admn = null;
+        List<AdminDTO> admines = new ArrayList<AdminDTO>();
 
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT_ALL);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                inf = fromResultSet(rs);
-                infracciones.add(inf);
+                AdminDTO admin = fromResultSet(rs);
+                admines.add(admin);
             }
         } finally {
             Conexion.close(rs);
             Conexion.close(stmt);
         }
-        return infracciones;
+        return admines;
     }
      
-    public InfraccionDTO select(int idInfraccion) throws SQLException {
+    public AdminDTO select(int idAdmin) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        InfraccionDTO inf = null;
+        AdminDTO result = null;
+        
         try {
             conn = Conexion.getConnection();
             if (conn != null) {
                 stmt = conn.prepareStatement(SQL_SELECT);
-                stmt.setInt(1, idInfraccion);
+                stmt.setInt(1, idAdmin);
                 rs = stmt.executeQuery();
                 if (rs.next()) {
-                    inf = fromResultSet(rs);
+                    result = fromResultSet(rs);
                 }
             }
         }finally {
             Conexion.close(rs);
             Conexion.close(stmt);
         }
-        return inf;
+        return result;
     }
 
-    public int insert(InfraccionDTO infraccion) throws SQLException {
+    public int insert(AdminDTO admin) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1, infraccion.getArticulo());
-            stmt.setString(2, infraccion.getTitulo());
-            stmt.setString(3, infraccion.getDescripcion());
-            stmt.setFloat(4, infraccion.getImporte());
+            stmt.setString(1, admin.getEmail());
+            stmt.setString(2, admin.getPassword());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -92,7 +89,7 @@ public class InfraccionDAO{
         return rows;
     }
 
-    public int update(InfraccionDTO infraccion) throws SQLException {
+    public int update(AdminDTO admin) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -101,10 +98,8 @@ public class InfraccionDAO{
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, infraccion.getArticulo());
-            stmt.setString(2, infraccion.getTitulo());
-            stmt.setString(3, infraccion.getDescripcion());
-            stmt.setFloat(4, infraccion.getImporte());
+            stmt.setString(1, admin.getEmail());
+            stmt.setString(2, admin.getPassword());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -116,7 +111,7 @@ public class InfraccionDAO{
         return rows;
     }
 
-    public int delete(InfraccionDTO infraccion) throws SQLException {
+    public int delete(AdminDTO admin) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -125,7 +120,7 @@ public class InfraccionDAO{
             conn = Conexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setInt(1, infraccion.getId());
+            stmt.setInt(1, admin.getId());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
         } finally {
