@@ -35,10 +35,10 @@
                     </div>
                 </div>
                 <div class ="col-md-3">
-                    <div class ="row">
+                    <div class ="row p-1">
                         <div class = "col-md-12 rounded">Articulos</div>
                     </div>
-                    <div class ="row">
+                    <div class ="row p-1">
                         <div class = "col-md-12 rounded" style="background-color: #d5eeff;">ssad</div>
                     </div>
                 </div>
