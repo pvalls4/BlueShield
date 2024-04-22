@@ -109,6 +109,7 @@ public class AgenteDAO {
             stmt.setString(1, agente.getCiudadano().getDni());
             stmt.setString(2, agente.getPassword());
             stmt.setString(3, agente.getEnlaceFotografico());
+            stmt.setInt(4, agente.getPlaca());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);

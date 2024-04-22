@@ -109,6 +109,7 @@ public class ModeloDAO {
             stmt.setString(1, modeloDTO.getMarca());
             stmt.setString(2, modeloDTO.getModelo());
             stmt.setString(3, modeloDTO.getImagen());
+            stmt.setInt(4, modeloDTO.getId());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);

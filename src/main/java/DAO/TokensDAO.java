@@ -114,6 +114,7 @@ public class TokensDAO {
             stmt.setString(3, tokens.getTipo().name());
             stmt.setInt(4, tokens.getAdmin().getId());
             stmt.setInt(5, tokens.getAgente().getPlaca());
+            stmt.setInt(6, tokens.getId());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
