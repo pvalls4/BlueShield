@@ -9,9 +9,9 @@ public class VehiculoDAO {
 
     private static final String SQL_SELECT_ALL = "SELECT * FROM vehiculos";
     private static final String SQL_SELECT = "SELECT * FROM vehiculos WHERE bastidor = ?";
-    private static final String SQL_INSERT = "INSERT INTO persona(bastidor, matricula, dniPropietario, idModelo) VALUES(?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE persona SET bastidor=?, matricula=?, dniPropietario=?, idModelo=? WHERE bastidor = ?";
-    private static final String SQL_DELETE = "DELETE FROM persona WHERE bastidor=?";
+    private static final String SQL_INSERT = "INSERT INTO vehiculos(bastidor, matricula, dniPropietario, idModelo) VALUES(?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE vehiculos SET matricula=?, dniPropietario=?, idModelo=? WHERE bastidor = ?";
+    private static final String SQL_DELETE = "DELETE FROM vehiculos WHERE bastidor=?";
 
     private VehiculoDTO fromResultSet(ResultSet rs) throws SQLException {
         String bastidor = rs.getString("bastidor");
@@ -108,10 +108,11 @@ public class VehiculoDAO {
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, vehiculo.getBastidor());
-            stmt.setString(2, vehiculo.getMatricula());
-            stmt.setString(3, vehiculo.getCiudadano().getDni());
-            stmt.setInt(4, vehiculo.getModelo().getId());
+            stmt.setString(1, vehiculo.getMatricula());
+            stmt.setString(2, vehiculo.getCiudadano().getDni());
+            stmt.setInt(3, vehiculo.getModelo().getId());
+            stmt.setString(4, vehiculo.getBastidor());
+
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);

@@ -28,7 +28,7 @@ public class AdminDAO{
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        AdminDTO admn = null;
+        AdminDTO admin = null;
         List<AdminDTO> admines = new ArrayList<AdminDTO>();
 
         try {
@@ -36,7 +36,7 @@ public class AdminDAO{
             stmt = conn.prepareStatement(SQL_SELECT_ALL);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                AdminDTO admin = fromResultSet(rs);
+                admin = fromResultSet(rs);
                 admines.add(admin);
             }
         } finally {
@@ -100,6 +100,7 @@ public class AdminDAO{
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, admin.getEmail());
             stmt.setString(2, admin.getPassword());
+            stmt.setInt(3, admin.getId());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);

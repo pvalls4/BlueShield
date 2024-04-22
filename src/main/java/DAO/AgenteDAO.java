@@ -1,47 +1,47 @@
 package DAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import model.DTO.ModeloDTO;
-import model.DTO.VehiculoDTO;
+import model.DTO.*;
 
-public class ModeloDAO {
+public class AgenteDAO {
+   
+    private static final String SQL_SELECT_ALL = "SELECT * FROM agentes";
+    private static final String SQL_SELECT = "SELECT * FROM agentes WHERE placa = ?";
+    private static final String SQL_INSERT = "INSERT INTO agentes(dniAgente, password, imagen) VALUES(?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE agentes SET dniAgente=?, password=?, imagen=?, WHERE placa = ?";
+    private static final String SQL_DELETE = "DELETE FROM agentes WHERE placa=?";
 
-    private static final String SQL_SELECT_ALL = "SELECT * FROM modelos";
-    private static final String SQL_SELECT = "SELECT * FROM modelos WHERE id= ?";
-    private static final String SQL_INSERT = "INSERT INTO modelos(marca, modelo, imagen) VALUES(?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE modelos SET marca=?, modelo=?, image=? WHERE id = ?";
-    private static final String SQL_DELETE = "DELETE FROM modelos WHERE id=?";
+    private AgenteDTO fromResultSet(ResultSet rs) throws SQLException {
+        int placa = rs.getInt("placa");
+        
+        String dniAgente = rs.getString("dniAgente");
+        CiudadanoDTO ciudadano = new CiudadanoDAO().select(dniAgente);
 
-    private ModeloDTO fromResultSet(ResultSet rs) throws SQLException {
-        String marca = rs.getString("marca");
-        String modelo = rs.getString("modelo");
+        String password = rs.getString("password");
         String imagen = rs.getString("imagen");
 
-        ModeloDTO modeloDTO = new ModeloDTO(marca, modelo, imagen);
+        AgenteDTO agente = new AgenteDTO(placa,ciudadano, password, imagen);
 
-        return modeloDTO;
+        return agente;
     }
 
-    public List<ModeloDTO> selectAll() throws SQLException {
+    public List<AgenteDTO> selectAll() throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        ModeloDTO modeloDTO = null;
-        List<ModeloDTO> modelos = new ArrayList<ModeloDTO>();
+        AgenteDTO agente = null;
+        List<AgenteDTO> agentes = new ArrayList<AgenteDTO>();
 
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT_ALL);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                modeloDTO = fromResultSet(rs);
-                if (modeloDTO != null) {
-                    modelos.add(modeloDTO);
+                agente = fromResultSet(rs);
+                if (agente != null) {
+                    agentes.add(agente);
                 }
             }
         } finally {
@@ -49,23 +49,23 @@ public class ModeloDAO {
             Conexion.close(stmt);
         }
 
-        return modelos;
+        return agentes;
     }
 
-    public ModeloDTO select(int id) throws SQLException {
+    public AgenteDTO select(int placa) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        ModeloDTO modeloDTO = null;
+        AgenteDTO agente = null;
 
         try {
             conn = Conexion.getConnection();
             if (conn != null) {
                 stmt = conn.prepareStatement(SQL_SELECT);
-                stmt.setInt(1, id);
+                stmt.setInt(1, placa);
                 rs = stmt.executeQuery();
                 if (rs.next()) {
-                    modeloDTO = fromResultSet(rs);
+                    agente = fromResultSet(rs);
                 }
             }
         } finally {
@@ -73,19 +73,19 @@ public class ModeloDAO {
             Conexion.close(stmt);
         }
 
-        return modeloDTO;
+        return agente;
     }
 
-    public int insert(ModeloDTO modeloDTO) throws SQLException {
+    public int insert(AgenteDTO agente) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1, modeloDTO.getMarca());
-            stmt.setString(2, modeloDTO.getModelo());
-            stmt.setString(3, modeloDTO.getImagen());
+            stmt.setString(1, agente.getCiudadano().getDni());
+            stmt.setString(2, agente.getPassword());
+            stmt.setString(3, agente.getEnlaceFotografico());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -97,7 +97,7 @@ public class ModeloDAO {
         return rows;
     }
 
-    public int update(ModeloDTO modeloDTO) throws SQLException {
+    public int update(AgenteDTO agente) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -106,10 +106,10 @@ public class ModeloDAO {
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, modeloDTO.getMarca());
-            stmt.setString(2, modeloDTO.getModelo());
-            stmt.setString(3, modeloDTO.getImagen());
-            stmt.setInt(4, modeloDTO.getId());
+            stmt.setString(1, agente.getCiudadano().getDni());
+            stmt.setString(2, agente.getPassword());
+            stmt.setString(3, agente.getEnlaceFotografico());
+            stmt.setInt(4, agente.getPlaca());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -121,7 +121,7 @@ public class ModeloDAO {
         return rows;
     }
 
-    public int delete(ModeloDTO modeloDTO) throws SQLException {
+    public int delete(AgenteDTO agente) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -130,7 +130,7 @@ public class ModeloDAO {
             conn = Conexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setInt(1, modeloDTO.getId());
+            stmt.setInt(1, agente.getPlaca());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
         } finally {

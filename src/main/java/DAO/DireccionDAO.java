@@ -32,7 +32,7 @@ public class DireccionDAO{
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        DireccionDTO dir = null;
+        DireccionDTO direccion = null;
         List<DireccionDTO> direcciones = new ArrayList<DireccionDTO>();
 
         try {
@@ -40,7 +40,7 @@ public class DireccionDAO{
             stmt = conn.prepareStatement(SQL_SELECT_ALL);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                DireccionDTO direccion = fromResultSet(rs);
+                direccion = fromResultSet(rs);
                 direcciones.add(direccion);
             }
         } finally {
@@ -112,6 +112,7 @@ public class DireccionDAO{
             stmt.setString(4, direccion.getPiso());
             stmt.setString(5, direccion.getPuerta());
             stmt.setInt(6, direccion.getNumero());
+            stmt.setInt(7, direccion.getId());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
