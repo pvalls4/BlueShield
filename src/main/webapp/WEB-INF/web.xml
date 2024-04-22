@@ -9,6 +9,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>./view/login.jsp</welcome-file>
+        <welcome-file>./view/ciudadano.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
