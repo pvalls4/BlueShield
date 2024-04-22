@@ -32,7 +32,7 @@ public class DireccionDAO{
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        DireccionDTO dir = null;
+        DireccionDTO direccion = null;
         List<DireccionDTO> direcciones = new ArrayList<DireccionDTO>();
 
         try {
@@ -40,7 +40,7 @@ public class DireccionDAO{
             stmt = conn.prepareStatement(SQL_SELECT_ALL);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                DireccionDTO direccion = fromResultSet(rs);
+                direccion = fromResultSet(rs);
                 direcciones.add(direccion);
             }
         } finally {
