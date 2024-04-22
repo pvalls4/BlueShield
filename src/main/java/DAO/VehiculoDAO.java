@@ -9,9 +9,9 @@ public class VehiculoDAO {
 
     private static final String SQL_SELECT_ALL = "SELECT * FROM vehiculos";
     private static final String SQL_SELECT = "SELECT * FROM vehiculos WHERE bastidor = ?";
-    private static final String SQL_INSERT = "INSERT INTO persona(bastidor, matricula, dniPropietario, idModelo) VALUES(?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE persona SET matricula=?, dniPropietario=?, idModelo=? WHERE bastidor = ?";
-    private static final String SQL_DELETE = "DELETE FROM persona WHERE bastidor=?";
+    private static final String SQL_INSERT = "INSERT INTO vehiculos(bastidor, matricula, dniPropietario, idModelo) VALUES(?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE vehiculos SET matricula=?, dniPropietario=?, idModelo=? WHERE bastidor = ?";
+    private static final String SQL_DELETE = "DELETE FROM vehiculos WHERE bastidor=?";
 
     private VehiculoDTO fromResultSet(ResultSet rs) throws SQLException {
         String bastidor = rs.getString("bastidor");

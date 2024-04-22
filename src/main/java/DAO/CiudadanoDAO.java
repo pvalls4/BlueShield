@@ -11,7 +11,7 @@ public class CiudadanoDAO {
     private static final String SQL_SELECT = "SELECT * FROM ciudadanos WHERE dni = ?";
     private static final String SQL_INSERT = "INSERT INTO ciudadanos(dni, nombre, apellidos, fecha_nacimiento, telefono, email, isDeceased, imagen, idDirecciones) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE ciudadanos SET nombre=?, apellidos=?, fecha_nacimiento=?, telefono=?, email=?, isDeceased=?, imagen=?, idDirecciones=? WHERE dni = ?";
-    private static final String SQL_DELETE = "DELETE FROM ciudadnos WHERE dni=?";
+    private static final String SQL_DELETE = "DELETE FROM ciudadanos WHERE dni=?";
 
     private CiudadanoDTO fromResultSet(ResultSet rs) throws SQLException {
         String dni = rs.getString("dni");
