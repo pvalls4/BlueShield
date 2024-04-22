@@ -126,7 +126,8 @@ public class MultaDAO{
             stmt.setInt(6, multa.getAgente().getPlaca());
             stmt.setString(7, multa.getCiudadano().getDni());
             stmt.setString(8, multa.getVehiculo().getBastidor());
-            
+            stmt.setInt(9, multa.getId());
+
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);

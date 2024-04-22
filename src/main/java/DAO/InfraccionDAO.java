@@ -30,7 +30,7 @@ public class InfraccionDAO{
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        InfraccionDTO inf = null;
+        InfraccionDTO infraccion = null;
         List<InfraccionDTO> infracciones = new ArrayList<InfraccionDTO>();
 
         try {
@@ -38,8 +38,8 @@ public class InfraccionDAO{
             stmt = conn.prepareStatement(SQL_SELECT_ALL);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                inf = fromResultSet(rs);
-                infracciones.add(inf);
+                infraccion = fromResultSet(rs);
+                infracciones.add(infraccion);
             }
         } finally {
             Conexion.close(rs);
@@ -52,7 +52,7 @@ public class InfraccionDAO{
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        InfraccionDTO inf = null;
+        InfraccionDTO infraccion = null;
         try {
             conn = Conexion.getConnection();
             if (conn != null) {
@@ -60,14 +60,14 @@ public class InfraccionDAO{
                 stmt.setInt(1, idInfraccion);
                 rs = stmt.executeQuery();
                 if (rs.next()) {
-                    inf = fromResultSet(rs);
+                    infraccion = fromResultSet(rs);
                 }
             }
         }finally {
             Conexion.close(rs);
             Conexion.close(stmt);
         }
-        return inf;
+        return infraccion;
     }
 
     public int insert(InfraccionDTO infraccion) throws SQLException {
@@ -105,6 +105,7 @@ public class InfraccionDAO{
             stmt.setString(2, infraccion.getTitulo());
             stmt.setString(3, infraccion.getDescripcion());
             stmt.setFloat(4, infraccion.getImporte());
+            stmt.setInt(5, infraccion.getId());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);

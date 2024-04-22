@@ -112,6 +112,7 @@ public class DireccionDAO{
             stmt.setString(4, direccion.getPiso());
             stmt.setString(5, direccion.getPuerta());
             stmt.setInt(6, direccion.getNumero());
+            stmt.setInt(7, direccion.getId());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
