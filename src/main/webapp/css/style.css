@@ -20,6 +20,12 @@ body {
     padding: 10px;
 }
 
+.logo-login {
+    max-width: 200px;
+    max-height: 275px;
+    padding-bottom: 10px;
+}
+
 .blueshield {
     max-width: 350px;
     max-height: 80px;
@@ -33,5 +39,25 @@ body {
 
 .text-darkblue {
     color: #4b64db;
+}
+
+.input-form.form-control {
+    border: 2px solid #4b64db;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #e0f6fe;
+    color: #4b64db;
+}
+
+.input-form.form-control:focus {
+    background-color: #f1fbff;
+    color: #4b64db;
+}
+
+.b-login.btn {
+    background: linear-gradient(to bottom, #4b64db, #553cd8);
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
