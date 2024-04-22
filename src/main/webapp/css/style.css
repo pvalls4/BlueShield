@@ -8,11 +8,30 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 */
 
 body {
-    background-image: url('../images/login.png'); /* Reemplaza 'ruta/a/la/imagen.jpg' con la ruta de tu imagen */
-    background-size: cover; /* Para asegurarse de que la imagen cubra todo el fondo */
-    background-repeat: no-repeat; /* Evita que la imagen de fondo se repita */
+    background-image: url('../images/fondo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
-h1 {
-    color: red;
+.logo {
+    max-width: 130px;
+    max-height: 175px;
+    padding: 10px;
 }
+
+.blueshield {
+    max-width: 350px;
+    max-height: 80px;
+}
+
+.division {
+    width: auto;
+    height: 15px;
+    background: linear-gradient(to bottom, #4b64db, #553cd8);
+}
+
+.text-darkblue {
+    color: #4b64db;
+}
+

@@ -18,7 +18,7 @@ public class VehiculoDAO {
         String matricula = rs.getString("matricula");
 
         String dniPropietario = rs.getString("dniPropietario");
-        CiudadanoDTO ciudadano = new CiudadanoDAO().select(dniPropietario);
+        CiudadanoDTO ciudadano = null; //new CiudadanoDAO().select(dniPropietario);
 
         int idModelo = rs.getInt("idModelo");
         ModeloDTO modelo = new ModeloDAO().select(idModelo);

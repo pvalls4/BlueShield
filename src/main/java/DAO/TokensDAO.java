@@ -26,7 +26,7 @@ public class TokensDAO {
         AdminDTO admin=new AdminDAO().select(idAdmins);
         
         int idAgentes = rs.getInt("idAgentes");
-        AgenteDTO agente=new AgenteDAO().select(idAgentes);
+        AgenteDTO agente=null; //new AgenteDAO().select(idAgentes);
 
         TokensDTO tokensDTO = new TokensDTO(id, token, estado, tipo, admin, agente);
 

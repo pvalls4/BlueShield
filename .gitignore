@@ -63,3 +63,4 @@ release.properties
 dependency-reduced-pom.xml
 src/test
 src/main/resources/config
+/nbproject/
