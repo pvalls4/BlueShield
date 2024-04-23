@@ -20,9 +20,9 @@ public class listaMultas extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        response.setContentType("text/html;charset=UTF-8");
+        String dni = request.getParameter("id");
         MultaDAO dao = new MultaDAO();
-        List<MultaDTO> listaMultas = dao.selectAll();
+        List<MultaDTO> listaMultas = dao.selectDNI(dni);
         request.setAttribute("listaMultas", listaMultas);
         RequestDispatcher rd = request.getRequestDispatcher("./view/multas/listaMultas.jsp");
         rd.forward(request, response);
@@ -41,8 +41,7 @@ public class listaMultas extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String identifier = request.getParameter("id");
-        int id = Integer.parseInt(identifier);
+        String id = request.getParameter("id");
         response.sendRedirect("multaInfo?id=" + id);
     }
 
