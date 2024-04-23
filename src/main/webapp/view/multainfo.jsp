@@ -34,7 +34,7 @@
                         <div class = "col-md-11 rounded" style="background-color: #d5eeff;">s</div>
                     </div>
                 </div>
-                <div class ="col-md-3">
+                <div class ="col-md-3 border-start border-dark">
                     <div class ="row p-1">
                         <div class = "col-md-12 rounded">Articulos</div>
                     </div>
