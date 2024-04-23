@@ -1,7 +1,6 @@
 package controller.multas;
 
 import DAO.MultaDAO;
-import controller.ciudadanos;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,10 +21,8 @@ public class listaMultas extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        MultaDAO dataObject = new MultaDAO();
-        List<MultaDTO> listaMultas = dataObject.selectAll();
-        request.setAttribute("listaMultas", listaMultas);
-        System.out.println(listaMultas);
+        MultaDAO dao = new MultaDAO();
+        List<MultaDTO> listaMultas = dao.selectAll();
         RequestDispatcher rd = request.getRequestDispatcher("./view/multas/listaMultas.jsp");
         rd.forward(request, response);
     }
@@ -36,31 +33,16 @@ public class listaMultas extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ciudadanos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(listaMultas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            String identifier= request.getParameter("id");
-            int id = Integer.parseInt(identifier);
-            
-            MultaDAO multaDAO = new MultaDAO(); 
-            MultaDTO multa = multaDAO.select(id);
-            
-            if (multa == null) {
-               
-                response.sendRedirect("BlueShield/multaInfo.jsp?notFound=true");
-            } else {
-                
-                request.setAttribute("multa", multa);
-                request.getRequestDispatcher("/view/multas/multaInfo.jsp").forward(request, response);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ciudadanos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String identifier = request.getParameter("id");
+        int id = Integer.parseInt(identifier);
+        response.sendRedirect("multaInfo?id=" + id);
     }
 
     @Override
