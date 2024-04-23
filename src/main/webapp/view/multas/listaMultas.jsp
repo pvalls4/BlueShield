@@ -5,7 +5,7 @@
         <div class="col">
             <form action="listaMultas" method="post">
                 <div class="input-group mb-3 p-4">
-                    <input type="text" class="form-control" name="id" placeholder="Buscar por num. Referencia" aria-label="Buscar por num. Referencia" aria-describedby="button-addon2">
+                    <input type="text" class="form-control" name="id" placeholder="Buscar por REF" aria-label="Buscar por REF" aria-describedby="button-addon2">
                     <button class="btn btn-primary" type="submit" id="button-addon2">
                         <i class="bi bi-search"></i>
                     </button>
@@ -17,8 +17,8 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Num Referencia</th>
-                    <th>Estado</th>
+                    <th>Num referencia</th>
+                    <th>Fecha de emision</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,13 +26,18 @@
                     <c:forEach items="${listaMultas}" var="multa">
                         <tr>
                             <td>${multa.id}</td>
-                            <td>${multa.isPagado}</td>
+                            <td>${multa.fecha_emision}</td>
+                            <td>
+                                <a href="multa?id=${multa.id}">
+                                    <i class="bi bi-eye-fill p-3"></i>
+                                </a>
+                            </td>
                         </tr>
                     </c:forEach>
                 </c:if>
                 <c:if test="${empty listaMultas}">
                     <tr>
-                        <td colspan="2">No hay multas disponibles.</td>
+                        <td colspan="3">No hay multas disponibles.</td>
                     </tr>
                 </c:if>
             </tbody>

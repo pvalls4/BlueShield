@@ -23,6 +23,7 @@ public class listaMultas extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         MultaDAO dao = new MultaDAO();
         List<MultaDTO> listaMultas = dao.selectAll();
+        request.setAttribute("listaMultas", listaMultas);
         RequestDispatcher rd = request.getRequestDispatcher("./view/multas/listaMultas.jsp");
         rd.forward(request, response);
     }

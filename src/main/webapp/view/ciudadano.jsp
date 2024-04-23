@@ -63,7 +63,7 @@
                 </div>
             </div>
         </div>
-
+                       
         <div class="row justify-content-center text-center">
             <div class="col-md-6 col-lg-4"> <!-- Tamaño alargado para dispositivos medianos y grandes -->
                 <button class="btn btn-primary btn-block m-1 px-5" style="background-color: #bbddf5;color:#0757af;">Editar perfil</button>

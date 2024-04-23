@@ -23,6 +23,7 @@ public class ciudadanos_dashboard extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         CiudadanoDAO dao = new CiudadanoDAO();
         List<CiudadanoDTO> listaCiudadanos = dao.selectAll();
+        request.setAttribute("listaCiudadanos", listaCiudadanos);
         RequestDispatcher rd = request.getRequestDispatcher("./view/ciudadanos_dashboard.jsp");
         rd.forward(request, response);
     }
