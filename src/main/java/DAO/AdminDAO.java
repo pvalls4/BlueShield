@@ -61,7 +61,7 @@ public class AdminDAO{
                     result = fromResultSet(rs);
                 }
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             result = null;
         }
         return result;

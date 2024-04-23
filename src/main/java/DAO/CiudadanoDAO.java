@@ -48,9 +48,8 @@ public class CiudadanoDAO {
                     ciudadanos.add(ciudadano);
                 }
             }
-        } finally {
-            Conexion.close(rs);
-            Conexion.close(stmt);
+        }  catch (SQLException ex) {
+            ciudadanos = null;
         }
 
         return ciudadanos;
@@ -72,9 +71,8 @@ public class CiudadanoDAO {
                     ciudadano = fromResultSet(rs);
                 }
             }
-        } finally {
-            Conexion.close(rs);
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            ciudadano = null;
         }
 
         return ciudadano;
@@ -100,8 +98,8 @@ public class CiudadanoDAO {
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
             System.out.println("Registros afectados:" + rows);
-        } finally {
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            rows = 0;
         }
 
         return rows;
@@ -131,8 +129,8 @@ public class CiudadanoDAO {
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
 
-        } finally {
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            rows = 0;
         }
 
         return rows;
@@ -150,8 +148,8 @@ public class CiudadanoDAO {
             stmt.setString(1, ciudadano.getDni());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
-        } finally {
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            rows = 0;
         }
 
         return rows;
