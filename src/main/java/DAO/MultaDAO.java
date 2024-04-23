@@ -52,9 +52,8 @@ public class MultaDAO{
                 multa = fromResultSet(rs);
                 multas.add(multa);
             }
-        } finally {
-            Conexion.close(rs);
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            multas=null;
         }
         return multas;
     }
@@ -75,9 +74,8 @@ public class MultaDAO{
                     result = fromResultSet(rs);
                 }
             }
-        }finally {
-            Conexion.close(rs);
-            Conexion.close(stmt);
+        }catch (SQLException ex) {
+            result=null;
         }
         return result;
     }
@@ -102,10 +100,9 @@ public class MultaDAO{
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
             System.out.println("Registros afectados:" + rows);
-        } finally {
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            rows = 0;
         }
-
         return rows;
     }
 
@@ -132,8 +129,8 @@ public class MultaDAO{
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
 
-        } finally {
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            rows = 0;
         }
 
         return rows;
@@ -151,10 +148,9 @@ public class MultaDAO{
             stmt.setInt(1, multa.getId());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
-        } finally {
-            Conexion.close(stmt);
+        }catch (SQLException ex) {
+            rows = 0;
         }
-
         return rows;
     }
 }
