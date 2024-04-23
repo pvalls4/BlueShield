@@ -1,6 +1,7 @@
-package controller;
+package controller.multas;
 
-import DAO.CiudadanoDAO;
+import DAO.MultaDAO;
+import controller.ciudadanos;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,19 +14,19 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.DTO.CiudadanoDTO;
+import model.DTO.MultaDTO;
 
-@WebServlet(name = "multa", urlPatterns = {"/multa"})
-public class multa extends HttpServlet {
+@WebServlet(name = "listaMultas", urlPatterns = {"/listaMultas"})
+public class listaMultas extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        CiudadanoDAO dao = new CiudadanoDAO();
-        List<CiudadanoDTO> listaCiudadanos = dao.selectAll();
-        request.setAttribute("listaCiudadanos", listaCiudadanos);
-        System.out.println(listaCiudadanos);
-        RequestDispatcher rd = request.getRequestDispatcher("./view/ciudadanos_dashboard.jsp");
+        MultaDAO dataObject = new MultaDAO();
+        List<MultaDTO> listaMultas = dataObject.selectAll();
+        request.setAttribute("listaMultas", listaMultas);
+        System.out.println(listaMultas);
+        RequestDispatcher rd = request.getRequestDispatcher("./view/multas/listaMultas.jsp");
         rd.forward(request, response);
     }
 
@@ -43,18 +44,19 @@ public class multa extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String dni = request.getParameter("dni");
+            String identifier= request.getParameter("id");
+            int id = Integer.parseInt(identifier);
             
-            CiudadanoDAO ciudadanoDAO = new CiudadanoDAO(); 
-            CiudadanoDTO ciudadano = ciudadanoDAO.select(dni);
+            MultaDAO multaDAO = new MultaDAO(); 
+            MultaDTO multa = multaDAO.select(id);
             
-            if (ciudadano == null) {
+            if (multa == null) {
                
-                response.sendRedirect("BlueShield/ciudadano_dashboard.jsp?notFound=true");
+                response.sendRedirect("BlueShield/multaInfo.jsp?notFound=true");
             } else {
                 
-                request.setAttribute("ciudadano", ciudadano);
-                request.getRequestDispatcher("/view/ciudadano.jsp").forward(request, response);
+                request.setAttribute("multa", multa);
+                request.getRequestDispatcher("/view/multas/multaInfo.jsp").forward(request, response);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ciudadanos.class.getName()).log(Level.SEVERE, null, ex);
