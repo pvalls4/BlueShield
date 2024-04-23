@@ -20,7 +20,7 @@ public class MultaDAO{
     private MultaDTO fromResultSet(ResultSet rs) throws SQLException {
         int id = rs.getInt("id");
         Date fechaEmision = rs.getDate("fecha_emision");
-        Date fechaLimite = rs.getDate("fecha_liite");
+        Date fechaLimite = rs.getDate("fecha_limite");
         double importeTotal = rs.getDouble("importe_total");
         String observaciones = rs.getString("observaciones");
         Boolean isPagado = rs.getBoolean("isPagado"); 
@@ -53,7 +53,7 @@ public class MultaDAO{
                 multas.add(multa);
             }
         } catch (SQLException ex) {
-            multas=null;
+            multas = null;
         }
         return multas;
     }
