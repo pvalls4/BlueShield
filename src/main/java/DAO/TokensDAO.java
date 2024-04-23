@@ -48,9 +48,8 @@ public class TokensDAO {
                 tokensDTO = fromResultSet(rs);
                 tokens.add(tokensDTO);
             }
-        } finally {
-            Conexion.close(rs);
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            tokens = null;
         }
         return tokens;
     }
@@ -70,9 +69,8 @@ public class TokensDAO {
                     tokenDTO = fromResultSet(rs);
                 }
             }
-        } finally {
-            Conexion.close(rs);
-            Conexion.close(stmt);
+        }catch (SQLException ex) {
+            tokenDTO = null;
         }
         return tokenDTO;
     }
@@ -93,8 +91,8 @@ public class TokensDAO {
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
             System.out.println("Registros afectados:" + rows);
-        } finally {
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            rows = 0;
         }
 
         return rows;
@@ -119,8 +117,8 @@ public class TokensDAO {
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
 
-        } finally {
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            rows = 0;
         }
 
         return rows;
@@ -138,8 +136,8 @@ public class TokensDAO {
             stmt.setInt(1, tokens.getId());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
-        } finally {
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            rows = 0;
         }
 
         return rows;
