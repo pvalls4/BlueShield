@@ -3,7 +3,10 @@
 <div class="container border border-dark rounded" style="background-color: #9acbfd">
 
     <c:if test="${empty ciudadano}">
-        <p>No se encontraron detalles del ciudadano.</p>
+        <div class="row justify-content-center text-center py-5 m-3" style="background-color: #bbddf5;color:#0757af;">
+            No se encontró este ciudadano.   
+        </div>
+
     </c:if>
     <c:if test="${not empty ciudadano}">
         <div class="row px-4">

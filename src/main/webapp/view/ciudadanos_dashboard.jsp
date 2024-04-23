@@ -19,20 +19,26 @@
                 <tr>
                     <th>Nombre</th>
                     <th>DNI</th>
+                    <th>Detalles</th>
                 </tr>
             </thead>
             <tbody>
                 <c:if test="${not empty listaCiudadanos}">
                     <c:forEach items="${listaCiudadanos}" var="ciudadano">
-                        <tr>
+                        <tr class="clickable-row" data-dni="${ciudadano.dni}">
                             <td>${ciudadano.nombre} ${ciudadano.apellidos}</td>
                             <td>${ciudadano.dni}</td>
+                            <td>
+                                <a href="ciudadano?id=${ciudadano.dni}">
+                                    <i class="bi bi-eye-fill p-3"></i>
+                                </a>
+                            </td>
                         </tr>
                     </c:forEach>
                 </c:if>
                 <c:if test="${empty listaCiudadanos}">
                     <tr>
-                        <td colspan="2">No hay ciudadanos disponibles.</td>
+                        <td colspan="3">No hay ciudadanos disponibles.</td>
                     </tr>
                 </c:if>
             </tbody>

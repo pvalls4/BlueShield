@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 import model.DTO.CiudadanoDTO;
 
 @WebServlet(name = "ciudadanos", urlPatterns = {"/ciudadanos"})
-public class ciudadanos extends HttpServlet {
+public class ciudadanos_dashboard extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -35,30 +35,15 @@ public class ciudadanos extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ciudadanos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ciudadanos_dashboard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            String dni = request.getParameter("dni");
-            
-            CiudadanoDAO ciudadanoDAO = new CiudadanoDAO(); 
-            CiudadanoDTO ciudadano = ciudadanoDAO.select(dni);
-            
-            if (ciudadano == null) {
-               
-                response.sendRedirect("BlueShield/ciudadano_dashboard.jsp?notFound=true");
-            } else {
-                
-                request.setAttribute("ciudadano", ciudadano);
-                request.getRequestDispatcher("/view/ciudadano.jsp").forward(request, response);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ciudadanos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String dni = request.getParameter("dni");
+        response.sendRedirect("ciudadano?id=" + dni);
     }
 
     @Override

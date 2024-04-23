@@ -108,9 +108,20 @@ public class DireccionDTO {
         this.puerta = puerta;
     }
 
+    
+    /*
+    private int id;
+    private String municipio;
+    private String codigoPostal;
+    private String calle;
+    private String piso;
+    private String puerta;
+    private int numero;
+    */
     @Override
     public String toString() {
-        return "DireccionDTO{" + "id=" + id + ", municipio=" + municipio + ", codigoPostal=" + codigoPostal + ", calle=" + calle + ", piso=" + piso + ", puerta=" + puerta + ", numero=" + numero + '}';
+        return
+                String.format("C/ %s %d %s-%s, %s, %s",this.getCalle(),this.getNumero(),this.getPiso(),this.getPuerta(),this.getCodigoPostal(),this.getMunicipio());
     }
     
 }
