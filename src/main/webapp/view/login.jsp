@@ -2,7 +2,7 @@
 <div class="d-flex justify-content-center">
     <div class="d-flex flex-column justify-content-center w-40"> 
         <div class="d-flex justify-content-center">
-            <img src="./images/logoBS.png" class="logo-login">
+            <img src="./images/logoBS.png" class="logo2">
         </div>
          <form method="post" action="login">
             <div class="mb-3 mt-3">
