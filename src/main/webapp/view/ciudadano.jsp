@@ -55,9 +55,12 @@
             </div>
         </div>
     </div>
-    <div class="row px-4">
-        <div class="col-md-12 g-3">
-            <h2 style="padding-left: 20%;">Nombre - DNI</h2>
+    <div class="row px-4 justify-content-center">
+        <div class="col-md-6">
+          <button type="button" class="btn btn-primary">Primary</button>
+        </div>
+        <div class="col-md-6">
+           Ver Multas
         </div>
     </div>
 </div>
