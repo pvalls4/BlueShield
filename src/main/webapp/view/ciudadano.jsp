@@ -20,7 +20,7 @@
                     <div class="col p-1">
                         Fecha de Nacimiento
                     </div>
-                    <div class="col border border-dark rounded p-1" style="background-color: #bbddf5">
+                    <div class="col border border-dark rounded p-1" style="background-color: #bbddf5;color:#0757af;">
                         15/04/1996
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                     <div class="col p-1">
                         Teléfono
                     </div>
-                    <div class="col border border-dark rounded p-1" style="background-color: #bbddf5">
+                    <div class="col border border-dark rounded p-1" style="background-color: #bbddf5;color:#0757af;">
                         657475837
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                     <div class="col p-1">
                         Dirección
                     </div>
-                    <div class="col border border-dark rounded p-1" style="background-color: #bbddf5">
+                    <div class="col border border-dark rounded p-1" style="background-color: #bbddf5;color:#0757af;overflow-wrap: break-word;">
                         Calle super grande de la hostia 3434343523 piso 3424234234
                     </div>
                 </div>
@@ -48,20 +48,22 @@
                     <div class="col p-1">
                         E-mail
                     </div>
-                    <div class="col border border-dark rounded p-1" style="background-color: #bbddf5">
+                    <div class="col border border-dark rounded p-1" style="background-color: #bbddf5;color:#0757af;overflow-wrap: break-word;">
                         correodeejemplosuperlargodelamuerte@dominiosuperlargodelamuerto.com
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row px-4 justify-content-center">
-        <div class="col-md-6">
-          <button type="button" class="btn btn-primary">Primary</button>
+
+    <div class="row justify-content-center text-center">
+        <div class="col-md-6 col-lg-4"> <!-- Tamaño alargado para dispositivos medianos y grandes -->
+            <button class="btn btn-primary btn-block m-1 px-5" style="background-color: #bbddf5;color:#0757af;">Editar perfil</button>
         </div>
-        <div class="col-md-6">
-           Ver Multas
+        <div class="col-md-6 col-lg-4"> <!-- Tamaño alargado para dispositivos medianos y grandes -->
+            <button class="btn btn-primary btn-block m-1 mb-3 px-5" style="background-color: #bbddf5;color:#0757af;">Ver Multas</button>
         </div>
     </div>
+
 </div>
 <%@ include file="./footer.jsp" %>
