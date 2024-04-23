@@ -45,8 +45,10 @@ public class login extends HttpServlet {
         boolean isAuthenticated = authenticate(placa, pwd);
 
         if (isAuthenticated) {
+            System.out.println(isAuthenticated);
             HttpSession session = request.getSession();
             session.setAttribute("username", placa);
+            request.setAttribute("username", placa);
             request.getRequestDispatcher("/view/dashboard.jsp").forward(request, response);
         } else {
             request.setAttribute("errorMessage", "Invalid username or password");
@@ -59,9 +61,11 @@ public class login extends HttpServlet {
             AgenteDAO dao = new AgenteDAO();
             try {
                 AgenteDTO agente = dao.select(placa);
+                System.out.println(agente);
                 return agente.getPlaca() == placa && agente.getPassword().equals(pwd);
             } catch (SQLException ex) {
                 Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex);
                 return false;
             }
 
