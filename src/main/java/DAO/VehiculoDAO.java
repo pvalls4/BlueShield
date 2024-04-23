@@ -45,9 +45,8 @@ public class VehiculoDAO {
                     vehiculos.add(vehiculo);
                 }
             }
-        } finally {
-            Conexion.close(rs);
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            vehiculos = null;
         }
 
         return vehiculos;
@@ -69,9 +68,8 @@ public class VehiculoDAO {
                     vehiculo = fromResultSet(rs);
                 }
             }
-        } finally {
-            Conexion.close(rs);
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            vehiculo = null;
         }
 
         return vehiculo;
@@ -92,8 +90,8 @@ public class VehiculoDAO {
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
             System.out.println("Registros afectados:" + rows);
-        } finally {
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            rows=0;
         }
 
         return rows;
@@ -117,8 +115,8 @@ public class VehiculoDAO {
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
 
-        } finally {
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            rows=0;
         }
 
         return rows;
@@ -136,8 +134,8 @@ public class VehiculoDAO {
             stmt.setString(1, vehiculo.getBastidor());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
-        } finally {
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            rows=0;
         }
 
         return rows;

@@ -39,9 +39,8 @@ public class AdminDAO{
                 admin = fromResultSet(rs);
                 admines.add(admin);
             }
-        } finally {
-            Conexion.close(rs);
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            admines = null;
         }
         return admines;
     }
@@ -62,9 +61,8 @@ public class AdminDAO{
                     result = fromResultSet(rs);
                 }
             }
-        }finally {
-            Conexion.close(rs);
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            result = null;
         }
         return result;
     }
@@ -82,8 +80,8 @@ public class AdminDAO{
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
             System.out.println("Registros afectados:" + rows);
-        } finally {
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            rows=0;
         }
 
         return rows;
@@ -105,8 +103,8 @@ public class AdminDAO{
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
 
-        } finally {
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            rows = 0;
         }
 
         return rows;
@@ -124,10 +122,9 @@ public class AdminDAO{
             stmt.setInt(1, admin.getId());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
-        } finally {
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            rows = 0;
         }
-
         return rows;
     }
 }

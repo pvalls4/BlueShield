@@ -20,7 +20,7 @@ body {
     padding: 10px;
 }
 
-.logo-login {
+.logo2 {
     max-width: 200px;
     max-height: 275px;
     padding-bottom: 10px;
@@ -38,20 +38,20 @@ body {
 }
 
 .text-darkblue {
-    color: #4b64db;
+    color: #0757af;
 }
 
 .input-form.form-control {
-    border: 2px solid #4b64db;
+    border: 2px solid #0757af;
     border-radius: 5px;
     padding: 5px;
-    background-color: #e0f6fe;
-    color: #4b64db;
+    background-color: #bbddf5;
+    color: #0757af;
 }
 
 .input-form.form-control:focus {
-    background-color: #f1fbff;
-    color: #4b64db;
+    background-color: #bbddf5;
+    color: #0757af;
 }
 
 .b-login.btn {
@@ -61,3 +61,30 @@ body {
     padding-left: 10px;
 }
 
+.dash-option{
+    border: 2px solid transparent;
+}
+
+.dash-option:hover {
+    background-color: #bbddf5;
+    border: 2px solid #0757af;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#fondo {
+    background-color: #9acbfd;
+    border: 2px solid #0757af;
+    border-radius: 5px;
+}
+
+.boton {
+    background-color: #bbddf5;
+    border: 2px solid #0757af;
+    border-radius: 5px;
+    color: #0757af
+}
+
+.boton:hover {
+    background-color: #99d0f7;
+}
