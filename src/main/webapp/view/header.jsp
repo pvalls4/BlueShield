@@ -18,7 +18,7 @@
                         <img src="./images/blueshield.png" class="blueshield">
                     </div>
                 </div>
-                <h2 class="d-flex flex-column justify-content-end">Version 1.0</h2>
+                <h2 class="d-flex flex-column justify-content-end">Version 1.0 - <%= request.getAttribute("username") %></h2>
             </div>
             <div class="division mb-3"></div>
         </header>

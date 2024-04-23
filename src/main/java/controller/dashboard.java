@@ -1,25 +1,24 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package controller;
 
-import DAO.AgenteDAO;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.DTO.AgenteDTO;
 
 /**
  *
  * @author Mati
  */
-@WebServlet(name = "login", urlPatterns = {"/login"})
-public class login extends HttpServlet {
+@WebServlet(name = "dashboard", urlPatterns = {"/dashboard"})
+public class dashboard extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,40 +31,22 @@ public class login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-             RequestDispatcher dispatcher = request.getRequestDispatcher("/view/login.jsp");
-             dispatcher.forward(request, response);
-    }
-    
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int placa = Integer.parseInt(request.getParameter("placa"));
-        String pwd = request.getParameter("pwd");
+                response.setContentType("text/html;charset=UTF-8");
+                HttpSession session = request.getSession(false); // No crea una nueva sesión si no hay una existente
 
-        // Perform authentication (e.g., check against a database)
-        boolean isAuthenticated = authenticate(placa, pwd);
-
-        if (isAuthenticated) {
-            HttpSession session = request.getSession();
-            session.setAttribute("username", placa);
-            request.getRequestDispatcher("/view/dashboard.jsp").forward(request, response);
-        } else {
-            request.setAttribute("errorMessage", "Invalid username or password");
-            request.getRequestDispatcher("/view/login.jsp").forward(request, response);
-}
-            
-    }
-    private boolean authenticate(int placa, String pwd) 
-        throws ServletException, IOException {
-            AgenteDAO dao = new AgenteDAO();
-            try {
-                AgenteDTO agente = dao.select(placa);
-                return agente.getPlaca() == placa && agente.getPassword().equals(pwd);
-            } catch (SQLException ex) {
-                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
+                if (session != null && session.getAttribute("username") != null) {
+                    // Hay una sesión activa y el usuario está autenticado
+                    // Realiza la lógica correspondiente, como mostrar una página de inicio o redirigir a otra URL
+                    request.setAttribute("username", session.getAttribute("username"));
+                    System.out.println("####1" + session.getAttribute("username"));
+                    System.out.println("####2" + request.getAttribute("username"));
+                    request.getRequestDispatcher("/view/dashboard.jsp").forward(request, response);
+                } else {
+                    // No hay una sesión activa o el usuario no está autenticado
+                    // Realiza la lógica correspondiente, como mostrar un formulario de inicio de sesión
+                    response.sendRedirect("view/login.jsp");
+                } 
             }
-
-        }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -90,7 +71,11 @@ public class login extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
     /**
      * Returns a short description of the servlet.
@@ -101,6 +86,5 @@ public class login extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
 }
-    
