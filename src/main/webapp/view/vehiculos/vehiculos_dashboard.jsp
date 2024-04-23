@@ -1,11 +1,11 @@
-<%@ include file="./header.jsp" %>
+<%@ include file="../header.jsp" %>
 <div class="container border border-dark rounded" style="background-color: #9acbfd">
     <div class="row">
         <!--        buscador-->
         <div class="col">
-            <form action="ciudadanos" method="post">
+            <form action="vehiculos" method="post">
                 <div class="input-group mb-3 p-4">
-                    <input type="text" class="form-control" name="dni" placeholder="Buscar por DNI" aria-label="Buscar por DNI" aria-describedby="button-addon2">
+                    <input type="text" class="form-control" name="bastidor" placeholder="Buscar por Bastidor" aria-label="Buscar por Bastidor" aria-describedby="button-addon2">
                     <button class="btn btn-primary" type="submit" id="button-addon2">
                         <i class="bi bi-search"></i>
                     </button>
@@ -17,32 +17,31 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>DNI</th>
+                    <th>Bastidor</th>
                     <th>Detalles</th>
                 </tr>
             </thead>
             <tbody>
-                <c:if test="${not empty listaCiudadanos}">
-                    <c:forEach items="${listaCiudadanos}" var="ciudadano">
+                <c:if test="${not empty listaVehiculos}">
+                    <c:forEach items="${listaVehiculos}" var="vehiculo">
                         <tr>
-                            <td>${ciudadano.nombre} ${ciudadano.apellidos}</td>
-                            <td>${ciudadano.dni}</td>
+                            <td>${vehiculo.bastidor}</td>
+                            
                             <td>
-                                <a href="ciudadano?id=${ciudadano.dni}">
+                                <a href="vehiculo?id=${vehiculo.bastidor}">
                                     <i class="bi bi-eye-fill p-3"></i>
                                 </a>
                             </td>
                         </tr>
                     </c:forEach>
                 </c:if>
-                <c:if test="${empty listaCiudadanos}">
+                <c:if test="${empty listaVehiculos}">
                     <tr>
-                        <td colspan="3">No hay ciudadanos disponibles.</td>
+                        <td colspan="2">No hay vehiculos disponibles.</td>
                     </tr>
                 </c:if>
             </tbody>
         </table>
     </div>
 </div>
-<%@ include file="./footer.jsp" %>
+<%@ include file="../footer.jsp" %>

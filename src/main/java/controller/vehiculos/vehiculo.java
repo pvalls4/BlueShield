@@ -1,6 +1,6 @@
-package controller;
+package controller.vehiculos;
 
-import DAO.CiudadanoDAO;
+import DAO.VehiculoDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -9,30 +9,31 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-import model.DTO.CiudadanoDTO;
+import model.DTO.VehiculoDTO;
 
-@WebServlet(name = "ciudadano", urlPatterns = {"/ciudadano"})
-public class ciudadano extends HttpServlet {
+@WebServlet(name = "vehiculo", urlPatterns = {"/vehiculo"})
+public class vehiculo extends HttpServlet {
 
+   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        RequestDispatcher rd = request.getRequestDispatcher("./view/ciudadano.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("./view/vehiculos/vehiculo.jsp");
         rd.forward(request, response);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
+         try {
 
-            String dni = request.getParameter("id");
+            String bastidor = request.getParameter("id");
 
-            CiudadanoDAO ciudadanoDAO = new CiudadanoDAO();
-            CiudadanoDTO ciudadano = ciudadanoDAO.select(dni);
+            VehiculoDAO dao = new VehiculoDAO();
+            VehiculoDTO vehiculo = dao.select(bastidor);
 
-            request.setAttribute("ciudadano", ciudadano);
-            request.getRequestDispatcher("/view/ciudadano.jsp").forward(request, response);
+            request.setAttribute("vehiculo", vehiculo);
+            request.getRequestDispatcher("/view/vehiculos/vehiculo.jsp").forward(request, response);
 
         } catch (SQLException ex) {
             ex.printStackTrace(); 
@@ -42,7 +43,7 @@ public class ciudadano extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+       
     }
 
     @Override
