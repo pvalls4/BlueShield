@@ -49,6 +49,7 @@ public class CiudadanoDAO {
                 }
             }
         }  catch (SQLException ex) {
+            System.out.println(ex);
             ciudadanos = null;
         }
 
