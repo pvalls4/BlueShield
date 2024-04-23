@@ -2,77 +2,40 @@ package DAO;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sql.DataSource;
-import org.apache.commons.dbcp2.BasicDataSource;
 
 public class Conexion {
-    public static final Properties properties = new Properties();
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final Properties properties = new Properties();
 
     static {
-        String filename = "./config/config.properties";
-        try (InputStream input = Conexion.class.getClassLoader().getResourceAsStream(filename)) {
-            if(input==null){
-                throw new RuntimeException("Sorry, unable to find " + filename);
-            }
-
-            //load a properties file from class path
-            properties.load(input);
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }  
-    }
-
-    private static final String JDBC_URL = properties.getProperty("JDBC_URL");
-    private static final String JDBC_USER = properties.getProperty("JDBC_USER");
-    private static final String JDBC_PASS = properties.getProperty("JDBC_PASS");
-    private static BasicDataSource dataSource;
-    
-    public static DataSource getDataSource() {
-        if (dataSource == null) {
-            dataSource = new BasicDataSource();
-            dataSource.setUrl(JDBC_URL);
-            dataSource.setUsername(JDBC_USER);
-            dataSource.setPassword(JDBC_PASS);
-            dataSource.setInitialSize(50);
+        try (InputStream inputStream = Conexion.class.getClassLoader().getResourceAsStream("./config/config.properties")) {
+            properties.load(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return dataSource;
     }
-    
+
+    private static final String DB_URL = properties.getProperty("JDBC_URL");
+    private static final String DB_USER = properties.getProperty("JDBC_USER");
+    private static final String DB_PASSWORD = properties.getProperty("JDBC_PASS");
+
     public static Connection getConnection() throws SQLException {
-        return getDataSource().getConnection();
-    }
-    
-    public static void close(ResultSet rs) {
+        Connection conn = null;
         try {
-            rs.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
+            Class.forName(DRIVER);
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        } catch (SQLException e) {
+            System.err.println("Error al conectar con la base de datos: " + e.getMessage());
+            throw e;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public static void close(PreparedStatement stmt) {
-        try {
-            stmt.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        }
-    }
-
-    public static void close(Connection conn) {
-        try {
-            conn.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        }
+        return conn;
     }
 }
