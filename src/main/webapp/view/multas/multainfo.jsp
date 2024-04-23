@@ -1,12 +1,12 @@
-<%@ include file="./header.jsp" %>
+<%@ include file="../header.jsp" %>
 <div class="container bg-primary border border-dark rounded">
 
         <div class = "row" style="background-color: #9acbfd;">
             <div class ="row">
-                <div class = "d-flex justify-content-center "><h2>EMISION DE DENUNCIA</h2></div>
+                <div class = "d-flex justify-content-center mt-2"><h2>VISUALIZACION DE DENUNCIA</h2></div>
             </div>
             <div class = "row">
-                <div class = "col-md-9 mb-2">
+                <div class = "col-md-9 mb-5 ">
                     <div class ="row">
                         <div class = "col rounded ms-3 me-3">Num. Referencia</div>
                         <div class = "col rounded mx-4">Fecha</div>
@@ -34,7 +34,7 @@
                         <div class = "col-md-11 rounded ms-3" style="background-color: #bbddf5;"><p>sad</p></div>
                     </div>
                 </div>
-                <div class ="col-md-3 border-start border-dark mb-2">
+                <div class ="col-md-3 border-start border-dark mb-5">
                     <div class ="row">
                         <div class = "col-md-11 ms-3 me-2">Articulos</div>
                     </div>
@@ -42,19 +42,7 @@
                         <div class = "col-md-11 rounded ms-3 me-2" style="background-color: #bbddf5;"><p>ssad</p></div>
                     </div>
                 </div>
-                <div class = "row">
-                    <div class ="d-flex justify-content-center ">
-                        <form method="post" action="multar">
-                            <div class = "col me-3"> 
-                                <button type="submit" class="btn btn-primary b-login mb-2">Log In</button>
-                            </div>
-                            <div class = "col me-3">
-                                <button type="submit" class="btn btn-primary b-login mb-2">Log In</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
 </div>
-<%@ include file="./footer.jsp" %>
+<%@ include file="../footer.jsp" %>

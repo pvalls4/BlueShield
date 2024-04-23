@@ -9,6 +9,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>./view/multaemision.jsp</welcome-file>
+        <welcome-file>./view/multas/nuevaMulta.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
