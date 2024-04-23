@@ -1,7 +1,7 @@
-<%@ include file="../header.jsp" %>
+<%@ include file="../header.jsp"%>
 <div class="container bg-primary border border-dark rounded">
 
-        <div class = "row" style="background-color: #9acbfd;">
+        <div class = "row" style= " background-color: #9acbfd;">
             <div class ="row">
                 <div class = "d-flex justify-content-center mt-2"><h2>VISUALIZACION DE DENUNCIA</h2></div>
             </div>
