@@ -43,10 +43,9 @@ public class DireccionDAO{
                 direccion = fromResultSet(rs);
                 direcciones.add(direccion);
             }
-        } finally {
-            Conexion.close(rs);
-            Conexion.close(stmt);
-        }
+        }catch (SQLException ex) {
+            direcciones = null;
+        } 
         return direcciones;
     }
      
@@ -66,9 +65,8 @@ public class DireccionDAO{
                     result = fromResultSet(rs);
                 }
             }
-        }finally {
-            Conexion.close(rs);
-            Conexion.close(stmt);
+        }catch (SQLException ex) {
+            result = null;
         }
         return result;
     }
@@ -90,8 +88,8 @@ public class DireccionDAO{
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
             System.out.println("Registros afectados:" + rows);
-        } finally {
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            rows = 0;
         }
 
         return rows;
@@ -117,10 +115,9 @@ public class DireccionDAO{
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
 
-        } finally {
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            rows = 0;
         }
-
         return rows;
     }
 
@@ -136,10 +133,9 @@ public class DireccionDAO{
             stmt.setInt(1, direccion.getId());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
-        } finally {
-            Conexion.close(stmt);
+        } catch (SQLException ex) {
+            rows = 0;
         }
-
         return rows;
     }
 }
