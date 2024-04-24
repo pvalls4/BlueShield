@@ -9,15 +9,15 @@
                     <div class = "col-md-12 mb-2">
                         <div class ="row">
                             <div class = "col rounded ms-3 me-3">Num. Referencia</div>
-                            <div class = "col rounded mx-4">Fecha</div>                                  
+                            <div class = "col rounded ms-4 me-2">Fecha</div>                                  
                         </div>
                         <div class ="row">
                             <div class = "col rounded ms-3 me-3 mb-2"><div class = "form-control input-form">asdasd</div></div>
-                            <div class = "col rounded mx-4 mb-2"><input type="date" class="form-control input-form" id="fechaEmision" name="fechaEmision"></div>                                         
+                            <div class = "col rounded ms-4 me-2 mb-2"><input type="date" class="form-control input-form" id="fechaEmision" name="fechaEmision"></div>                                         
                         </div>
                         <div class ="row">
                             <div class = "col rounded ms-3 me-3">Denunciado/a</div>                        
-                            <div class = "col rounded mx-4">Vehiculo Implicado*</div> 
+                            <div class = "col rounded ms-4 me-2">Vehiculo Implicado*</div> 
                         </div>
                         <div class ="row">
                             <div class = "col rounded ms-3 me-3 mb-2">
@@ -37,25 +37,23 @@
                                     %>
                                 </datalist>
                             </div>                                                
-                            <div class = "col rounded  mb-2 mx-4"><input type="text" class="form-control input-form" id="matricula" name="matricula"></div> 
+                            <div class = "col rounded  mb-2 ms-4 me-2"><input type="text" class="form-control input-form" id="matricula" name="matricula"></div> 
                         </div>
                         <div class ="row">
-                            <div class = "col-md-11 rounded ms-3">Ubicacion</div>                        
-                            <div class = "col-md-11 rounded ms-3 mb-2"><input type="text" class="form-control input-form" id="" name=""></div>
+                            <div class = "col rounded ms-3 me-2">Ubicacion</div>                                                 
+                        </div>
+                        <div class = "row">
+                            <div class = "col rounded ms-3 mb-2 me-2"><input type="text" class="form-control input-form" id="" name=""></div>
                         </div>
                         <div class ="row">
-                            <div class = "col-md-11 rounded ms-3">Hechos</div>                        
-                            <div class = "col-md-11 rounded ms-3"><input type="text" class="form-control input-form" id="" name=""></div>
+                            <div class = "col rounded ms-3 me-2">Hechos</div>                        
                         </div>
+                        <div class = "row">
+                            <div class = "col rounded ms-3 mb-2 me-2"><input type="text" class="form-control input-form" id="" name=""></div>
+                        </div>    
                     </div>
                     <div class = "row">
-                                <div class = "col d-flex justify-content-center">  
-                                    <button type="submit" class="boton mx-4 my-3">Emitir denuncia</button>
-                                    <button type="submit" class="boton mx-4 my-3">Cancelar</button>
-                                </div>                       
-                    </div>
-                    <div class = "row">
-                        <div class="container mt-5">
+                        <div class="container my-3 ms-3">
                         <div class="accordion" id="accordionArticulos">
                     <%@ page import="java.util.List" %>
                     <%@ page import="model.DTO.InfraccionDTO" %>
@@ -82,9 +80,9 @@
                           // Mostrar el nuevo capítulo en el acordeón
                           
                             %>
-                            <div class="accordion-item">
+                            <div class="accordion-item" style ="background-color: #bbddf5;">
                                 <h2 class="accordion-header" id="heading<%= capituloActual %>">
-                                  <button class="accordion-button <%= primerCapitulo ? "" : "collapsed" %>" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= capituloActual %>" aria-expanded="<%= primerCapitulo ? "true" : "false" %>" aria-controls="collapse<%= capituloActual %>">
+                                  <button class="accordion-button <%= primerCapitulo ? "" : "collapsed" %>" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= capituloActual %>" aria-expanded="<%= primerCapitulo ? "true" : "false" %>" aria-controls="collapse<%= capituloActual %>" style="background-color: #1e549f; color: white;">
                                     Capítulo <%= capituloActual %>
                                   </button>
                                 </h2>
@@ -107,6 +105,12 @@
                                       </div>
                                 </div>
                             </div>
+                    </div>
+                    <div class = "row">
+                        <div class = "col d-flex justify-content-center">  
+                            <button type="submit" class="boton mx-4 mt-4">Emitir denuncia</button>
+                            <button type="submit" class="boton mx-4 mt-4">Cancelar</button>
+                        </div>                       
                     </div>
                 </div>
             </div>
