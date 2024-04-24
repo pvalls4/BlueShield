@@ -19,6 +19,7 @@
                 <tr>
                     <th>Num referencia</th>
                     <th>Fecha de emision</th>
+                    <th>Detalles</th>
                 </tr>
             </thead>
             <tbody>

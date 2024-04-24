@@ -10,8 +10,8 @@
     </c:if>
     <c:if test="${not empty vehiculo}">
         <div class="row px-4">
-            <div class="col-md-12 g-3">
-                <h2 style="padding-left: 20%;">${vehiculo.bastidor}</h2>
+            <div class="col-md-12 g-3 text-center">
+                <h2>${vehiculo.bastidor}</h2>
             </div>
         </div>
 
@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="modelo" class="col-form-label">Modelo</label>
-                            <input type="text" class="form-control input-form"  id="modelo" name="modelo" value="${verhiculo.modelo.modelo}" required>
+                            <input type="text" class="form-control input-form"  id="modelo" name="modelo" value="${vehiculo.modelo.modelo}" required>
                         </div>
                     </div>
 

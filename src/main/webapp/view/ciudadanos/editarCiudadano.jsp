@@ -10,8 +10,8 @@
     </c:if>
     <c:if test="${not empty ciudadano}">
         <div class="row px-4">
-            <div class="col-md-12 g-3">
-                <h2 style="padding-left: 20%;">${ciudadano.nombre} ${ciudadano.apellidos} - ${ciudadano.dni}</h2>
+            <div class="col-md-12 g-3 text-center">
+                <h2>${ciudadano.nombre} ${ciudadano.apellidos} - ${ciudadano.dni}</h2>
             </div>
         </div>
 
