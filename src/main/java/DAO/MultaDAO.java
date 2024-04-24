@@ -14,6 +14,7 @@ public class MultaDAO{
     private static final String SQL_SELECT_ALL = "SELECT * FROM multas;";
     private static final String SQL_SELECT = "SELECT * FROM multas WHERE id = ?;";
     private static final String SQL_SELECT_DNI = "SELECT * FROM multas WHERE dniPropietario = ?;";
+    private static final String SQL_SELECT_PLACA = "SELECT * FROM multas WHERE idPlaca = ?;";
     private static final String SQL_INSERT = "INSERT INTO multas(fecha_emision, fecha_limite, importe_total, observaciones, isPagado, idPlaca, dniPropietario, bastidor) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE multas SET fecha_emision = ?, fecha_limite = ?, importe_total = ?, observaciones = ?, isPagado = ?, idPlaca = ?, dniPropietario = ?, bastidor = ? WHERE id = ?";
     private static final String SQL_DELETE = "DELETE FROM multas WHERE id=?";
@@ -28,7 +29,6 @@ public class MultaDAO{
         int idPlaca = rs.getInt("idPlaca");
         String dniPropietario = rs.getString("dniPropietario");
         String bastidor = rs.getString("bastidor");
-
         AgenteDTO agente = new AgenteDAO().select(idPlaca);
         CiudadanoDTO ciudadano = new CiudadanoDAO().select(dniPropietario);
         VehiculoDTO vehiculo = new VehiculoDAO().select(bastidor);
@@ -69,6 +69,28 @@ public class MultaDAO{
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT_DNI);
             stmt.setString(1, dniPropietario);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                multa = fromResultSet(rs);
+                multas.add(multa);
+            }
+        } catch (SQLException ex) {
+            multas = null;
+        }
+        return multas;
+    }
+    
+    public List<MultaDTO> selectPlaca(int idPlaca) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        MultaDTO multa = null;
+        List<MultaDTO> multas = new ArrayList<MultaDTO>();
+
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT_PLACA);
+            stmt.setInt(1, idPlaca);
             rs = stmt.executeQuery();
             while (rs.next()) {
                 multa = fromResultSet(rs);

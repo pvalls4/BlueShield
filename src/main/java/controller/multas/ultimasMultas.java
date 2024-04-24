@@ -1,92 +1,66 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller.multas;
 
-import DAO.CiudadanoDAO;
+import DAO.MultaDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import java.sql.SQLException;
-import java.util.List;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.DTO.CiudadanoDTO;
+import model.DTO.MultaDTO;
 
-/**
- *
- * @author Mati
- */
-@WebServlet(name = "nuevaMulta", urlPatterns = {"/nuevaMulta"})
+@WebServlet(name = "ultimasMultas", urlPatterns = {"/ultimasMultas"})
 public class ultimasMultas extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-                response.setContentType("text/html;charset=UTF-8");
-                CiudadanoDAO dao = new CiudadanoDAO();
-                List<CiudadanoDTO> listaCiudadanos = dao.selectAll();
-                request.setAttribute("listaCiudadanos", listaCiudadanos);
-                System.out.println(listaCiudadanos);
-                RequestDispatcher rd = request.getRequestDispatcher("/view/multas/nuevaMulta.jsp");
-                rd.forward(request, response);
-            }
+  
+        HttpSession session = request.getSession(false); // No crea una nueva sesión si no hay una existente
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+        
+        if (session != null && session.getAttribute("username") != null) {
+            // Hay una sesión activa y el usuario está autenticado
+            // Realiza la lógica correspondiente, como mostrar una página de inicio o redirigir a otra URL
+            request.setAttribute("username", session.getAttribute("username"));
+            System.out.println("####1" + session.getAttribute("username"));
+            System.out.println("####2" + request.getAttribute("username"));
+            int idPlaca = (Integer) request.getAttribute("username");
+            MultaDAO dao = new MultaDAO();
+            List<MultaDTO> ultimasMultas = dao.selectPlaca(idPlaca);
+            request.setAttribute("ultimasMultas", ultimasMultas);
+            RequestDispatcher rd = request.getRequestDispatcher("./view/multas/ultimasMultas.jsp");
+            rd.forward(request, response);
+        } else {
+            // No hay una sesión activa o el usuario no está autenticado
+            // Realiza la lógica correspondiente, como mostrar un formulario de inicio de sesión
+            response.sendRedirect("view/login.jsp");
+        }
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                try {
-                    processRequest(request, response);
-                } catch (SQLException ex) {
-                    Logger.getLogger(ultimasMultas.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ultimasMultas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                try {
-                    processRequest(request, response);
-                } catch (SQLException ex) {
-                    Logger.getLogger(ultimasMultas.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        String id = request.getParameter("id");
+        response.sendRedirect("multaInfo?id=" + id);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

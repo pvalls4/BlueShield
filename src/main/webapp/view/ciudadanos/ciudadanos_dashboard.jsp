@@ -30,7 +30,7 @@
                             <td>${ciudadano.dni}</td>
                             <td>
                                 <a href="ciudadano?id=${ciudadano.dni}">
-                                    <i class="bi bi-eye-fill p-3"></i>
+                                    <button class="btn btn-primary b-login mb-2">Ver</button>
                                 </a>
                             </td>
                         </tr>
