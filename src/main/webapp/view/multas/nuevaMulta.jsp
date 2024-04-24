@@ -22,8 +22,22 @@
                             <div class = "col rounded ms-4 ps-4 me-5">Vehiculo Implicado*</div> 
                         </div>
                         <div class ="row">
-                            <div class = "col rounded ms-3 me-3 mb-2 autocomplete"><input type="text" class="form-control input-form" id="iDenunciado" name="denunciado">
-                                <ul id="acCiudadanos"></ul>
+                            <div class = "col rounded ms-3 me-3 mb-2">
+                                <input class="form-control input-form" list="datalistOptions" id="exampleDataList" placeholder="Ciudadano">
+                                <datalist id="datalistOptions">
+                                    <%@ page import="java.util.List" %>
+                                    <%@ page import="model.DTO.CiudadanoDTO" %>
+                                    <%@ page import="java.util.ArrayList" %>
+
+                                    <% 
+                                        List<CiudadanoDTO> listaCiudadanos = (List<CiudadanoDTO>) request.getAttribute("listaCiudadanos");                                      
+                                        for(CiudadanoDTO ciudadano : listaCiudadanos) {
+                                    %>
+                                        <option value="<%= ciudadano.getNombre() %> <%= ciudadano.getApellidos() %>">
+                                    <%
+                                        }
+                                    %>
+                                </datalist>
                             </div>                                                
                             <div class = "col rounded  mb-2 ms-4 me-5"><input type="text" class="form-control input-form" id="bastidor" name="bastidor"></div> 
                         </div>
@@ -109,47 +123,6 @@
                 </div>
             </div>
         </div>
-    </form>                   
-    <script>
-        <%@ page import="java.util.List" %>
-        <%@ page import="model.DTO.CiudadanoDTO" %>
-        <%@ page import="java.util.ArrayList" %>
-        <% List<CiudadanoDTO> listaCiudadanos = (List<CiudadanoDTO>) request.getAttribute("listaCiudadanos"); %>
-        var nombresCiudadanos = [];
-        <%
-            for(CiudadanoDTO ciudadano : listaCiudadanos) {
-        %>
-                nombresCiudadanos.push("<%= ciudadano.getNombre() %> <%= ciudadano.getApellidos() %>"); // Agregar cada nombre al array de JavaScript
-        <%
-            }
-        %>
-        console.log(nombresCiudadanos);
-        // Obtener el input y la lista UL
-        var input = document.getElementById("denunciado");
-        var ul = document.getElementById("ciudadanos");
-
-        // Función para filtrar y mostrar los resultados
-        input.addEventListener("input", function() {
-          // Limpiar la lista
-          ul.innerHTML = "";
-          var inputValue = this.value.toLowerCase();
-          // Filtrar la lista de datos
-          nombresCiudadanos.forEach(function(ciudadano) {
-            if (ciudadano.toLowerCase().indexOf(inputValue) > -1) {
-              var li = document.createElement("li");
-              li.textContent = ciudadano;
-              ul.appendChild(li);
-            }
-          });
-        });
-
-        // Función para seleccionar el elemento de la lista
-        ul.addEventListener("click", function(e) {
-          var selectedValue = e.target.textContent;
-          input.value = selectedValue;
-          // Limpiar la lista después de seleccionar
-          ul.innerHTML = "";
-        });
-    </script>
+    </form>
 
 <%@ include file="../footer.jsp" %>
