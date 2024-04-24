@@ -48,7 +48,7 @@
                     <div class ="row">
                         <div class = "col-md-11 rounded ms-3 me-2" style="background-color: #bbddf5;">
                             <c:forEach items="${infraccionesInfo}" var="info">
-                                ${info.infraccion.articulo}                         
+                                <p>${info.infraccion.articulo}: ${info.infraccion.titulo}.</p>
                             </c:forEach>
                         </div>
                     </div>
