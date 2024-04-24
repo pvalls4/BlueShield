@@ -15,17 +15,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DTO.MultaDTO;
 
-@WebServlet(name = "ultimasMultas", urlPatterns = {"/ultimasMultas"})
-public class ultimasMultas extends HttpServlet {
+@WebServlet(name = "multaInfo", urlPatterns = {"/multaInfo"})
+public class multaInfo extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         String identifier = request.getParameter("id");
-        int idPlaca = Integer.parseInt(identifier);
+        int id = Integer.parseInt(identifier);
+        
         MultaDAO dao = new MultaDAO();
-        List<MultaDTO> ultimasMultas = dao.selectPlaca(idPlaca);
-        request.setAttribute("ultimasMultas", ultimasMultas);
-        RequestDispatcher rd = request.getRequestDispatcher("./view/multas/ultimasMultas.jsp");
+        MultaDTO multaInfo = dao.select(id);
+        
+        request.setAttribute("multaInfo", multaInfo);
+        RequestDispatcher rd = request.getRequestDispatcher("./view/multas/multaInfo.jsp");
+        
         rd.forward(request, response);
     }
 
@@ -35,15 +38,15 @@ public class ultimasMultas extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ultimasMultas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(multaInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-        response.sendRedirect("multaInfo?id=" + id);
+        /*String id = request.getParameter("id");
+        response.sendRedirect("multaInfo?id=" + id);*/
     }
 
     @Override

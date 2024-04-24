@@ -28,7 +28,7 @@
                             <td>${multa.id}</td>
                             <td>${multa.fecha_emision}</td>
                             <td>
-                                <a href="multa?id=${multa.id}">
+                                <a href="multaInfo?id=${multa.id}">
                                     <i class="bi bi-eye-fill p-3"></i>
                                 </a>
                             </td>
