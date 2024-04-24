@@ -3,12 +3,12 @@ package controller.ciudadanos;
 import DAO.CiudadanoDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,19 +20,39 @@ public class ciudadanos_dashboard extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        response.setContentType("text/html;charset=UTF-8");
-        CiudadanoDAO dao = new CiudadanoDAO();
-        List<CiudadanoDTO> listaCiudadanos = dao.selectAll();
-        request.setAttribute("listaCiudadanos", listaCiudadanos);
-        RequestDispatcher rd = request.getRequestDispatcher("./view/ciudadanos/ciudadanos_dashboard.jsp");
-        rd.forward(request, response);
+            HttpSession session = request.getSession(false);
+
+            if (session != null && session.getAttribute("username") != null) {
+                request.setAttribute("username", session.getAttribute("username"));
+                response.setContentType("text/html;charset=UTF-8");
+                CiudadanoDAO dao = new CiudadanoDAO();
+                List<CiudadanoDTO> listaCiudadanos = dao.selectAll();
+                request.setAttribute("listaCiudadanos", listaCiudadanos);
+                RequestDispatcher rd = request.getRequestDispatcher("./view/ciudadanos/ciudadanos_dashboard.jsp");
+                rd.forward(request, response);
+            } else {
+                response.sendRedirect("login");
+            } 
+            
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            HttpSession session = request.getSession(false);
+
+            if (session != null && session.getAttribute("username") != null) {
+                request.setAttribute("username", session.getAttribute("username"));
+                response.setContentType("text/html;charset=UTF-8");
+                CiudadanoDAO dao = new CiudadanoDAO();
+                List<CiudadanoDTO> listaCiudadanos = dao.selectAll();
+                request.setAttribute("listaCiudadanos", listaCiudadanos);
+                RequestDispatcher rd = request.getRequestDispatcher("./view/ciudadanos/ciudadanos_dashboard.jsp");
+                rd.forward(request, response);
+            } else {
+                response.sendRedirect("login");
+            } 
         } catch (SQLException ex) {
             Logger.getLogger(ciudadanos_dashboard.class.getName()).log(Level.SEVERE, null, ex);
         }

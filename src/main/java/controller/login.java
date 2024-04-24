@@ -42,13 +42,12 @@ public class login extends HttpServlet {
         String pwd = request.getParameter("pwd");
 
         // Perform authentication (e.g., check against a database)
-        boolean isAuthenticated = authenticate(placa, pwd);
+        AgenteDTO agente = authenticate(placa, pwd);
 
-        if (isAuthenticated) {
-            System.out.println(isAuthenticated);
+        if (agente != null) {
             HttpSession session = request.getSession();
-            session.setAttribute("username", placa);
-            request.setAttribute("username", placa);
+            session.setAttribute("username", agente.getCiudadano().getNombre() + " " + agente.getCiudadano().getApellidos());
+            request.setAttribute("username", agente.getCiudadano().getNombre() + " " + agente.getCiudadano().getApellidos());
             request.getRequestDispatcher("/view/dashboard.jsp").forward(request, response);
         } else {
             request.setAttribute("errorMessage", "Invalid username or password");
@@ -56,19 +55,19 @@ public class login extends HttpServlet {
 }
             
     }
-    private boolean authenticate(int placa, String pwd) 
+    private AgenteDTO authenticate(int placa, String pwd) 
         throws ServletException, IOException {
             AgenteDAO dao = new AgenteDAO();
             try {
                 AgenteDTO agente = dao.select(placa);
-                System.out.println(agente);
-                return agente.getPlaca() == placa && agente.getPassword().equals(pwd);
+                if (agente.getPlaca() == placa && agente.getPassword().equals(pwd)) {
+                    return agente;
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println(ex);
-                return false;
             }
-
+            return null;
         }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

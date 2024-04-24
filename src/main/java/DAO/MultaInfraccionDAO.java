@@ -7,7 +7,7 @@ import java.util.List;
 import model.DTO.InfraccionDTO;
 import model.DTO.MultaDTO;
 
-public class MultasnfraccionDAO{
+public class MultaInfraccionDAO{
 
 
     private static final String SQL_SELECT_ALL = "SELECT * FROM multas_infracciones;";
