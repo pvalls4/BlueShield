@@ -17,9 +17,10 @@
         <!-- Segundo row con imagen y parámetros -->
         <div class="row p-3">
             <!-- Imagen a la izquierda -->
-            <div class="col-md-3 border border-dark rounded m-0 p-0">
-                <img src="${vehiculo.modelo.imagen}" class="img-fluid" alt="FotoVehiculo">
+            <div class="col-md-3 border border-dark rounded m-0 p-0 d-flex align-items-center justify-content-center">
+                <img src="${vehiculo.modelo.imagen}" class="img-fluid" alt="FotoVehiculo" style="object-fit: cover; width: 100%; height: 100%;">
             </div>
+
             <!-- Contenedor para otros parámetros a la derecha -->
             <div class="col-md-9">
                 <!-- Nueva fila para dividir los parámetros -->
