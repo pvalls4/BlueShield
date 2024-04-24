@@ -10,8 +10,8 @@
     </c:if>
     <c:if test="${not empty vehiculo}">
         <div class="row px-4">
-            <div class="col-md-12 g-3">
-                <h2 style="padding-left: 20%;">${vehiculo.matricula}</h2>
+            <div class="col-md-12 g-3 text-center">
+                <h2>${vehiculo.modelo.modelo} - ${vehiculo.matricula}</h2>
             </div>
         </div>
         <!-- Segundo row con imagen y parámetros -->
@@ -52,17 +52,23 @@
                                 ver más
                             </a>
                         </div>
-
-
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col px-3">
+                    <div class="col-md-6 px-3">
                         <div class="col p-1">
                             Matricula
                         </div>
-                        <div class="col border border-dark rounded p-1" style="background-color: #bbddf5;color:#0757af;overflow-wrap: break-word;">
+                        <div class="col border border-dark rounded p-1" style="background-color: #bbddf5;color:#0757af;">
                             ${vehiculo.matricula}
+                        </div>
+                    </div>
+                    <div class="col-md-6 rounded px-3">
+                        <div class="col p-1">
+                            Bastidor
+                        </div>
+                        <div class="col border border-dark rounded p-1" style="background-color: #bbddf5;color:#0757af;">
+                            ${vehiculo.bastidor}
                         </div>
                     </div>
                 </div>
@@ -71,10 +77,12 @@
 
         <div class="row justify-content-center text-center">
             <div class="col-md-6 col-lg-4"> <!-- Tamaño alargado para dispositivos medianos y grandes -->
-                <button class="btn btn-primary btn-block m-1 px-5" style="background-color: #bbddf5;color:#0757af;">Editar Vehiculo</button>
+                <a href="editarVehiculo?id=${vehiculo.bastidor}">
+                    <button class="btn btn-primary btn-block m-1 px-5" style="background-color: #bbddf5;color:#0757af;">Editar vehiculo</button>
+                </a>
             </div>
             <div class="col-md-6 col-lg-4"> <!-- Tamaño alargado para dispositivos medianos y grandes -->
-                <button class="btn btn-primary btn-block m-1 mb-3 px-5" style="background-color: #bbddf5;color:#0757af;">Ver Multas</button>
+                <a href="listaMultas?id=${vehiculo.bastidor}"><button class="btn btn-primary btn-block m-1 mb-3 px-5" style="background-color: #bbddf5;color:#0757af;">Ver Multas</button></a>
             </div>
         </div>
     </c:if>

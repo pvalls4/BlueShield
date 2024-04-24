@@ -8,8 +8,7 @@ import model.DTO.AgenteDTO;
 import model.DTO.CiudadanoDTO;
 import model.DTO.VehiculoDTO;
 
-public class MultaDAO{
-
+public class MultaDAO {
 
     private static final String SQL_SELECT_ALL = "SELECT * FROM multas;";
     private static final String SQL_SELECT = "SELECT * FROM multas WHERE id = ?;";
@@ -25,19 +24,19 @@ public class MultaDAO{
         Date fechaLimite = rs.getDate("fecha_limite");
         double importeTotal = rs.getDouble("importe_total");
         String observaciones = rs.getString("observaciones");
-        Boolean isPagado = rs.getBoolean("isPagado"); 
+        Boolean isPagado = rs.getBoolean("isPagado");
         int idPlaca = rs.getInt("idPlaca");
         String dniPropietario = rs.getString("dniPropietario");
         String bastidor = rs.getString("bastidor");
         AgenteDTO agente = new AgenteDAO().select(idPlaca);
         CiudadanoDTO ciudadano = new CiudadanoDAO().select(dniPropietario);
         VehiculoDTO vehiculo = new VehiculoDAO().select(bastidor);
-        
+
         MultaDTO multa = new MultaDTO(id, fechaEmision, fechaLimite, importeTotal, observaciones, isPagado, agente, ciudadano, vehiculo);
-            
+
         return multa;
-    } 
-    
+    }
+
     public List<MultaDTO> selectAll() throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -58,7 +57,8 @@ public class MultaDAO{
         }
         return multas;
     }
-        public List<MultaDTO> selectDNI(String dniPropietario) throws SQLException {
+
+    public List<MultaDTO> selectDNI(String dniPropietario) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -79,7 +79,7 @@ public class MultaDAO{
         }
         return multas;
     }
-    
+
     public List<MultaDTO> selectPlaca(int idPlaca) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -101,13 +101,13 @@ public class MultaDAO{
         }
         return multas;
     }
-    
+
     public MultaDTO select(int idMulta) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         MultaDTO result = null;
-        
+
         try {
             conn = Conexion.getConnection();
             if (conn != null) {
@@ -118,8 +118,8 @@ public class MultaDAO{
                     result = fromResultSet(rs);
                 }
             }
-        }catch (SQLException ex) {
-            result=null;
+        } catch (SQLException ex) {
+            result = null;
         }
         return result;
     }
@@ -139,7 +139,6 @@ public class MultaDAO{
             stmt.setInt(6, multa.getAgente().getPlaca());
             stmt.setString(7, multa.getCiudadano().getDni());
             stmt.setString(8, multa.getVehiculo().getBastidor());
-            
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -169,7 +168,6 @@ public class MultaDAO{
             stmt.setString(8, multa.getVehiculo().getBastidor());
             stmt.setInt(9, multa.getId());
 
-
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
 
@@ -192,7 +190,7 @@ public class MultaDAO{
             stmt.setInt(1, multa.getId());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             rows = 0;
         }
         return rows;

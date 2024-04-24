@@ -9,6 +9,7 @@ public class VehiculoDAO {
 
     private static final String SQL_SELECT_ALL = "SELECT * FROM vehiculos";
     private static final String SQL_SELECT = "SELECT * FROM vehiculos WHERE bastidor = ?";
+    private static final String SQL_SELECT_DNI = "SELECT * FROM vehiculos WHERE dniPropietario = ?;";
     private static final String SQL_INSERT = "INSERT INTO vehiculos(bastidor, matricula, dniPropietario, idModelo) VALUES(?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE vehiculos SET matricula=?, dniPropietario=?, idModelo=? WHERE bastidor = ?";
     private static final String SQL_DELETE = "DELETE FROM vehiculos WHERE bastidor=?";
@@ -73,6 +74,28 @@ public class VehiculoDAO {
         }
 
         return vehiculo;
+    }
+    
+    public List<VehiculoDTO> selectDNI(String dniPropietario) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        VehiculoDTO vehiculo = null;
+        List<VehiculoDTO> vehiculos = new ArrayList<VehiculoDTO>();
+
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT_DNI);
+            stmt.setString(1, dniPropietario);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                vehiculo = fromResultSet(rs);
+                vehiculos.add(vehiculo);
+            }
+        } catch (SQLException ex) {
+            vehiculos = null;
+        }
+        return vehiculos;
     }
 
     public int insert(VehiculoDTO vehiculo) throws SQLException {
