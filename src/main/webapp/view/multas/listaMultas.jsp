@@ -29,7 +29,7 @@
                             <td>${multa.fecha_emision}</td>
                             <td>
                                 <a href="multaInfo?id=${multa.id}">
-                                    <i class="bi bi-eye-fill p-3"></i>
+                                    <button class="btn btn-primary b-login mb-2">Ver</button>
                                 </a>
                             </td>
                         </tr>
