@@ -46,9 +46,14 @@
                         <div class="col p-1">
                             Propietario
                         </div>
-                        <div class="col border border-dark rounded p-1" style="background-color: #bbddf5;color:#0757af;overflow-wrap: break-word;">
+                        <div class="col border border-dark rounded p-1" style="background-color: #bbddf5; color: #0757af; overflow-wrap: break-word;">
                             ${vehiculo.ciudadano.nombre} ${vehiculo.ciudadano.apellidos}
+                            <a href="ciudadano?id=${vehiculo.ciudadano.dni}" style="float: right; padding-right: 5%;">
+                                ver más
+                            </a>
                         </div>
+
+
                     </div>
                 </div>
                 <div class="row">
