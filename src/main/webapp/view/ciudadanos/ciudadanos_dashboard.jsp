@@ -1,4 +1,4 @@
-<%@ include file="./header.jsp" %>
+<%@ include file="../header.jsp" %>
 <div class="container border border-dark rounded" style="background-color: #9acbfd">
     <div class="row">
         <!--        buscador-->
@@ -45,4 +45,4 @@
         </table>
     </div>
 </div>
-<%@ include file="./footer.jsp" %>
+<%@ include file="../footer.jsp" %>

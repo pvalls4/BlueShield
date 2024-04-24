@@ -1,7 +1,7 @@
 package controller.vehiculos;
 
 import DAO.VehiculoDAO;
-import controller.ciudadanos_dashboard;
+import controller.ciudadanos.ciudadanos_dashboard;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 

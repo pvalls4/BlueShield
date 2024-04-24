@@ -1,4 +1,4 @@
-package controller;
+package controller.ciudadanos;
 
 import DAO.CiudadanoDAO;
 import jakarta.servlet.RequestDispatcher;
@@ -24,7 +24,7 @@ public class ciudadanos_dashboard extends HttpServlet {
         CiudadanoDAO dao = new CiudadanoDAO();
         List<CiudadanoDTO> listaCiudadanos = dao.selectAll();
         request.setAttribute("listaCiudadanos", listaCiudadanos);
-        RequestDispatcher rd = request.getRequestDispatcher("./view/ciudadanos_dashboard.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("./view/ciudadanos/ciudadanos_dashboard.jsp");
         rd.forward(request, response);
     }
 

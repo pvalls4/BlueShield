@@ -1,4 +1,4 @@
-<%@ include file="./header.jsp" %>
+<%@ include file="../header.jsp" %>
 
 <div class="container border border-dark rounded" style="background-color: #9acbfd">
 
@@ -74,4 +74,4 @@
         </div>
     </c:if>
 </div>
-<%@ include file="./footer.jsp" %>
+<%@ include file="../footer.jsp" %>

@@ -1,4 +1,4 @@
-package controller;
+package controller.ciudadanos;
 
 import DAO.CiudadanoDAO;
 import jakarta.servlet.RequestDispatcher;
@@ -17,7 +17,7 @@ public class ciudadano extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        RequestDispatcher rd = request.getRequestDispatcher("./view/ciudadano.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("./view/ciudadanos/ciudadano.jsp");
         rd.forward(request, response);
     }
 
@@ -32,7 +32,7 @@ public class ciudadano extends HttpServlet {
             CiudadanoDTO ciudadano = ciudadanoDAO.select(dni);
 
             request.setAttribute("ciudadano", ciudadano);
-            request.getRequestDispatcher("/view/ciudadano.jsp").forward(request, response);
+            request.getRequestDispatcher("/view/ciudadanos/ciudadano.jsp").forward(request, response);
 
         } catch (SQLException ex) {
             ex.printStackTrace(); 
