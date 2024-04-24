@@ -18,6 +18,7 @@
             <thead>
                 <tr>
                     <th>Bastidor</th>
+                    <th>Propietario</th>
                     <th>Detalles</th>
                 </tr>
             </thead>
@@ -26,10 +27,11 @@
                     <c:forEach items="${listaVehiculos}" var="vehiculo">
                         <tr>
                             <td>${vehiculo.bastidor}</td>
-                            
+                            <td>${vehiculo.ciudadano.nombre} ${vehiculo.ciudadano.apellidos}</td>
+
                             <td>
                                 <a href="vehiculo?id=${vehiculo.bastidor}">
-                                    <i class="bi bi-eye-fill p-3"></i>
+                                    <button class="btn btn-primary b-login mb-2">Ver</button>
                                 </a>
                             </td>
                         </tr>
@@ -37,7 +39,7 @@
                 </c:if>
                 <c:if test="${empty listaVehiculos}">
                     <tr>
-                        <td colspan="2">No hay vehiculos disponibles.</td>
+                        <td colspan="3">No hay vehiculos disponibles.</td>
                     </tr>
                 </c:if>
             </tbody>
