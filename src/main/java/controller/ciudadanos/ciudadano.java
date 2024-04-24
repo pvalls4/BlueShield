@@ -1,6 +1,7 @@
 package controller.ciudadanos;
 
 import DAO.CiudadanoDAO;
+import DAO.VehiculoDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -9,7 +10,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import java.util.List;
 import model.DTO.CiudadanoDTO;
+import model.DTO.VehiculoDTO;
 
 @WebServlet(name = "ciudadano", urlPatterns = {"/ciudadano"})
 public class ciudadano extends HttpServlet {
@@ -30,8 +33,11 @@ public class ciudadano extends HttpServlet {
 
             CiudadanoDAO ciudadanoDAO = new CiudadanoDAO();
             CiudadanoDTO ciudadano = ciudadanoDAO.select(dni);
+            List<VehiculoDTO> listaVehiculos = new  VehiculoDAO().selectDNI(dni);
 
+            
             request.setAttribute("ciudadano", ciudadano);
+            request.setAttribute("listaVehiculos", listaVehiculos);
             request.getRequestDispatcher("/view/ciudadanos/ciudadano.jsp").forward(request, response);
 
         } catch (SQLException ex) {

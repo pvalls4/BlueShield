@@ -10,8 +10,8 @@
     </c:if>
     <c:if test="${not empty ciudadano}">
         <div class="row px-4">
-            <div class="col-md-12 g-3">
-                <h2 style="padding-left: 20%;">${ciudadano.nombre} ${ciudadano.apellidos} - ${ciudadano.dni}</h2>
+            <div class="col-md-12 g-3 text-center">
+                <h2>${ciudadano.nombre} ${ciudadano.apellidos} - ${ciudadano.dni}</h2>
             </div>
         </div>
         <!-- Segundo row con imagen y parámetros -->
@@ -62,6 +62,45 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="row  mb-3 px-4">
+            <div class="row px-4">
+                <div class="col-md-12 g-3 text-center">
+                    <h3>Vehículos asociados</h3>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Bastidor</th>
+                        <th>Matricula</th>
+                        <th>Modelo</th>                  
+                        <th>Detalles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:if test="${not empty listaVehiculos}">
+                        <c:forEach items="${listaVehiculos}" var="vehiculo">
+                            <tr>
+                                <td>${vehiculo.bastidor}</td>
+                                <td>${vehiculo.matricula}</td>
+                                <td>${vehiculo.modelo.modelo}</td>
+                                <td>
+                                    <a href="vehiculo?id=${vehiculo.bastidor}">
+                                        <button class="btn btn-primary b-login mb-2">Ver</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${empty listaVehiculos}">
+                        <tr>
+                            <td colspan="4">No hay vehiculos asociados.</td>
+                        </tr>
+                    </c:if>
+                </tbody>
+            </table>
         </div>
 
         <div class="row justify-content-center text-center">

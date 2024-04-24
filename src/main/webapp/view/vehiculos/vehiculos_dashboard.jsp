@@ -15,18 +15,22 @@
     </div>
     <div class="row  mb-3 px-4">
         <table class="table">
-            <thead>
-                <tr>
-                    <th>Bastidor</th>
-                    <th>Propietario</th>
-                    <th>Detalles</th>
-                </tr>
-            </thead>
             <tbody>
+                <thead>
+                    <tr>
+                        <th>Bastidor</th>
+                        <th>Matricula</th>
+                        <th>Modelo</th>                  
+                        <th>Propietario</th>                  
+                        <th>Detalles</th>
+                    </tr>
+                </thead>
                 <c:if test="${not empty listaVehiculos}">
                     <c:forEach items="${listaVehiculos}" var="vehiculo">
                         <tr>
                             <td>${vehiculo.bastidor}</td>
+                            <td>${vehiculo.matricula}</td>
+                            <td>${vehiculo.modelo.modelo}</td>
                             <td>${vehiculo.ciudadano.nombre} ${vehiculo.ciudadano.apellidos}</td>
 
                             <td>
@@ -39,7 +43,7 @@
                 </c:if>
                 <c:if test="${empty listaVehiculos}">
                     <tr>
-                        <td colspan="3">No hay vehiculos disponibles.</td>
+                        <td colspan="5">No hay vehiculos disponibles.</td>
                     </tr>
                 </c:if>
             </tbody>

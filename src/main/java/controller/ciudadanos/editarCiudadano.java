@@ -1,6 +1,7 @@
 package controller.ciudadanos;
 
 import DAO.CiudadanoDAO;
+import DAO.DireccionDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -8,12 +9,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DTO.CiudadanoDTO;
-import model.DTO.DireccionDTO;
 
 @WebServlet(name = "editarCiudadano", urlPatterns = {"/editarCiudadano"})
 public class editarCiudadano extends HttpServlet {
@@ -46,7 +45,6 @@ public class editarCiudadano extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            // Obtener los datos del formulario
             String dni = request.getParameter("dni");
             CiudadanoDTO ciudadano= new CiudadanoDAO().select(dni);
             
@@ -72,14 +70,11 @@ public class editarCiudadano extends HttpServlet {
             ciudadano.getDireccion().setPiso(piso);
             ciudadano.getDireccion().setPuerta(puerta);
             
-            int resultado = new CiudadanoDAO().update(ciudadano);
+            new DireccionDAO().update(ciudadano.getDireccion());
+            new CiudadanoDAO().update(ciudadano);
             
-            // Puedes manejar el resultado de la actualización aquí, por ejemplo, redireccionar a otra página
-            if (resultado > 0) {
-                response.sendRedirect("exito.jsp");
-            } else {
-                response.sendRedirect("error.jsp");
-            }
+            response.sendRedirect("ciudadano?id=" + dni);
+            
         } catch (SQLException ex) {
             Logger.getLogger(editarCiudadano.class.getName()).log(Level.SEVERE, null, ex);
         }
