@@ -1,42 +1,41 @@
 package controller.ciudadanos;
 
 import DAO.CiudadanoDAO;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Date;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DTO.CiudadanoDTO;
-import model.DTO.DireccionDTO;
 
 @WebServlet(name = "editarCiudadano", urlPatterns = {"/editarCiudadano"})
 public class editarCiudadano extends HttpServlet {
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        RequestDispatcher rd = request.getRequestDispatcher("./view/ciudadanos/editarCiudadano.jsp");
-        rd.forward(request, response);
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            HttpSession session = request.getSession(false);
 
-            String dni = request.getParameter("id");
+            if (session != null && session.getAttribute("username") != null) {
+                request.setAttribute("username", session.getAttribute("username"));
+                response.setContentType("text/html;charset=UTF-8");
 
-            CiudadanoDAO ciudadanoDAO = new CiudadanoDAO();
-            CiudadanoDTO ciudadano = ciudadanoDAO.select(dni);
+                String dni = request.getParameter("id");
 
-            request.setAttribute("ciudadano", ciudadano);
-            request.getRequestDispatcher("/view/ciudadanos/editarCiudadano.jsp").forward(request, response);
+                CiudadanoDAO ciudadanoDAO = new CiudadanoDAO();
+                CiudadanoDTO ciudadano = ciudadanoDAO.select(dni);
+                request.setAttribute("ciudadano", ciudadano);
+                
+                request.getRequestDispatcher("/view/ciudadanos/editarCiudadano.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("login");
+            } 
 
         } catch (SQLException ex) {
             ex.printStackTrace();

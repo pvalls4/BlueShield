@@ -15,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DTO.CiudadanoDTO;
@@ -39,14 +40,22 @@ public class nuevaMulta extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
                 response.setContentType("text/html;charset=UTF-8");
-                CiudadanoDAO daoc = new CiudadanoDAO();
-                InfraccionDAO daoi = new InfraccionDAO();
-                List<CiudadanoDTO> listaCiudadanos = daoc.selectAll();
-                request.setAttribute("listaCiudadanos", listaCiudadanos);
-                List<InfraccionDTO> listaInfracciones = daoi.selectAll();
-                request.setAttribute("listaInfracciones", listaInfracciones);
-                RequestDispatcher rd = request.getRequestDispatcher("/view/multas/nuevaMulta.jsp");
-                rd.forward(request, response);
+                HttpSession session = request.getSession(false);
+
+                if (session != null && session.getAttribute("username") != null) {
+                    request.setAttribute("username", session.getAttribute("username"));
+                    response.setContentType("text/html;charset=UTF-8");
+                    CiudadanoDAO daoc = new CiudadanoDAO();
+                    InfraccionDAO daoi = new InfraccionDAO();
+                    List<CiudadanoDTO> listaCiudadanos = daoc.selectAll();
+                    request.setAttribute("listaCiudadanos", listaCiudadanos);
+                    List<InfraccionDTO> listaInfracciones = daoi.selectAll();
+                    request.setAttribute("listaInfracciones", listaInfracciones);
+                    RequestDispatcher rd = request.getRequestDispatcher("/view/multas/nuevaMulta.jsp");
+                    rd.forward(request, response);
+                } else {
+                    response.sendRedirect("login");
+                } 
             }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

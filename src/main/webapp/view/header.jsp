@@ -20,17 +20,19 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-12 col-md-auto text-center">
-                        <img id="dashboard" src="./images/logoBS.png" class="logo mb-3 mb-md-0" alt="Logo" onclick="redirigir(this.id)">
+                        <img src="./images/logoBS.png" class="logo mb-3 mb-md-0" alt="Logo" onclick="redirigir('dashboard')">
                     </div>
 
                     <div class="col-12 col-md-auto text-center">
-                        <img id="dashboard" src="./images/blueshield.png" class="blueshield" alt="BlueShield" onclick="redirigir(this.id)">
+                        <img src="./images/blueshield.png" class="blueshield" alt="BlueShield" onclick="redirigir('dashboard')">
                     </div>
+
                     <script>
                         function redirigir(id) {
-                            window.location.href = id;
+                            window.location.href = id
                         }
                     </script>
+
                     <div class="col-12 col-md text-center text-md-left">
                         <h2 class="version mb-0 text-md-right">Version 1.0 - <%= request.getAttribute("username") %></h2>
                     </div>
