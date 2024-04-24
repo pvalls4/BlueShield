@@ -36,6 +36,9 @@
                     <div class="col-12 col-md text-center text-md-left">
                         <h2 class="version mb-0 text-md-right">Version 1.0 - <%= request.getAttribute("username") %></h2>
                     </div>
+                    <div>
+                        <a href='logout'>Cerrar sesión</a>
+                    </div>
                 </div>
             </div>
             <div class="division mb-3"></div>

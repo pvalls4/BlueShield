@@ -1,7 +1,5 @@
 package controller.vehiculos;
 
-import DAO.CiudadanoDAO;
-import DAO.DireccionDAO;
 import DAO.VehiculoDAO;
 import DAO.ModeloDAO;
 import controller.ciudadanos.editarCiudadano;
@@ -12,10 +10,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.DTO.CiudadanoDTO;
 import model.DTO.VehiculoDTO;
 
 @WebServlet(name = "editarVehiculo", urlPatterns = {"/editarVehiculo"})
@@ -32,15 +30,21 @@ public class editarVehiculo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            response.setContentType("text/html;charset=UTF-8");
+            HttpSession session = request.getSession(false);
 
-            String bastidor = request.getParameter("id");
+            if (session != null && session.getAttribute("username") != null) {
+                request.setAttribute("username", session.getAttribute("username"));
+                String bastidor = request.getParameter("id");
 
-            VehiculoDAO dao = new VehiculoDAO();
-            VehiculoDTO vehiculo = dao.select(bastidor);
+                VehiculoDAO dao = new VehiculoDAO();
+                VehiculoDTO vehiculo = dao.select(bastidor);
 
-            request.setAttribute("vehiculo", vehiculo);
-            request.getRequestDispatcher("/view/vehiculos/editarVehiculo.jsp").forward(request, response);
-
+                request.setAttribute("vehiculo", vehiculo);
+                request.getRequestDispatcher("/view/vehiculos/editarVehiculo.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("login");
+            } 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

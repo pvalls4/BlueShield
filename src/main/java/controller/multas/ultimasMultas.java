@@ -30,7 +30,7 @@ public class ultimasMultas extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("./view/multas/ultimasMultas.jsp");
                 rd.forward(request, response);
             } else {
-                response.sendRedirect("view/login.jsp");
+                response.sendRedirect("login");
             }
     }
 
