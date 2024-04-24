@@ -16,7 +16,7 @@
     function redirigir(option) {
         switch (option) {
             case 1: 
-                window.location.href = "nuevamulta";
+                window.location.href = "nuevaMulta";
                 break;
             case 2:
                 window.location.href = "ultimasMultas";
