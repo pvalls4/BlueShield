@@ -2,7 +2,7 @@
 <div class="container bg-primary border border-dark rounded">
     
     <c:if test="${empty multaInfo}">
-        <div class="row justify-content-center text-center py-5 m-3" style="background-color: #bbddf5;color:#0757af;">
+        <div class="row justify-content-center text-center py-5 m-3" style="background-color: #bbddf5; color:#0757af;">
             No se encontró esta multa.   
         </div>
 
