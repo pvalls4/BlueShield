@@ -5,6 +5,7 @@
 package controller.multas;
 
 import DAO.CiudadanoDAO;
+import DAO.InfraccionDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -17,6 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DTO.CiudadanoDTO;
+import model.DTO.InfraccionDTO;
 
 /**
  *
@@ -37,10 +39,12 @@ public class nuevaMulta extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
                 response.setContentType("text/html;charset=UTF-8");
-                CiudadanoDAO dao = new CiudadanoDAO();
-                List<CiudadanoDTO> listaCiudadanos = dao.selectAll();
+                CiudadanoDAO daoc = new CiudadanoDAO();
+                InfraccionDAO daoi = new InfraccionDAO();
+                List<CiudadanoDTO> listaCiudadanos = daoc.selectAll();
                 request.setAttribute("listaCiudadanos", listaCiudadanos);
-                System.out.println(listaCiudadanos);
+                List<InfraccionDTO> listaInfracciones = daoi.selectAll();
+                request.setAttribute("listaInfracciones", listaInfracciones);
                 RequestDispatcher rd = request.getRequestDispatcher("/view/multas/nuevaMulta.jsp");
                 rd.forward(request, response);
             }

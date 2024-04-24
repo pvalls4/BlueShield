@@ -46,7 +46,7 @@
                         <div class = "col-md-11 ms-3 me-2">Articulos</div>
                     </div>
                     <div class ="row">
-                        <div class = "col-md-11 rounded ms-3 me-2" style="background-color: #bbddf5;"><p>sd</p></div>
+                        <div class = "col-md-11 rounded ms-3 me-2" style="background-color: #bbddf5;"><p></p></div>
                     </div>
                 </div>
             </div>
