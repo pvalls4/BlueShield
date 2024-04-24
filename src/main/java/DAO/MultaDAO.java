@@ -29,7 +29,6 @@ public class MultaDAO{
         int idPlaca = rs.getInt("idPlaca");
         String dniPropietario = rs.getString("dniPropietario");
         String bastidor = rs.getString("bastidor");
-
         AgenteDTO agente = new AgenteDAO().select(idPlaca);
         CiudadanoDTO ciudadano = new CiudadanoDAO().select(dniPropietario);
         VehiculoDTO vehiculo = new VehiculoDAO().select(bastidor);

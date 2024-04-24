@@ -38,7 +38,7 @@
                     </div>
                     <div class ="row">
                         <div class = "col-md-11 rounded ms-3">Hechos</div>                        
-                        <div class = "col-md-11 rounded ms-3" style="background-color: #bbddf5;"><p>sad</p></div>
+                        <div class = "col-md-11 rounded ms-3" style="background-color: #bbddf5;"><p>${multaInfo.observaciones}</p></div>
                     </div>
                 </div>
                 <div class ="col-md-3 border-start border-dark mb-5">
@@ -46,7 +46,7 @@
                         <div class = "col-md-11 ms-3 me-2">Articulos</div>
                     </div>
                     <div class ="row">
-                        <div class = "col-md-11 rounded ms-3 me-2" style="background-color: #bbddf5;"><p>ssad</p></div>
+                        <div class = "col-md-11 rounded ms-3 me-2" style="background-color: #bbddf5;"><p>${multaInfo.infraccion.}</p></div>
                     </div>
                 </div>
             </div>

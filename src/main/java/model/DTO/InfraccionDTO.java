@@ -1,4 +1,3 @@
-
 package model.DTO;
 
 public class InfraccionDTO {
