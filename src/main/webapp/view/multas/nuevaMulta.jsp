@@ -7,21 +7,21 @@
             </div>
             <div class="row">
                 <div class="col-md-12 mb-2">
-                    <div class="row">
-                        <div class="col rounded ms-3 me-3">Num. Referencia</div>
-                        <div class="col rounded ms-4 me-2">Fecha</div>                                  
+                    <div class="row">                     
+                        <label for = "numReferencia" class="col rounded ms-3 me-3">Num. Referencia</label>
+                        <label for = "fechaEmision" class="col rounded ms-4 me-2">Fecha</label>                                  
                     </div>
                     <div class="row">
                         <div class="col rounded ms-3 me-3 mb-2"><div class="form-control input-form">asdasd</div></div>
-                        <div class="col rounded ms-4 me-2 mb-2"><input type="date" class="form-control input-form" id="fechaEmision" name="fechaEmision"></div>                                         
+                        <div class="col rounded ms-4 me-2 mb-2"><input type="date" class="form-control input-form" id="fechaEmision" name="fechaEmision" required></div>                                         
                     </div>
                     <div class="row">
-                        <div class="col rounded ms-3 me-3">Denunciado/a</div>                        
-                        <div class="col rounded ms-4 me-2">Vehiculo Implicado*</div> 
+                        <label for = "ciudadano" class="col rounded ms-3 me-3">Denunciado/a</label>                        
+                        <label for = "vehiculo" class="col rounded ms-4 me-2">Vehiculo Implicado*</label> 
                     </div>
                     <div class="row">
                         <div class="col rounded ms-3 me-3 mb-2">
-                            <input class="form-control input-form" list="datalistOptions" id="exampleDataList" placeholder="Ciudadano">
+                            <input class="form-control input-form" list="datalistOptions" id="ciudadano" placeholder="Ciudadano">
                             <datalist id="datalistOptions">
                                 <%@ page import="java.util.List" %>
                                 <%@ page import="model.DTO.CiudadanoDTO" %>
@@ -39,16 +39,16 @@
                         <div class="col rounded  mb-2 ms-4 me-2"><input type="text" class="form-control input-form" id="matricula" name="matricula"></div> 
                     </div>
                     <div class="row">
-                        <div class="col rounded ms-3 me-2">Ubicacion</div>                                                 
+                        <label for= "ubicacion" class="col rounded ms-3 me-2">Ubicacion</label>                                                 
                     </div>
                     <div class="row">
-                        <div class="col rounded ms-3 mb-2 me-2"><input type="text" class="form-control input-form" id="" name=""></div>
+                        <div class="col rounded ms-3 mb-2 me-2"><input type="text" class="form-control input-form" id="ubicacion" name="ubicacion"></div>
                     </div>
                     <div class="row">
-                        <div class="col rounded ms-3 me-2">Hechos</div>                        
+                        <label for= "observaciones" class="col rounded ms-3 me-2">Hechos</label>                        
                     </div>
                     <div class="row">
-                        <div class="col rounded ms-3 mb-2 me-2"><input type="text" class="form-control input-form" id="" name=""></div>
+                        <div class="col rounded ms-3 mb-2 me-2"><input type="text" class="form-control input-form" id="observaciones" name="observaciones"></div>
                     </div>    
                 </div>
                 <div class="row">
