@@ -7,20 +7,11 @@
             </div>
             <div class="row">
                 <div class="col-md-12 mb-2">
-                    <div class="row">                     
-                        <label for = "numReferencia" class="col rounded ms-3 me-3">Num. Referencia</label>
-                        <label for = "fechaEmision" class="col rounded ms-4 me-2">Fecha</label>                                  
+                    <div class="row">
+                        <label for = "ciudadano" class="col rounded ms-3 me-2">Denunciado/a</label>                        
                     </div>
                     <div class="row">
-                        <div class="col rounded ms-3 me-3 mb-2"><div class="form-control input-form">asdasd</div></div>
-                        <div class="col rounded ms-4 me-2 mb-2"><input type="date" class="form-control input-form" id="fechaEmision" name="fechaEmision" required></div>                                         
-                    </div>
-                    <div class="row">
-                        <label for = "ciudadano" class="col rounded ms-3 me-3">Denunciado/a</label>                        
-                        <label for = "vehiculo" class="col rounded ms-4 me-2">Vehiculo Implicado*</label> 
-                    </div>
-                    <div class="row">
-                        <div class="col rounded ms-3 me-3 mb-2">
+                        <div class="col rounded ms-3 mb-2 me-2">
                             <input class="form-control input-form" list="datalistOptions" id="ciudadano" placeholder="Ciudadano">
                             <datalist id="datalistOptions">
                                 <c:forEach var="ciudadano" items="${listaCiudadanos}">
@@ -28,6 +19,15 @@
                                     </c:forEach>
                             </datalist>
                         </div>
+
+                    </div>
+                    <div class="row">
+                        <label for = "fechaEmision" class="col rounded ms-3 me-2">Fecha</label>                                  
+                        <label for = "vehiculo" class="col rounded ms-4 me-2">Vehiculo Implicado*</label> 
+                    </div>
+                    <div class="row">
+                        <div class="col rounded ms-3 me-2 mb-2"><input type="date" class="form-control input-form" id="fechaEmision" name="fechaEmision" required></div>                                         
+
 
                         <div class="col rounded  mb-2 ms-4 me-2"><input type="text" class="form-control input-form" id="matricula" name="matricula"></div> 
                     </div>
