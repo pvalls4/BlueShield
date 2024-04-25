@@ -5,7 +5,7 @@
         <div class="col">
             <form action="vehiculos" method="post">
                 <div class="input-group mb-3 p-4">
-                    <input type="text" class="form-control" name="bastidor" placeholder="Buscar por Bastidor" aria-label="Buscar por Bastidor" aria-describedby="button-addon2">
+                    <input type="text" class="form-control" name="matricula" placeholder="Buscar por Matricula" aria-label="Buscar por Matricula" aria-describedby="button-addon2">
                     <button class="btn btn-primary" type="submit" id="button-addon2">
                         <i class="bi bi-search"></i>
                     </button>
@@ -15,16 +15,16 @@
     </div>
     <div class="row  mb-3 px-4">
         <table class="table">
+            <thead>
+                <tr>
+                    <th>Bastidor</th>
+                    <th>Matricula</th>
+                    <th>Modelo</th>                  
+                    <th>Propietario</th>                  
+                    <th>Detalles</th>
+                </tr>
+            </thead>
             <tbody>
-                <thead>
-                    <tr>
-                        <th>Bastidor</th>
-                        <th>Matricula</th>
-                        <th>Modelo</th>                  
-                        <th>Propietario</th>                  
-                        <th>Detalles</th>
-                    </tr>
-                </thead>
                 <c:if test="${not empty listaVehiculos}">
                     <c:forEach items="${listaVehiculos}" var="vehiculo">
                         <tr>

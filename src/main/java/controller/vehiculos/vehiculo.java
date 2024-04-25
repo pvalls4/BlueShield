@@ -32,10 +32,10 @@ public class vehiculo extends HttpServlet {
 
             if (session != null && session.getAttribute("username") != null) {
                 request.setAttribute("username", session.getAttribute("username"));
-                String bastidor = request.getParameter("id");
+                String matricula = request.getParameter("id");
 
                 VehiculoDAO dao = new VehiculoDAO();
-                VehiculoDTO vehiculo = dao.select(bastidor);
+                VehiculoDTO vehiculo = dao.selectMATRICULA(matricula);
 
                 request.setAttribute("vehiculo", vehiculo);
                 request.getRequestDispatcher("/view/vehiculos/vehiculo.jsp").forward(request, response);
