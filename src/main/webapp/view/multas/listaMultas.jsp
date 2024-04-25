@@ -29,7 +29,7 @@
                             <td>${multa.id}</td>
                             <td>${multa.fecha_emision}</td>
                             <td>
-                                <a href="VisualizarMulta?id=${multa.id}">
+                                <a href="visualizarMulta?id=${multa.id}">
                                     <button class="btn btn-primary b-login mb-2">Ver</button>
                                 </a>
                             </td>
