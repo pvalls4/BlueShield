@@ -86,8 +86,8 @@
                                 }
                             %>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check<%= articulo.getId() %>" name="articuloSeleccionado">
-                                <label class="form-check-label" for="check<%= articulo.getId() %>">
+                                <input class="form-check-input" type="checkbox" value="" id="<%= articulo.getId() %>" name="articuloSeleccionado">
+                                <label class="form-check-label" for="<%= articulo.getId() %>">
                                     Artículo <%= articulo.getId() %> - <%= articulo.getTitulo() %>
                                 </label>
                             </div>

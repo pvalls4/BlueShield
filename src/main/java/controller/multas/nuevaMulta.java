@@ -23,22 +23,9 @@ import model.DTO.CiudadanoDTO;
 import model.DTO.InfraccionDTO;
 import model.DTO.MultaDTO;
 
-/**
- *
- * @author Mati
- */
 @WebServlet(name = "nuevaMulta", urlPatterns = {"/nuevaMulta"})
 public class nuevaMulta extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
@@ -85,38 +72,38 @@ public class nuevaMulta extends HttpServlet {
         }
     }
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String[] articulosSeleccionados = request.getParameterValues("articuloSeleccionado");
+        String[] articulosSeleccionadosStr = request.getParameterValues("articuloSeleccionado");
 
-        if (articulosSeleccionados != null) {
-            // Aquí puedes construir tu objeto utilizando los valores seleccionados
-            // Por ejemplo, podrías crear una lista de identificadores de los artículos seleccionados
-            List<String> idsArticulosSeleccionados = Arrays.asList(articulosSeleccionados);
-            // Luego, puedes hacer lo que necesites con esta lista
-        }
+        if (articulosSeleccionadosStr != null) {
+            // Convertir los valores de cadena a enteros
+            List<Integer> articulosSeleccionados = new ArrayList<>();
+            for (String str : articulosSeleccionadosStr) {
+                try {
+                    int articuloId = Integer.parseInt(str);
+                    articulosSeleccionados.add(articuloId);
+                } catch (NumberFormatException e) {
+                    // Manejar cualquier error de conversión aquí
+                    e.printStackTrace();
+                }
+            }
 
-        List<InfraccionDTO> infracciones = null;
-        
+            List<InfraccionDTO> infracciones = null;
+
 //        for(0 -> idsArticulosSeleccionado.size){
 //            infracciones.i=new InfraccionDAO().select(idsArticulosSeleccionados.i)
 //        }
-        
 //        double importeTotal=importeTotal(infracciones);
 //        Date fecha_final=fechaLimite(request.getParameter(fecha_emision));
+        }
+
+        @Override
+        public String getServletInfo
         
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+            () {
         return "Short description";
-    }// </editor-fold>
+        }// </editor-fold>
 
-}
+    }
