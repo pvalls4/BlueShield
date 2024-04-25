@@ -57,7 +57,14 @@ public class nuevaMulta extends HttpServlet {
                     response.sendRedirect("login");
                 } 
             }
-
+    
+    private double importeTotal( List<InfraccionDTO> listaInfracciones){
+        double result = 0;
+        for (InfraccionDTO infraccion : listaInfracciones) {
+            result += infraccion.getImporte();
+        }
+        return result;
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
