@@ -74,7 +74,8 @@
                                   if (primerCapitulo==false) {
                             %>
                         </div> <! -- Si no es el primer capítulo y se ha cambiado de capítulo, hay que cerrar el body y el item del acordeón anterior>
-                    </div>                               
+                    </div>  
+                </div>
                     <%
                   }
                   // Mostrar el nuevo capítulo en el acordeón
@@ -105,14 +106,14 @@
                         </div>
                     </div>
                 </div>
+            </div></div></div>
                 <div class = "row">
                     <div class = "col d-flex justify-content-center">  
-                        <button type="submit" class="boton mx-4 mt-4">Emitir denuncia</button>
-                        <button type="submit" class="boton mx-4 mt-4">Cancelar</button>
+                        <button type="submit" class="boton m-4">Emitir denuncia</button>
+                        <button type="submit" class="boton m-4">Cancelar</button>
                     </div>                       
                 </div>
-            </div>
         </div>
     </form>
-</div>      
+</div>
 <%@ include file="../footer.jsp" %>
