@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 package controller.multas;
 
 import DAO.CiudadanoDAO;
@@ -18,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.DTO.AgenteDTO;
 import model.DTO.CiudadanoDTO;
 import model.DTO.InfraccionDTO;
 
@@ -44,7 +42,7 @@ public class nuevaMulta extends HttpServlet {
 
                 if (session != null && session.getAttribute("username") != null) {
                     request.setAttribute("username", session.getAttribute("username"));
-                    response.setContentType("text/html;charset=UTF-8");
+                    AgenteDTO agente = (AgenteDTO) session.getAttribute("username");
                     CiudadanoDAO daoc = new CiudadanoDAO();
                     InfraccionDAO daoi = new InfraccionDAO();
                     List<CiudadanoDTO> listaCiudadanos = daoc.selectAll();
@@ -52,6 +50,7 @@ public class nuevaMulta extends HttpServlet {
                     List<InfraccionDTO> listaInfracciones = daoi.selectAll();
                     request.setAttribute("listaInfracciones", listaInfracciones);
                     RequestDispatcher rd = request.getRequestDispatcher("/view/multas/nuevaMulta.jsp");
+                    
                     rd.forward(request, response);
                 } else {
                     response.sendRedirect("login");
