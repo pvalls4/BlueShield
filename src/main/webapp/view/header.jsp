@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <title>BlueShield</title>
-        
+
         <link rel="stylesheet" href="./css/style.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -33,15 +33,23 @@
                         }
                     </script>
 
-                    <div class="col-12 col-md text-center text-md-left">
-                        <h2 class="version mb-0 text-md-right">Version 1.0 - <%= request.getAttribute("username") %></h2>
-                    </div>
-                    <div>
-                        <a href='logout'>Cerrar sesión</a>
+                    <div class="col-12 col-md-auto text-center">
+                        <div class="col-md-4"></div>
+
+                        <div class="col-md-4 text-center">
+                            <h2 class="version mb-0">Version 1.0 - <%= request.getAttribute("username") %></h2>
+                        </div>
+                        <div class="col-md-4 text-md-right text-center">
+                            <a href='logout'>
+                                <button type="submit" class="btn btn-primary b-login">Cerrar Sesión</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="division mb-3"></div>
+            <div class="division mb-3">
+
+            </div>
         </header>
 
 
