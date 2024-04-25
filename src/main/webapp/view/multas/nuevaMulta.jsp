@@ -12,7 +12,21 @@
                     </div>
                     <div class="row">
                         <div class="col rounded ms-3 mb-2 me-2">
-                            <input class="form-control input-form" id="dni" name="dni" placeholder="DNI Ciudadano" onkeyup="buscarCiudadano()">
+                            <input class="form-control input-form" list="datalistOptions" id="dni" name="dni" placeholder="DNI Ciudadano" onkeyup="buscarCiudadano()">
+                            <datalist id="datalistOptions">
+                                <%@ page import="java.util.List" %>
+                                <%@ page import="model.DTO.CiudadanoDTO" %>
+                                <%@ page import="java.util.ArrayList" %>
+                                <% 
+                                    List<CiudadanoDTO> listaCiudadanos = (List<CiudadanoDTO>) request.getAttribute("listaCiudadanos");                                      
+                                    for(CiudadanoDTO ciudadano : listaCiudadanos) {
+                                %>
+                                <option value="<%= ciudadano.getDni() %>">
+                                    <%
+                                        }
+                                    %>
+                            </datalist>
+
                             <input class="form-control input-form" id="nombreCiudadano" name="nombreCiudadano" placeholder="Nombre del Ciudadano" readonly>
 
                             <script>
