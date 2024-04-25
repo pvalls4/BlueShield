@@ -58,28 +58,7 @@
                     </div>
                     <div class="row">
                         <div class="col rounded ms-3 me-2 mb-2"><input type="date" class="form-control input-form" id="fechaEmision" name="fechaEmision" required></div>                                         
-                        <div class="col rounded  mb-2 ms-4 me-2"><input type="text" class="form-control input-form" id="matricula" name="matricula" onkeyup="buscarCiudadanoPorVehiculo();buscarCiudadano();"></div>
-                        <script>
-                            function buscarCiudadanoPorVehiculo() {
-                                var matricula = document.getElementById("matricula").value;
-                                if (matricula.trim() !== '') {
-                                    var xhr = new XMLHttpRequest();
-                                    xhr.onreadystatechange = function () {
-                                        if (xhr.readyState === XMLHttpRequest.DONE) {
-                                            if (xhr.status === 200) {
-                                                document.getElementById("dni").value = xhr.responseText;
-                                            } else {
-                                                console.error('Error en la solicitud: ' + xhr.status);
-                                            }
-                                        }
-                                    };
-                                    xhr.open('GET', 'BuscarVehiculoDeMulta?id=' + encodeURIComponent(matricula), true);
-                                    xhr.send();
-                                } else {
-                                    document.getElementById("dni").value = "";
-                                }
-                            }
-                        </script>
+                        <div class="col rounded  mb-2 ms-4 me-2"><input type="text" class="form-control input-form" id="matricula" name="matricula"></div>
                     </div>
                     <div class="row">
                         <label for= "ubicacion" class="col rounded ms-3 me-2">Ubicacion</label>                                                 

@@ -81,9 +81,8 @@ public class nuevaMulta extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
         String dni = request.getParameter("dni");
-        System.out.println(dni+"1st flag");
+        System.out.println(dni + "1st flag");
         CiudadanoDTO ciudadano = null;
         CiudadanoDAO daoc = new CiudadanoDAO();
 
@@ -109,30 +108,28 @@ public class nuevaMulta extends HttpServlet {
 
         float importeTotal = 0.0f;
         String[] articulosSeleccionadosStr = request.getParameterValues("articuloSeleccionado");
-        System.out.println(articulosSeleccionadosStr);
-        if (articulosSeleccionadosStr != null) {
-            List<Integer> articulosSeleccionados = new ArrayList<>();
-            for (String str : articulosSeleccionadosStr) {
-                try {
-                    int articuloId = Integer.parseInt(str);
-                    articulosSeleccionados.add(articuloId);
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-            }
-            System.out.println(articulosSeleccionados);
 
-            List<InfraccionDTO> infracciones = new ArrayList<>();
-            for (int articulo : articulosSeleccionados) {
-                try {
-                    infracciones.add(new InfraccionDAO().select(articulo));
-                } catch (SQLException ex) {
-                    Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        List<Integer> articulosSeleccionados = new ArrayList<>();
+        for (String str : articulosSeleccionadosStr) {
+            try {
+                int articuloId = Integer.parseInt(str);
+                articulosSeleccionados.add(articuloId);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
             }
-
-            importeTotal = importeTotal(infracciones);
         }
+        System.out.println(articulosSeleccionados);
+
+        List<InfraccionDTO> infracciones = new ArrayList<>();
+        for (int articulo : articulosSeleccionados) {
+            try {
+                infracciones.add(new InfraccionDAO().select(articulo));
+            } catch (SQLException ex) {
+                Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        importeTotal = importeTotal(infracciones);
 
         String fechaEmisionStr = request.getParameter("fechaEmision");
         Date fechaEmision = null;
@@ -154,7 +151,7 @@ public class nuevaMulta extends HttpServlet {
         }
 
         try {
-            nuevaMultaDAO.insert(nuevaMulta);
+            nuevaMultaDAO.insert(nuevaMulta, infracciones);
         } catch (SQLException ex) {
             Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.DTO.AgenteDTO;
 import model.DTO.CiudadanoDTO;
+import model.DTO.InfraccionDTO;
 import model.DTO.VehiculoDTO;
 
 public class MultaDAO {
@@ -125,13 +126,13 @@ public class MultaDAO {
         return result;
     }
 
-    public int insert(MultaDTO multa) throws SQLException {
+    public int insert(MultaDTO multa, List<InfraccionDTO> infracciones) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
         try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(SQL_INSERT);
+            stmt = conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
             stmt.setDate(1, multa.getFecha_emision());
             stmt.setDate(2, multa.getFecha_limite());
             stmt.setDouble(3, multa.getImporte_total());
@@ -146,8 +147,23 @@ public class MultaDAO {
             } else {
                 stmt.setString(9, multa.getVehiculo().getBastidor());
             }
-
+            System.out.println("llega1");
             rows = stmt.executeUpdate();
+            System.out.println("llega2");
+
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            System.out.println("llega3" + generatedKeys);
+            int generatedId = -1;
+            if (generatedKeys.next()) {
+                generatedId = generatedKeys.getInt(1);
+                System.out.println("llega4" + generatedId);
+            } else {
+                throw new SQLException("No se generó ningún ID.");
+            }
+            System.out.println(generatedId + " id generada multa");
+            int rowMI=new MultaInfraccionDAO().insertALL(generatedId, infracciones);
+            System.out.println(rowMI + " rowMI");
+
         } catch (SQLException ex) {
             rows = 0;
         }
