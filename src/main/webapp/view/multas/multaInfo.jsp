@@ -29,12 +29,12 @@
                         <div class = "col rounded ms-4 pe-2 me-5">Vehiculo Implicado*</div> 
                     </div>
                     <div class ="row">
-                        <div class = "col rounded ms-3 me-3 mb-2" style="background-color: #bbddf5;">${multaInfo.ciudadano.nombre}</div>                                                
-                        <div class = "col rounded  mb-2 ms-4 me-5" style="background-color: #bbddf5;">${multaInfo.vehiculo.modelo.marca}</div> 
+                        <div class = "col rounded ms-3 me-3 mb-2" style="background-color: #bbddf5;"><p>${multaInfo.ciudadano.nombre}</p></div>                                                
+                        <div class = "col rounded  mb-2 ms-4 me-5" style="background-color: #bbddf5;"><p>${multaInfo.vehiculo.modelo.marca} ${multaInfo.vehiculo.modelo.modelo} <strong>${multaInfo.vehiculo.matricula}</strong></p></div> 
                     </div>
                     <div class ="row">
                         <div class = "col-md-11 rounded ms-3">Ubicacion</div>                        
-                        <div class = "col-md-11 rounded ms-3 mb-2" style="background-color: #bbddf5;">${multaInfo.ubicacion}</div>
+                        <div class = "col-md-11 rounded ms-3 mb-2" style="background-color: #bbddf5;"><p>${multaInfo.ubicacion}</p></div>
                     </div>
                     <div class ="row">
                         <div class = "col-md-11 rounded ms-3">Hechos</div>                        
