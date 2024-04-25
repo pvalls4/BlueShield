@@ -1,6 +1,6 @@
 <%@ include file="../header.jsp" %>
 <div class="container bg-primary border border-dark rounded">
-    <form id="denunciaForm" method="post" action="nuevaMulta">        
+    <form id="nuevaMulta" method="post" action="nuevaMulta">        
         <div class="row" style="background-color: #9acbfd;">
             <div class="row">
                 <div class="d-flex justify-content-center mt-2"><h2>EMISION DE DENUNCIA</h2></div>
@@ -23,19 +23,12 @@
                         <div class="col rounded ms-3 me-3 mb-2">
                             <input class="form-control input-form" list="datalistOptions" id="ciudadano" placeholder="Ciudadano">
                             <datalist id="datalistOptions">
-                                <%@ page import="java.util.List" %>
-                                <%@ page import="model.DTO.CiudadanoDTO" %>
-                                <%@ page import="java.util.ArrayList" %>
-                                <% 
-                                    List<CiudadanoDTO> listaCiudadanos = (List<CiudadanoDTO>) request.getAttribute("listaCiudadanos");                                      
-                                    for(CiudadanoDTO ciudadano : listaCiudadanos) {
-                                %>
-                                <option value="<%= ciudadano.getNombre() %> <%= ciudadano.getApellidos() %>">
-                                    <%
-                                        }
-                                    %>
+                                <c:forEach var="ciudadano" items="${listaCiudadanos}">
+                                    <option value="${ciudadano.nombre} ${ciudadano.apellidos}">
+                                    </c:forEach>
                             </datalist>
-                        </div>                                                
+                        </div>
+
                         <div class="col rounded  mb-2 ms-4 me-2"><input type="text" class="form-control input-form" id="matricula" name="matricula"></div> 
                     </div>
                     <div class="row">
@@ -93,7 +86,7 @@
                                 }
                             %>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check<%= articulo.getId() %>">
+                                <input class="form-check-input" type="checkbox" value="" id="check<%= articulo.getId() %>" name="articuloSeleccionado">
                                 <label class="form-check-label" for="check<%= articulo.getId() %>">
                                     Artículo <%= articulo.getId() %> - <%= articulo.getTitulo() %>
                                 </label>
@@ -121,7 +114,7 @@
                 const btnEmitirDenuncia = document.querySelector("#emitirDenuncia");
                 const btnCancelar = document.querySelector("#cancelar");
                 const confirmar = document.querySelector("#confirmar");
-                const form = document.getElementById('denunciaForm'); // Get the form by its id
+                const form = document.getElementById('nuevaMulta'); // Get the form by its id
 
                 btnEmitirDenuncia.addEventListener("click", () => {
                     confirmar.showModal();

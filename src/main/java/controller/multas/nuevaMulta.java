@@ -1,4 +1,3 @@
-
 package controller.multas;
 
 import DAO.CiudadanoDAO;
@@ -15,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,74 +41,72 @@ public class nuevaMulta extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-                response.setContentType("text/html;charset=UTF-8");
-                HttpSession session = request.getSession(false);
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(false);
 
-                if (session != null && session.getAttribute("username") != null) {
-                    request.setAttribute("username", session.getAttribute("username"));
-                    AgenteDTO agente = (AgenteDTO) session.getAttribute("username");
-                    CiudadanoDAO daoc = new CiudadanoDAO();
-                    InfraccionDAO daoi = new InfraccionDAO();
-                    List<CiudadanoDTO> listaCiudadanos = daoc.selectAll();
-                    request.setAttribute("listaCiudadanos", listaCiudadanos);
-                    List<InfraccionDTO> listaInfracciones = daoi.selectAll();
-                    request.setAttribute("listaInfracciones", listaInfracciones);
-                    RequestDispatcher rd = request.getRequestDispatcher("/view/multas/nuevaMulta.jsp");
-                    rd.forward(request, response);
-                } else {
-                    response.sendRedirect("login");
-                } 
-            }
-    
-    private double importeTotal(List<InfraccionDTO> listaInfracciones){
+        if (session != null && session.getAttribute("username") != null) {
+            request.setAttribute("username", session.getAttribute("username"));
+            AgenteDTO agente = (AgenteDTO) session.getAttribute("username");
+            CiudadanoDAO daoc = new CiudadanoDAO();
+            InfraccionDAO daoi = new InfraccionDAO();
+            List<CiudadanoDTO> listaCiudadanos = daoc.selectAll();
+            request.setAttribute("listaCiudadanos", listaCiudadanos);
+            List<InfraccionDTO> listaInfracciones = daoi.selectAll();
+            request.setAttribute("listaInfracciones", listaInfracciones);
+            RequestDispatcher rd = request.getRequestDispatcher("/view/multas/nuevaMulta.jsp");
+            rd.forward(request, response);
+        } else {
+            response.sendRedirect("login");
+        }
+    }
+
+    private double importeTotal(List<InfraccionDTO> listaInfracciones) {
         double result = 0;
         for (InfraccionDTO infraccion : listaInfracciones) {
             result += infraccion.getImporte();
         }
         return result;
     }
-    
-    private Date fechaLimite(Date fechaEmision){
+
+    private Date fechaLimite(Date fechaEmision) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fechaEmision);
         calendar.add(Calendar.MONTH, 1);
-        return new Date(calendar.getTime().getTime());     
+        return new Date(calendar.getTime().getTime());
     }
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                try {
-                    processRequest(request, response);
-                } catch (SQLException ex) {
-                    Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                try {
-                    processRequest(request, response);
-                } catch (SQLException ex) {
-                    Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        String[] articulosSeleccionados = request.getParameterValues("articuloSeleccionado");
+
+        if (articulosSeleccionados != null) {
+            // Aquí puedes construir tu objeto utilizando los valores seleccionados
+            // Por ejemplo, podrías crear una lista de identificadores de los artículos seleccionados
+            List<String> idsArticulosSeleccionados = Arrays.asList(articulosSeleccionados);
+            // Luego, puedes hacer lo que necesites con esta lista
+        }
+
+        List<InfraccionDTO> infracciones = null;
+        
+//        for(0 -> idsArticulosSeleccionado.size){
+//            infracciones.i=new InfraccionDAO().select(idsArticulosSeleccionados.i)
+//        }
+        
+//        double importeTotal=importeTotal(infracciones);
+//        Date fecha_final=fechaLimite(request.getParameter(fecha_emision));
+        
     }
 
     /**
