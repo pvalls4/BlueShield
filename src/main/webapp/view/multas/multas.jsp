@@ -2,7 +2,7 @@
 <div class="d-flex justify-content-center">
     <div id="fondo" class="d-flex justify-content-center" style="width: 500px; background-color: #9acbfd"">
         <div class="d-flex flex-column">
-            <img src="./images/logoBS.png" class="logo2 text-center">
+            <img src="./images/logoBStrazo.png" class="logo2 text-center">
             <button onclick="ir(1)" class="boton m-3">
                 Nueva Multa
             </button>

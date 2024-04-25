@@ -11,6 +11,10 @@ body {
     padding: 10px;
 }
 
+.logo:hover {
+    cursor: pointer;
+}
+
 .logo2 {
     max-width: 200px;
     max-height: 275px;
