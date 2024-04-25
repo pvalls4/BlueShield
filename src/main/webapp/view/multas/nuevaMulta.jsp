@@ -72,75 +72,76 @@
                                   capituloActual = articulo.getId() / 100;
                                   if (primerCapitulo==false) {
                             %>
-                        </div> <!-- Si no es el primer capítulo y se ha cambiado de capítulo, hay que cerrar el body y el item del acordeón anterior -->
-                    </div>                               
-                    <%
-                  }
-                  // Mostrar el nuevo capítulo en el acordeón
+                        </div> <! -- Si no es el primer capítulo y se ha cambiado de capítulo, hay que cerrar el body y el item del acordeón anterior>
+                    </div>  
+                </div>
+                <%
+              }
+              // Mostrar el nuevo capítulo en el acordeón
                           
-                    %>
-                    <div class="accordion-item" style="background-color: #bbddf5;">
-                        <h2 class="accordion-header" id="heading<%= capituloActual %>">
-                            <button class="accordion-button <%= primerCapitulo ? "" : "collapsed" %>" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= capituloActual %>" aria-expanded="<%= primerCapitulo ? "true" : "false" %>" aria-controls="collapse<%= capituloActual %>" style="background-color: #1e549f; color: white;">
-                                Capítulo <%= capituloActual %>
-                            </button>
-                        </h2>
-                        <div id="collapse<%= capituloActual %>" class="accordion-collapse collapse<%= primerCapitulo ? " show" : "" %>" aria-labelledby="heading<%= capituloActual %>" data-bs-parent="#accordionArticulos">
-                            <div class="accordion-body">
-                                <%
-                                          primerCapitulo = false;
-                                    }
-                                %>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check<%= articulo.getId() %>">
-                                    <label class="form-check-label" for="check<%= articulo.getId() %>">
-                                        Artículo <%= articulo.getId() %> - <%= articulo.getTitulo() %>
-                                    </label>
-                                </div>
-                                <%
-                                    }
-                                %>
+                %>
+                <div class="accordion-item" style="background-color: #bbddf5;">
+                    <h2 class="accordion-header" id="heading<%= capituloActual %>">
+                        <button class="accordion-button <%= primerCapitulo ? "" : "collapsed" %>" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= capituloActual %>" aria-expanded="<%= primerCapitulo ? "true" : "false" %>" aria-controls="collapse<%= capituloActual %>" style="background-color: #1e549f; color: white;">
+                            Capítulo <%= capituloActual %>
+                        </button>
+                    </h2>
+                    <div id="collapse<%= capituloActual %>" class="accordion-collapse collapse<%= primerCapitulo ? " show" : "" %>" aria-labelledby="heading<%= capituloActual %>" data-bs-parent="#accordionArticulos">
+                        <div class="accordion-body">
+                            <%
+                                      primerCapitulo = false;
+                                }
+                            %>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="check<%= articulo.getId() %>">
+                                <label class="form-check-label" for="check<%= articulo.getId() %>">
+                                    Artículo <%= articulo.getId() %> - <%= articulo.getTitulo() %>
+                                </label>
                             </div>
+                            <%
+                                }
+                            %>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col d-flex justify-content-center">  
-                        <button id="emitirDenuncia" class="boton mx-4 mt-4">Emitir denuncia</button>
-                        <a href="dashboard"><button type="button" class="boton mx-4 mt-4">Cancelar</button></a>
-                    </div>                       
-                </div>
-
-                <dialog class = "boton" id="confirmar"> 
-                    <button id="confirmarBtn" class="boton mx-4 mt-4">Confirmar</button>
-                    <button id="cancelar" class="boton mx-4 mt-4">Cancelar</button>
-                </dialog>
-
-                <script>
-                    const btnEmitirDenuncia = document.querySelector("#emitirDenuncia");
-                    const btnCancelar = document.querySelector("#cancelar");
-                    const confirmar = document.querySelector("#confirmar");
-                    const form = document.getElementById('denunciaForm'); // Get the form by its id
-
-                    btnEmitirDenuncia.addEventListener("click", () => {
-                        confirmar.showModal();
-                    });
-                    btnCancelar.addEventListener("click", () => {
-                        confirmar.close();
-                    });
-
-                    document.querySelector('#confirmarBtn').addEventListener("click", () => {
-                        // Form will be submitted to nuevaMulta servlet
-                        form.submit(); // Submit the form
-                    });
-
-                    // Prevent form submission
-                    form.addEventListener('submit', function (event) {
-                        event.preventDefault();
-                    });
-                </script>
             </div>
+            <div class="row">
+                <div class="col d-flex justify-content-center">  
+                    <button id="emitirDenuncia" class="boton mx-4 mt-4">Emitir denuncia</button>
+                    <a href="dashboard"><button type="button" class="boton mx-4 mt-4">Cancelar</button></a>
+                </div>                       
+            </div>
+
+            <dialog class = "boton" id="confirmar"> 
+                <button id="confirmarBtn" class="boton mx-4 mt-4">Confirmar</button>
+                <button id="cancelar" class="boton mx-4 mt-4">Cancelar</button>
+            </dialog>
+
+            <script>
+                const btnEmitirDenuncia = document.querySelector("#emitirDenuncia");
+                const btnCancelar = document.querySelector("#cancelar");
+                const confirmar = document.querySelector("#confirmar");
+                const form = document.getElementById('denunciaForm'); // Get the form by its id
+
+                btnEmitirDenuncia.addEventListener("click", () => {
+                    confirmar.showModal();
+                });
+                btnCancelar.addEventListener("click", () => {
+                    confirmar.close();
+                });
+
+                document.querySelector('#confirmarBtn').addEventListener("click", () => {
+                    // Form will be submitted to nuevaMulta servlet
+                    form.submit(); // Submit the form
+                });
+
+                // Prevent form submission
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+                });
+            </script>
         </div>
-    </form>
+</div>
+</form>
 </div>      
 <%@ include file="../footer.jsp" %>
