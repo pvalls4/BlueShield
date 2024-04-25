@@ -13,7 +13,7 @@ public class MultaDAO {
     private static final String SQL_SELECT_ALL = "SELECT * FROM multas;";
     private static final String SQL_SELECT = "SELECT * FROM multas WHERE id = ?;";
     private static final String SQL_SELECT_DNI = "SELECT * FROM multas WHERE dniPropietario = ?;";
-    private static final String SQL_SELECT_PLACA = "SELECT * FROM multas WHERE idPlaca = ?;";
+    private static final String SQL_SELECT_PLACA = "SELECT * FROM multas WHERE idPlaca = ? ORDER BY fecha_emision DESC LIMIT 10;";
     private static final String SQL_INSERT = "INSERT INTO multas(fecha_emision, fecha_limite, importe_total, observaciones, ubicacion, isPagado, idPlaca, dniPropietario, bastidor) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE multas SET fecha_emision = ?, fecha_limite = ?, importe_total = ?, observaciones = ?, ubicacion = ?, isPagado = ?, idPlaca = ?, dniPropietario = ?, bastidor = ? WHERE id = ?";
     private static final String SQL_DELETE = "DELETE FROM multas WHERE id=?";
