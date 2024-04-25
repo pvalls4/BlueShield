@@ -41,7 +41,7 @@ public class listaAgentes extends HttpServlet {
                         AgenteDAO dao = new AgenteDAO();
                         List<AgenteDTO> listaAgentes = dao.selectAll();
                         request.setAttribute("listaAgentes", listaAgentes);
-                        RequestDispatcher rd = request.getRequestDispatcher("./view/agentes/agentes.jsp");
+                        RequestDispatcher rd = request.getRequestDispatcher("./view/agentes/listaAgentes.jsp");
                         rd.forward(request, response);
                     } else {
                         response.sendRedirect("login");

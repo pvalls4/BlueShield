@@ -1,8 +1,6 @@
-
 package model.DTO;
 
 import java.sql.Date;
-
 
 public class CiudadanoDTO {
     private String dni;
@@ -135,11 +133,4 @@ public class CiudadanoDTO {
     public String toString() {
         return "CiudadanoDTO{" + "dni=" + dni + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fecha_nacimiento=" + fecha_nacimiento + ", telefono=" + telefono + ", email=" + email + ", isDeceased=" + isDeceased + ", enlaceFotografico=" + enlaceFotografico + ", direccion=" + direccion + '}';
     }
-    
-    
-
-   
-    
-    
-    
 }
