@@ -34,7 +34,7 @@
                             <td>${vehiculo.ciudadano.nombre} ${vehiculo.ciudadano.apellidos}</td>
 
                             <td>
-                                <a href="vehiculo?id=${vehiculo.bastidor}">
+                                <a href="vehiculo?id=${vehiculo.matricula}">
                                     <button class="btn btn-primary b-login mb-2">Ver</button>
                                 </a>
                             </td>
