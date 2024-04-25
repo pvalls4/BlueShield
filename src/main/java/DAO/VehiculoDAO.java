@@ -122,9 +122,7 @@ public class VehiculoDAO {
         }
         return vehiculos;
     }
-    
-    
-    
+
 
     public int insert(VehiculoDTO vehiculo) throws SQLException {
         Connection conn = null;
@@ -188,7 +186,6 @@ public class VehiculoDAO {
         } catch (SQLException ex) {
             rows=0;
         }
-
         return rows;
     }
 }

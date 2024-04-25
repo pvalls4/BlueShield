@@ -12,14 +12,13 @@
                     </div>
                     <div class="row">
                         <div class="col rounded ms-3 mb-2 me-2">
-                            <input class="form-control input-form" list="datalistOptions" id="ciudadano" placeholder="Ciudadano">
+                            <input class="form-control input-form" list="datalistOptions" id="ciudadano" name="ciudadano" placeholder="Ciudadano">
                             <datalist id="datalistOptions">
                                 <c:forEach var="ciudadano" items="${listaCiudadanos}">
                                     <option value="${ciudadano.nombre} ${ciudadano.apellidos}">
-                                    </c:forEach>
+                                </c:forEach>
                             </datalist>
                         </div>
-
                     </div>
                     <div class="row">
                         <label for = "fechaEmision" class="col rounded ms-3 me-2">Fecha</label>                                  
@@ -27,8 +26,6 @@
                     </div>
                     <div class="row">
                         <div class="col rounded ms-3 me-2 mb-2"><input type="date" class="form-control input-form" id="fechaEmision" name="fechaEmision" required></div>                                         
-
-
                         <div class="col rounded  mb-2 ms-4 me-2"><input type="text" class="form-control input-form" id="matricula" name="matricula"></div> 
                     </div>
                     <div class="row">
@@ -132,7 +129,7 @@
                 form.addEventListener('submit', function (event) {
                     event.preventDefault();
                 });
-            </script>     
+            </script>
         </div>
 </div></div></div>
 </form>

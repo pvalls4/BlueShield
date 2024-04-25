@@ -75,7 +75,6 @@ public class CiudadanoDAO {
         } catch (SQLException ex) {
             ciudadano = null;
         }
-
         return ciudadano;
     }
 

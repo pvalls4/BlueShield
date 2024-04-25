@@ -3,6 +3,7 @@ package controller.multas;
 import DAO.CiudadanoDAO;
 import DAO.InfraccionDAO;
 import DAO.MultaDAO;
+import DAO.VehiculoDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -23,9 +24,12 @@ import model.DTO.AgenteDTO;
 import model.DTO.CiudadanoDTO;
 import model.DTO.InfraccionDTO;
 import model.DTO.MultaDTO;
+import model.DTO.VehiculoDTO;
 
 @WebServlet(name = "nuevaMulta", urlPatterns = {"/nuevaMulta"})
 public class nuevaMulta extends HttpServlet {
+
+    private AgenteDTO agente;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -33,8 +37,8 @@ public class nuevaMulta extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         if (session != null && session.getAttribute("username") != null) {
+            agente = (AgenteDTO) session.getAttribute("username");
             request.setAttribute("username", session.getAttribute("username"));
-            AgenteDTO agente = (AgenteDTO) session.getAttribute("username");
             CiudadanoDAO daoc = new CiudadanoDAO();
             InfraccionDAO daoi = new InfraccionDAO();
             List<CiudadanoDTO> listaCiudadanos = daoc.selectAll();
@@ -76,23 +80,44 @@ public class nuevaMulta extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String[] articulosSeleccionadosStr = request.getParameterValues("articuloSeleccionado");
 
+        String dni = request.getParameter("ciudadanoDni");
+        CiudadanoDTO ciudadano = null;
+        CiudadanoDAO daoc = new CiudadanoDAO();
+        try {
+            ciudadano = daoc.select(dni);
+        } catch (SQLException ex) {
+            Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String matricula = request.getParameter("matricula");
+        VehiculoDTO vehiculo = null;
+        if (matricula != null && !matricula.isEmpty()) {
+            VehiculoDAO daov = new VehiculoDAO();
+            try {
+                vehiculo = daov.selectMATRICULA(matricula);
+            } catch (SQLException ex) {
+                Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        String ubicacion = request.getParameter("ubicacion");
+        String observaciones = request.getParameter("observaciones");
+
+        double importeTotal = 0.0;
+        String[] articulosSeleccionadosStr = request.getParameterValues("articuloSeleccionado");
         if (articulosSeleccionadosStr != null) {
-            // Convertir los valores de cadena a enteros
             List<Integer> articulosSeleccionados = new ArrayList<>();
             for (String str : articulosSeleccionadosStr) {
                 try {
                     int articuloId = Integer.parseInt(str);
                     articulosSeleccionados.add(articuloId);
                 } catch (NumberFormatException e) {
-                    // Manejar cualquier error de conversión aquí
                     e.printStackTrace();
                 }
             }
 
-            List<InfraccionDTO> infracciones = null;
-
+            List<InfraccionDTO> infracciones = new ArrayList<>();
             for (int articulo : articulosSeleccionados) {
                 try {
                     infracciones.add(new InfraccionDAO().select(articulo));
@@ -101,21 +126,35 @@ public class nuevaMulta extends HttpServlet {
                 }
             }
 
-            double importeTotal = importeTotal(infracciones);
+            importeTotal = importeTotal(infracciones);
         }
 
         String fechaEmisionStr = request.getParameter("fechaEmision");
-
-        // Convierte el valor de la fecha en formato String al tipo de datos Date de SQL
         Date fechaEmision = null;
         try {
             fechaEmision = Date.valueOf(fechaEmisionStr);
         } catch (IllegalArgumentException e) {
-            // Maneja cualquier error de formato de fecha aquí
             e.printStackTrace();
         }
-        
+
         Date fecha_final = fechaLimite(fechaEmision);
+        boolean isPagado = false;
+        MultaDAO nuevaMultaDAO = new MultaDAO();
+
+        MultaDTO nuevaMulta;
+        if (vehiculo == null) {
+            nuevaMulta = new MultaDTO(fechaEmision, fecha_final, importeTotal, observaciones, ubicacion, isPagado, agente, ciudadano, null);
+        } else {
+            nuevaMulta = new MultaDTO(fechaEmision, fecha_final, importeTotal, observaciones, ubicacion, isPagado, agente, ciudadano, vehiculo);
+        }
+
+        try {
+            nuevaMultaDAO.insert(nuevaMulta);
+        } catch (SQLException ex) {
+            Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        response.sendRedirect("multas");
     }
 
     @Override

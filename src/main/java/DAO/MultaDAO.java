@@ -140,11 +140,14 @@ public class MultaDAO {
             stmt.setBoolean(6, multa.isIsPagado());
             stmt.setInt(7, multa.getAgente().getPlaca());
             stmt.setString(8, multa.getCiudadano().getDni());
-            stmt.setString(9, multa.getVehiculo().getBastidor());
+            // Set null if vehiculo is null, otherwise set the bastidor
+            if (multa.getVehiculo() == null) {
+                stmt.setNull(9, Types.VARCHAR);
+            } else {
+                stmt.setString(9, multa.getVehiculo().getBastidor());
+            }
 
-            System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
-            System.out.println("Registros afectados:" + rows);
         } catch (SQLException ex) {
             rows = 0;
         }
