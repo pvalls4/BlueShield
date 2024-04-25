@@ -15,8 +15,8 @@
                             <input class="form-control input-form" list="datalistOptions" id="ciudadano" name="ciudadano" placeholder="Ciudadano">
                             <datalist id="datalistOptions">
                                 <c:forEach var="ciudadano" items="${listaCiudadanos}">
-                                    <option value="${ciudadano.nombre} ${ciudadano.apellidos}">
-                                </c:forEach>
+                                    <option value="${ciudadano.nombre} ${ciudadano.apellidos} ${ciudadano.dni}">
+                                    </c:forEach>
                             </datalist>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                                 }
                             %>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="<%= articulo.getId() %>" name="articuloSeleccionado">
+                                <input class="form-check-input" type="checkbox" value="<%= articulo.getId() %>" id="<%= articulo.getId() %>" name="articuloSeleccionado">
                                 <label class="form-check-label" for="<%= articulo.getId() %>">
                                     Artículo <%= articulo.getId() %> - <%= articulo.getTitulo() %>
                                 </label>

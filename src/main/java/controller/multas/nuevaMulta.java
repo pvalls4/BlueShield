@@ -52,8 +52,8 @@ public class nuevaMulta extends HttpServlet {
         }
     }
 
-    private double importeTotal(List<InfraccionDTO> listaInfracciones) {
-        double result = 0;
+    private float importeTotal(List<InfraccionDTO> listaInfracciones) {
+        float result = 0;
         for (InfraccionDTO infraccion : listaInfracciones) {
             result += infraccion.getImporte();
         }
@@ -81,9 +81,11 @@ public class nuevaMulta extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String dni = request.getParameter("ciudadanoDni");
-        CiudadanoDTO ciudadano = null;
+        String ciudadanoValue = request.getParameter("ciudadano");
+        String[] ciudadanoParts = ciudadanoValue.split("\\s+");
+        String dni = ciudadanoParts[ciudadanoParts.length - 1];
         CiudadanoDAO daoc = new CiudadanoDAO();
+        CiudadanoDTO ciudadano = null;
         try {
             ciudadano = daoc.select(dni);
         } catch (SQLException ex) {
@@ -104,7 +106,7 @@ public class nuevaMulta extends HttpServlet {
         String ubicacion = request.getParameter("ubicacion");
         String observaciones = request.getParameter("observaciones");
 
-        double importeTotal = 0.0;
+        float importeTotal = 0.0f;
         String[] articulosSeleccionadosStr = request.getParameterValues("articuloSeleccionado");
         if (articulosSeleccionadosStr != null) {
             List<Integer> articulosSeleccionados = new ArrayList<>();
