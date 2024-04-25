@@ -1,6 +1,6 @@
 <%@ include file="../header.jsp" %>
 <div class="container bg-primary border border-dark rounded">
-    <form id="nuevaMulta" method="post" action="nuevaMulta">        
+    <form id="nuevaMulta" method="post" action="nuevaMulta" accept-charset="UTF-8">        
         <div class="row" style="background-color: #9acbfd;">
             <div class="row">
                 <div class="d-flex justify-content-center mt-2"><h2>EMISION DE DENUNCIA</h2></div>
@@ -135,6 +135,7 @@
             </div>
 
             <dialog class = "boton" id="confirmar"> 
+                <p class="text-center">¿Confirma Denuncia?</p>
                 <button id="confirmarBtn" class="boton mx-4 mt-4">Confirmar</button>
                 <button id="cancelar" class="boton mx-4 mt-4">Cancelar</button>
             </dialog>
@@ -146,22 +147,51 @@
                 const form = document.getElementById('nuevaMulta'); // Get the form by its id
 
                 btnEmitirDenuncia.addEventListener("click", () => {
-                    confirmar.showModal();
+                    // Verificar si todos los campos requeridos están llenos antes de mostrar el diálogo de confirmación
+                    if (validarCamposRequeridos() && alMenosUnCheckboxMarcado()) {
+                        confirmar.showModal();
+                    } else {
+                        alert('Por favor, completa todos los campos requeridos y marca al menos una opción.');
+                    }
                 });
+
                 btnCancelar.addEventListener("click", () => {
                     confirmar.close();
                 });
 
                 document.querySelector('#confirmarBtn').addEventListener("click", () => {
-                    // Form will be submitted to nuevaMulta servlet
-                    form.submit(); // Submit the form
+                    // Verificar nuevamente si todos los campos requeridos están llenos antes de enviar el formulario
+                    if (validarCamposRequeridos()) {
+                        // Formulario será enviado al servlet nuevaMulta
+                        form.submit(); // Enviar el formulario
+                    } else {
+                        alert('Por favor, completa todos los campos requeridos.');
+                    }
                 });
 
-                // Prevent form submission
+                // Prevenir envío del formulario
                 form.addEventListener('submit', function (event) {
                     event.preventDefault();
                 });
+
+                // Función para verificar si al menos un checkbox está marcado
+                function alMenosUnCheckboxMarcado() {
+                    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                    return checkboxes.length > 0;
+                }
+
+                // Función para validar que todos los campos requeridos estén llenos
+                function validarCamposRequeridos() {
+                    var campos = form.querySelectorAll('[required]');
+                    for (var i = 0; i < campos.length; i++) {
+                        if (!campos[i].value) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
             </script>
+
         </div>
 </div></div></div>
 </form>
