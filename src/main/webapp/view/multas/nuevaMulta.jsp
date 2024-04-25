@@ -12,12 +12,30 @@
                     </div>
                     <div class="row">
                         <div class="col rounded ms-3 mb-2 me-2">
-                            <input class="form-control input-form" list="datalistOptions" id="ciudadano" name="ciudadano" placeholder="Ciudadano">
-                            <datalist id="datalistOptions">
-                                <c:forEach var="ciudadano" items="${listaCiudadanos}">
-                                    <option value="${ciudadano.nombre} ${ciudadano.apellidos} ${ciudadano.dni}">
-                                    </c:forEach>
-                            </datalist>
+                            <input class="form-control input-form" id="dni" name="dni" placeholder="DNI Ciudadano" onkeyup="buscarCiudadano()">
+                            <input class="form-control input-form" id="nombreCiudadano" name="nombreCiudadano" placeholder="Nombre del Ciudadano" readonly>
+
+                            <script>
+                                function buscarCiudadano() {
+                                    var dni = document.getElementById("dni").value;
+                                    if (dni.trim() !== '') {
+                                        var xhr = new XMLHttpRequest();
+                                        xhr.onreadystatechange = function () {
+                                            if (xhr.readyState === XMLHttpRequest.DONE) {
+                                                if (xhr.status === 200) {
+                                                    document.getElementById("nombreCiudadano").value = xhr.responseText;
+                                                } else {
+                                                    console.error('Error en la solicitud: ' + xhr.status);
+                                                }
+                                            }
+                                        };
+                                        xhr.open('GET', 'BuscarCiudadanoDeMulta?id=' + encodeURIComponent(dni), true);
+                                        xhr.send();
+                                    } else {
+                                        document.getElementById("nombreCiudadano").value = "";
+                                    }
+                                }
+                            </script>
                         </div>
                     </div>
                     <div class="row">
