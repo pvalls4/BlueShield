@@ -46,8 +46,8 @@ public class login extends HttpServlet {
 
         if (agente != null) {
             HttpSession session = request.getSession();
-            session.setAttribute("username", agente.getCiudadano().getNombre() + " " + agente.getCiudadano().getApellidos());
-            request.setAttribute("username", agente.getCiudadano().getNombre() + " " + agente.getCiudadano().getApellidos());
+            session.setAttribute("username", agente);
+            request.setAttribute("username", agente);
             request.getRequestDispatcher("/view/dashboard.jsp").forward(request, response);
         } else {
             request.setAttribute("errorMessage", "Invalid username or password");

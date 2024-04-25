@@ -15,6 +15,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     </head>
+    
     <body>
         <header>
             <div class="container">
@@ -34,7 +35,20 @@
                     </script>
 
                     <div class="col-12 col-md text-center text-md-left">
-                        <h2 class="version mb-0 text-md-right">Version 1.0 - <%= request.getAttribute("username") %></h2>
+                        <c:if test="${not empty requestScope.username}" >
+                            <%@ page import="model.DTO.AgenteDTO" %>
+                            <%
+                            AgenteDTO agente = (AgenteDTO) request.getAttribute("username");
+                            String agenteLogged = agente.getCiudadano().getNombre() + " " + agente.getCiudadano().getApellidos();
+                            int placa = agente.getPlaca();
+                            %>
+                            <h2 class="version mb-0 text-md-right">Version 1.0 - <%= agenteLogged %> (<%= placa %>)</h2>
+                        </c:if>
+                        <c:if test="${empty requestScope.username}">
+                            <h2 class="version mb-0 text-md-right">Version 1.0</h2>
+                        </c:if>
+                                    
+</h2>
                     </div>
                     <div>
                         <a href='logout'>Cerrar sesión</a>
