@@ -3,6 +3,7 @@ package controller.multas;
 
 import DAO.CiudadanoDAO;
 import DAO.InfraccionDAO;
+import DAO.MultaDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -18,6 +19,7 @@ import java.util.logging.Logger;
 import model.DTO.AgenteDTO;
 import model.DTO.CiudadanoDTO;
 import model.DTO.InfraccionDTO;
+import model.DTO.MultaDTO;
 
 /**
  *
@@ -43,14 +45,16 @@ public class nuevaMulta extends HttpServlet {
                 if (session != null && session.getAttribute("username") != null) {
                     request.setAttribute("username", session.getAttribute("username"));
                     AgenteDTO agente = (AgenteDTO) session.getAttribute("username");
+                    MultaDAO daom = new MultaDAO();
                     CiudadanoDAO daoc = new CiudadanoDAO();
                     InfraccionDAO daoi = new InfraccionDAO();
+                    List<MultaDTO> listaMultas = daom.selectAll();
+                    request.setAttribute("listaMultas", listaMultas);
                     List<CiudadanoDTO> listaCiudadanos = daoc.selectAll();
                     request.setAttribute("listaCiudadanos", listaCiudadanos);
                     List<InfraccionDTO> listaInfracciones = daoi.selectAll();
                     request.setAttribute("listaInfracciones", listaInfracciones);
                     RequestDispatcher rd = request.getRequestDispatcher("/view/multas/nuevaMulta.jsp");
-                    
                     rd.forward(request, response);
                 } else {
                     response.sendRedirect("login");

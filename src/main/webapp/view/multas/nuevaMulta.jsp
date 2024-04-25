@@ -139,9 +139,8 @@
                 form.addEventListener('submit', function (event) {
                     event.preventDefault();
                 });
-            </script>
-        
-</div>
-</form>
+            </script>    
+        </div>
+    </form>
 </div>      
 <%@ include file="../footer.jsp" %>
