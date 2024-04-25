@@ -61,9 +61,9 @@ public class ciudadanos_dashboard extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String dni = request.getParameter("dni");
-        response.sendRedirect("ciudadano?id=" + dni);
-    }
+                String dni = request.getParameter("dni");
+                response.sendRedirect("ciudadano?id=" + dni);
+            }
 
     @Override
     public String getServletInfo() {

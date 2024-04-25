@@ -19,8 +19,8 @@ import model.DTO.AgenteDTO;
  *
  * @author Mati
  */
-@WebServlet(name = "listaAgentes", urlPatterns = {"/listaAgentes"})
-public class agentes extends HttpServlet {
+@WebServlet(name = "agentes", urlPatterns = {"/agentes"})
+public class listaAgentes extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -64,7 +64,7 @@ public class agentes extends HttpServlet {
                 try {
                     processRequest(request, response);
                 } catch (SQLException ex) {
-                    Logger.getLogger(agentes.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(listaAgentes.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -79,11 +79,8 @@ public class agentes extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                try {
-                    processRequest(request, response);
-                } catch (SQLException ex) {
-                    Logger.getLogger(agentes.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                String placa = request.getParameter("placa");
+                response.sendRedirect("agente?placa=" + placa);
             }
 
     /**
