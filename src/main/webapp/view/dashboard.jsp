@@ -5,9 +5,9 @@
     <img id="multas" src="./images/multas.png" class="dash-option m-3" onclick="redirigir(this.id)">
 </div>
 <div class="d-flex justify-content-center flex-wrap">
-    <img id="agentes" src="./images/ciudadanos.png" class="dash-option m-3" onclick="redirigir(this.id)">
-    <img id="condecoraciones" src="./images/multas.png" class="dash-option m-3" onclick="redirigir(this.id)">
-    <img id="admin" src="./images/vehiculos.png" class="dash-option m-3" onclick="redirigir(this.id)">
+    <img id="agentes" src="./images/agentes.png" class="dash-option m-3" onclick="redirigir(this.id)">
+    <img id="condecoraciones" src="./images/condecoraciones.png" class="dash-option m-3" onclick="redirigir(this.id)">
+    <img id="admin" src="./images/admin1.png" class="dash-option m-3" onclick="redirigir(this.id)">
 </div>
 
 

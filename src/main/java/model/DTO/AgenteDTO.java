@@ -13,6 +13,7 @@ public class AgenteDTO {
     private CiudadanoDTO ciudadano;
     private String password;
     private String enlaceFotografico;
+    private String rango;
 
     /**
      * @param placa
@@ -20,11 +21,20 @@ public class AgenteDTO {
      * @param password
      * @param enlaceFotografico 
      */
-    public AgenteDTO(int placa, CiudadanoDTO ciudadano, String password, String enlaceFotografico) {
+    public AgenteDTO(int placa, CiudadanoDTO ciudadano, String password, String enlaceFotografico, String rango) {
         this.placa = placa;
         this.ciudadano = ciudadano;
         this.password = password;
         this.enlaceFotografico = enlaceFotografico;
+        this.rango = rango;
+    }
+
+    public String getRango() {
+        return rango;
+    }
+
+    public void setRango(String rango) {
+        this.rango = rango;
     }
 
     public int getPlaca() {
@@ -61,7 +71,7 @@ public class AgenteDTO {
 
     @Override
     public String toString() {
-        return "AgenteDTO{" + "placa=" + placa + ", ciudadano=" + ciudadano + "enlaceFotografico=" + enlaceFotografico + '}';
+        return "AgenteDTO{" + "placa=" + placa + ", ciudadano=" + ciudadano + ", enlaceFotografico=" + enlaceFotografico + ", rango: " + rango +'}';
     }
     
     

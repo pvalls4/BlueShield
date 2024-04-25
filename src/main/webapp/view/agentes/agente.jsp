@@ -38,7 +38,7 @@
                             Rango
                         </div>
                         <div class="col border border-dark rounded p-1" style="background-color: #bbddf5;color:#0757af;">
-                            <!-- $ {agente.ciudadano.rango} -->
+                            ${agente.rango}
                         </div>
                     </div>
                 </div>
