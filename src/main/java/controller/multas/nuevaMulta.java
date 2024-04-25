@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.logging.Level;
@@ -92,18 +93,34 @@ public class nuevaMulta extends HttpServlet {
 
             List<InfraccionDTO> infracciones = null;
 
-//        for(0 -> idsArticulosSeleccionado.size){
-//            infracciones.i=new InfraccionDAO().select(idsArticulosSeleccionados.i)
-//        }
-//        double importeTotal=importeTotal(infracciones);
-//        Date fecha_final=fechaLimite(request.getParameter(fecha_emision));
+            for (int articulo : articulosSeleccionados) {
+                try {
+                    infracciones.add(new InfraccionDAO().select(articulo));
+                } catch (SQLException ex) {
+                    Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            double importeTotal = importeTotal(infracciones);
         }
 
-        @Override
-        public String getServletInfo
-        
-            () {
-        return "Short description";
-        }// </editor-fold>
+        String fechaEmisionStr = request.getParameter("fechaEmision");
 
+        // Convierte el valor de la fecha en formato String al tipo de datos Date de SQL
+        Date fechaEmision = null;
+        try {
+            fechaEmision = Date.valueOf(fechaEmisionStr);
+        } catch (IllegalArgumentException e) {
+            // Maneja cualquier error de formato de fecha aquí
+            e.printStackTrace();
+        }
+        
+        Date fecha_final = fechaLimite(fechaEmision);
     }
+
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}
