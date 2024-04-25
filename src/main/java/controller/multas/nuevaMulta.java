@@ -45,11 +45,8 @@ public class nuevaMulta extends HttpServlet {
                 if (session != null && session.getAttribute("username") != null) {
                     request.setAttribute("username", session.getAttribute("username"));
                     AgenteDTO agente = (AgenteDTO) session.getAttribute("username");
-                    MultaDAO daom = new MultaDAO();
                     CiudadanoDAO daoc = new CiudadanoDAO();
                     InfraccionDAO daoi = new InfraccionDAO();
-                    List<MultaDTO> listaMultas = daom.selectAll();
-                    request.setAttribute("listaMultas", listaMultas);
                     List<CiudadanoDTO> listaCiudadanos = daoc.selectAll();
                     request.setAttribute("listaCiudadanos", listaCiudadanos);
                     List<InfraccionDTO> listaInfracciones = daoi.selectAll();

@@ -3,7 +3,6 @@ package controller.ciudadanos;
 import DAO.CiudadanoDAO;
 
 import DAO.VehiculoDAO;
-import jakarta.servlet.RequestDispatcher;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
