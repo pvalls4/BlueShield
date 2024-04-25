@@ -17,8 +17,8 @@ import java.util.logging.Logger;
 import model.DTO.MultaDTO;
 import model.DTO.MultaInfraccionDTO;
 
-@WebServlet(name = "multaInfo", urlPatterns = {"/multaInfo"})
-public class multaInfo extends HttpServlet {
+@WebServlet(name = "visualizarMulta", urlPatterns = {"/visualizarMulta"})
+public class visualizarMulta extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -31,14 +31,14 @@ public class multaInfo extends HttpServlet {
                     int id = Integer.parseInt(identifier);
 
                     MultaDAO multaDao = new MultaDAO();
-                    MultaDTO multaInfo = multaDao.select(id);
+                    MultaDTO visualizarMulta = multaDao.select(id);
 
                     MultaInfraccionDAO multaInfraccionDao = new MultaInfraccionDAO();
                     List<MultaInfraccionDTO> infraccionesInfo =  multaInfraccionDao.selectIdMulta(id);
 
                     request.setAttribute("infraccionesInfo", infraccionesInfo);
-                    request.setAttribute("multaInfo", multaInfo);
-                    RequestDispatcher rd = request.getRequestDispatcher("./view/multas/multaInfo.jsp");
+                    request.setAttribute("visualizarMulta", visualizarMulta);
+                    RequestDispatcher rd = request.getRequestDispatcher("./view/multas/visualizarMulta.jsp");
 
                     rd.forward(request, response);
                 } else {
@@ -54,7 +54,7 @@ public class multaInfo extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(multaInfo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(visualizarMulta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -62,7 +62,7 @@ public class multaInfo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         /*String id = request.getParameter("id");
-        response.sendRedirect("multaInfo?id=" + id);*/
+        response.sendRedirect("visualizarMulta?id=" + id);*/
     }
 
     @Override

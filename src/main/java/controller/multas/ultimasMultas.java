@@ -49,7 +49,7 @@ public class ultimasMultas extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id = request.getParameter("id");
-        response.sendRedirect("multaInfo?id=" + id);
+        response.sendRedirect("visualizarMulta?id=" + id);
     }
 
     @Override

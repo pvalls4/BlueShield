@@ -14,6 +14,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DTO.AgenteDTO;
@@ -58,12 +60,19 @@ public class nuevaMulta extends HttpServlet {
                 } 
             }
     
-    private double importeTotal( List<InfraccionDTO> listaInfracciones){
+    private double importeTotal(List<InfraccionDTO> listaInfracciones){
         double result = 0;
         for (InfraccionDTO infraccion : listaInfracciones) {
             result += infraccion.getImporte();
         }
         return result;
+    }
+    
+    private Date fechaLimite(Date fechaEmision){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaEmision);
+        calendar.add(Calendar.MONTH, 1);
+        return new Date(calendar.getTime().getTime());     
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
