@@ -140,7 +140,7 @@
                     event.preventDefault();
                 });
             </script>
-        </div>
+        
 </div>
 </form>
 </div>      
