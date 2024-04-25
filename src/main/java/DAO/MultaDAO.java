@@ -14,8 +14,8 @@ public class MultaDAO {
     private static final String SQL_SELECT = "SELECT * FROM multas WHERE id = ?;";
     private static final String SQL_SELECT_DNI = "SELECT * FROM multas WHERE dniPropietario = ?;";
     private static final String SQL_SELECT_PLACA = "SELECT * FROM multas WHERE idPlaca = ?;";
-    private static final String SQL_INSERT = "INSERT INTO multas(fecha_emision, fecha_limite, importe_total, observaciones, isPagado, idPlaca, dniPropietario, bastidor) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE multas SET fecha_emision = ?, fecha_limite = ?, importe_total = ?, observaciones = ?, isPagado = ?, idPlaca = ?, dniPropietario = ?, bastidor = ? WHERE id = ?";
+    private static final String SQL_INSERT = "INSERT INTO multas(fecha_emision, fecha_limite, importe_total, observaciones, ubicacion, isPagado, idPlaca, dniPropietario, bastidor) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE multas SET fecha_emision = ?, fecha_limite = ?, importe_total = ?, observaciones = ?, ubicacion = ?, isPagado = ?, idPlaca = ?, dniPropietario = ?, bastidor = ? WHERE id = ?";
     private static final String SQL_DELETE = "DELETE FROM multas WHERE id=?";
 
     private MultaDTO fromResultSet(ResultSet rs) throws SQLException {
@@ -23,6 +23,7 @@ public class MultaDAO {
         Date fechaEmision = rs.getDate("fecha_emision");
         Date fechaLimite = rs.getDate("fecha_limite");
         double importeTotal = rs.getDouble("importe_total");
+        String ubicacion = rs.getString("ubicacion");
         String observaciones = rs.getString("observaciones");
         Boolean isPagado = rs.getBoolean("isPagado");
         int idPlaca = rs.getInt("idPlaca");
@@ -32,7 +33,7 @@ public class MultaDAO {
         CiudadanoDTO ciudadano = new CiudadanoDAO().select(dniPropietario);
         VehiculoDTO vehiculo = new VehiculoDAO().select(bastidor);
 
-        MultaDTO multa = new MultaDTO(id, fechaEmision, fechaLimite, importeTotal, observaciones, isPagado, agente, ciudadano, vehiculo);
+        MultaDTO multa = new MultaDTO(id, fechaEmision, fechaLimite, importeTotal, observaciones, ubicacion, isPagado, agente, ciudadano, vehiculo);
 
         return multa;
     }
@@ -135,10 +136,11 @@ public class MultaDAO {
             stmt.setDate(2, multa.getFecha_limite());
             stmt.setDouble(3, multa.getImporte_total());
             stmt.setString(4, multa.getObservaciones());
-            stmt.setBoolean(5, multa.isIsPagado());
-            stmt.setInt(6, multa.getAgente().getPlaca());
-            stmt.setString(7, multa.getCiudadano().getDni());
-            stmt.setString(8, multa.getVehiculo().getBastidor());
+            stmt.setString(5, multa.getUbicacion());
+            stmt.setBoolean(6, multa.isIsPagado());
+            stmt.setInt(7, multa.getAgente().getPlaca());
+            stmt.setString(8, multa.getCiudadano().getDni());
+            stmt.setString(9, multa.getVehiculo().getBastidor());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -162,11 +164,12 @@ public class MultaDAO {
             stmt.setDate(2, multa.getFecha_limite());
             stmt.setDouble(3, multa.getImporte_total());
             stmt.setString(4, multa.getObservaciones());
-            stmt.setBoolean(5, multa.isIsPagado());
-            stmt.setInt(6, multa.getAgente().getPlaca());
-            stmt.setString(7, multa.getCiudadano().getDni());
-            stmt.setString(8, multa.getVehiculo().getBastidor());
-            stmt.setInt(9, multa.getId());
+            stmt.setString(5, multa.getUbicacion());
+            stmt.setBoolean(6, multa.isIsPagado());
+            stmt.setInt(7, multa.getAgente().getPlaca());
+            stmt.setString(8, multa.getCiudadano().getDni());
+            stmt.setString(9, multa.getVehiculo().getBastidor());
+            stmt.setInt(10, multa.getId());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);

@@ -16,6 +16,7 @@ public class MultaDTO {
     private Date fecha_limite;
     private double importe_total;
     private String observaciones;
+    private String ubicacion;
     private boolean isPagado;
     private AgenteDTO agente;
     private CiudadanoDTO ciudadano;
@@ -32,12 +33,13 @@ public class MultaDTO {
      * @param ciudadano
      * @param vehiculo 
      */
-    public MultaDTO(int id, Date fecha_emision, Date fecha_limite, double importe_total, String observaciones, boolean isPagado, AgenteDTO agente, CiudadanoDTO ciudadano, VehiculoDTO vehiculo) {
+    public MultaDTO(int id, Date fecha_emision, Date fecha_limite, double importe_total, String observaciones, String ubicacion, boolean isPagado, AgenteDTO agente, CiudadanoDTO ciudadano, VehiculoDTO vehiculo) {
         this.id = id;
         this.fecha_emision = fecha_emision;
         this.fecha_limite = fecha_limite;
         this.importe_total = importe_total;
         this.observaciones = observaciones;
+        this.ubicacion = ubicacion;
         this.isPagado = isPagado;
         this.agente = agente;
         this.ciudadano = ciudadano;
@@ -54,12 +56,13 @@ public class MultaDTO {
      * @param agente
      * @param ciudadano 
      */
-    public MultaDTO(int id, Date fecha_emision, Date fecha_limite, double importe_total, String observaciones, boolean isPagado, AgenteDTO agente, CiudadanoDTO ciudadano) {
+    public MultaDTO(int id, Date fecha_emision, Date fecha_limite, double importe_total, String observaciones, String ubicacion, boolean isPagado, AgenteDTO agente, CiudadanoDTO ciudadano) {
         this.id = id;
         this.fecha_emision = fecha_emision;
         this.fecha_limite = fecha_limite;
         this.importe_total = importe_total;
         this.observaciones = observaciones;
+        this.ubicacion = ubicacion;
         this.isPagado = isPagado;
         this.agente = agente;
         this.ciudadano = ciudadano;
@@ -75,11 +78,12 @@ public class MultaDTO {
      * @param ciudadano
      * @param vehiculo 
      */
-    public MultaDTO(Date fecha_emision, Date fecha_limite, double importe_total, String observaciones, boolean isPagado, AgenteDTO agente, CiudadanoDTO ciudadano, VehiculoDTO vehiculo) {
+    public MultaDTO(Date fecha_emision, Date fecha_limite, double importe_total, String observaciones, String ubicacion, boolean isPagado, AgenteDTO agente, CiudadanoDTO ciudadano, VehiculoDTO vehiculo) {
         this.fecha_emision = fecha_emision;
         this.fecha_limite = fecha_limite;
         this.importe_total = importe_total;
         this.observaciones = observaciones;
+        this.ubicacion = ubicacion;
         this.isPagado = isPagado;
         this.agente = agente;
         this.ciudadano = ciudadano;
@@ -95,14 +99,23 @@ public class MultaDTO {
      * @param agente
      * @param ciudadano 
      */
-    public MultaDTO(Date fecha_emision, Date fecha_limite, double importe_total, String observaciones, boolean isPagado, AgenteDTO agente, CiudadanoDTO ciudadano) {
+    public MultaDTO(Date fecha_emision, Date fecha_limite, double importe_total, String observaciones, String ubicacion, boolean isPagado, AgenteDTO agente, CiudadanoDTO ciudadano) {
         this.fecha_emision = fecha_emision;
         this.fecha_limite = fecha_limite;
         this.importe_total = importe_total;
         this.observaciones = observaciones;
+        this.ubicacion = ubicacion;
         this.isPagado = isPagado;
         this.agente = agente;
         this.ciudadano = ciudadano;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 
     public int getId() {

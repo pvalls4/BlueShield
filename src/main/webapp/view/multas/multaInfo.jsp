@@ -34,7 +34,7 @@
                     </div>
                     <div class ="row">
                         <div class = "col-md-11 rounded ms-3">Ubicacion</div>                        
-                        <div class = "col-md-11 rounded ms-3 mb-2" style="background-color: #bbddf5;">asd</div>
+                        <div class = "col-md-11 rounded ms-3 mb-2" style="background-color: #bbddf5;">${multaInfo.ubicacion}</div>
                     </div>
                     <div class ="row">
                         <div class = "col-md-11 rounded ms-3">Hechos</div>                        
