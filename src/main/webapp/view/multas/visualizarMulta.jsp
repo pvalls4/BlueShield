@@ -1,6 +1,6 @@
 <%@ include file="../header.jsp"%>
 <div class="container bg-primary border border-dark rounded">
-    
+
     <c:if test="${empty visualizarMulta}">
         <div class="row justify-content-center text-center py-5 m-3" style="background-color: #bbddf5; color:#0757af;">
             No se encontró esta multa.   
@@ -30,15 +30,19 @@
                     </div>
                     <div class ="row">
                         <div class = "col rounded ms-3 me-3 mb-2" style="background-color: #bbddf5;"><p>${visualizarMulta.ciudadano.nombre}</p></div>                                                
-                        <div class = "col rounded  mb-2 ms-4 me-4" style="background-color: #bbddf5;"><p>${visualizarMulta.vehiculo.modelo.marca} ${visualizarMulta.vehiculo.modelo.modelo} <strong>${visualizarMulta.vehiculo.matricula}</strong></p></div> 
+                        <div class = "col rounded mb-2 ms-4 me-4" style="background-color: #bbddf5;"><p>${visualizarMulta.vehiculo.modelo.marca} ${visualizarMulta.vehiculo.modelo.modelo} <strong>${visualizarMulta.vehiculo.matricula}</strong></p></div> 
                     </div>
                     <div class ="row">
-                        <div class = "col-md-11 rounded ms-3">Ubicacion</div>                        
-                        <div class = "col-md-11 rounded ms-3 mb-2" style="background-color: #bbddf5;"><p>${visualizarMulta.ubicacion}</p></div>
+                        <div class = "col rounded ms-3 me-4">Ubicacion</div>
                     </div>
                     <div class ="row">
-                        <div class = "col-md-11 rounded ms-3">Hechos</div>                        
-                        <div class = "col-md-11 rounded ms-3" style="background-color: #bbddf5;"><p>${visualizarMulta.observaciones}</p></div>
+                        <div class = "col rounded ms-3 mb-2 me-4" style="background-color: #bbddf5;"><p>${visualizarMulta.ubicacion}</p></div>
+                    </div>
+                    <div class ="row">
+                        <div class = "col rounded ms-3 me-4">Hechos</div> 
+                    </div>
+                    <div class ="row">
+                        <div class = "col rounded ms-3 me-4" style="background-color: #bbddf5;"><p>${visualizarMulta.observaciones}</p></div>
                     </div>
                 </div>
                 <div class ="col-md-3 border-start border-dark mb-5">
