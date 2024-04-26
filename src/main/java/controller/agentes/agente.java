@@ -1,6 +1,7 @@
 package controller.agentes;
 
 import DAO.AgenteDAO;
+import DAO.CondecoracionAgenteDAO;
 import DAO.CondecoracionDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -10,8 +11,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import model.DTO.AgenteDTO;
+import model.DTO.CondecoracionAgenteDTO;
 import model.DTO.CondecoracionDTO;
 
 /**
@@ -39,14 +42,13 @@ public class agente extends HttpServlet {
                     try {
                         int placa = Integer.parseInt(request.getParameter("placa"));
 
-                        AgenteDAO agentedao = new AgenteDAO();
-                        AgenteDTO agente = agentedao.select(placa);
-                        List<CondecoracionDTO> listaCondecoraciones = new CondecoracionDAO().selectAll();
-
-                        request.setAttribute("agente", agente);
-                        request.setAttribute("listaCondecoraciones", listaCondecoraciones);
+                        AgenteDTO agente = new AgenteDAO().select(placa);
+                        List<CondecoracionAgenteDTO> condecoracionesAgente = new CondecoracionAgenteDAO().selectByAgente(agente.getPlaca());
                         
-                        //List<CondecoracionAgenteDTO> condecoracionesAgente = new CondecoracionAgenteDAO().select(int placa);
+                        request.setAttribute("agente", agente);
+                        request.setAttribute("listaCondecoracionesAgente", condecoracionesAgente);
+                        System.out.println(request.getAttribute("listaCondecoracionesAgente"));
+                        
                         request.getRequestDispatcher("/view/agentes/agente.jsp").forward(request, response);
 
                     } catch (SQLException ex) {

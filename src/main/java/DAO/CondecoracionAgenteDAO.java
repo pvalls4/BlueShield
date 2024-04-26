@@ -8,7 +8,8 @@ import model.DTO.*;
 public class CondecoracionAgenteDAO {
 
     private static final String SQL_SELECT_ALL = "SELECT * FROM condecoraciones_agentes";
-    private static final String SQL_SELECT = "SELECT * FROM condecoraciones_agentes WHERE idCondecoracion = ? AND idAgente = ?";
+    private static final String SQL_SELECT_BY_COND = "SELECT * FROM condecoraciones_agentes WHERE idCondecoracion = ?";
+    private static final String SQL_SELECT_BY_AGENTE = "SELECT * FROM condecoraciones_agentes WHERE idAgente = ?";
     private static final String SQL_INSERT = "INSERT INTO condecoraciones_agentes(idCondecoracion, idAgente, fecha_emision) VALUES(?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE condecoraciones_agentes SET fecha_emision=? WHERE idCondecoracion = ? AND idAgente = ?";
     private static final String SQL_DELETE = "DELETE FROM condecoraciones_agentes WHERE idCondecoracion = ? AND idAgente = ?";
@@ -50,29 +51,58 @@ public class CondecoracionAgenteDAO {
 
         return condecoracionesAgentes;
     }
-
-    public CondecoracionAgenteDTO select(int idCondecoracion, int idAgente) throws SQLException {
+    
+    public List<CondecoracionAgenteDTO> selectByAgente(int idAgente) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         CondecoracionAgenteDTO condecoracionAgente = null;
+        List<CondecoracionAgenteDTO> condecoracionesAgentes = new ArrayList<CondecoracionAgenteDTO>();
+
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT_BY_AGENTE);
+            stmt.setInt(1, idAgente);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                condecoracionAgente = fromResultSet(rs);
+                if (condecoracionAgente != null) {
+                    condecoracionesAgentes.add(condecoracionAgente);
+                }
+            }
+        }  catch (SQLException ex) {
+            System.out.println(ex);
+            condecoracionesAgentes = null;
+        }
+
+        return condecoracionesAgentes;
+    }
+
+    public List<CondecoracionAgenteDTO> selectByCond(int idCondecoracion) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        CondecoracionAgenteDTO agenteCondecoracion = null;
+        List<CondecoracionAgenteDTO> agentesCondecoracion = null;
 
         try {
             conn = Conexion.getConnection();
             if (conn != null) {
-                stmt = conn.prepareStatement(SQL_SELECT);
+                stmt = conn.prepareStatement(SQL_SELECT_BY_COND);
                 stmt.setInt(1, idCondecoracion);
-                stmt.setInt(2, idAgente);
                 rs = stmt.executeQuery();
-                if (rs.next()) {
-                    condecoracionAgente = fromResultSet(rs);
+                while (rs.next()) {
+                    agenteCondecoracion = fromResultSet(rs);
+                    if (agenteCondecoracion != null) {
+                        agentesCondecoracion.add(agenteCondecoracion);
+                    }
                 }
             }
         } catch (SQLException ex) {
-            condecoracionAgente = null;
+            agentesCondecoracion = null;
         }
 
-        return condecoracionAgente;
+        return agentesCondecoracion;
     }
 
     public int insert(CondecoracionAgenteDTO condecoracionAgente) throws SQLException {

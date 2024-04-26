@@ -18,6 +18,7 @@
             <thead>
                 <tr>
                     <th>Placa</th>
+                    <th>Rango</th>
                     <th>Agente</th>
                     <th>Detalles</th>
                 </tr>
@@ -27,6 +28,7 @@
                     <c:forEach items="${listaAgentes}" var="agente">
                         <tr>
                             <td>${agente.placa}</td>
+                            <td>${agente.rango}</td>
                             <td>${agente.ciudadano.nombre} ${agente.ciudadano.apellidos}</td>
                             <td>
                                 <a href="agente?placa=${agente.placa}">
