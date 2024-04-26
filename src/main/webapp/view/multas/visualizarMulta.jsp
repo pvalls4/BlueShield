@@ -16,21 +16,21 @@
                 <div class = "col-md-9 mb-5 ">
                     <div class ="row">
                         <div class = "col rounded ms-3 me-3">Num. Referencia</div>
-                        <div class = "col rounded mx-4">Fecha</div>
-                        <div class = "col rounded ms-4 me-5">Importe</div>                        
+                        <div class = "col rounded mx-3">Fecha</div>
+                        <div class = "col rounded ms-3 me-4">Importe</div>                        
                     </div>
                     <div class ="row">
                         <div class = "col rounded ms-3 me-3 mb-2" style="background-color: #bbddf5;">${visualizarMulta.id}</div>
-                        <div class = "col rounded mx-4 mb-2" style="background-color: #bbddf5;">${visualizarMulta.fecha_emision}</div>
-                        <div class = "col rounded ms-4 mb-2 me-5" style="background-color: #bbddf5;">${visualizarMulta.importe_total}&euro;</div>                        
+                        <div class = "col rounded mx-3 mb-2" style="background-color: #bbddf5;">${visualizarMulta.fecha_emision}</div>
+                        <div class = "col rounded ms-3 mb-2 me-4" style="background-color: #bbddf5;">${visualizarMulta.importe_total}&euro;</div>                        
                     </div>
                     <div class ="row">
                         <div class = "col rounded ms-3">Denunciado/a</div>                        
-                        <div class = "col rounded ms-4 pe-2 me-5">Vehiculo Implicado*</div> 
+                        <div class = "col rounded ms-4 pe-2 me-4">Vehiculo Implicado*</div> 
                     </div>
                     <div class ="row">
                         <div class = "col rounded ms-3 me-3 mb-2" style="background-color: #bbddf5;"><p>${visualizarMulta.ciudadano.nombre}</p></div>                                                
-                        <div class = "col rounded  mb-2 ms-4 me-5" style="background-color: #bbddf5;"><p>${visualizarMulta.vehiculo.modelo.marca} ${visualizarMulta.vehiculo.modelo.modelo} <strong>${visualizarMulta.vehiculo.matricula}</strong></p></div> 
+                        <div class = "col rounded  mb-2 ms-4 me-4" style="background-color: #bbddf5;"><p>${visualizarMulta.vehiculo.modelo.marca} ${visualizarMulta.vehiculo.modelo.modelo} <strong>${visualizarMulta.vehiculo.matricula}</strong></p></div> 
                     </div>
                     <div class ="row">
                         <div class = "col-md-11 rounded ms-3">Ubicacion</div>                        
