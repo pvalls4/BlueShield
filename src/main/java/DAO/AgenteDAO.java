@@ -10,7 +10,7 @@ public class AgenteDAO {
     private static final String SQL_SELECT_ALL = "SELECT * FROM agentes";
     private static final String SQL_SELECT = "SELECT * FROM agentes WHERE placa = ?";
     private static final String SQL_INSERT = "INSERT INTO agentes(dniAgente, password, imagen) VALUES(?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE agentes SET dniAgente=?, password=?, imagen=?, WHERE placa = ?";
+    private static final String SQL_UPDATE = "UPDATE agentes SET dniAgente=?, password=?, imagen=? WHERE placa = ?";
     private static final String SQL_DELETE = "DELETE FROM agentes WHERE placa=?";
 
     private AgenteDTO fromResultSet(ResultSet rs) throws SQLException {
