@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DTO.AgenteDTO;
+import utilidad.PasswordManager;
 
 /**
  *
@@ -60,7 +61,7 @@ public class login extends HttpServlet {
             AgenteDAO dao = new AgenteDAO();
             try {
                 AgenteDTO agente = dao.select(placa);
-                if (agente.getPlaca() == placa && agente.getPassword().equals(pwd)) {
+                if (agente.getPlaca() == placa && PasswordManager.verifyPassword(pwd,agente.getPassword())) {
                     return agente;
                 }
             } catch (SQLException ex) {
