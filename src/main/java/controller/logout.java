@@ -27,13 +27,13 @@ public class logout extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            HttpSession session = request.getSession(false); // Obtener la sesión sin crear una nueva si no existe
-            if (session != null) {
-                session.invalidate(); // Invalidar la sesión actual
+                HttpSession session = request.getSession(false); // Obtener la sesión sin crear una nueva si no existe
+                if (session != null) {
+                    session.invalidate(); // Invalidar la sesión actual
+                }
+                 RequestDispatcher dispatcher = request.getRequestDispatcher("/view/logout.jsp");
+                 dispatcher.forward(request, response);
             }
-             RequestDispatcher dispatcher = request.getRequestDispatcher("/view/logout.jsp");
-             dispatcher.forward(request, response);
-    }
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

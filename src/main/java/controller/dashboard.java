@@ -38,7 +38,7 @@ public class dashboard extends HttpServlet {
                     request.getRequestDispatcher("/view/dashboard.jsp").forward(request, response);
                 } else {
                     response.sendRedirect("login");
-                } 
+                }
             }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
