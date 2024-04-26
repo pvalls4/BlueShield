@@ -1,7 +1,5 @@
 package model.DTO;
 
-import java.sql.Date;
-
 public class CondecoracionDTO {
     private int id;
     private String titulo;
