@@ -83,7 +83,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-4"> <!-- Tamaño alargado para dispositivos medianos y grandes -->
-                <a href="listaMultas?id=${vehiculo.bastidor}"><button class="btn btn-primary btn-block m-1 mb-3 px-5" style="background-color: #bbddf5;color:#0757af;">Ver Multas</button></a>
+                <a href="listaMultasVehiculo?id=${vehiculo.bastidor}"><button class="btn btn-primary btn-block m-1 mb-3 px-5" style="background-color: #bbddf5;color:#0757af;">Ver Multas</button></a>
             </div>
         </div>
     </c:if>
