@@ -48,12 +48,36 @@ public class CiudadanoDAO {
                     ciudadanos.add(ciudadano);
                 }
             }
-        }  catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println(ex);
             ciudadanos = null;
         }
 
         return ciudadanos;
+    }
+
+    public List<String> selectALL_dni() throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String dni = null;
+        List<String> dnis = new ArrayList<String>();
+
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT_ALL);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                dni = rs.getString("dni");
+                if (rs != null) {
+                    dnis.add(dni);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            dnis = null;
+        }
+        return dnis;
     }
 
     public CiudadanoDTO select(String dni) throws SQLException {
@@ -75,7 +99,6 @@ public class CiudadanoDAO {
         } catch (SQLException ex) {
             ciudadano = null;
         }
-
         return ciudadano;
     }
 

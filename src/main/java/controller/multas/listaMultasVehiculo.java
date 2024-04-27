@@ -1,7 +1,6 @@
 package controller.multas;
 
 import DAO.MultaDAO;
-import DAO.MultaInfraccionDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -15,37 +14,25 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DTO.MultaDTO;
-import model.DTO.MultaInfraccionDTO;
 
-@WebServlet(name = "multaInfo", urlPatterns = {"/multaInfo"})
-public class multaInfo extends HttpServlet {
+@WebServlet(name = "listaMultasVehiculo", urlPatterns = {"/listaMultasVehiculo"})
+public class listaMultasVehiculo extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-                HttpSession session = request.getSession(false); // No crea una nueva sesión si no hay una existente
-
+                HttpSession session = request.getSession(false);
 
                 if (session != null && session.getAttribute("username") != null) {
                     request.setAttribute("username", session.getAttribute("username"));
-                    String identifier = request.getParameter("id");
-                    int id = Integer.parseInt(identifier);
-
-                    MultaDAO multaDao = new MultaDAO();
-                    MultaDTO multaInfo = multaDao.select(id);
-
-                    MultaInfraccionDAO multaInfraccionDao = new MultaInfraccionDAO();
-                    List<MultaInfraccionDTO> infraccionesInfo =  multaInfraccionDao.selectIdMulta(id);
-
-                    request.setAttribute("infraccionesInfo", infraccionesInfo);
-                    request.setAttribute("multaInfo", multaInfo);
-                    RequestDispatcher rd = request.getRequestDispatcher("./view/multas/multaInfo.jsp");
-
+                    String bastidor = request.getParameter("id");
+                    MultaDAO dao = new MultaDAO();
+                    List<MultaDTO> listaMultasVehiculo = dao.selectBASTIDOR(bastidor);
+                    request.setAttribute("listaMultasVehiculo", listaMultasVehiculo);
+                    RequestDispatcher rd = request.getRequestDispatcher("./view/multas/listaMultasVehiculo.jsp");
                     rd.forward(request, response);
                 } else {
-                    // No hay una sesión activa o el usuario no está autenticado
-                    // Realiza la lógica correspondiente, como mostrar un formulario de inicio de sesión
-                    response.sendRedirect("view/login.jsp");
-                }
+                    response.sendRedirect("login");
+                } 
             }
 
     @Override
@@ -54,15 +41,15 @@ public class multaInfo extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(multaInfo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(listaMultasVehiculo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*String id = request.getParameter("id");
-        response.sendRedirect("multaInfo?id=" + id);*/
+        String id = request.getParameter("id");
+        response.sendRedirect("visualizarMulta?id=" + id);
     }
 
     @Override

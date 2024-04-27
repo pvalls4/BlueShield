@@ -3,9 +3,9 @@
     <div class="row">
         <!--        buscador-->
         <div class="col">
-            <form action="listaMultas" method="post">
+            <form action="agentes" method="post">
                 <div class="input-group mb-3 p-4">
-                    <input type="text" class="form-control" name="id" placeholder="Buscar por REF" aria-label="Buscar por REF" aria-describedby="button-addon2">
+                    <input type="text" class="form-control" name="placa" placeholder="Buscar por Placa" aria-label="Buscar por Placa" aria-describedby="button-addon2">
                     <button class="btn btn-primary" type="submit" id="button-addon2">
                         <i class="bi bi-search"></i>
                     </button>
@@ -17,28 +17,30 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Num referencia</th>
-                    <th>Fecha de emision</th>
+                    <th>Placa</th>
+                    <th>Rango</th>
+                    <th>Agente</th>
                     <th>Detalles</th>
                 </tr>
             </thead>
             <tbody>
-                <c:if test="${not empty listaMultas}">
-                    <c:forEach items="${listaMultas}" var="multa">
+                <c:if test="${not empty listaAgentes}">
+                    <c:forEach items="${listaAgentes}" var="agente">
                         <tr>
-                            <td>${multa.id}</td>
-                            <td>${multa.fecha_emision}</td>
+                            <td>${agente.placa}</td>
+                            <td>${agente.rango}</td>
+                            <td>${agente.ciudadano.nombre} ${agente.ciudadano.apellidos}</td>
                             <td>
-                                <a href="visualizarMulta?id=${multa.id}">
+                                <a href="agente?placa=${agente.placa}">
                                     <button class="btn btn-primary b-login mb-2">Ver</button>
                                 </a>
                             </td>
                         </tr>
                     </c:forEach>
                 </c:if>
-                <c:if test="${empty listaMultas}">
+                <c:if test="${empty listaAgentes}">
                     <tr>
-                        <td colspan="3">No hay multas disponibles.</td>
+                        <td colspan="3">No hay agentes disponibles.</td>
                     </tr>
                 </c:if>
             </tbody>

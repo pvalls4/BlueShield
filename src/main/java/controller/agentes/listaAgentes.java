@@ -1,4 +1,4 @@
-package controller;
+package controller.agentes;
 
 import DAO.AgenteDAO;
 import jakarta.servlet.RequestDispatcher;
@@ -10,17 +10,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DTO.AgenteDTO;
-import utilidad.PasswordManager;
 
 /**
  *
  * @author Mati
  */
-@WebServlet(name = "login", urlPatterns = {"/login"})
-public class login extends HttpServlet {
+@WebServlet(name = "agentes", urlPatterns = {"/agentes"})
+public class listaAgentes extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,44 +32,21 @@ public class login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-             RequestDispatcher dispatcher = request.getRequestDispatcher("/view/login.jsp");
-             dispatcher.forward(request, response);
-    }
-    
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int placa = Integer.parseInt(request.getParameter("placa"));
-        String pwd = request.getParameter("pwd");
+            throws ServletException, IOException, SQLException {
+                HttpSession session = request.getSession(false);
 
-        // Perform authentication (e.g., check against a database)
-        AgenteDTO agente = authenticate(placa, pwd);
+                    if (session != null && session.getAttribute("username") != null) {
+                        request.setAttribute("username", session.getAttribute("username"));
+                        response.setContentType("text/html;charset=UTF-8");
+                        List<AgenteDTO> listaAgentes = new AgenteDAO().selectAll();
+                        request.setAttribute("listaAgentes", listaAgentes);
+                        RequestDispatcher rd = request.getRequestDispatcher("./view/agentes/listaAgentes.jsp");
+                        rd.forward(request, response);
+                    } else {
+                        response.sendRedirect("login");
+                    } 
 
-        if (agente != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("username", agente);
-            request.setAttribute("username", agente);
-            request.getRequestDispatcher("/view/dashboard.jsp").forward(request, response);
-        } else {
-            request.setAttribute("errorMessage", "Invalid username or password");
-            request.getRequestDispatcher("/view/login.jsp").forward(request, response);
-}
-            
-    }
-    private AgenteDTO authenticate(int placa, String pwd) 
-        throws ServletException, IOException {
-            AgenteDAO dao = new AgenteDAO();
-            try {
-                AgenteDTO agente = dao.select(placa);
-                if (agente.getPlaca() == placa && PasswordManager.verifyPassword(pwd,agente.getPassword())) {
-                    return agente;
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println(ex);
             }
-            return null;
-        }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -83,8 +60,12 @@ public class login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+                try {
+                    processRequest(request, response);
+                } catch (SQLException ex) {
+                    Logger.getLogger(listaAgentes.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -94,7 +75,12 @@ public class login extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+                String placa = request.getParameter("placa");
+                response.sendRedirect("agente?placa=" + placa);
+            }
 
     /**
      * Returns a short description of the servlet.
@@ -105,6 +91,5 @@ public class login extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
 }
-    

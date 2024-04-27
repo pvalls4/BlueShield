@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.DTO.AgenteDTO;
 import model.DTO.MultaDTO;
 
 @WebServlet(name = "ultimasMultas", urlPatterns = {"/ultimasMultas"})
@@ -22,8 +23,8 @@ public class ultimasMultas extends HttpServlet {
             throws ServletException, IOException, SQLException {
             HttpSession session = request.getSession(false);
             if (session != null && session.getAttribute("username") != null) {
-                request.setAttribute("username", session.getAttribute("username"));
-                int idPlaca = (Integer) request.getAttribute("username");
+                AgenteDTO agente = (AgenteDTO) session.getAttribute("username");
+                int idPlaca = agente.getPlaca();
                 MultaDAO dao = new MultaDAO();
                 List<MultaDTO> ultimasMultas = dao.selectPlaca(idPlaca);
                 request.setAttribute("ultimasMultas", ultimasMultas);
@@ -48,7 +49,7 @@ public class ultimasMultas extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id = request.getParameter("id");
-        response.sendRedirect("multaInfo?id=" + id);
+        response.sendRedirect("visualizarMulta?id=" + id);
     }
 
     @Override

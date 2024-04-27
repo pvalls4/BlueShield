@@ -52,8 +52,8 @@ public class vehiculos_dashboard extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String bastidor = request.getParameter("bastidor");
-        response.sendRedirect("vehiculo?id=" + bastidor);
+        String matricula = request.getParameter("matricula");
+        response.sendRedirect("vehiculo?id=" + matricula);
     }
 
     @Override

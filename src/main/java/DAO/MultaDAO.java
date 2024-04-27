@@ -6,16 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 import model.DTO.AgenteDTO;
 import model.DTO.CiudadanoDTO;
+import model.DTO.InfraccionDTO;
 import model.DTO.VehiculoDTO;
 
 public class MultaDAO {
 
     private static final String SQL_SELECT_ALL = "SELECT * FROM multas;";
     private static final String SQL_SELECT = "SELECT * FROM multas WHERE id = ?;";
+    private static final String SQL_SELECT_BASTIDOR = "SELECT * FROM multas WHERE bastidor = ?;";
     private static final String SQL_SELECT_DNI = "SELECT * FROM multas WHERE dniPropietario = ?;";
-    private static final String SQL_SELECT_PLACA = "SELECT * FROM multas WHERE idPlaca = ?;";
-    private static final String SQL_INSERT = "INSERT INTO multas(fecha_emision, fecha_limite, importe_total, observaciones, isPagado, idPlaca, dniPropietario, bastidor) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE multas SET fecha_emision = ?, fecha_limite = ?, importe_total = ?, observaciones = ?, isPagado = ?, idPlaca = ?, dniPropietario = ?, bastidor = ? WHERE id = ?";
+    private static final String SQL_SELECT_PLACA = "SELECT * FROM multas WHERE idPlaca = ? ORDER BY fecha_emision DESC LIMIT 10;";
+    private static final String SQL_INSERT = "INSERT INTO multas(fecha_emision, fecha_limite, importe_total, observaciones, ubicacion, isPagado, idPlaca, dniPropietario, bastidor) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE multas SET fecha_emision = ?, fecha_limite = ?, importe_total = ?, observaciones = ?, ubicacion = ?, isPagado = ?, idPlaca = ?, dniPropietario = ?, bastidor = ? WHERE id = ?";
     private static final String SQL_DELETE = "DELETE FROM multas WHERE id=?";
 
     private MultaDTO fromResultSet(ResultSet rs) throws SQLException {
@@ -23,6 +25,7 @@ public class MultaDAO {
         Date fechaEmision = rs.getDate("fecha_emision");
         Date fechaLimite = rs.getDate("fecha_limite");
         double importeTotal = rs.getDouble("importe_total");
+        String ubicacion = rs.getString("ubicacion");
         String observaciones = rs.getString("observaciones");
         Boolean isPagado = rs.getBoolean("isPagado");
         int idPlaca = rs.getInt("idPlaca");
@@ -32,7 +35,7 @@ public class MultaDAO {
         CiudadanoDTO ciudadano = new CiudadanoDAO().select(dniPropietario);
         VehiculoDTO vehiculo = new VehiculoDAO().select(bastidor);
 
-        MultaDTO multa = new MultaDTO(id, fechaEmision, fechaLimite, importeTotal, observaciones, isPagado, agente, ciudadano, vehiculo);
+        MultaDTO multa = new MultaDTO(id, fechaEmision, fechaLimite, importeTotal, observaciones, ubicacion, isPagado, agente, ciudadano, vehiculo);
 
         return multa;
     }
@@ -69,6 +72,27 @@ public class MultaDAO {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT_DNI);
             stmt.setString(1, dniPropietario);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                multa = fromResultSet(rs);
+                multas.add(multa);
+            }
+        } catch (SQLException ex) {
+            multas = null;
+        }
+        return multas;
+    }
+     public List<MultaDTO> selectBASTIDOR(String bastidor) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        MultaDTO multa = null;
+        List<MultaDTO> multas = new ArrayList<MultaDTO>();
+
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT_BASTIDOR);
+            stmt.setString(1, bastidor);
             rs = stmt.executeQuery();
             while (rs.next()) {
                 multa = fromResultSet(rs);
@@ -124,25 +148,36 @@ public class MultaDAO {
         return result;
     }
 
-    public int insert(MultaDTO multa) throws SQLException {
+    public int insert(MultaDTO multa, List<InfraccionDTO> infracciones) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
         try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(SQL_INSERT);
+            stmt = conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
             stmt.setDate(1, multa.getFecha_emision());
             stmt.setDate(2, multa.getFecha_limite());
             stmt.setDouble(3, multa.getImporte_total());
             stmt.setString(4, multa.getObservaciones());
-            stmt.setBoolean(5, multa.isIsPagado());
-            stmt.setInt(6, multa.getAgente().getPlaca());
-            stmt.setString(7, multa.getCiudadano().getDni());
-            stmt.setString(8, multa.getVehiculo().getBastidor());
-
-            System.out.println("ejecutando query:" + SQL_INSERT);
+            stmt.setString(5, multa.getUbicacion());
+            stmt.setBoolean(6, multa.isIsPagado());
+            stmt.setInt(7, multa.getAgente().getPlaca());
+            stmt.setString(8, multa.getCiudadano().getDni());
+            // Set null if vehiculo is null, otherwise set the bastidor
+            if (multa.getVehiculo() == null) {
+                stmt.setNull(9, Types.VARCHAR);
+            } else {
+                stmt.setString(9, multa.getVehiculo().getBastidor());
+            }
             rows = stmt.executeUpdate();
-            System.out.println("Registros afectados:" + rows);
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            int generatedId = -1;
+            if (generatedKeys.next()) {
+                generatedId = generatedKeys.getInt(1);
+            } else {
+                throw new SQLException("No se generó ningún ID.");
+            }
+            int rowMI=new MultaInfraccionDAO().insertALL(generatedId, infracciones);
         } catch (SQLException ex) {
             rows = 0;
         }
@@ -162,11 +197,12 @@ public class MultaDAO {
             stmt.setDate(2, multa.getFecha_limite());
             stmt.setDouble(3, multa.getImporte_total());
             stmt.setString(4, multa.getObservaciones());
-            stmt.setBoolean(5, multa.isIsPagado());
-            stmt.setInt(6, multa.getAgente().getPlaca());
-            stmt.setString(7, multa.getCiudadano().getDni());
-            stmt.setString(8, multa.getVehiculo().getBastidor());
-            stmt.setInt(9, multa.getId());
+            stmt.setString(5, multa.getUbicacion());
+            stmt.setBoolean(6, multa.isIsPagado());
+            stmt.setInt(7, multa.getAgente().getPlaca());
+            stmt.setString(8, multa.getCiudadano().getDni());
+            stmt.setString(9, multa.getVehiculo().getBastidor());
+            stmt.setInt(10, multa.getId());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);

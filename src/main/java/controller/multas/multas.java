@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller.multas;
 
 import java.io.IOException;
@@ -36,12 +32,12 @@ public class multas extends HttpServlet {
                 response.setContentType("text/html;charset=UTF-8");
                 HttpSession session = request.getSession(false);
 
-                if (session != null && session.getAttribute("username") != null) {
-                    request.setAttribute("username", session.getAttribute("username"));
-                    request.getRequestDispatcher("./view/multas/multas.jsp").forward(request, response);
-                } else {
-                    response.sendRedirect("login");
-                } 
+        if (session != null && session.getAttribute("username") != null) {
+            request.setAttribute("username", session.getAttribute("username"));
+            request.getRequestDispatcher("./view/multas/multas.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("login");
+        }
             }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

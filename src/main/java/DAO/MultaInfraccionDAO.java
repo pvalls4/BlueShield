@@ -7,8 +7,7 @@ import java.util.List;
 import model.DTO.InfraccionDTO;
 import model.DTO.MultaDTO;
 
-public class MultaInfraccionDAO{
-
+public class MultaInfraccionDAO {
 
     private static final String SQL_SELECT_ALL = "SELECT * FROM multas_infracciones;";
     private static final String SQL_SELECT_INFRACCION = "SELECT * FROM multas_infracciones WHERE idInfraccion = ?;";
@@ -20,15 +19,15 @@ public class MultaInfraccionDAO{
     private MultaInfraccionDTO fromResultSet(ResultSet rs) throws SQLException {
         int idMulta = rs.getInt("idMulta");
         int idInfraccion = rs.getInt("idInfraccion");
-        
+
         MultaDTO multa = new MultaDAO().select(idMulta);
         InfraccionDTO infraccion = new InfraccionDAO().select(idInfraccion);
-        
-        MultaInfraccionDTO multasInfracciones = new MultaInfraccionDTO(multa,infraccion);
-            
+
+        MultaInfraccionDTO multasInfracciones = new MultaInfraccionDTO(multa, infraccion);
+
         return multasInfracciones;
-    } 
-    
+    }
+
     public List<MultaInfraccionDTO> selectAll() throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -49,7 +48,8 @@ public class MultaInfraccionDAO{
         }
         return multasInfracciones;
     }
-        public List<MultaInfraccionDTO> selectIdMulta(int idMulta) throws SQLException {
+
+    public List<MultaInfraccionDTO> selectIdMulta(int idMulta) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -70,8 +70,8 @@ public class MultaInfraccionDAO{
         }
         return multasInfracciones;
     }
-    
-        public List<MultaInfraccionDTO> selectIdInfraccion(int idInfraccion) throws SQLException {
+
+    public List<MultaInfraccionDTO> selectIdInfraccion(int idInfraccion) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -80,7 +80,7 @@ public class MultaInfraccionDAO{
 
         try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(SQL_SELECT_MULTA);
+            stmt = conn.prepareStatement(SQL_SELECT_INFRACCION);
             stmt.setInt(1, idInfraccion);
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -92,7 +92,7 @@ public class MultaInfraccionDAO{
         }
         return multasInfracciones;
     }
-    
+
     public int insert(MultaInfraccionDTO multaInfraccion) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -102,13 +102,39 @@ public class MultaInfraccionDAO{
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setInt(1, multaInfraccion.getMulta().getId());
             stmt.setInt(2, multaInfraccion.getInfraccion().getId());
-            
+
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
             System.out.println("Registros afectados:" + rows);
         } catch (SQLException ex) {
             rows = 0;
         }
+        return rows;
+    }
+
+    public int insertALL(int idMulta, List<InfraccionDTO> infracciones) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_INSERT);
+
+            for (InfraccionDTO infraccion : infracciones) {
+                stmt.setInt(1, idMulta);
+                stmt.setInt(2, infraccion.getId());
+                stmt.addBatch();
+            }
+
+            int[] insertedCounts = stmt.executeBatch();
+            for (int count : insertedCounts) {
+                rows += count;
+            }
+
+        } catch (SQLException ex) {
+            rows = 0;
+        }
+
         return rows;
     }
 
@@ -123,7 +149,7 @@ public class MultaInfraccionDAO{
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setInt(1, multaInfraccion.getMulta().getId());
             stmt.setInt(2, multaInfraccion.getInfraccion().getId());
- 
+
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
 
@@ -146,7 +172,7 @@ public class MultaInfraccionDAO{
             stmt.setInt(1, multaInfraccion.getMulta().getId());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             rows = 0;
         }
         return rows;

@@ -1,11 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller.multas;
 
 import DAO.CiudadanoDAO;
 import DAO.InfraccionDAO;
+import DAO.MultaDAO;
+import DAO.VehiculoDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -16,90 +14,152 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.DTO.AgenteDTO;
 import model.DTO.CiudadanoDTO;
 import model.DTO.InfraccionDTO;
+import model.DTO.MultaDTO;
+import model.DTO.VehiculoDTO;
 
-/**
- *
- * @author Mati
- */
 @WebServlet(name = "nuevaMulta", urlPatterns = {"/nuevaMulta"})
 public class nuevaMulta extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    private AgenteDTO agente;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-                response.setContentType("text/html;charset=UTF-8");
-                HttpSession session = request.getSession(false);
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(false);
 
-                if (session != null && session.getAttribute("username") != null) {
-                    request.setAttribute("username", session.getAttribute("username"));
-                    response.setContentType("text/html;charset=UTF-8");
-                    CiudadanoDAO daoc = new CiudadanoDAO();
-                    InfraccionDAO daoi = new InfraccionDAO();
-                    List<CiudadanoDTO> listaCiudadanos = daoc.selectAll();
-                    request.setAttribute("listaCiudadanos", listaCiudadanos);
-                    List<InfraccionDTO> listaInfracciones = daoi.selectAll();
-                    request.setAttribute("listaInfracciones", listaInfracciones);
-                    RequestDispatcher rd = request.getRequestDispatcher("/view/multas/nuevaMulta.jsp");
-                    rd.forward(request, response);
-                } else {
-                    response.sendRedirect("login");
-                } 
-            }
+        if (session != null && session.getAttribute("username") != null) {
+            agente = (AgenteDTO) session.getAttribute("username");
+            request.setAttribute("username", session.getAttribute("username"));
+            CiudadanoDAO daoc = new CiudadanoDAO();
+            InfraccionDAO daoi = new InfraccionDAO();
+            List<CiudadanoDTO> listaCiudadanos = daoc.selectAll();
+            request.setAttribute("listaCiudadanos", listaCiudadanos);
+            List<InfraccionDTO> listaInfracciones = daoi.selectAll();
+            Collections.sort(listaInfracciones, Comparator.comparing(InfraccionDTO::getId));
+            request.setAttribute("listaInfracciones", listaInfracciones);
+            RequestDispatcher rd = request.getRequestDispatcher("/view/multas/nuevaMulta.jsp");
+            rd.forward(request, response);
+        } else {
+            response.sendRedirect("login");
+        }
+    }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    private float importeTotal(List<InfraccionDTO> listaInfracciones) {
+        float result = 0;
+        for (InfraccionDTO infraccion : listaInfracciones) {
+            result += infraccion.getImporte();
+        }
+        return result;
+    }
+
+    private Date fechaLimite(Date fechaEmision) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaEmision);
+        calendar.add(Calendar.MONTH, 1);
+        return new Date(calendar.getTime().getTime());
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                try {
-                    processRequest(request, response);
-                } catch (SQLException ex) {
-                    Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                try {
-                    processRequest(request, response);
-                } catch (SQLException ex) {
-                    Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
-                }
+
+        String dni = request.getParameter("dni");
+        CiudadanoDTO ciudadano = null;
+        CiudadanoDAO daoc = new CiudadanoDAO();
+
+        try {
+            ciudadano = daoc.select(dni);
+        } catch (SQLException ex) {
+            Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String matricula = request.getParameter("matricula");
+        VehiculoDTO vehiculo = null;
+        if (matricula != null && !matricula.isEmpty()) {
+            VehiculoDAO daov = new VehiculoDAO();
+            try {
+                vehiculo = daov.selectMATRICULA(matricula);
+            } catch (SQLException ex) {
+                Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        String ubicacion = request.getParameter("ubicacion");
+        String observaciones = request.getParameter("observaciones");
+
+        float importeTotal = 0.0f;
+        String[] articulosSeleccionadosStr = request.getParameterValues("articuloSeleccionado");
+
+        List<Integer> articulosSeleccionados = new ArrayList<>();
+        for (String str : articulosSeleccionadosStr) {
+            try {
+                int articuloId = Integer.parseInt(str);
+                articulosSeleccionados.add(articuloId);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+
+        List<InfraccionDTO> infracciones = new ArrayList<>();
+        for (int articulo : articulosSeleccionados) {
+            try {
+                infracciones.add(new InfraccionDAO().select(articulo));
+            } catch (SQLException ex) {
+                Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        importeTotal = importeTotal(infracciones);
+
+        String fechaEmisionStr = request.getParameter("fechaEmision");
+        Date fechaEmision = null;
+        try {
+            fechaEmision = Date.valueOf(fechaEmisionStr);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+
+        Date fecha_final = fechaLimite(fechaEmision);
+        boolean isPagado = false;
+        MultaDAO nuevaMultaDAO = new MultaDAO();
+
+        MultaDTO nuevaMulta;
+        if (vehiculo == null) {
+            nuevaMulta = new MultaDTO(fechaEmision, fecha_final, importeTotal, observaciones, ubicacion, isPagado, agente, ciudadano, null);
+        } else {
+            nuevaMulta = new MultaDTO(fechaEmision, fecha_final, importeTotal, observaciones, ubicacion, isPagado, agente, ciudadano, vehiculo);
+        }
+
+        try {
+            nuevaMultaDAO.insert(nuevaMulta, infracciones);
+        } catch (SQLException ex) {
+            Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        response.sendRedirect("multas");
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

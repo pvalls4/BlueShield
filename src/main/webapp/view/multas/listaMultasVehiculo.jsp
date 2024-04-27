@@ -3,7 +3,7 @@
     <div class="row">
         <!--        buscador-->
         <div class="col">
-            <form action="listaMultas" method="post">
+            <form action="listaMultasVehiculo" method="post">
                 <div class="input-group mb-3 p-4">
                     <input type="text" class="form-control" name="id" placeholder="Buscar por REF" aria-label="Buscar por REF" aria-describedby="button-addon2">
                     <button class="btn btn-primary" type="submit" id="button-addon2">
@@ -23,8 +23,8 @@
                 </tr>
             </thead>
             <tbody>
-                <c:if test="${not empty listaMultas}">
-                    <c:forEach items="${listaMultas}" var="multa">
+                <c:if test="${not empty listaMultasVehiculo}">
+                    <c:forEach items="${listaMultasVehiculo}" var="multa">
                         <tr>
                             <td>${multa.id}</td>
                             <td>${multa.fecha_emision}</td>
@@ -36,7 +36,7 @@
                         </tr>
                     </c:forEach>
                 </c:if>
-                <c:if test="${empty listaMultas}">
+                <c:if test="${empty listaMultasVehiculo}">
                     <tr>
                         <td colspan="3">No hay multas disponibles.</td>
                     </tr>
