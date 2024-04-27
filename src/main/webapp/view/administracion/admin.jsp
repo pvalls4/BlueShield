@@ -12,6 +12,9 @@
             <button onclick="ir(3)" class="boton m-3">
                 Añadir Sanción
             </button>-->
+            <button onclick="ir(4)" class="boton m-3">
+                Crear Modelo
+            </button>
         </div>
     </div>
 </div>
@@ -26,6 +29,10 @@
                 break;
             case 3:
                 window.location.href = "anadirSancion";
+                break;
+            case 4:
+                window.location.href = "crearModelo";
+                break;
         }
     }
 
