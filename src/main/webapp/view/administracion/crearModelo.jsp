@@ -1,6 +1,6 @@
 <%@ include file="../header.jsp" %>
 <div class="container bg-primary border border-dark rounded">
-  <form method="post" action="crearAgente">
+  <form method="post" action="crearModelo">
     <div class="row" style="background-color: #9acbfd">
       <div class="row">
         <div class="d-flex justify-content-center mt-2">
@@ -41,7 +41,7 @@
         </div>
         <div class="row">
           <div class="col d-flex justify-content-center">
-            <button type="submit" class="boton mx-4 mt-4">Crear Agente</button>
+            <button type="submit" class="boton mx-4 mt-4">Crear Modelo</button>
             <button type="button" class="boton mx-4 mt-4" onclick="window.location.href='login'">Cancelar</button>
           </div>
         </div>
