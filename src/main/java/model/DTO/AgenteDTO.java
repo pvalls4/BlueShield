@@ -16,10 +16,24 @@ public class AgenteDTO {
     private String rango;
 
     /**
+     * @param ciudadano
+     * @param password
+     * @param enlaceFotografico 
+     * @param rango 
+     */
+    public AgenteDTO(CiudadanoDTO ciudadano, String password, String enlaceFotografico, String rango) {
+        this.ciudadano = ciudadano;
+        this.password = password;
+        this.enlaceFotografico = enlaceFotografico;
+        this.rango = rango;
+    }
+    
+    /**
      * @param placa
      * @param ciudadano
      * @param password
      * @param enlaceFotografico 
+     * @param rango 
      */
     public AgenteDTO(int placa, CiudadanoDTO ciudadano, String password, String enlaceFotografico, String rango) {
         this.placa = placa;

@@ -9,7 +9,8 @@ public class AgenteDAO {
    
     private static final String SQL_SELECT_ALL = "SELECT * FROM agentes";
     private static final String SQL_SELECT = "SELECT * FROM agentes WHERE placa = ?";
-    private static final String SQL_INSERT = "INSERT INTO agentes(dniAgente, password, imagen, rango) VALUES(?, ?, ?)";
+    private static final String SQL_SELECT_DNI = "SELECT * FROM agentes WHERE dniAgente = ?";
+    private static final String SQL_INSERT = "INSERT INTO agentes(dniAgente, password, imagen, rango) VALUES(?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE agentes SET dniAgente=?, password=?, imagen=?, rango=? WHERE placa = ?";
     private static final String SQL_DELETE = "DELETE FROM agentes WHERE placa=?";
 
@@ -73,6 +74,31 @@ public class AgenteDAO {
         }
 
         return agente;
+    }
+    
+        public byte select(String dni) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        AgenteDTO agente = null;
+        byte rows = 0;
+        try {
+            conn = Conexion.getConnection();
+            if (conn != null) {
+                stmt = conn.prepareStatement(SQL_SELECT_DNI);
+                stmt.setString(1, dni);
+                rs = stmt.executeQuery();
+                
+                if (rs.next()) {
+                    agente = fromResultSet(rs);
+                    rows = 1;
+                }
+            }
+        } catch (SQLException ex) {
+            rows = 0;
+        }
+
+        return rows;
     }
 
     public int insert(AgenteDTO agente) throws SQLException {
