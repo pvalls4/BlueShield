@@ -33,10 +33,12 @@
                         <div class = "col rounded mb-2 ms-4 me-4" style="background-color: #bbddf5;"><p>${visualizarMulta.vehiculo.modelo.marca} ${visualizarMulta.vehiculo.modelo.modelo} <strong>${visualizarMulta.vehiculo.matricula}</strong></p></div> 
                     </div>
                     <div class ="row">
-                        <div class = "col rounded ms-3 me-4">Ubicacion</div>
+                        <div class = "col rounded ms-3">Ubicación</div>                        
+                        <div class = "col rounded ms-4 pe-2 me-4">Estado</div> 
                     </div>
                     <div class ="row">
-                        <div class = "col rounded ms-3 mb-2 me-4" style="background-color: #bbddf5;"><p>${visualizarMulta.ubicacion}</p></div>
+                        <div class = "col rounded ms-3 me-3 mb-2" style="background-color: #bbddf5;"><p>${visualizarMulta.ubicacion}</p></div>                                                
+                        <div class = "col rounded mb-2 ms-4 me-4" style="background-color: #bbddf5;"><p>${visualizarMulta.isPagado ? 'Pagada' : 'No pagada'}</strong></p></div> 
                     </div>
                     <div class ="row">
                         <div class = "col rounded ms-3 me-4">Hechos</div> 
