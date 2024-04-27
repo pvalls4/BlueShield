@@ -19,6 +19,8 @@
                 <tr>
                     <th>Num referencia</th>
                     <th>Fecha de emision</th>
+                    <th>Estado</th>
+                    <th>Fecha l&iacute;mite</th>
                     <th>Detalles</th>
                 </tr>
             </thead>
@@ -28,6 +30,8 @@
                         <tr>
                             <td>${multa.id}</td>
                             <td>${multa.fecha_emision}</td>
+                            <td>${multa.isPagado ? 'Pagada' : 'No pagada'}</td>
+                            <td>${multa.fecha_limite}</td>
                             <td>
                                 <a href="visualizarMulta?id=${multa.id}">
                                     <button class="btn btn-primary b-login mb-2">Ver</button>
