@@ -13,6 +13,7 @@ public class MultaDAO {
 
     private static final String SQL_SELECT_ALL = "SELECT * FROM multas;";
     private static final String SQL_SELECT = "SELECT * FROM multas WHERE id = ?;";
+    private static final String SQL_SELECT_BASTIDOR = "SELECT * FROM multas WHERE bastidor = ?;";
     private static final String SQL_SELECT_DNI = "SELECT * FROM multas WHERE dniPropietario = ?;";
     private static final String SQL_SELECT_PLACA = "SELECT * FROM multas WHERE idPlaca = ? ORDER BY fecha_emision DESC LIMIT 10;";
     private static final String SQL_INSERT = "INSERT INTO multas(fecha_emision, fecha_limite, importe_total, observaciones, ubicacion, isPagado, idPlaca, dniPropietario, bastidor) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -71,6 +72,27 @@ public class MultaDAO {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT_DNI);
             stmt.setString(1, dniPropietario);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                multa = fromResultSet(rs);
+                multas.add(multa);
+            }
+        } catch (SQLException ex) {
+            multas = null;
+        }
+        return multas;
+    }
+     public List<MultaDTO> selectBASTIDOR(String bastidor) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        MultaDTO multa = null;
+        List<MultaDTO> multas = new ArrayList<MultaDTO>();
+
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT_BASTIDOR);
+            stmt.setString(1, bastidor);
             rs = stmt.executeQuery();
             while (rs.next()) {
                 multa = fromResultSet(rs);
