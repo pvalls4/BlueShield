@@ -18,6 +18,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DTO.AgenteDTO;
@@ -44,6 +46,7 @@ public class nuevaMulta extends HttpServlet {
             List<CiudadanoDTO> listaCiudadanos = daoc.selectAll();
             request.setAttribute("listaCiudadanos", listaCiudadanos);
             List<InfraccionDTO> listaInfracciones = daoi.selectAll();
+            Collections.sort(listaInfracciones, Comparator.comparing(InfraccionDTO::getId));
             request.setAttribute("listaInfracciones", listaInfracciones);
             RequestDispatcher rd = request.getRequestDispatcher("/view/multas/nuevaMulta.jsp");
             rd.forward(request, response);
@@ -82,7 +85,6 @@ public class nuevaMulta extends HttpServlet {
             throws ServletException, IOException {
 
         String dni = request.getParameter("dni");
-        System.out.println(dni + "1st flag");
         CiudadanoDTO ciudadano = null;
         CiudadanoDAO daoc = new CiudadanoDAO();
 
@@ -118,7 +120,6 @@ public class nuevaMulta extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        System.out.println(articulosSeleccionados);
 
         List<InfraccionDTO> infracciones = new ArrayList<>();
         for (int articulo : articulosSeleccionados) {

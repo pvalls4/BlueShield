@@ -147,23 +147,15 @@ public class MultaDAO {
             } else {
                 stmt.setString(9, multa.getVehiculo().getBastidor());
             }
-            System.out.println("llega1");
             rows = stmt.executeUpdate();
-            System.out.println("llega2");
-
             ResultSet generatedKeys = stmt.getGeneratedKeys();
-            System.out.println("llega3" + generatedKeys);
             int generatedId = -1;
             if (generatedKeys.next()) {
                 generatedId = generatedKeys.getInt(1);
-                System.out.println("llega4" + generatedId);
             } else {
                 throw new SQLException("No se generó ningún ID.");
             }
-            System.out.println(generatedId + " id generada multa");
             int rowMI=new MultaInfraccionDAO().insertALL(generatedId, infracciones);
-            System.out.println(rowMI + " rowMI");
-
         } catch (SQLException ex) {
             rows = 0;
         }

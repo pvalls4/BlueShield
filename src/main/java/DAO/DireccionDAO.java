@@ -74,10 +74,10 @@ public class DireccionDAO{
     public int insert(DireccionDTO direccion) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
-        int rows = 0;
+        int idDireccion = -1;
         try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(SQL_INSERT);
+            stmt = conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, direccion.getMunicipio());
             stmt.setString(2, direccion.getCodigoPostal());
             stmt.setString(3, direccion.getCalle());
@@ -86,13 +86,17 @@ public class DireccionDAO{
             stmt.setInt(6, direccion.getNumero());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
-            rows = stmt.executeUpdate();
-            System.out.println("Registros afectados:" + rows);
+            stmt.executeUpdate();
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                idDireccion = generatedKeys.getInt(1);
+            } else {
+                throw new SQLException("No se generó ningún ID.");
+            }
         } catch (SQLException ex) {
-            rows = 0;
+            throw new SQLException("Error servidor.");
         }
-
-        return rows;
+        return idDireccion;
     }
 
     public int update(DireccionDTO direccion) throws SQLException {

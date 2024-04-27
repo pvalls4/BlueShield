@@ -1,5 +1,12 @@
 <%@ include file="../header.jsp" %>
 <div class="container border border-dark rounded" style="background-color: #9acbfd">
+    <div class="row text-center m-4">
+        <div class="col-md-12">
+            <a href="registrarCiudadano">
+                <button class="btn btn-primary b-login mb-2" Style="width:100%">Registrar Ciudadano</button>
+            </a>
+        </div>
+    </div>
     <div class="row">
         <!--        buscador-->
         <div class="col">
