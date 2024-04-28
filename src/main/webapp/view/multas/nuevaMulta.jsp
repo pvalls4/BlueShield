@@ -117,8 +117,40 @@
                 </div>                       
             </div>
 
-            <dialog class = "boton" id="confirmar"> 
+            <dialog class="boton" id="confirmar"> 
                 <p class="text-center">¿Confirma Denuncia?</p>
+                <div class="row">
+                    <div class="col" style="color:black">
+                        Denunciado/a: 
+                    </div>
+                    <div class="col" style="color:black">
+                        Fecha emision: 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <strong id="dniDenunciado" style="color: #1e549f;"></strong>
+                    </div>
+                    <div class="col">
+                        <span id="fechaEmisionMulta"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col" style="color:black">
+                        Infracciones:
+                    </div>
+                    <div class="col" style="color:black">
+                        Importe total:
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <textarea id="infracciones" class="form-control input-form" rows="4" readonly></textarea>
+                    </div>
+                    <div class="col">
+                        <span id="importeTotal"></span>
+                    </div>
+                </div>
                 <button id="confirmarBtn" class="boton mx-4 mt-4">Confirmar</button>
                 <button id="cancelar" class="boton mx-4 mt-4">Cancelar</button>
             </dialog>
@@ -132,6 +164,30 @@
                 btnEmitirDenuncia.addEventListener("click", () => {
                     // Verificar si todos los campos requeridos están llenos antes de mostrar el diálogo de confirmación
                     if (validarCamposRequeridos() && alMenosUnCheckboxMarcado()) {
+                        // Obtener los valores del DNI y la fecha de emisión
+                        const dniDenunciado = document.getElementById("dni").value;
+                        const fechaEmisionMulta = document.getElementById("fechaEmision").value;
+                        
+                        // Obtener las infracciones seleccionadas
+                        const infraccionesSeleccionadas = [];
+                        const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                        let importeTotal = 0; // Variable para almacenar el importe total
+                        checkboxes.forEach((checkbox) => {
+                            // Obtener solo el número de artículo
+                            const numeroArticulo = checkbox.labels[0].textContent.trim().split(" ")[1]; // Suponiendo que el formato es "Artículo XXX - Titulo"
+                            infraccionesSeleccionadas.push("Artículo " + numeroArticulo); // Agregar "Artículo" al número de artículo
+                        });
+
+                        // Convertir la lista de infracciones a una cadena con saltos de línea
+                        let infraccionesTexto = infraccionesSeleccionadas.join("\n");
+
+                        // Establecer los valores en el diálogo de confirmación
+                        document.getElementById("infracciones").textContent = infraccionesTexto;
+                        document.getElementById("dniDenunciado").textContent = dniDenunciado;
+                        document.getElementById("fechaEmisionMulta").textContent = fechaEmisionMulta;
+
+
+                        // Mostrar el diálogo de confirmación
                         confirmar.showModal();
                     } else {
                         alert('Por favor, completa todos los campos requeridos y marca al menos una opción.');
