@@ -1,5 +1,6 @@
 package controller;
 
+import DAO.AdminDAO;
 import DAO.AgenteDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -52,6 +53,7 @@ public class login extends HttpServlet {
             request.getRequestDispatcher("/view/dashboard.jsp").forward(request, response);
         } else {
             request.setAttribute("errorMessage", "Invalid username or password");
+            request.setAttribute("invalidUser", true);
             request.getRequestDispatcher("/view/login.jsp").forward(request, response);
 }
             
@@ -61,7 +63,9 @@ public class login extends HttpServlet {
             AgenteDAO dao = new AgenteDAO();
             try {
                 AgenteDTO agente = dao.select(placa);
-                if (agente.getPlaca() == placa && PasswordManager.verifyPassword(pwd,agente.getPassword())) {
+                if(agente == null){
+                    return null;
+                } else if (agente.getPlaca() == placa && PasswordManager.verifyPassword(pwd,agente.getPassword())) {
                     return agente;
                 }
             } catch (SQLException ex) {

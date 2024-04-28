@@ -5,6 +5,9 @@
             <img src="./images/logoBS.png" class="logo2">
         </div>
          <form method="post" action="login">
+                <c:if test="${invalidUser}">
+                    <span class="text-darkblue">${errorMessage}</span>
+                </c:if>
             <div class="mb-3 mt-3">
                 <label for="email" class="form-label text-darkblue">Identificador:</label>
                 <input type="number" class="form-control input-form" id="placa" placeholder="Número de placa" name="placa">
