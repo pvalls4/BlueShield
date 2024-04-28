@@ -174,7 +174,7 @@
                         checkboxes.forEach((checkbox) => {
                             const jsonValue = JSON.parse(checkbox.value); // Parse the JSON string
                             const importeArticulo = parseFloat(jsonValue.importe); // Get the importe value from JSON
-                            const articulo = parseFloat(jsonValue.id)/100; // Get the articuloId with format
+                            const articulo = (parseFloat(jsonValue.id)/100).toFixed(2); // Get the articuloId with format
                             importeTotal += importeArticulo; // Sumar el importe al total
                             infraccionesSeleccionadas.push("Artículo: " + articulo);
                         });
@@ -191,7 +191,7 @@
                         alert('Por favor, completa todos los campos requeridos y marca al menos una opción.');
                     }
                 });
-
+                
                 btnCancelar.addEventListener("click", () => {
                     confirmar.close();
                 });
