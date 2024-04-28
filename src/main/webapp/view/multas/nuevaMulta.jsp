@@ -98,7 +98,7 @@
                                 }
                             %>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="<%= articulo.getId() %>" id="<%= articulo.getId() %>" name="articuloSeleccionado">
+                                <input class="form-check-input" type="checkbox" value='{"importe": <%= articulo.getImporte() %>, "id": <%= articulo.getId() %>}' id="<%= articulo.getId() %>" name="articuloSeleccionado">
                                 <label class="form-check-label" for="<%= articulo.getId() %>">
                                     Artículo <%= articulo.getId() %> - <%= articulo.getTitulo() %>
                                 </label>
@@ -118,7 +118,7 @@
             </div>
 
             <dialog class="boton" id="confirmar"> 
-                <p class="text-center">¿Confirma Denuncia?</p>
+                <p class="text-center">¿Confirmar Denuncia?</p>
                 <div class="row">
                     <div class="col" style="color:black">
                         Denunciado/a: 
@@ -167,27 +167,24 @@
                         // Obtener los valores del DNI y la fecha de emisión
                         const dniDenunciado = document.getElementById("dni").value;
                         const fechaEmisionMulta = document.getElementById("fechaEmision").value;
-                        
-                        // Obtener las infracciones seleccionadas
                         const infraccionesSeleccionadas = [];
+                        let importeTotal = 0; // Importe total inicializado en 0
+
                         const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-                        let importeTotal = 0; // Variable para almacenar el importe total
                         checkboxes.forEach((checkbox) => {
-                            // Obtener solo el número de artículo
-                            const numeroArticulo = checkbox.labels[0].textContent.trim().split(" ")[1]; // Suponiendo que el formato es "Artículo XXX - Titulo"
-                            infraccionesSeleccionadas.push("Artículo " + numeroArticulo); // Agregar "Artículo" al número de artículo
+                            const jsonValue = JSON.parse(checkbox.value); // Parse the JSON string
+                            const importeArticulo = parseFloat(jsonValue.importe); // Get the importe value from JSON
+                            importeTotal += importeArticulo; // Sumar el importe al total
+                            infraccionesSeleccionadas.push("Artículo " + jsonValue.id);
                         });
 
-                        // Convertir la lista de infracciones a una cadena con saltos de línea
-                        let infraccionesTexto = infraccionesSeleccionadas.join("\n");
-
                         // Establecer los valores en el diálogo de confirmación
-                        document.getElementById("infracciones").textContent = infraccionesTexto;
+                        document.getElementById("infracciones").textContent = infraccionesSeleccionadas.join("\n");
+                        document.getElementById("importeTotal").textContent = importeTotal.toFixed(2); // Mostrar el importe total con 2 decimales
+
                         document.getElementById("dniDenunciado").textContent = dniDenunciado;
                         document.getElementById("fechaEmisionMulta").textContent = fechaEmisionMulta;
 
-
-                        // Mostrar el diálogo de confirmación
                         confirmar.showModal();
                     } else {
                         alert('Por favor, completa todos los campos requeridos y marca al menos una opción.');
