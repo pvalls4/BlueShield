@@ -174,8 +174,9 @@
                         checkboxes.forEach((checkbox) => {
                             const jsonValue = JSON.parse(checkbox.value); // Parse the JSON string
                             const importeArticulo = parseFloat(jsonValue.importe); // Get the importe value from JSON
+                            const articulo = parseFloat(jsonValue.id)/100; // Get the articuloId with format
                             importeTotal += importeArticulo; // Sumar el importe al total
-                            infraccionesSeleccionadas.push("Artículo " + jsonValue.id);
+                            infraccionesSeleccionadas.push("Artículo: " + articulo);
                         });
 
                         // Establecer los valores en el diálogo de confirmación
