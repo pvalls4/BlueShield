@@ -12,9 +12,10 @@ public class MultaInfraccionDAO {
     private static final String SQL_SELECT_ALL = "SELECT * FROM multas_infracciones;";
     private static final String SQL_SELECT_INFRACCION = "SELECT * FROM multas_infracciones WHERE idInfraccion = ?;";
     private static final String SQL_SELECT_MULTA = "SELECT * FROM multas_infracciones WHERE idMulta = ?;";
+    private static final String SQL_SELECT_MULTAINFRACCION = "SELECT * FROM multas_infracciones WHERE idMulta = ? AND idInfraccion = ?;";
     private static final String SQL_INSERT = "INSERT INTO multas_infracciones(idMulta, idInfraccion) VALUES(?, ?)";
     private static final String SQL_UPDATE = "UPDATE multas_infracciones SET idMulta = ?, idInfraccion = ? WHERE idMulta = ?";
-    private static final String SQL_DELETE = "DELETE FROM multas_infracciones WHERE idMulta=?";
+    private static final String SQL_DELETE = "DELETE FROM multas_infracciones WHERE idMulta=? AND idInfraccion = ?";
 
     private MultaInfraccionDTO fromResultSet(ResultSet rs) throws SQLException {
         int idMulta = rs.getInt("idMulta");
@@ -47,6 +48,29 @@ public class MultaInfraccionDAO {
             multasInfracciones = null;
         }
         return multasInfracciones;
+    }
+
+    public MultaInfraccionDTO selectIdMultaInfraccion(int idMulta, int idInfraccion) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        MultaInfraccionDTO result = null;
+
+        try {
+            conn = Conexion.getConnection();
+            if (conn != null) {
+                stmt = conn.prepareStatement(SQL_SELECT_MULTAINFRACCION);
+                stmt.setInt(1, idMulta);
+                stmt.setInt(2, idInfraccion);
+                rs = stmt.executeQuery();
+                if (rs.next()) {
+                    result = fromResultSet(rs);
+                }
+            }
+        } catch (SQLException ex) {
+            result = null;
+        }
+        return result;
     }
 
     public List<MultaInfraccionDTO> selectIdMulta(int idMulta) throws SQLException {
@@ -170,6 +194,7 @@ public class MultaInfraccionDAO {
             System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setInt(1, multaInfraccion.getMulta().getId());
+            stmt.setInt(2, multaInfraccion.getInfraccion().getId());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {

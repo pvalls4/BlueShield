@@ -10,6 +10,7 @@ public class CondecoracionAgenteDAO {
     private static final String SQL_SELECT_ALL = "SELECT * FROM condecoraciones_agentes";
     private static final String SQL_SELECT_BY_COND = "SELECT * FROM condecoraciones_agentes WHERE idCondecoracion = ?";
     private static final String SQL_SELECT_BY_AGENTE = "SELECT * FROM condecoraciones_agentes WHERE idAgente = ?";
+    private static final String SQL_SELECT_BY_COND_AGENTE = "SELECT * FROM condecoraciones_agentes WHERE idCondecoracion = ? AND idAgente = ?";
     private static final String SQL_INSERT = "INSERT INTO condecoraciones_agentes(idCondecoracion, idAgente, fecha_emision) VALUES(?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE condecoraciones_agentes SET fecha_emision=? WHERE idCondecoracion = ? AND idAgente = ?";
     private static final String SQL_DELETE = "DELETE FROM condecoraciones_agentes WHERE idCondecoracion = ? AND idAgente = ?";
@@ -18,7 +19,7 @@ public class CondecoracionAgenteDAO {
         int idCondecoracion = rs.getInt("idCondecoracion");
         int idAgente = rs.getInt("idAgente");
         Date fecha_emision = rs.getDate("fecha_emision");
-        
+
         CondecoracionDTO condecoracion = new CondecoracionDAO().select(idCondecoracion);
         AgenteDTO agente = new AgenteDAO().select(idAgente);
 
@@ -44,14 +45,14 @@ public class CondecoracionAgenteDAO {
                     condecoracionesAgentes.add(condecoracionAgente);
                 }
             }
-        }  catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println(ex);
             condecoracionesAgentes = null;
         }
 
         return condecoracionesAgentes;
     }
-    
+
     public List<CondecoracionAgenteDTO> selectByAgente(int idAgente) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -70,7 +71,7 @@ public class CondecoracionAgenteDAO {
                     condecoracionesAgentes.add(condecoracionAgente);
                 }
             }
-        }  catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println(ex);
             condecoracionesAgentes = null;
         }
@@ -103,6 +104,29 @@ public class CondecoracionAgenteDAO {
         }
 
         return agentesCondecoracion;
+    }
+
+    public CondecoracionAgenteDTO selectIdCondecoracionAgente(int idCondecoracion, int idPlaca) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        CondecoracionAgenteDTO result = null;
+
+        try {
+            conn = Conexion.getConnection();
+            if (conn != null) {
+                stmt = conn.prepareStatement(SQL_SELECT_BY_COND_AGENTE);
+                stmt.setInt(1, idCondecoracion);
+                stmt.setInt(2, idPlaca);
+                rs = stmt.executeQuery();
+                if (rs.next()) {
+                    result = fromResultSet(rs);
+                }
+            }
+        } catch (SQLException ex) {
+            result = null;
+        }
+        return result;
     }
 
     public int insert(CondecoracionAgenteDTO condecoracionAgente) throws SQLException {

@@ -22,7 +22,7 @@
                                 <td><strong>${condecoracion.titulo}</strong></td>
                                 <td>${condecoracion.descripcion}</td>
                                 <td>
-                                    <a href="condecoracion?id=${condecoracion.id}">
+                                    <a href="condecoracionDetalles?id=${condecoracion.id}">
                                         <button class="btn btn-primary b-login mb-2">Ver</button>
                                     </a>
                                 </td>
