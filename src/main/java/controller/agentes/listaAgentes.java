@@ -34,17 +34,18 @@ public class listaAgentes extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
                 HttpSession session = request.getSession(false);
+                request.setAttribute("title", "BlueShield - Agentes");
 
-                    if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
-                        request.setAttribute("username", session.getAttribute("username"));
-                        response.setContentType("text/html;charset=UTF-8"); 
-                        List<AgenteDTO> listaAgentes = new AgenteDAO().selectAll();
-                        request.setAttribute("listaAgentes", listaAgentes);
-                        RequestDispatcher rd = request.getRequestDispatcher("./view/agentes/listaAgentes.jsp");
-                        rd.forward(request, response);
-                    } else {
-                        response.sendRedirect("login");
-                    } 
+                if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
+                    request.setAttribute("username", session.getAttribute("username"));
+                    response.setContentType("text/html;charset=UTF-8"); 
+                    List<AgenteDTO> listaAgentes = new AgenteDAO().selectAll();
+                    request.setAttribute("listaAgentes", listaAgentes);
+                    RequestDispatcher rd = request.getRequestDispatcher("./view/agentes/listaAgentes.jsp");
+                    rd.forward(request, response);
+                } else {
+                    response.sendRedirect("login");
+                } 
 
             }
 

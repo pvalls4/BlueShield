@@ -36,6 +36,7 @@ public class editarVehiculo extends HttpServlet {
             if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
                 request.setAttribute("username", session.getAttribute("username"));
                 String bastidor = request.getParameter("id");
+                request.setAttribute("title", "BlueShield - Editar vehículo " + bastidor);
 
                 VehiculoDAO dao = new VehiculoDAO();
                 VehiculoDTO vehiculo = dao.select(bastidor);

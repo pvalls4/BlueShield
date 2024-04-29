@@ -31,8 +31,9 @@ public class logout extends HttpServlet {
                 if (session != null) {
                     session.invalidate(); // Invalidar la sesión actual
                 }
-                 RequestDispatcher dispatcher = request.getRequestDispatcher("/view/logout.jsp");
-                 dispatcher.forward(request, response);
+                request.setAttribute("title", "BlueShield - LogOut");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/view/logout.jsp");
+                dispatcher.forward(request, response);
             }
     
     @Override

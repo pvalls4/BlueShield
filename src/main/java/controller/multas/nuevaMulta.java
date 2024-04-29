@@ -16,7 +16,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -41,6 +40,7 @@ public class nuevaMulta extends HttpServlet {
         if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
             agente = (AgenteDTO) session.getAttribute("username");
             request.setAttribute("username", session.getAttribute("username"));
+            request.setAttribute("title", "BlueShield - Emisión de Denuncia");
             CiudadanoDAO daoc = new CiudadanoDAO();
             InfraccionDAO daoi = new InfraccionDAO();
             List<CiudadanoDTO> listaCiudadanos = daoc.selectAll();

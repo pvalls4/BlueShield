@@ -27,6 +27,7 @@ public class vehiculos_dashboard extends HttpServlet {
 
                 if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
                     request.setAttribute("username", session.getAttribute("username"));
+                    request.setAttribute("title", "BlueShield - Vehiculos");
                     response.setContentType("text/html;charset=UTF-8");
                     VehiculoDAO dao = new VehiculoDAO();
                     List<VehiculoDTO> listaVehiculos = dao.selectAll();

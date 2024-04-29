@@ -2,7 +2,6 @@ package controller.ciudadanos;
 
 import DAO.CiudadanoDAO;
 import DAO.DireccionDAO;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -32,6 +31,7 @@ public class editarCiudadano extends HttpServlet {
                 response.setContentType("text/html;charset=UTF-8");
 
                 String dni = request.getParameter("id");
+                request.setAttribute("title", "BlueShield - Editar Ciudadano " + dni);
 
                 CiudadanoDAO ciudadanoDAO = new CiudadanoDAO();
                 CiudadanoDTO ciudadano = ciudadanoDAO.select(dni);

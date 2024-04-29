@@ -24,9 +24,10 @@ public class ultimasMultas extends HttpServlet {
             HttpSession session = request.getSession(false);
             if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
                 AgenteDTO agente = (AgenteDTO) session.getAttribute("username");
-                int idPlaca = agente.getPlaca();
+                int placa = agente.getPlaca();
+                request.setAttribute("title", "BlueShield - Multas recientes de " + placa);
                 MultaDAO dao = new MultaDAO();
-                List<MultaDTO> ultimasMultas = dao.selectPlaca(idPlaca);
+                List<MultaDTO> ultimasMultas = dao.selectPlaca(placa);
                 request.setAttribute("ultimasMultas", ultimasMultas);
                 RequestDispatcher rd = request.getRequestDispatcher("./view/multas/ultimasMultas.jsp");
                 rd.forward(request, response);

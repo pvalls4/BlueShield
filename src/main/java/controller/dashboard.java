@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import static utilidad.PasswordManager.hashPassword;
 
 /**
  *
@@ -37,6 +36,7 @@ public class dashboard extends HttpServlet {
                 if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
                     request.setAttribute("username", session.getAttribute("username"));
                     request.setAttribute("admin", session.getAttribute("admin"));
+                    request.setAttribute("title", "BlueShield - Home");
                     request.getRequestDispatcher("/view/dashboard.jsp").forward(request, response);
                 } else {
                     response.sendRedirect("login");
