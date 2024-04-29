@@ -113,7 +113,7 @@
             <div class="row">
                 <div class="col d-flex justify-content-center">  
                     <button id="emitirDenuncia" class="boton mx-4 mt-4">Emitir denuncia</button>
-                    <a href="dashboard"><button type="button" class="boton mx-4 mt-4">Cancelar</button></a>
+                    <a href="multas"><button type="button" class="boton mx-4 mt-4">Cancelar</button></a>
                 </div>                       
             </div>
 

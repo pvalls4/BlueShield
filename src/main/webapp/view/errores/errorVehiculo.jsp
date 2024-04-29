@@ -1,17 +1,11 @@
 <%@ include file="../header.jsp" %>
 <div class="container border border-dark rounded" style="background-color: #9acbfd">
     <div class="row  mb-3 px-4">
-        <table class="table">
-            <tbody>
-                <tr>
-                    <td class="col d-flex justify-content-center" colspan="3">El veh&iacute;culo declarado no consta de registro en la base de datos</td>
-                </tr>
-            </tbody>
-        </table>
+        <h3 class="text-center" colspan="3">El veh&iacute;culo ingresado no consta de registro en la base de datos</h3>
     </div>
-    <div class="row  mb-3">
-        <a href="nuevaMulta" class="col d-flex justify-content-center"><button type="submit" class="btn btn-primary b-login ms-4 mb-2">Volver al men&uacute; de nueva multa</button></a>
-        <a href="dashboard" class="col d-flex justify-content-center"><button type="submit" class="btn btn-primary b-login me-4 mb-2">Volver al men&uacute; principal</button></a>
+    <div class="row  mb-3 text-center">
+        <div class="col ms-4 mb-2"><a href="nuevaMulta"><button type="submit" class="btn btn-primary b-login">Volver al men&uacute; anterior</button></a></div>
+        <div class="col me-4 mb-2"><a href="dashboard" class="col"><button type="submit" class="btn btn-primary b-login">Volver al men&uacute; principal</button></a></div>
     </div>
 </div>
 <%@ include file="../footer.jsp" %>
