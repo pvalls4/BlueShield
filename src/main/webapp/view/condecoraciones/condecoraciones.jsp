@@ -1,7 +1,7 @@
 <%@ include file="../header.jsp" %>
 <div class="container border border-dark rounded" style="background-color: #9acbfd">
     <div class="d-flex justify-content-center m-5">
-        <h1><strong>Condecoraciones</strong></h1>
+        <h1><strong><u>CONDECORACIONES</u></strong></h1>
     </div>
     <div class="row  mb-3 px-4">
         <div class="table-responsive">
@@ -18,7 +18,7 @@
                     <c:if test="${not empty listaCondecoraciones}">
                         <c:forEach items="${listaCondecoraciones}" var="condecoracion">
                             <tr>
-                                <td><img src="${condecoracion.foto}"></td>
+                                <td><img class="m-2" src="${condecoracion.foto}"></td>
                                 <td><strong>${condecoracion.titulo}</strong></td>
                                 <td>${condecoracion.descripcion}</td>
                                 <td>

@@ -17,7 +17,17 @@
         <div class="col">
             <form action="ciudadanos" method="post">
                 <div class="input-group mb-3 p-4">
-                    <input type="text" class="form-control" name="dni" placeholder="Buscar por DNI" aria-label="Buscar por DNI" aria-describedby="button-addon2">
+                    <input type="text" class="form-control" list="ciudadanosOptions" name="dni" placeholder="Buscar por DNI" aria-label="Buscar por DNI" aria-describedby="button-addon2">
+                    <datalist id="ciudadanosOptions">
+                        <c:if test="${not empty listaCiudadanos}">
+                            <c:forEach items="${listaCiudadanos}" var="ciudadano">
+                                <option value="${ciudadano.dni}">${ciudadano.dni} - ${ciudadano.nombre} ${ciudadano.apellidos}</option>
+                            </c:forEach>
+                        </c:if>
+                        <c:if test="${empty listaCiudadanos}">
+                            <option value="Error en base de datos">
+                        </c:if>
+                    </datalist>
                     <button class="btn btn-primary" type="submit" id="button-addon2">
                         <i class="bi bi-search"></i>
                     </button>

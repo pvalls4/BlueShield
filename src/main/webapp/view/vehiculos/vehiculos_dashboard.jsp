@@ -10,7 +10,17 @@
         <div class="col">
             <form action="vehiculos" method="post">
                 <div class="input-group mb-3 p-4">
-                    <input type="text" class="form-control" name="matricula" placeholder="Buscar por Matricula" aria-label="Buscar por Matricula" aria-describedby="button-addon2">
+                    <input type="text" class="form-control" name="matricula" list="vehiculosOptions" placeholder="Buscar Veh&iacute;culo" aria-label="Buscar por Matricula" aria-describedby="button-addon2">
+                    <datalist id="vehiculosOptions">
+                        <c:if test="${not empty listaVehiculos}">
+                            <c:forEach items="${listaVehiculos}" var="vehiculo">
+                                <option value="${vehiculo.matricula}">${vehiculo.matricula} - ${vehiculo.modelo.modelo} (${vehiculo.ciudadano.nombre} ${vehiculo.ciudadano.apellidos})</option>
+                            </c:forEach>
+                        </c:if>
+                        <c:if test="${empty listaVehiculos}">
+                            <option value="Error en la base de datos">
+                        </c:if>
+                    </datalist>
                     <button class="btn btn-primary" type="submit" id="button-addon2">
                         <i class="bi bi-search"></i>
                     </button>
