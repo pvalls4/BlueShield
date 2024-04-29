@@ -55,6 +55,7 @@ public class condecoracionDetalles extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String id = request.getParameter("id");
         String condecoracionAgenteValue = request.getParameter("condecoracionAgente");
         String[] condecoracionAgenteParts = condecoracionAgenteValue.split(" ");
         String idCondecoracionStr = condecoracionAgenteParts[0];
