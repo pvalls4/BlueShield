@@ -181,7 +181,7 @@
 
                         // Establecer los valores en el diálogo de confirmación
                         document.getElementById("infracciones").textContent = infraccionesSeleccionadas.join("\n");
-                        document.getElementById("importeTotal").textContent = importeTotal.toFixed(2); // Mostrar el importe total con 2 decimales
+                        document.getElementById("importeTotal").textContent = importeTotal.toFixed(2) + ("\u20AC"); // Mostrar el importe total con 2 decimales
 
                         document.getElementById("dniDenunciado").textContent = dniDenunciado;
                         document.getElementById("fechaEmisionMulta").textContent = fechaEmisionMulta;
