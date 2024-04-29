@@ -12,16 +12,16 @@
                     </div>
                     <div class="row">
                         <div class="col rounded ms-3 mb-2 me-2">
-                            <input class="form-control input-form" list="datalistOptions" id="dni" name="dni" placeholder="DNI Ciudadano" onkeyup="buscarCiudadano()">
-                            <datalist id="datalistOptions">
+                            <input class="form-control input-form" list="ciudadanosOptions" id="dni" name="dni" placeholder="DNI Ciudadano" onblur="buscarCiudadano()">
+                            <datalist id="ciudadanosOptions">
                                 <c:if test="${not empty listaCiudadanos}">
                                     <c:forEach items="${listaCiudadanos}" var="ciudadano">
                                         <option value="${ciudadano.dni}">
-                                        </c:forEach>
-                                    </c:if>
-                                    <c:if test="${empty listaCiudadanos}">
+                                    </c:forEach>
+                                </c:if>
+                                <c:if test="${empty listaCiudadanos}">
                                     <option value="Error en base de datos">
-                                    </c:if>
+                                </c:if>
                             </datalist>
                         </div>
                     </div>
@@ -37,11 +37,23 @@
 
                     <div class="row">
                         <label for = "fechaEmision" class="col rounded ms-3 me-2">Fecha</label>                                  
-                        <label for = "vehiculo" class="col rounded ms-4 me-2">Vehiculo Implicado*</label> 
+                        <label for = "vehiculo" class="col rounded ms-4 me-2">Vehiculo Implicado (Opcional)</label> 
                     </div>
                     <div class="row">
                         <div class="col rounded ms-3 me-2 mb-2"><input type="date" class="form-control input-form" id="fechaEmision" name="fechaEmision" required></div>                                         
-                        <div class="col rounded  mb-2 ms-4 me-2"><input type="text" class="form-control input-form" id="matricula" name="matricula"></div>
+                        <div class="col rounded  mb-2 ms-4 me-2">
+                            <input type="text" class="form-control input-form" list="vehiculosOptions" id="matricula" name="matricula" placeholder="Matricula">
+                            <datalist id="vehiculosOptions">
+                                <c:if test="${not empty listaVehiculos}">
+                                    <c:forEach items="${listaVehiculos}" var="vehiculo">
+                                        <option value="${vehiculo.matricula}">${vehiculo.matricula} - ${vehiculo.modelo.modelo}</option>
+                                    </c:forEach>
+                                </c:if>
+                                <c:if test="${empty listaVehiculos}">
+                                    <option value="Error en la base de datos">
+                                </c:if>
+                            </datalist>
+                        </div>
                     </div>
                     <div class="row">
                         <label for= "ubicacion" class="col rounded ms-3 me-2">Ubicacion</label>                                                 
@@ -83,7 +95,6 @@
                 <%
               }
               // Mostrar el nuevo capítulo en el acordeón
-                          
                 %>
                 <div class="accordion-item" style="background-color: #bbddf5;">
                     <h2 class="accordion-header" id="heading<%= capituloActual %>">
@@ -100,7 +111,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value='{"importe": <%= articulo.getImporte() %>, "id": <%= articulo.getId() %>}' id="<%= articulo.getId() %>" name="articuloSeleccionado">
                                 <label class="form-check-label" for="<%= articulo.getId() %>">
-                                    Artículo <%= articulo.getId() %> - <%= articulo.getTitulo() %>
+                                    <%= articulo.getArticulo() %> - <%= articulo.getTitulo() %>
                                 </label>
                             </div>
                             <%

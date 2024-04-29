@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DTO.AgenteDTO;
-import static utilidad.PasswordManager.hashPassword;
 import static utilidad.PasswordManager.verifyPassword;
 
 /**
@@ -55,9 +54,9 @@ public class login extends HttpServlet {
             request.setAttribute("errorMessage", "Invalid username or password");
             request.setAttribute("invalidUser", true);
             request.getRequestDispatcher("/view/login.jsp").forward(request, response);
-}
-            
+        }
     }
+    
     private AgenteDTO authenticate(int placa, String pwd) 
         throws ServletException, IOException {
             AgenteDAO dao = new AgenteDAO();

@@ -42,9 +42,12 @@ public class nuevaMulta extends HttpServlet {
             request.setAttribute("username", session.getAttribute("username"));
             request.setAttribute("title", "BlueShield - Emisión de Denuncia");
             CiudadanoDAO daoc = new CiudadanoDAO();
+            VehiculoDAO daov = new VehiculoDAO();
             InfraccionDAO daoi = new InfraccionDAO();
             List<CiudadanoDTO> listaCiudadanos = daoc.selectAll();
+            List<VehiculoDTO> listaVehiculos = daov.selectAll();
             request.setAttribute("listaCiudadanos", listaCiudadanos);
+            request.setAttribute("listaVehiculos", listaVehiculos);
             List<InfraccionDTO> listaInfracciones = daoi.selectAll();
             Collections.sort(listaInfracciones, Comparator.comparing(InfraccionDTO::getId));
             request.setAttribute("listaInfracciones", listaInfracciones);
