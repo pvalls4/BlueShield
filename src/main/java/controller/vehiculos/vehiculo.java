@@ -33,6 +33,7 @@ public class vehiculo extends HttpServlet {
             if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
                 request.setAttribute("username", session.getAttribute("username"));
                 String matricula = request.getParameter("id");
+                request.setAttribute("title", "BlueShield - Vehículo " + matricula);
 
                 VehiculoDAO dao = new VehiculoDAO();
                 VehiculoDTO vehiculo = dao.selectMATRICULA(matricula);

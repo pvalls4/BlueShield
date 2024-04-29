@@ -28,6 +28,7 @@ public class visualizarMulta extends HttpServlet {
                 if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
                     request.setAttribute("username", session.getAttribute("username"));
                     String identifier = request.getParameter("id");
+                    request.setAttribute("title", "BlueShield - Multa REF. " + identifier);
                     int id = Integer.parseInt(identifier);
 
                     MultaDAO multaDao = new MultaDAO();

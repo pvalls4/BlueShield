@@ -1,6 +1,5 @@
 package controller;
 
-import DAO.AdminDAO;
 import DAO.AgenteDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -14,7 +13,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DTO.AgenteDTO;
-import utilidad.PasswordManager;
 import static utilidad.PasswordManager.hashPassword;
 import static utilidad.PasswordManager.verifyPassword;
 
@@ -36,9 +34,10 @@ public class login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-             RequestDispatcher dispatcher = request.getRequestDispatcher("/view/login.jsp");
-             dispatcher.forward(request, response);
-    }
+                request.setAttribute("title", "BlueShield - LogIn");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/view/login.jsp");
+                dispatcher.forward(request, response);
+           }
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -56,7 +55,8 @@ public class login extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("username", agente);
                 request.setAttribute("username", agente);
-                request.getRequestDispatcher("/view/dashboard.jsp").forward(request, response);
+                response.sendRedirect("dashboard");
+                // request.getRequestDispatcher("/view/dashboard.jsp").forward(request, response);
             }
         } else {
             request.setAttribute("errorMessage", "Invalid username or password");

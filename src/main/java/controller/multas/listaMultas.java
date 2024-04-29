@@ -25,6 +25,7 @@ public class listaMultas extends HttpServlet {
                 if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
                     request.setAttribute("username", session.getAttribute("username"));
                     String dni = request.getParameter("id");
+                    request.setAttribute("title", "BlueShield - Multas de " + dni);
                     MultaDAO dao = new MultaDAO();
                     List<MultaDTO> listaMultas = dao.selectDNI(dni);
                     request.setAttribute("listaMultas", listaMultas);

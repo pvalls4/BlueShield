@@ -34,6 +34,7 @@ public class multas extends HttpServlet {
 
         if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
             request.setAttribute("username", session.getAttribute("username"));
+                    request.setAttribute("title", "BlueShield - Multas");
             request.getRequestDispatcher("./view/multas/multas.jsp").forward(request, response);
         } else {
             response.sendRedirect("login");

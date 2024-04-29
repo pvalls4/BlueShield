@@ -3,7 +3,7 @@
     <form id="nuevaMulta" method="post" action="nuevaMulta" accept-charset="UTF-8">        
         <div class="row" style="background-color: #9acbfd;">
             <div class="row">
-                <div class="d-flex justify-content-center mt-2"><h2>EMISION DE DENUNCIA</h2></div>
+                <div class="d-flex justify-content-center mt-2"><h2><strong><u>EMISION DE DENUNCIA</u></strong></h2></div>
             </div>
             <div class="row">
                 <div class="col-md-12 mb-2">

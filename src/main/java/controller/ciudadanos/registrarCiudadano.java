@@ -3,7 +3,6 @@ package controller.ciudadanos;
 import DAO.CiudadanoDAO;
 import DAO.DireccionDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,16 +21,17 @@ public class registrarCiudadano extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession(false);
+                response.setContentType("text/html;charset=UTF-8");
+                request.setAttribute("title", "BlueShield - Registrar Ciudadano");
+                HttpSession session = request.getSession(false);
 
-        if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
-            request.setAttribute("username", session.getAttribute("username"));
-            request.getRequestDispatcher("./view/ciudadanos/registrarCiudadano.jsp").forward(request, response);
-        } else {
-            response.sendRedirect("login");
-        }
-    }
+                if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
+                    request.setAttribute("username", session.getAttribute("username"));
+                    request.getRequestDispatcher("./view/ciudadanos/registrarCiudadano.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("login");
+                }
+            }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

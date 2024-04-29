@@ -1,9 +1,7 @@
 package controller.ciudadanos;
 
 import DAO.CiudadanoDAO;
-
 import DAO.VehiculoDAO;
-
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,6 +26,7 @@ public class ciudadano extends HttpServlet {
             request.setAttribute("username", session.getAttribute("username"));
             try {
                 String dni = request.getParameter("id");
+                request.setAttribute("title", "BlueShield - Ciudadano " + dni);
 
                 CiudadanoDAO ciudadanoDAO = new CiudadanoDAO();
                 CiudadanoDTO ciudadano = ciudadanoDAO.select(dni);

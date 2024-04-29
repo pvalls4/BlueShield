@@ -30,6 +30,7 @@ public class condecoraciones extends HttpServlet {
                 CondecoracionDAO dao = new CondecoracionDAO();
                 List<CondecoracionDTO> listaCondecoraciones = dao.selectAll();
                 request.setAttribute("listaCondecoraciones", listaCondecoraciones);
+                request.setAttribute("title", "BlueShield - Condecoraciones");
                 RequestDispatcher rd = request.getRequestDispatcher("./view/condecoraciones/condecoraciones.jsp");
                 rd.forward(request, response);
             } else {
