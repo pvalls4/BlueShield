@@ -33,9 +33,8 @@ public class dashboard extends HttpServlet {
                 response.setContentType("text/html;charset=UTF-8");
                 HttpSession session = request.getSession(false);
                 
-                if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
+                if (session != null && (session.getAttribute("username") != null)) {
                     request.setAttribute("username", session.getAttribute("username"));
-                    request.setAttribute("admin", session.getAttribute("admin"));
                     request.setAttribute("title", "BlueShield - Home");
                     request.getRequestDispatcher("/view/dashboard.jsp").forward(request, response);
                 } else {

@@ -14,7 +14,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DTO.AgenteDTO;
@@ -87,7 +86,7 @@ public class crearAgente extends HttpServlet {
                                         
                     try{
                         ciudadano = ciudadanoDAO.select(dni);
-                        AgenteDTO nuevoAgente = new AgenteDTO(ciudadano, hashPassword(contrasena), imagen, rango);
+                        AgenteDTO nuevoAgente = new AgenteDTO(ciudadano, hashPassword(contrasena), imagen, rango, false);
                         agenteDAO.insert(nuevoAgente);
                         
                     }catch(SQLException e){

@@ -17,10 +17,20 @@
         <!-- Segundo row con imagen y parámetros -->
         <div class="row p-3">
             <!-- Imagen a la izquierda -->
-            <div class="col-md-3 border border-dark rounded m-0 p-0 d-flex align-items-center justify-content-center">
+            <!-- <div class="col-md-3 border border-dark rounded m-0 p-0 d-flex align-items-center justify-content-center">
                 <img src="${ciudadano.enlaceFotografico}" class="img-fluid" alt="FotoCiudadano" style="object-fit: cover; width: 100%; height: 100%;">
+            </div> -->
+            
+            <div class="col-md-3 border border-dark rounded m-0 p-0 d-flex align-items-center justify-content-center">
+                <div class="container">
+                    <div class="position-relative d-inline-block">
+                        <img src="${ciudadano.enlaceFotografico}" class="img-fluid" alt="FotoCiudadano" style="object-fit: cover; width: 100%; height: 100%;">
+                        <div class="position-absolute top-0 start-0">
+                            <img src="../images/logoBS.png" alt="FALLECIDO" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
             </div>
-
             <!-- Contenedor para otros parámetros a la derecha -->
             <div class="col-md-9">
                 <!-- Nueva fila para dividir los parámetros -->
@@ -68,7 +78,7 @@
         <div class="row  mb-3 px-4">
             <div class="row px-4">
                 <div class="col-md-12 g-3 text-center">
-                    <h3>Vehículos asociados</h3>
+                    <h3><strong>Vehículos asociados</strong></h3>
                 </div>
             </div>
             <table class="table">

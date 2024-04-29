@@ -10,8 +10,8 @@ public class AgenteDAO {
     private static final String SQL_SELECT_ALL = "SELECT * FROM agentes";
     private static final String SQL_SELECT = "SELECT * FROM agentes WHERE placa = ?";
     private static final String SQL_SELECT_DNI = "SELECT * FROM agentes WHERE dniAgente = ?";
-    private static final String SQL_INSERT = "INSERT INTO agentes(dniAgente, password, imagen, rango) VALUES(?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE agentes SET dniAgente=?, password=?, imagen=?, rango=? WHERE placa = ?";
+    private static final String SQL_INSERT = "INSERT INTO agentes(dniAgente, password, imagen, rango, isAdmin) VALUES(?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE agentes SET dniAgente=?, password=?, imagen=?, rango=?, isAdmin=? WHERE placa = ?";
     private static final String SQL_DELETE = "DELETE FROM agentes WHERE placa=?";
 
     private AgenteDTO fromResultSet(ResultSet rs) throws SQLException {
@@ -23,8 +23,9 @@ public class AgenteDAO {
         String password = rs.getString("password");
         String imagen = rs.getString("imagen");
         String rango = rs.getString("rango");
+        boolean isAdmin = rs.getBoolean("isAdmin");
 
-        AgenteDTO agente = new AgenteDTO(placa,ciudadano, password, imagen, rango);
+        AgenteDTO agente = new AgenteDTO(placa,ciudadano, password, imagen, rango, isAdmin);
 
         return agente;
     }
@@ -112,6 +113,7 @@ public class AgenteDAO {
             stmt.setString(2, agente.getPassword());
             stmt.setString(3, agente.getEnlaceFotografico());
             stmt.setString(4, agente.getRango());
+            stmt.setBoolean(5, agente.isAdmin());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -136,7 +138,8 @@ public class AgenteDAO {
             stmt.setString(2, agente.getPassword());
             stmt.setString(3, agente.getEnlaceFotografico());
             stmt.setString(4, agente.getRango());
-            stmt.setInt(5, agente.getPlaca());
+            stmt.setBoolean(5, agente.isAdmin());
+            stmt.setInt(6, agente.getPlaca());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);

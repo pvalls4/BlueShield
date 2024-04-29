@@ -14,6 +14,7 @@ public class AgenteDTO {
     private String password;
     private String enlaceFotografico;
     private String rango;
+    private boolean isAdmin;
 
     /**
      * @param ciudadano
@@ -21,11 +22,12 @@ public class AgenteDTO {
      * @param enlaceFotografico 
      * @param rango 
      */
-    public AgenteDTO(CiudadanoDTO ciudadano, String password, String enlaceFotografico, String rango) {
+    public AgenteDTO(CiudadanoDTO ciudadano, String password, String enlaceFotografico, String rango, boolean isAdmin) {
         this.ciudadano = ciudadano;
         this.password = password;
         this.enlaceFotografico = enlaceFotografico;
         this.rango = rango;
+        this.isAdmin = isAdmin;
     }
     
     /**
@@ -35,12 +37,13 @@ public class AgenteDTO {
      * @param enlaceFotografico 
      * @param rango 
      */
-    public AgenteDTO(int placa, CiudadanoDTO ciudadano, String password, String enlaceFotografico, String rango) {
+    public AgenteDTO(int placa, CiudadanoDTO ciudadano, String password, String enlaceFotografico, String rango, boolean isAdmin) {
         this.placa = placa;
         this.ciudadano = ciudadano;
         this.password = password;
         this.enlaceFotografico = enlaceFotografico;
         this.rango = rango;
+        this.isAdmin = isAdmin;
     }
 
     public String getRango() {
@@ -83,9 +86,17 @@ public class AgenteDTO {
         this.enlaceFotografico = enlaceFotografico;
     }
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+    
     @Override
     public String toString() {
-        return "AgenteDTO{" + "placa=" + placa + ", ciudadano=" + ciudadano + ", enlaceFotografico=" + enlaceFotografico + ", rango: " + rango +'}';
+        return "AgenteDTO{" + "placa=" + placa + ", ciudadano=" + ciudadano + ", enlaceFotografico=" + enlaceFotografico + ", rango: " + rango + ", isAdmin:" + isAdmin +'}';
     }
     
     

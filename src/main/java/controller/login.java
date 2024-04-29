@@ -43,21 +43,14 @@ public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int placa = Integer.parseInt(request.getParameter("placa"));
         String pwd = request.getParameter("pwd");
-        final int ADMIN_USER = 99999;
 
         // Perform authentication (e.g., check against a database)
         AgenteDTO agente = authenticate(placa, pwd);
         if (agente != null) {
-            if(agente.getPlaca() == ADMIN_USER && verifyPassword(pwd,agente.getPassword())){
-                response.sendRedirect("loginAdmin");
-                System.out.println(hashPassword("admin"));
-            } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("username", agente);
-                request.setAttribute("username", agente);
-                response.sendRedirect("dashboard");
-                // request.getRequestDispatcher("/view/dashboard.jsp").forward(request, response);
-            }
+            HttpSession session = request.getSession();
+            session.setAttribute("username", agente);
+            request.setAttribute("username", agente);
+            response.sendRedirect("dashboard");
         } else {
             request.setAttribute("errorMessage", "Invalid username or password");
             request.setAttribute("invalidUser", true);

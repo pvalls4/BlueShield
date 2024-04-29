@@ -18,27 +18,26 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
     </head>
 
+    <script>
+        function redirigir(id) {
+            window.location.href = id
+        }
+    </script>
     <body>
         <header>
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-12 col-md-3 text-center">
+                    <div class="col-12 col-md-4 text-center d-flex">
                         <img src="./images/logoBS.png" class="logo mb-3 mb-md-0" alt="Logo" onclick="redirigir('dashboard')">
+                        <div class="d-flex flex-column justify-content-center">
+                            <img src="./images/blueshield.png" class="blueshield" alt="BlueShield" onclick="redirigir('dashboard')">
+                        </div>
                     </div>
-                    <div class="col-12 col-md-3 text-center mr-md-auto">
-                        <img src="./images/blueshield.png" class="blueshield" alt="BlueShield" onclick="redirigir('dashboard')">
+                    <div class="col-md-4 text-center">
                     </div>
-                    <script>
-                        function redirigir(id) {
-                            window.location.href = id
-                        }
-                    </script>
-                    <div class="col-md-3 text-center">
-                    </div>
-                    <div class="col-12 col-md-3 text-center">
+                    <div class="col-12 col-md-4 text-center">
                         <div class="row align-items-center">
                             <c:choose>
                                 <c:when test="${not empty requestScope.username}" >
@@ -48,8 +47,12 @@
                                     String agenteLogged = agente.getCiudadano().getNombre() + " " + agente.getCiudadano().getApellidos();
                                     int placa = agente.getPlaca();
                                     %>
-                                    <h2 class="version mb-0 text-md-right">Version 1.0 - <%= agenteLogged %> (<%= placa %>)</h2>
-                                    <a href='logout' class="my-1">
+                                    <div class="d-flex flex-column mx-1 pb-2">
+                                        <p class="version mb-0 text-md-right">Version 1.0</p>
+                                        <a href="agente?placa=<%= placa %>"><%= agenteLogged %> (<%= placa %>)</a>
+                                    </div>
+                                    
+                                    <a href='logout' class="mx-1">
                                         <button type="submit" class="btn btn-primary b-login">Cerrar Sesi&oacute;n</button>
                                     </a>
                                 </c:when>
