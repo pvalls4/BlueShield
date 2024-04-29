@@ -1,6 +1,5 @@
 package controller.condecoraciones;
 
-import DAO.CiudadanoDAO;
 import DAO.CondecoracionDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -14,7 +13,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.DTO.CiudadanoDTO;
 import model.DTO.CondecoracionDTO;
 
 @WebServlet(name = "condecoraciones", urlPatterns = {"/condecoraciones"})

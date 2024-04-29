@@ -1,18 +1,26 @@
 <%@ include file="../header.jsp" %>
 <div class="container border border-dark rounded" style="background-color: #9acbfd">
-    <div class="row">
-        <!--        buscador-->
-        <div class="col">
-            <form action="listaMultasVehiculo" method="post">
-                <div class="input-group mb-3 p-4">
-                    <input type="text" class="form-control" name="id" placeholder="Buscar por REF" aria-label="Buscar por REF" aria-describedby="button-addon2">
-                    <button class="btn btn-primary" type="submit" id="button-addon2">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
-            </form>
+    <c:if test="${not empty listaMultasVehiculo}">
+        <div class="row px-4">
+            <div class="col-md-12 g-3 text-center">
+                <h2><strong><u>Multas de Vehículo: ${listaMultasVehiculo[0].vehiculo.matricula}</u></strong></h2>
+            </div>
         </div>
-    </div>
+    
+        <div class="row">
+            <!--        buscador-->
+            <div class="col">
+                <form action="listaMultasVehiculo" method="post">
+                    <div class="input-group mb-3 p-4">
+                        <input type="text" class="form-control" name="id" placeholder="Buscar por REF" aria-label="Buscar por REF" aria-describedby="button-addon2">
+                        <button class="btn btn-primary" type="submit" id="button-addon2">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </c:if>
     <div class="row  mb-3 px-4">
         <table class="table">
             <thead>

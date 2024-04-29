@@ -11,7 +11,7 @@
     <c:if test="${not empty vehiculo}">
         <div class="row px-4">
             <div class="col-md-12 g-3 text-center">
-                <h2>${vehiculo.modelo.modelo} - ${vehiculo.matricula}</h2>
+                <h2><strong><u>${vehiculo.modelo.modelo} - ${vehiculo.matricula}</u></strong></h2>
             </div>
         </div>
         <!-- Segundo row con imagen y parámetros -->

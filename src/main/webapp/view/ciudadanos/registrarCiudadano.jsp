@@ -2,7 +2,7 @@
 
 <div class="row px-4">
     <div class="col-md-12 g-3 text-center">
-        <h2>REGISTRO DE CIUDADANO</h2>
+        <h2><strong>REGISTRO DE CIUDADANO</strong></h2>
     </div>
 </div>
 
@@ -95,10 +95,10 @@
             function generarDNIUnico() {
                 var dni;
                 do {
-                    var numeroAleatorio = Math.floor(Math.random() * 1000000000);
-                    var letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                    var letraAleatoria = letras.charAt(Math.floor(Math.random() * letras.length));
-                    dni = numeroAleatorio.toString() + letraAleatoria;
+                    var numeroAleatorio = Math.floor(Math.random() * 100000000);
+                    var letras = 'TRWAGMYFPDXBNJZSQVHLCKE';
+                    var residuo = numeroAleatorio % 23;
+                    dni = numeroAleatorio.toString() + letras.charAt(residuo);
                 } while (existeDNI(dni));
                 return dni;
             }

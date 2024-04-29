@@ -1,9 +1,13 @@
 <%@ include file="../header.jsp" %>
 <div class="container border border-dark rounded" style="background-color: #9acbfd">
-    <div>
-        <img src="${condecoracion.foto}">
-        <p>${condecoracion.titulo}</p>
-        <p>${condecoracion.descripcion}</p>
+    <div class="d-flex container-fluid justify-content-center m-5">
+        <div class="d-flex flex-column justify-content-center m-3">
+            <img class="img-fluid" src="${condecoracion.foto}">
+        </div>
+        <h1 class="m-3"><strong>${condecoracion.titulo}</strong></h1>
+    </div>
+    <div class="d-flex container-fluid justify-content-center m-3">
+        <p>Descripción: ${condecoracion.descripcion}</p>
     </div>
     <div class="row  mb-3 px-4">
         <table class="table">
@@ -11,7 +15,7 @@
                 <tr>
                     <th>Agente</th>
                     <th>Fecha Emisión</th>
-                    <td>Acciones</td>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>

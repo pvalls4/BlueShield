@@ -1,5 +1,8 @@
 <%@ include file="../header.jsp" %>
 <div class="container border border-dark rounded" style="background-color: #9acbfd">
+    <div class="d-flex justify-content-center m-5">
+        <h1><strong>Condecoraciones</strong></h1>
+    </div>
     <div class="row  mb-3 px-4">
         <table class="table">
             <thead>
