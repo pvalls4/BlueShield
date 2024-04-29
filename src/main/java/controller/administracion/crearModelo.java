@@ -13,6 +13,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.Response;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,13 +32,13 @@ public class crearModelo extends HttpServlet {
                 response.setContentType("text/html;charset=UTF-8");
                 HttpSession session = request.getSession(false);
 
-                if (session != null && session.getAttribute("username") != null) {
-                        request.setAttribute("username", session.getAttribute("username"));
+                if (session != null && session.getAttribute("admin") != null) {
+                        request.setAttribute("admin", session.getAttribute("admin"));
                         response.setContentType("text/html;charset=UTF-8");
                         RequestDispatcher rd = request.getRequestDispatcher("/view/administracion/crearModelo.jsp");
                         rd.forward(request, response);
                 } else {
-                    response.sendRedirect("login");
+                    throw new WebApplicationException("Access is forbidden to this resource", Response.Status.FORBIDDEN);
                 } 
             }
 
@@ -45,8 +47,8 @@ public class crearModelo extends HttpServlet {
             throws ServletException, IOException{
                 response.setContentType("text/html;charset=UTF-8");
                 HttpSession session = request.getSession(false);
-                if (session != null && session.getAttribute("username") != null) {
-                    request.setAttribute("username", session.getAttribute("username"));
+                if (session != null && session.getAttribute("admin") != null) {
+                    request.setAttribute("admin", session.getAttribute("admin"));
                     response.setContentType("text/html;charset=UTF-8");
                     RequestDispatcher rd;                 
                     String marca = request.getParameter("marca");
@@ -65,7 +67,7 @@ public class crearModelo extends HttpServlet {
                     rd = request.getRequestDispatcher("/view/administracion/modeloSubido.jsp");
                     rd.forward(request, response);
                 } else {
-                    response.sendRedirect("login");
+                    throw new WebApplicationException("Access is forbidden to this resource", Response.Status.FORBIDDEN);
                 } 
                 
     }

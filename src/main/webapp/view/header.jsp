@@ -35,21 +35,29 @@
                     </div>
                     <div class="col-12 col-md-3 text-center">
                         <div class="row align-items-center">
-                            <c:if test="${not empty requestScope.username}" >
-                                <%@ page import="model.DTO.AgenteDTO" %>
-                                <%
-                                AgenteDTO agente = (AgenteDTO) request.getAttribute("username");
-                                String agenteLogged = agente.getCiudadano().getNombre() + " " + agente.getCiudadano().getApellidos();
-                                int placa = agente.getPlaca();
-                                %>
-                                <h2 class="version mb-0 text-md-right">Version 1.0 - <%= agenteLogged %> (<%= placa %>)</h2>
-                                <a href='logout' class="my-1">
-                                    <button type="submit" class="btn btn-primary b-login">Cerrar Sesión</button>
-                                </a>
-                            </c:if>
-                            <c:if test="${empty requestScope.username}">
-                                <h2 class="version mb-0 text-md-right">Version 1.0</h2>
-                            </c:if>
+                            <c:choose>
+                                <c:when test="${not empty requestScope.username}" >
+                                    <%@ page import="model.DTO.AgenteDTO" %>
+                                    <%
+                                    AgenteDTO agente = (AgenteDTO) request.getAttribute("username");
+                                    String agenteLogged = agente.getCiudadano().getNombre() + " " + agente.getCiudadano().getApellidos();
+                                    int placa = agente.getPlaca();
+                                    %>
+                                    <h2 class="version mb-0 text-md-right">Version 1.0 - <%= agenteLogged %> (<%= placa %>)</h2>
+                                    <a href='logout' class="my-1">
+                                        <button type="submit" class="btn btn-primary b-login">Cerrar Sesi&oacute;n</button>
+                                    </a>
+                                </c:when>
+                                <c:when test="${not empty requestScope.admin}" >
+                                    <h2 class="version mb-0 text-md-right">Version 1.0 - ADMIN </h2>
+                                    <a href='logout' class="my-1">
+                                        <button type="submit" class="btn btn-primary b-login">Cerrar Sesi&oacute;n</button>
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <h2 class="version mb-0 text-md-right">Version 1.0</h2>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                 </div>

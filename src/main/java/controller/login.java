@@ -15,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DTO.AgenteDTO;
 import utilidad.PasswordManager;
+import static utilidad.PasswordManager.hashPassword;
+import static utilidad.PasswordManager.verifyPassword;
 
 /**
  *
@@ -42,15 +44,20 @@ public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int placa = Integer.parseInt(request.getParameter("placa"));
         String pwd = request.getParameter("pwd");
+        final int ADMIN_USER = 99999;
 
         // Perform authentication (e.g., check against a database)
         AgenteDTO agente = authenticate(placa, pwd);
-
         if (agente != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("username", agente);
-            request.setAttribute("username", agente);
-            request.getRequestDispatcher("/view/dashboard.jsp").forward(request, response);
+            if(agente.getPlaca() == ADMIN_USER && verifyPassword(pwd,agente.getPassword())){
+                response.sendRedirect("loginAdmin");
+                System.out.println(hashPassword("admin"));
+            } else {
+                HttpSession session = request.getSession();
+                session.setAttribute("username", agente);
+                request.setAttribute("username", agente);
+                request.getRequestDispatcher("/view/dashboard.jsp").forward(request, response);
+            }
         } else {
             request.setAttribute("errorMessage", "Invalid username or password");
             request.setAttribute("invalidUser", true);
@@ -65,7 +72,7 @@ public class login extends HttpServlet {
                 AgenteDTO agente = dao.select(placa);
                 if(agente == null){
                     return null;
-                } else if (agente.getPlaca() == placa && PasswordManager.verifyPassword(pwd,agente.getPassword())) {
+                } else if (agente.getPlaca() == placa && verifyPassword(pwd,agente.getPassword())) {
                     return agente;
                 }
             } catch (SQLException ex) {
@@ -74,8 +81,7 @@ public class login extends HttpServlet {
             }
             return null;
         }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

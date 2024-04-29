@@ -38,7 +38,7 @@ public class nuevaMulta extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(false);
 
-        if (session != null && session.getAttribute("username") != null) {
+        if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
             agente = (AgenteDTO) session.getAttribute("username");
             request.setAttribute("username", session.getAttribute("username"));
             CiudadanoDAO daoc = new CiudadanoDAO();

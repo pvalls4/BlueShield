@@ -1,4 +1,5 @@
 <%@ include file="../header.jsp" %>
+<c:if test="${isAdmin}">
 <div class="d-flex justify-content-center">
     <div id="fondo" class="d-flex justify-content-center" style="width: 500px; background-color: #9acbfd"">
         <div class="d-flex flex-column">
@@ -18,6 +19,7 @@
         </div>
     </div>
 </div>
+</c:if>
 <script>
     function ir(option) {
         switch (option) {

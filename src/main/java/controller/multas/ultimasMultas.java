@@ -22,7 +22,7 @@ public class ultimasMultas extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
             HttpSession session = request.getSession(false);
-            if (session != null && session.getAttribute("username") != null) {
+            if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
                 AgenteDTO agente = (AgenteDTO) session.getAttribute("username");
                 int idPlaca = agente.getPlaca();
                 MultaDAO dao = new MultaDAO();

@@ -25,7 +25,7 @@ public class visualizarMulta extends HttpServlet {
                 HttpSession session = request.getSession(false); // No crea una nueva sesión si no hay una existente
 
 
-                if (session != null && session.getAttribute("username") != null) {
+                if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
                     request.setAttribute("username", session.getAttribute("username"));
                     String identifier = request.getParameter("id");
                     int id = Integer.parseInt(identifier);

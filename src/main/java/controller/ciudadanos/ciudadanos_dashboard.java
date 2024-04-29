@@ -22,7 +22,7 @@ public class ciudadanos_dashboard extends HttpServlet {
             throws ServletException, IOException, SQLException {
             HttpSession session = request.getSession(false);
 
-            if (session != null && session.getAttribute("username") != null) {
+            if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
                 request.setAttribute("username", session.getAttribute("username"));
                 response.setContentType("text/html;charset=UTF-8");
                 CiudadanoDAO dao = new CiudadanoDAO();
@@ -42,7 +42,7 @@ public class ciudadanos_dashboard extends HttpServlet {
         try {
             HttpSession session = request.getSession(false);
 
-            if (session != null && session.getAttribute("username") != null) {
+            if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
                 request.setAttribute("username", session.getAttribute("username"));
                 response.setContentType("text/html;charset=UTF-8");
                 CiudadanoDAO dao = new CiudadanoDAO();

@@ -7,7 +7,9 @@
 <div class="d-flex justify-content-center flex-wrap">
     <img id="agentes" src="./images/agentes.png" class="dash-option m-3" onclick="redirigir(this.id)">
     <img id="condecoraciones" src="./images/condecoraciones.png" class="dash-option m-3" onclick="redirigir(this.id)">
+    <c:if test="${isAdmin}">
     <img id="admin" src="./images/admin1.png" class="dash-option m-3" onclick="redirigir(this.id)">
+    </c:if>
 </div>
 
 

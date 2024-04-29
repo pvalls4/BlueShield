@@ -10,6 +10,7 @@ public class AdminDAO{
 
     private static final String SQL_SELECT_ALL = "SELECT * FROM admins;";
     private static final String SQL_SELECT = "SELECT * FROM admins WHERE id = ?;";
+    private static final String SQL_SELECT_CORREO_ADMIN = "SELECT * FROM admins WHERE email = ?";
     private static final String SQL_INSERT = "INSERT INTO admins(email, password) VALUES(?, ?)";
     private static final String SQL_UPDATE = "UPDATE admins SET email=?, password=? WHERE id = ?";
     private static final String SQL_DELETE = "DELETE FROM admins WHERE id=?";
@@ -67,6 +68,28 @@ public class AdminDAO{
         return result;
     }
 
+        public AdminDTO select(String correoAdmin) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        AdminDTO result = null;
+        
+        try {
+            conn = Conexion.getConnection();
+            if (conn != null) {
+                stmt = conn.prepareStatement(SQL_SELECT_CORREO_ADMIN);
+                stmt.setString(1, correoAdmin);
+                rs = stmt.executeQuery();
+                if (rs.next()) {
+                    result = fromResultSet(rs);
+                }
+            }
+        } catch (SQLException ex) {
+            result = null;
+        }
+        return result;
+    }
+        
     public int insert(AdminDTO admin) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;

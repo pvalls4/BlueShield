@@ -22,7 +22,7 @@ public class listaMultasVehiculo extends HttpServlet {
             throws ServletException, IOException, SQLException {
                 HttpSession session = request.getSession(false);
 
-                if (session != null && session.getAttribute("username") != null) {
+                if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
                     request.setAttribute("username", session.getAttribute("username"));
                     String bastidor = request.getParameter("id");
                     MultaDAO dao = new MultaDAO();
