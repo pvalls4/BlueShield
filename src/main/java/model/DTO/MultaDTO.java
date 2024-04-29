@@ -174,7 +174,7 @@ public class MultaDTO {
         this.agente = agente;
     }
 
-    public CiudadanoDTO getCiudadano() {
+    public CiudadanoDTO getCiudadano() {      
         return ciudadano;
     }
 
