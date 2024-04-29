@@ -89,7 +89,12 @@ public class nuevaMulta extends HttpServlet {
         CiudadanoDAO daoc = new CiudadanoDAO();
 
         try {
-            ciudadano = daoc.select(dni);
+            if (daoc.select(dni) == null) {
+                RequestDispatcher rd = request.getRequestDispatcher("/view/errores/errorCiudadano.jsp");
+                rd.forward(request, response);
+            } else {
+                ciudadano = daoc.select(dni);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -99,7 +104,12 @@ public class nuevaMulta extends HttpServlet {
         if (matricula != null && !matricula.isEmpty()) {
             VehiculoDAO daov = new VehiculoDAO();
             try {
-                vehiculo = daov.selectMATRICULA(matricula);
+                if (daov.selectMATRICULA(matricula) == null) {
+                    RequestDispatcher rd = request.getRequestDispatcher("/view/errores/errorVehiculo.jsp");
+                    rd.forward(request, response);
+                } else {
+                    vehiculo = daov.selectMATRICULA(matricula);
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -161,7 +171,6 @@ public class nuevaMulta extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(nuevaMulta.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         response.sendRedirect("multas");
     }
 
