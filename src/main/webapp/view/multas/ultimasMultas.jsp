@@ -38,7 +38,7 @@
                             <td>${multa.id}</td>
                             <td>${multa.ciudadano.nombre} ${multa.ciudadano.apellidos}</td>
                             <td>${multa.fecha_emision}</td>
-                            <td>${multa.importe_total}</td>
+                            <td>${multa.importe_total}&euro;</td>
                             <td>${multa.isPagado ? 'Pagada' : 'No pagada'}</td>
                             <td>${multa.fecha_limite}</td>
                             <td>

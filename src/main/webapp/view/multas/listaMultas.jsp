@@ -19,7 +19,8 @@
                 <thead>
                     <tr>
                         <th>Num referencia</th>
-                        <th>Fecha de emision</th>
+                        <th>Fecha de emisi&oacute;n</th>
+                        <th>Importe total</th>
                         <th>Estado</th>
                         <th>Fecha l&iacute;mite</th>
                         <th>Detalles</th>
@@ -31,6 +32,7 @@
                             <tr>
                                 <td>${multa.id}</td>
                                 <td>${multa.fecha_emision}</td>
+                                <td>${multa.importe_total}&euro;</td>
                                 <td>${multa.isPagado ? 'Pagada' : 'No pagada'}</td>
                                 <td>${multa.fecha_limite}</td>
                                 <td>
