@@ -82,58 +82,59 @@
                 </div>
             </div>
         </div>
-
         <div class="row  mb-3 px-4">
             <div class="row px-4">
                 <div class="col-md-12 g-3 text-center">
                     <h3>Condecoraciones</h3>
                 </div>
             </div>
-            <table class="table-responsive">
-                <thead>
-                    <tr>
-                        <th>Medalla</th>
-                        <th>Título</th>
-                        <th>Fecha</th>
-                        <th>Detalles</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:if test="${not empty listaCondecoracionesAgente}">
-                        <c:forEach items="${listaCondecoracionesAgente}" var="condecoracionAgente">
-                            <tr>
-                                <td><img src="${condecoracionAgente.condecoracion.foto}"></td>
-                                <td>${condecoracionAgente.condecoracion.titulo}</td>
-                                <td>${condecoracionAgente.fecha_emision}</td>
-                                <td>
-                                <a href="condecoracion?id=${condecoracionAgente.condecoracion.id}">
-                                    <button class="btn btn-primary b-login mb-2">Ver</button>
-                                </a>
-                            </td>
-                            </tr>
-                        </c:forEach>
-                    </c:if>
-                    <c:if test="${empty listaCondecoracionesAgente}">
+            <div class="table-responsive">                
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td></td>
-                            <td colspan="4">No hay condecoraciones asociadas.</td>
-                            <td></td>
+                            <th>Medalla</th>
+                            <th>Título</th>
+                            <th>Fecha</th>
+                            <th>Detalles</th>
                         </tr>
-                    </c:if>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <c:if test="${not empty listaCondecoracionesAgente}">
+                            <c:forEach items="${listaCondecoracionesAgente}" var="condecoracionAgente">
+                                <tr>
+                                    <td><img src="${condecoracionAgente.condecoracion.foto}"></td>
+                                    <td>${condecoracionAgente.condecoracion.titulo}</td>
+                                    <td>${condecoracionAgente.fecha_emision}</td>
+                                    <td>
+                                        <a href="condecoracionDetalles?id=${condecoracionAgente.condecoracion.id}">
+                                            <button class="btn btn-primary b-login mb-2">Ver</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </c:if>
+                        <c:if test="${empty listaCondecoracionesAgente}">
+                            <tr>
+                                <td></td>
+                                <td colspan="4">No hay condecoraciones asociadas.</td>
+                                <td></td>
+                            </tr>
+                        </c:if>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-<!--        <div class="row justify-content-center text-center">
-            <div class="col-md-6 col-lg-4">  Tamaño alargado para dispositivos medianos y grandes 
-                <a href="editarAgente?placa$ {agente.placa}">
-                    <button class="btn btn-primary btn-block m-1 px-5" style="background-color: #bbddf5;color:#0757af;">Editar perfil</button>
-                </a>
-            </div>
-            <div class="col-md-6 col-lg-4">  Tamaño alargado para dispositivos medianos y grandes 
-                <a href="listaMultas?id=$ {ciudadano.dni}"><button class="btn btn-primary btn-block m-1 mb-3 px-5" style="background-color: #bbddf5;color:#0757af;">Ver Multas</button></a>
-            </div>
-        </div>-->
+        <!--        <div class="row justify-content-center text-center">
+                    <div class="col-md-6 col-lg-4">  Tamaño alargado para dispositivos medianos y grandes 
+                        <a href="editarAgente?placa$ {agente.placa}">
+                            <button class="btn btn-primary btn-block m-1 px-5" style="background-color: #bbddf5;color:#0757af;">Editar perfil</button>
+                        </a>
+                    </div>
+                    <div class="col-md-6 col-lg-4">  Tamaño alargado para dispositivos medianos y grandes 
+                        <a href="listaMultas?id=$ {ciudadano.dni}"><button class="btn btn-primary btn-block m-1 mb-3 px-5" style="background-color: #bbddf5;color:#0757af;">Ver Multas</button></a>
+                    </div>
+                </div>-->
     </c:if>
 </div>
 <%@ include file="../footer.jsp" %>

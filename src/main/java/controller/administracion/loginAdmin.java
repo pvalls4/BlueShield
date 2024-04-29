@@ -45,7 +45,7 @@ public class loginAdmin extends HttpServlet {
             session.setAttribute("isAdmin", true);
             request.setAttribute("admin", admin);
             request.setAttribute("isAdmin", true);
-//            request.getRequestDispatcher("/view/dashboard.jsp").forward(request, response);
+            //request.getRequestDispatcher("/view/dashboard.jsp").forward(request, response);
             System.out.println(hashPassword("admin"));
             response.sendRedirect("dashboard");
         } else {

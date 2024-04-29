@@ -15,7 +15,7 @@
                 <thead>
                     <tr>
                         <th>Agente</th>
-                        <th>Fecha Emisión</th>
+                        <th>Fecha Emisi&oacute;n</th>
                         <th></th>
                     </tr>
                 </thead>
