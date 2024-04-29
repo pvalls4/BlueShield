@@ -9,7 +9,7 @@
     <div class="d-flex container-fluid justify-content-center m-3">
         <p>Descripción: ${condecoracion.descripcion}</p>
     </div>
-    <div class="row  mb-3 px-4">
+    <div class="row mb-3 px-4">
         <table class="table">
             <thead>
                 <tr>

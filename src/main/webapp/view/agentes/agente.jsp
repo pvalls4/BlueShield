@@ -95,6 +95,7 @@
                         <th>Medalla</th>
                         <th>Título</th>
                         <th>Fecha</th>
+                        <th>Detalles</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -104,6 +105,11 @@
                                 <td><img src="${condecoracionAgente.condecoracion.foto}"></td>
                                 <td>${condecoracionAgente.condecoracion.titulo}</td>
                                 <td>${condecoracionAgente.fecha_emision}</td>
+                                <td>
+                                <a href="condecoracion?id=${condecoracionAgente.condecoracion.id}">
+                                    <button class="btn btn-primary b-login mb-2">Ver</button>
+                                </a>
+                            </td>
                             </tr>
                         </c:forEach>
                     </c:if>
