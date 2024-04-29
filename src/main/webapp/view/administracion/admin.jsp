@@ -14,7 +14,7 @@
                                 Añadir Sanción
                             </button>-->
                 <button onclick="ir(2)" class="boton m-3">
-                    Añadir Condecoraci&oacuten
+                    Crear Condecoraci&oacuten
                 </button>
             </div>
         </div>
@@ -27,7 +27,7 @@
                 window.location.href = "crearAgente";
                 break;
             case 2:
-                window.location.href = "anadirCondecoracion";
+                window.location.href = "crearCondecoracion";
                 break;
             case 3:
                 window.location.href = "anadirSancion";
