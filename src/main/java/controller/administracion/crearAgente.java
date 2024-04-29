@@ -29,9 +29,10 @@ public class crearAgente extends HttpServlet {
                 response.setContentType("text/html;charset=UTF-8");
                 HttpSession session = request.getSession(false);
 
-                if (session != null && session.getAttribute("admin") != null) {
+                if (session != null && session.getAttribute("username") != null && (Boolean) session.getAttribute("isAdmin") == true) {
                     try {
-                        request.setAttribute("admin", session.getAttribute("admin"));
+                        request.setAttribute("username", session.getAttribute("username"));
+                        request.setAttribute("isAdmin", session.getAttribute("isAdmin"));
                         response.setContentType("text/html;charset=UTF-8");
                         AgenteDAO aDao = new AgenteDAO();
                         List<AgenteDTO> listaAgentes = aDao.selectAll();
@@ -53,8 +54,9 @@ public class crearAgente extends HttpServlet {
             throws ServletException, IOException{
                 response.setContentType("text/html;charset=UTF-8");
                 HttpSession session = request.getSession(false);
-                if (session != null && session.getAttribute("admin") != null) {
-                    request.setAttribute("admin", session.getAttribute("admin"));
+                if (session != null && session.getAttribute("username") != null && (Boolean) session.getAttribute("isAdmin") == true) {
+                    request.setAttribute("username", session.getAttribute("username"));
+                    request.setAttribute("isAdmin", session.getAttribute("isAdmin"));
                     response.setContentType("text/html;charset=UTF-8");
                     RequestDispatcher rd;
                     String dni = request.getParameter("dni");

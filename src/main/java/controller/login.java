@@ -49,6 +49,10 @@ public class login extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("username", agente);
             request.setAttribute("username", agente);
+            if(agente.isAdmin() == true){
+                session.setAttribute("isAdmin", true);
+                request.setAttribute("isAdmin", true);
+            }
             response.sendRedirect("dashboard");
         } else {
             request.setAttribute("errorMessage", "Invalid username or password");

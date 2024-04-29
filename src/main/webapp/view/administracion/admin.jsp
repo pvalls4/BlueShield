@@ -7,14 +7,14 @@
                 <button onclick="ir(1)" class="boton m-3">
                     Crear Agente
                 </button>
-                <!--            <button onclick="ir(2)" class="boton m-3">
-                                Añadir Condecoración
-                            </button>
+                <button onclick="ir(4)" class="boton m-3">
+                    Crear Modelo
+                </button><!--
                             <button onclick="ir(3)" class="boton m-3">
                                 Añadir Sanción
                             </button>-->
-                <button onclick="ir(4)" class="boton m-3">
-                    Crear Modelo
+                <button onclick="ir(2)" class="boton m-3">
+                    Añadir Condecoraci&oacuten
                 </button>
             </div>
         </div>
