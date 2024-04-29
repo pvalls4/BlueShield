@@ -83,7 +83,7 @@ public class CondecoracionAgenteDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         CondecoracionAgenteDTO agenteCondecoracion = null;
-        List<CondecoracionAgenteDTO> agentesCondecoracion = null;
+        List<CondecoracionAgenteDTO> agentesCondecoracion = new ArrayList<CondecoracionAgenteDTO>();
 
         try {
             conn = Conexion.getConnection();

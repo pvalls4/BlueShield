@@ -110,19 +110,24 @@ public class nuevaMulta extends HttpServlet {
 
         float importeTotal = 0.0f;
         String[] articulosSeleccionadosStr = request.getParameterValues("articuloSeleccionado");
+        System.out.println(articulosSeleccionadosStr);
 
-        List<Integer> articulosSeleccionados = new ArrayList<>();
+        List<Integer> articulosIds = new ArrayList<>();
+
         for (String str : articulosSeleccionadosStr) {
-            try {
-                int articuloId = Integer.parseInt(str);
-                articulosSeleccionados.add(articuloId);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
+            // Buscamos la posición del valor "id"
+            int idStartIndex = str.indexOf("\"id\":") + 5; // Sumamos 5 para saltar el texto "\"id\":"
+            int idEndIndex = str.indexOf(",", idStartIndex); // La coma indica el final del valor
+            if (idEndIndex == -1) { // Si no hay una coma, es el último elemento
+                idEndIndex = str.indexOf("}", idStartIndex);
             }
+            String idStr = str.substring(idStartIndex, idEndIndex).trim(); // Extraemos la cadena del valor "id"
+            int id = Integer.parseInt(idStr); // Convertimos la cadena a entero
+            articulosIds.add(id); // Agregamos el valor a la lista
         }
 
         List<InfraccionDTO> infracciones = new ArrayList<>();
-        for (int articulo : articulosSeleccionados) {
+        for (int articulo : articulosIds) {
             try {
                 infracciones.add(new InfraccionDAO().select(articulo));
             } catch (SQLException ex) {

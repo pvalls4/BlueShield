@@ -98,7 +98,7 @@
                                 }
                             %>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="<%= articulo.getId() %>" id="<%= articulo.getId() %>" name="articuloSeleccionado">
+                                <input class="form-check-input" type="checkbox" value='{"importe": <%= articulo.getImporte() %>, "id": <%= articulo.getId() %>}' id="<%= articulo.getId() %>" name="articuloSeleccionado">
                                 <label class="form-check-label" for="<%= articulo.getId() %>">
                                     Artículo <%= articulo.getId() %> - <%= articulo.getTitulo() %>
                                 </label>
@@ -117,8 +117,40 @@
                 </div>                       
             </div>
 
-            <dialog class = "boton" id="confirmar"> 
-                <p class="text-center">¿Confirma Denuncia?</p>
+            <dialog class="boton" id="confirmar"> 
+                <p class="text-center">¿Confirmar Denuncia?</p>
+                <div class="row">
+                    <div class="col" style="color:black">
+                        Denunciado/a: 
+                    </div>
+                    <div class="col" style="color:black">
+                        Fecha emision: 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <strong id="dniDenunciado" style="color: #1e549f;"></strong>
+                    </div>
+                    <div class="col">
+                        <span id="fechaEmisionMulta"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col" style="color:black">
+                        Infracciones:
+                    </div>
+                    <div class="col" style="color:black">
+                        Importe total:
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <textarea id="infracciones" class="form-control input-form" rows="4" readonly></textarea>
+                    </div>
+                    <div class="col">
+                        <span id="importeTotal"></span>
+                    </div>
+                </div>
                 <button id="confirmarBtn" class="boton mx-4 mt-4">Confirmar</button>
                 <button id="cancelar" class="boton mx-4 mt-4">Cancelar</button>
             </dialog>
@@ -132,12 +164,34 @@
                 btnEmitirDenuncia.addEventListener("click", () => {
                     // Verificar si todos los campos requeridos están llenos antes de mostrar el diálogo de confirmación
                     if (validarCamposRequeridos() && alMenosUnCheckboxMarcado()) {
+                        // Obtener los valores del DNI y la fecha de emisión
+                        const dniDenunciado = document.getElementById("dni").value;
+                        const fechaEmisionMulta = document.getElementById("fechaEmision").value;
+                        const infraccionesSeleccionadas = [];
+                        let importeTotal = 0; // Importe total inicializado en 0
+
+                        const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                        checkboxes.forEach((checkbox) => {
+                            const jsonValue = JSON.parse(checkbox.value); // Parse the JSON string
+                            const importeArticulo = parseFloat(jsonValue.importe); // Get the importe value from JSON
+                            const articulo = (parseFloat(jsonValue.id)/100).toFixed(2); // Get the articuloId with format
+                            importeTotal += importeArticulo; // Sumar el importe al total
+                            infraccionesSeleccionadas.push("Artículo: " + articulo);
+                        });
+
+                        // Establecer los valores en el diálogo de confirmación
+                        document.getElementById("infracciones").textContent = infraccionesSeleccionadas.join("\n");
+                        document.getElementById("importeTotal").textContent = importeTotal.toFixed(2); // Mostrar el importe total con 2 decimales
+
+                        document.getElementById("dniDenunciado").textContent = dniDenunciado;
+                        document.getElementById("fechaEmisionMulta").textContent = fechaEmisionMulta;
+
                         confirmar.showModal();
                     } else {
                         alert('Por favor, completa todos los campos requeridos y marca al menos una opción.');
                     }
                 });
-
+                
                 btnCancelar.addEventListener("click", () => {
                     confirmar.close();
                 });
