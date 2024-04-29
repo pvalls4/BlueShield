@@ -17,12 +17,12 @@ import java.util.logging.Logger;
 import model.DTO.CondecoracionAgenteDTO;
 import model.DTO.CondecoracionDTO;
 
-@WebServlet(name = "condecoracionDetalles", urlPatterns = {"/condecoracion"})
+@WebServlet(name = "condecoracionDetalles", urlPatterns = {"/condecoracionDetalles"})
 public class condecoracionDetalles extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-            
+
     }
 
     @Override
@@ -46,7 +46,7 @@ public class condecoracionDetalles extends HttpServlet {
                 rd.forward(request, response);
             } else {
                 response.sendRedirect("login");
-            } 
+            }
         } catch (SQLException ex) {
             Logger.getLogger(condecoraciones.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -55,9 +55,23 @@ public class condecoracionDetalles extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                String dni = request.getParameter("dni");
-                response.sendRedirect("ciudadano?id=" + dni);
-            }
+        String condecoracionAgenteValue = request.getParameter("condecoracionAgente");
+        String[] condecoracionAgenteParts = condecoracionAgenteValue.split(" ");
+        String idCondecoracionStr = condecoracionAgenteParts[0];
+        String idAgenteStr = condecoracionAgenteParts[1];
+        int idCondecoracion = Integer.parseInt(idCondecoracionStr);
+        int idAgente = Integer.parseInt(idAgenteStr);
+
+        CondecoracionAgenteDTO condecoracionAgente = null;
+        CondecoracionAgenteDAO daoCA = new CondecoracionAgenteDAO();
+        try {
+            condecoracionAgente = daoCA.selectIdCondecoracionAgente(idCondecoracion, idAgente);
+            daoCA.delete(condecoracionAgente);
+        } catch (SQLException ex) {
+            Logger.getLogger(condecoracionDetalles.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        response.sendRedirect("condecoraciones");
+    }
 
     @Override
     public String getServletInfo() {

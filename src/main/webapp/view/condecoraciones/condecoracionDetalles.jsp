@@ -16,7 +16,7 @@
                     <tr>
                         <th>Agente</th>
                         <th>Fecha Emisión</th>
-                        <th>Acciones</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,14 +26,13 @@
                                 <td><strong>${condecoracionAgente.agente.ciudadano.nombre} ${condecoracionAgente.agente.ciudadano.apellidos}</strong></td>
                                 <td>${condecoracionAgente.fecha_emision}</td>
                                 <td>
-                                    <a href="condecoracion?id=">
-                                        <button class="btn btn-primary b-login mb-2">Eliminar</button>
-                                    </a>
+                                    <form id="condecoracionDetalles" action="condecoracionDetalles" method="post">
+                                        <button class="btn btn-primary b-login mb-2" id="condecoracionAgente" value="${condecoracionAgente.condecoracion.id} ${condecoracionAgente.agente.placa}" name="condecoracionAgente">Eliminar</button>
+                                    </form>
                                 </td>
                             </tr>
                         </c:forEach>
                     </c:if>
-                    
                     <c:if test="${empty agentesCondecoracion}">
                         <tr>
                             <td colspan="3">No hay condecoraciones disponibles.</td>
