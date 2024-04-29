@@ -26,7 +26,7 @@ public class condecoracionDetalles extends HttpServlet {
             throws ServletException, IOException, SQLException {
             HttpSession session = request.getSession(false);
 
-            if (session != null && session.getAttribute("username") != null) {
+            if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
                 request.setAttribute("username", session.getAttribute("username"));
                 int idCondecoracion = Integer.parseInt(request.getParameter("id"));
                 response.setContentType("text/html;charset=UTF-8");

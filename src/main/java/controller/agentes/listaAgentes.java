@@ -35,9 +35,9 @@ public class listaAgentes extends HttpServlet {
             throws ServletException, IOException, SQLException {
                 HttpSession session = request.getSession(false);
 
-                    if (session != null && session.getAttribute("username") != null) {
+                    if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
                         request.setAttribute("username", session.getAttribute("username"));
-                        response.setContentType("text/html;charset=UTF-8");
+                        response.setContentType("text/html;charset=UTF-8"); 
                         List<AgenteDTO> listaAgentes = new AgenteDAO().selectAll();
                         request.setAttribute("listaAgentes", listaAgentes);
                         RequestDispatcher rd = request.getRequestDispatcher("./view/agentes/listaAgentes.jsp");
