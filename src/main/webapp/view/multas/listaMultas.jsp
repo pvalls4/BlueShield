@@ -14,39 +14,41 @@
         </div>
     </div>
     <div class="row  mb-3 px-4">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Num referencia</th>
-                    <th>Fecha de emision</th>
-                    <th>Estado</th>
-                    <th>Fecha l&iacute;mite</th>
-                    <th>Detalles</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:if test="${not empty listaMultas}">
-                    <c:forEach items="${listaMultas}" var="multa">
-                        <tr>
-                            <td>${multa.id}</td>
-                            <td>${multa.fecha_emision}</td>
-                            <td>${multa.isPagado ? 'Pagada' : 'No pagada'}</td>
-                            <td>${multa.fecha_limite}</td>
-                            <td>
-                                <a href="visualizarMulta?id=${multa.id}">
-                                    <button class="btn btn-primary b-login mb-2">Ver</button>
-                                </a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </c:if>
-                <c:if test="${empty listaMultas}">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td colspan="3">No hay multas disponibles.</td>
+                        <th>Num referencia</th>
+                        <th>Fecha de emision</th>
+                        <th>Estado</th>
+                        <th>Fecha l&iacute;mite</th>
+                        <th>Detalles</th>
                     </tr>
-                </c:if>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <c:if test="${not empty listaMultas}">
+                        <c:forEach items="${listaMultas}" var="multa">
+                            <tr>
+                                <td>${multa.id}</td>
+                                <td>${multa.fecha_emision}</td>
+                                <td>${multa.isPagado ? 'Pagada' : 'No pagada'}</td>
+                                <td>${multa.fecha_limite}</td>
+                                <td>
+                                    <a href="visualizarMulta?id=${multa.id}">
+                                        <button class="btn btn-primary b-login mb-2">Ver</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${empty listaMultas}">
+                        <tr>
+                            <td colspan="3">No hay multas disponibles.</td>
+                        </tr>
+                    </c:if>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <%@ include file="../footer.jsp" %>
