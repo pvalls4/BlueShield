@@ -89,7 +89,7 @@
                     <h3>Condecoraciones</h3>
                 </div>
             </div>
-            <table class="table">
+            <table class="table-responsive">
                 <thead>
                     <tr>
                         <th>Medalla</th>

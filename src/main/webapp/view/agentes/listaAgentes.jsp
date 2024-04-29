@@ -14,37 +14,39 @@
         </div>
     </div>
     <div class="row  mb-3 px-4">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Placa</th>
-                    <th>Rango</th>
-                    <th>Agente</th>
-                    <th>Detalles</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:if test="${not empty listaAgentes}">
-                    <c:forEach items="${listaAgentes}" var="agente">
-                        <tr>
-                            <td>${agente.placa}</td>
-                            <td>${agente.rango}</td>
-                            <td>${agente.ciudadano.nombre} ${agente.ciudadano.apellidos}</td>
-                            <td>
-                                <a href="agente?placa=${agente.placa}">
-                                    <button class="btn btn-primary b-login mb-2">Ver</button>
-                                </a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </c:if>
-                <c:if test="${empty listaAgentes}">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td colspan="3">No hay agentes disponibles.</td>
+                        <th>Placa</th>
+                        <th>Rango</th>
+                        <th>Agente</th>
+                        <th>Detalles</th>
                     </tr>
-                </c:if>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <c:if test="${not empty listaAgentes}">
+                        <c:forEach items="${listaAgentes}" var="agente">
+                            <tr>
+                                <td>${agente.placa}</td>
+                                <td>${agente.rango}</td>
+                                <td>${agente.ciudadano.nombre} ${agente.ciudadano.apellidos}</td>
+                                <td>
+                                    <a href="agente?placa=${agente.placa}">
+                                        <button class="btn btn-primary b-login mb-2">Ver</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${empty listaAgentes}">
+                        <tr>
+                            <td colspan="3">No hay agentes disponibles.</td>
+                        </tr>
+                    </c:if>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <%@ include file="../footer.jsp" %>

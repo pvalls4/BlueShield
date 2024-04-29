@@ -26,35 +26,37 @@
         </div>
     </div>
     <div class="row  mb-3 px-4">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>DNI</th>
-                    <th>Detalles</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:if test="${not empty listaCiudadanos}">
-                    <c:forEach items="${listaCiudadanos}" var="ciudadano">
-                        <tr>
-                            <td>${ciudadano.nombre} ${ciudadano.apellidos}</td>
-                            <td>${ciudadano.dni}</td>
-                            <td>
-                                <a href="ciudadano?id=${ciudadano.dni}">
-                                    <button class="btn btn-primary b-login mb-2">Ver</button>
-                                </a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </c:if>
-                <c:if test="${empty listaCiudadanos}">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td colspan="3">No hay ciudadanos disponibles.</td>
+                        <th>Nombre</th>
+                        <th>DNI</th>
+                        <th>Detalles</th>
                     </tr>
-                </c:if>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <c:if test="${not empty listaCiudadanos}">
+                        <c:forEach items="${listaCiudadanos}" var="ciudadano">
+                            <tr>
+                                <td>${ciudadano.nombre} ${ciudadano.apellidos}</td>
+                                <td>${ciudadano.dni}</td>
+                                <td>
+                                    <a href="ciudadano?id=${ciudadano.dni}">
+                                        <button class="btn btn-primary b-login mb-2">Ver</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${empty listaCiudadanos}">
+                        <tr>
+                            <td colspan="3">No hay ciudadanos disponibles.</td>
+                        </tr>
+                    </c:if>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <%@ include file="../footer.jsp" %>

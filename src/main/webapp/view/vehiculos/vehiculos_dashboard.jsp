@@ -19,40 +19,42 @@
         </div>
     </div>
     <div class="row  mb-3 px-4">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Bastidor</th>
-                    <th>Matricula</th>
-                    <th>Modelo</th>                  
-                    <th>Propietario</th>                  
-                    <th>Detalles</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:if test="${not empty listaVehiculos}">
-                    <c:forEach items="${listaVehiculos}" var="vehiculo">
-                        <tr>
-                            <td>${vehiculo.bastidor}</td>
-                            <td>${vehiculo.matricula}</td>
-                            <td>${vehiculo.modelo.modelo}</td>
-                            <td>${vehiculo.ciudadano.nombre} ${vehiculo.ciudadano.apellidos}</td>
-
-                            <td>
-                                <a href="vehiculo?id=${vehiculo.matricula}">
-                                    <button class="btn btn-primary b-login mb-2">Ver</button>
-                                </a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </c:if>
-                <c:if test="${empty listaVehiculos}">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td colspan="5">No hay vehiculos disponibles.</td>
+                        <th>Bastidor</th>
+                        <th>Matricula</th>
+                        <th>Modelo</th>                  
+                        <th>Propietario</th>                  
+                        <th>Detalles</th>
                     </tr>
-                </c:if>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <c:if test="${not empty listaVehiculos}">
+                        <c:forEach items="${listaVehiculos}" var="vehiculo">
+                            <tr>
+                                <td>${vehiculo.bastidor}</td>
+                                <td>${vehiculo.matricula}</td>
+                                <td>${vehiculo.modelo.modelo}</td>
+                                <td>${vehiculo.ciudadano.nombre} ${vehiculo.ciudadano.apellidos}</td>
+
+                                <td>
+                                    <a href="vehiculo?id=${vehiculo.matricula}">
+                                        <button class="btn btn-primary b-login mb-2">Ver</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${empty listaVehiculos}">
+                        <tr>
+                            <td colspan="5">No hay vehiculos disponibles.</td>
+                        </tr>
+                    </c:if>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <%@ include file="../footer.jsp" %>
