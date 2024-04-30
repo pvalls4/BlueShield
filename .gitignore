@@ -64,4 +64,4 @@ dependency-reduced-pom.xml
 src/test
 src/main/resources/config
 /nbproject/
-src/main/java/DAO/Conexion.java
+Conexion.java
