@@ -5,7 +5,7 @@
         <div class="row" style="background-color: #9acbfd">
           <div class="row">
             <div class="d-flex justify-content-center mt-2">
-              <h2>NUEVA MARCA</h2>
+                <h2><strong><u>NUEVA MARCA</u></strong></h2>
             </div>
           </div>
           <div class="row">
@@ -41,9 +41,9 @@
               </div>
             </div>
             <div class="row">
-              <div class="col d-flex justify-content-center">
+              <div class="col d-flex justify-content-center mb-3">
                 <button type="submit" class="boton mx-4 mt-4">Crear Modelo</button>
-                <button type="button" class="boton mx-4 mt-4" onclick="window.location.href='login'">Cancelar</button>
+                <button type="button" class="boton mx-4 mt-4" onclick="redirigir('admin')">Cancelar</button>
               </div>
             </div>
           </div>

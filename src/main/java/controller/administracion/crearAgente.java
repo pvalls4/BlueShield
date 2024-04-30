@@ -36,6 +36,9 @@ public class crearAgente extends HttpServlet {
                         response.setContentType("text/html;charset=UTF-8");
                         AgenteDAO aDao = new AgenteDAO();
                         List<AgenteDTO> listaAgentes = aDao.selectAll();
+                        CiudadanoDAO cDao = new CiudadanoDAO();
+                        List<CiudadanoDTO> listaCiudadanos = cDao.selectAll();
+                        request.setAttribute("listaCiudadanos", listaCiudadanos);
                         AgenteDTO miAgente = listaAgentes.get(listaAgentes.size() -1);
                         int idPlaca = miAgente.getPlaca() + 1;
                         request.setAttribute("idPlaca", idPlaca);
@@ -78,7 +81,9 @@ public class crearAgente extends HttpServlet {
                     }
                     
                     String rango = request.getParameter("rangos");
-                    String correo = request.getParameter("correo");
+                    String adminCheckboxValue = request.getParameter("adminCheckbox");
+                    boolean isAdmin = adminCheckboxValue != null && adminCheckboxValue.equals("on");
+
                     String imagen = request.getParameter("imagen");
                     String halfPass = dni.substring(dni.length() - 3);
                     int placa = Integer.parseInt(request.getParameter("placa"));
@@ -88,7 +93,7 @@ public class crearAgente extends HttpServlet {
                                         
                     try{
                         ciudadano = ciudadanoDAO.select(dni);
-                        AgenteDTO nuevoAgente = new AgenteDTO(ciudadano, hashPassword(contrasena), imagen, rango, false);
+                        AgenteDTO nuevoAgente = new AgenteDTO(ciudadano, hashPassword(contrasena), imagen, rango, isAdmin);
                         agenteDAO.insert(nuevoAgente);
                         
                     }catch(SQLException e){
