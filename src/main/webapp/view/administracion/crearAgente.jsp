@@ -16,7 +16,7 @@
               </div>
               <div class="row">
                 <div class="col rounded ms-3 me-3 mb-2">
-                  <input type="text" class="form-control input-form" list="ciudadanosOptions" name="dni" placeholder="DNI agente" aria-label="Buscar por DNI" aria-describedby="button-addon2">
+                  <input type="text" autocomplete="off" class="form-control input-form" list="ciudadanosOptions" name="dni" placeholder="DNI agente" aria-label="Buscar por DNI" aria-describedby="button-addon2">
                     <datalist id="ciudadanosOptions">
                         <c:if test="${not empty listaCiudadanos}">
                             <c:forEach items="${listaCiudadanos}" var="ciudadano">

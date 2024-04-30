@@ -7,7 +7,7 @@
                     <img src="./images/logoBS.png" class="logo2 text-center">                    
                 </div>
                 <div class="boton m-3 px-2">
-                    La condecoraci&oacute;n ${titulo} ha sido creado correctamente.
+                    La condecoraci&oacute;n "${titulo}" ha sido creado correctamente.
                 </div>
             </div>
         </div>

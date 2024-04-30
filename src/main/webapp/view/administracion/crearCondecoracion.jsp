@@ -39,7 +39,7 @@
             </div>
             <div class="row">
               <div class="col d-flex justify-content-center mb-3">
-                <button type="submit" class="boton mx-4 mt-4">Crear Modelo</button>
+                  <button type="submit" class="boton mx-4 mt-4">Crear Condecoraci&oacute;n</button>
                 <button type="button" class="boton mx-4 mt-4" onclick="redirigir('admin')">Cancelar</button>
               </div>
             </div>
