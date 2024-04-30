@@ -173,7 +173,6 @@
                                 const dni = document.getElementById('dni').value;
                                 const nombreCompleto = document.getElementById('nombreCompleto').value;
                                 const telefono = document.getElementById('telefono').value;
-                                //const imagen = document.getElementById('imagen').value;
                                 const email = document.getElementById('email').value;
                                 const calle = document.getElementById('calle').value;
                                 const municipio = document.getElementById('municipio').value;
@@ -186,7 +185,6 @@
                                 document.getElementById('dni_d').textContent = dni;
                                 document.getElementById('nombreCompleto_d').textContent = nombreCompleto;
                                 document.getElementById('telefono_d').textContent = telefono;
-                                //document.getElementById('imagen_d').textContent = imagen;
                                 document.getElementById('email_d').textContent = email;
                                 document.getElementById('calle_d').textContent = calle;
                                 document.getElementById('municipio_d').textContent = municipio;

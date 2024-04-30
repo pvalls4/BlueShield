@@ -35,37 +35,29 @@
                             <img src="./images/blueshield.png" class="blueshield" alt="BlueShield" onclick="redirigir('dashboard')">
                         </div>
                     </div>
-                    <div class="col-md-4 text-center">
-                    </div>
+                    <div class="col-md-4 text-center"></div>
                     <div class="col-12 col-md-4 text-center">
                         <div class="row align-items-center">
-                            <c:choose>
-                                <c:when test="${not empty requestScope.username}" >
-                                    <%@ page import="model.DTO.AgenteDTO" %>
-                                    <%
-                                    AgenteDTO agente = (AgenteDTO) request.getAttribute("username");
-                                    String agenteLogged = agente.getCiudadano().getNombre() + " " + agente.getCiudadano().getApellidos();
-                                    int placa = agente.getPlaca();
-                                    %>
-                                    <div class="d-flex flex-column mx-1 pb-2">
+                            <%@ page import="model.DTO.AgenteDTO" %>
+                            <c:set var="agente" value="${username}"/>
+                            <c:if test="${not empty username}">
+                                <div class="d-flex flex-column mx-1 pb-2">
+                                    <c:if test="${agente.isAdmin()}">
+                                        <p class="version mb-0 text-md-right">Version 1.0 - <a href="admin">ADMIN</a></p>
+                                    </c:if>
+                                    <c:if test="${!agente.isAdmin()}">
                                         <p class="version mb-0 text-md-right">Version 1.0</p>
-                                        <a href="agente?placa=<%= placa %>"><%= agenteLogged %> (<%= placa %>)</a>
-                                    </div>
-                                    
-                                    <a href='logout' class="mx-1">
-                                        <button type="submit" class="btn btn-primary b-login">Cerrar Sesi&oacute;n</button>
-                                    </a>
-                                </c:when>
-                                <c:when test="${not empty requestScope.admin}" >
-                                    <h2 class="version mb-0 text-md-right">Version 1.0 - ADMIN </h2>
-                                    <a href='logout' class="my-1">
-                                        <button type="submit" class="btn btn-primary b-login">Cerrar Sesi&oacute;n</button>
-                                    </a>
-                                </c:when>
-                                <c:otherwise>
-                                    <h2 class="version mb-0 text-md-right">Version 1.0</h2>
-                                </c:otherwise>
-                            </c:choose>
+                                    </c:if>
+                                    <a href="agente?placa=${agente.placa}">${agente.ciudadano.nombre} ${agente.ciudadano.apellidos} (${agente.placa})</a>
+                                </div>
+
+                                <a href='logout' class="mx-1">
+                                    <button type="submit" class="btn btn-primary b-login">Cerrar Sesi&oacute;n</button>
+                                </a>
+                            </c:if>
+                            <c:if test="${empty username}">
+                                <h2 class="version mb-0 text-md-right">Version 1.0</h2>
+                            </c:if>
                         </div>
                     </div>
                 </div>
