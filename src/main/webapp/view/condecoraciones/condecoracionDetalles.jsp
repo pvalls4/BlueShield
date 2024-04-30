@@ -25,28 +25,30 @@
                             <tr>
                                 <td><strong>${condecoracionAgente.agente.ciudadano.nombre} ${condecoracionAgente.agente.ciudadano.apellidos}</strong></td>
                                 <td>${condecoracionAgente.fecha_emision}</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary b-login mb-2"  data-bs-toggle="modal" data-bs-target="#deleteModal" id="condecoracionAgente">Eliminar</button>
-                                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Confirmar eliminaci&oacute;n</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>¿Estás seguro de querer eliminar la condecoración seleccionada?</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <form id="condecoracionDetalles" action="condecoracionDetalles" method="post">
-                                                        <button  class="btn btn-primary" value="${condecoracionAgente.condecoracion.id} ${condecoracionAgente.agente.placa}" name="condecoracionAgente"">Confirmar</button>
-                                                    </form>
+                                <c:if test="${isAdmin}">
+                                    <td>
+                                        <button type="button" class="btn btn-primary b-login mb-2"  data-bs-toggle="modal" data-bs-target="#deleteModal" id="condecoracionAgente">Eliminar</button>
+                                        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Confirmar eliminación</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>¿Estás seguro de querer eliminar la condecoración seleccionada?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                        <form id="condecoracionDetalles" action="condecoracionDetalles" method="post">
+                                                            <button  class="btn btn-primary" value="${condecoracionAgente.condecoracion.id} ${condecoracionAgente.agente.placa}" name="condecoracionAgente"">Confirmar</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
+                                    </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                     </c:if>
