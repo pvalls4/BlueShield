@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 public class Conexion {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final String connectionString = System.getenv("AZURE_MYSQL_CONNECTIONSTRING");
     private static final Properties properties = new Properties();
 
     static {
@@ -29,7 +30,8 @@ public class Conexion {
         Connection conn = null;
         try {
             Class.forName(DRIVER);
-            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+//            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            conn = DriverManager.getConnection(connectionString);
         } catch (SQLException e) {
             System.err.println("Error al conectar con la base de datos: " + e.getMessage());
             throw e;
