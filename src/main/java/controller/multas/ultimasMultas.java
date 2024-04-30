@@ -21,19 +21,20 @@ public class ultimasMultas extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-            HttpSession session = request.getSession(false);
-            if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
-                AgenteDTO agente = (AgenteDTO) session.getAttribute("username");
-                int placa = agente.getPlaca();
-                request.setAttribute("title", "BlueShield - Multas recientes de " + placa);
-                MultaDAO dao = new MultaDAO();
-                List<MultaDTO> ultimasMultas = dao.selectPlaca(placa);
-                request.setAttribute("ultimasMultas", ultimasMultas);
-                RequestDispatcher rd = request.getRequestDispatcher("./view/multas/ultimasMultas.jsp");
-                rd.forward(request, response);
-            } else {
-                response.sendRedirect("login");
-            }
+        HttpSession session = request.getSession(false);
+        if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
+            request.setAttribute("username", session.getAttribute("username"));
+            AgenteDTO agente = (AgenteDTO) session.getAttribute("username");
+            int placa = agente.getPlaca();
+            request.setAttribute("title", "BlueShield - Multas recientes de " + placa);
+            MultaDAO dao = new MultaDAO();
+            List<MultaDTO> ultimasMultas = dao.selectPlaca(placa);
+            request.setAttribute("ultimasMultas", ultimasMultas);
+            RequestDispatcher rd = request.getRequestDispatcher("./view/multas/ultimasMultas.jsp");
+            rd.forward(request, response);
+        } else {
+            response.sendRedirect("login");
+        }
     }
 
     @Override
