@@ -92,27 +92,28 @@ public class crearAgente extends HttpServlet {
 
             String imagen = request.getParameter("imagen");
             String halfPass = dni.substring(dni.length() - 3);
-            int placa = 0; 
-            try{
+            int placa = 0;
+            try {
                 List<AgenteDTO> listaAgentes = agenteDAO.selectAll();
                 AgenteDTO miAgente = listaAgentes.get(listaAgentes.size() - 1);
                 placa = miAgente.getPlaca() + 1;
-            }catch(SQLException ex){
+            } catch (SQLException ex) {
                 ex.getStackTrace();
             }
             request.setAttribute("placa", placa);
             String contrasena = request.getParameter("dni");
             request.setAttribute("rango", rango);
-
+            
+            int idPlaca=0;
+            
             try {
                 ciudadano = ciudadanoDAO.select(dni);
                 AgenteDTO nuevoAgente = new AgenteDTO(ciudadano, hashPassword(contrasena), imagen, rango, isAdmin);
-                agenteDAO.insert(nuevoAgente);
-
+                idPlaca=agenteDAO.insert(nuevoAgente);
             } catch (SQLException e) {
                 e.getStackTrace();
             }
-
+            request.setAttribute("idAgente",idPlaca);
             request.setAttribute("dni", dni);
             request.setAttribute("dniInvalid", false);
             request.setAttribute("dni", dni);

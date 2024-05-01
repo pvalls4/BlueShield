@@ -21,10 +21,10 @@
                             <img src="./images/logoBS.png" class="logo2 text-center">                    
                         </div>
                         <div class="boton m-3 px-2">
-                            El agente ${placa} con documento ${dni} ha sido creado correctamente.
+                            El agente ${idPlaca} con documento ${dni} ha sido creado correctamente.
                         </div>
                         <div class="boton m-3 px-2">
-                            No se olvide que su clave es la placa + los 3 ultimos digitos de su documento.
+                            No se olvide que su clave es el número del DNI.
                         </div>
                     </div>
                 </div>

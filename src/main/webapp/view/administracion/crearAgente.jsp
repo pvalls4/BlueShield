@@ -42,7 +42,7 @@
                                         <option value="Sargento I">Sargento I</option>
                                         <option value="Detective II">Detective II</option>
                                         <option value="Sargento II">Sargento II</option>
-                                        <option value="Detective III+">Detective III</option>
+                                        <option value="Detective III">Detective III</option>
                                         <option value="Teniente I">Teniente I</option>
                                         <option value="Teniente II">Teniente II</option>
                                     </optgroup>

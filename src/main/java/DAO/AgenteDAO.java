@@ -105,22 +105,28 @@ public class AgenteDAO {
     public int insert(AgenteDTO agente) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
-        int rows = 0;
+        int generatedId = 0;
         try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(SQL_INSERT);
+            stmt = conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, agente.getCiudadano().getDni());
             stmt.setString(2, agente.getPassword());
             stmt.setString(3, agente.getEnlaceFotografico());
             stmt.setString(4, agente.getRango());
             stmt.setBoolean(5, agente.isAdmin());
 
-            rows = stmt.executeUpdate();
+            stmt.executeUpdate();
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            generatedId = -1;
+            if (generatedKeys.next()) {
+                generatedId = generatedKeys.getInt(1);
+            } else {
+                throw new SQLException("No se generó ningún ID.");
+            }
         } catch (SQLException ex) {
-            rows = 0;
+            generatedId = 0;
         }
-
-        return rows;
+        return generatedId;
     }
 
     public int update(AgenteDTO agente) throws SQLException {
