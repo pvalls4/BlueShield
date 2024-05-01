@@ -43,6 +43,7 @@ public class registrarCiudadano extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        
         String dni = request.getParameter("dni");
         String nombre = request.getParameter("nombre");
         String apellidos = request.getParameter("apellidos");

@@ -31,7 +31,7 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-12 col-md-4 text-center d-flex">
-                        <img src="./images/logoBS.png" class="logo mb-3 mb-md-0" alt="Logo" onclick="redirigir('dashboard')">
+                        <img src="./images/logoBS.png" class="logo mb-3 mb-md-0 img-fluid max-width-100" alt="Logo" onclick="redirigir('dashboard')">
                         <div class="d-flex flex-column justify-content-center">
                             <img src="./images/blueshield.png" class="blueshield" alt="BlueShield" onclick="redirigir('dashboard')">
                         </div>
