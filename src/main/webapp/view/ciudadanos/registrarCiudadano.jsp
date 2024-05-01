@@ -8,7 +8,7 @@
 
     <div class="row p-3">
         <div class="col-md-12">
-            <form action="registrarCiudadano" method="post">
+            <form action="registrarCiudadano" id="registrarCiudadano" method="post">
                 <div class="form-group row mx-3">
                     <label for="dni" class="col-form-label">DNI</label>
                 </div>
@@ -83,34 +83,14 @@
                 </div>
                 <div class="row justify-content-center text-center my-3 ">
                     <div class="col-md-6 col-lg-4">
-                        <!--<button type="submit" class="btn btn-primary btn-block m-1 px-5" style="background-color: #bbddf5;color:#0757af;">Confirmar Registro</button>-->
-                        <button type="submit" class="boton mx-4 mt-4">Confirmar Registro</button>
+                        <button id="toPopUp" class="boton mx-4 mt-4">Confirmar Registro</button>
                         <a href="ciudadanos"><button type="button" class="boton mx-4 mt-4">Cancelar</button></a>
                     </div>
                 </div>
+                
             </form>
-            <script>
-                function generarDNI() {
-                    var dniGenerado = generarDNIUnico();
-                    document.getElementById("dni").value = dniGenerado;
-                }
-                function generarDNIUnico() {
-                    var dni;
-                    do {
-                        var numeroAleatorio = Math.floor(Math.random() * 100000000);
-                        var letras = 'TRWAGMYFPDXBNJZSQVHLCKE';
-                        var residuo = numeroAleatorio % 23;
-                        dni = numeroAleatorio.toString() + letras.charAt(residuo);
-                    } while (existeDNI(dni));
-                    return dni;
-                }
-                function existeDNI(dni) {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("GET", "existeDNI?id=" + dni, false); // Solicitud sincrónica
-                    xhr.send();
-                    return xhr.responseText === "1";
-                }
-            </script>
+            <%@ include file="./modal_registroCiudadano.jsp" %>  
+            <script src="../../js/modal_registroCiudadano.js"></script>
         </div>
     </div>
 </div>
