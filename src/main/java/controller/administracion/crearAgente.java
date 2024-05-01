@@ -101,7 +101,7 @@ public class crearAgente extends HttpServlet {
                 ex.getStackTrace();
             }
             request.setAttribute("placa", placa);
-            String contrasena = placa + "-" + halfPass;
+            String contrasena = request.getParameter("dni");
             request.setAttribute("rango", rango);
 
             try {

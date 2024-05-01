@@ -1,10 +1,7 @@
 <%@ include file="../header.jsp" %>
-<div id="fondo" class="container bg-primary">      
+<div id="fondo" class="container rounded" style="background-color: #9acbfd">      
     <div class="row" style="
-         background-color: #9acbfd;
-         border: 2px solid #0757af;
-         border-radius: 20px;
-         ">
+         background-color: #9acbfd;">
         <form id="nuevaMulta" method="post" action="nuevaMulta" accept-charset="UTF-8">  
             <div class="row">
                 <div class="d-flex justify-content-center mt-2"><h2><strong><u>EMISI&Oacute;N DE DENUNCIA</u></strong></h2></div>
