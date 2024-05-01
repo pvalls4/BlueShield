@@ -160,11 +160,11 @@
                 function generarDNIUnico() {
                     var dni;
                     do {
-                        var numeroAleatorio = Math.floor(Math.random() * 100000000);
+                        var numeroAleatorio = Math.floor(10000000 + Math.random() * 90000000);
                         var letras = 'TRWAGMYFPDXBNJZSQVHLCKE';
                         var residuo = numeroAleatorio % 23;
                         dni = numeroAleatorio.toString() + letras.charAt(residuo);
-                    } while (existeDNI(dni) && numeroAleatorio > 10000000 && numeroAleatorio < 99999999);
+                    } while (existeDNI(dni));
                     return dni;
                 }
                 function existeDNI(dni) {

@@ -1,6 +1,10 @@
 <%@ include file="../header.jsp" %>
 <div id="fondo" class="container bg-primary">      
-    <div class="row" style="background-color: #9acbfd;">
+    <div class="row" style="
+         background-color: #9acbfd;
+         border: 2px solid #0757af;
+         border-radius: 20px;
+         ">
         <form id="nuevaMulta" method="post" action="nuevaMulta" accept-charset="UTF-8">  
             <div class="row">
                 <div class="d-flex justify-content-center mt-2"><h2><strong><u>EMISI&Oacute;N DE DENUNCIA</u></strong></h2></div>
@@ -180,15 +184,15 @@
 
                         const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
                         checkboxes.forEach((checkbox) => {
-                            const jsonValue = JSON.parse(checkbox.value); 
-                            const importeArticulo = parseFloat(jsonValue.importe); 
-                            const articulo = (parseFloat(jsonValue.id) / 100).toFixed(2); 
-                            importeTotal += importeArticulo; 
+                            const jsonValue = JSON.parse(checkbox.value);
+                            const importeArticulo = parseFloat(jsonValue.importe);
+                            const articulo = (parseFloat(jsonValue.id) / 100).toFixed(2);
+                            importeTotal += importeArticulo;
                             infraccionesSeleccionadas.push("Artículo: " + articulo);
                         });
 
                         document.getElementById("infracciones").textContent = infraccionesSeleccionadas.join("\n");
-                        document.getElementById("importeTotal").textContent = importeTotal.toFixed(2) + ("\u20AC"); 
+                        document.getElementById("importeTotal").textContent = importeTotal.toFixed(2) + ("\u20AC");
                         document.getElementById("dniDenunciado").textContent = dniDenunciado;
                         document.getElementById("fechaEmisionMulta").textContent = fechaEmisionMulta;
 

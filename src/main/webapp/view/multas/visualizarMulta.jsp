@@ -1,5 +1,5 @@
 <%@ include file="../header.jsp"%>
-<div id="fondo" class="container bg-primary rounded">
+<div id="fondo" class="container rounded">
     <c:set var="formattedImporte" value="${String.format('%.2f', visualizarMulta.importe_total)}" />
     <c:if test="${empty visualizarMulta}">
         <div class="row justify-content-center text-center py-5 m-3" style="background-color: #bbddf5; color:#0757af;">
@@ -31,7 +31,7 @@
                     <div class ="row">
                         <div class = "col rounded ms-4 me-3 mb-2" style="background-color: #bbddf5;">${visualizarMulta.ciudadano.nombre} ${visualizarMulta.ciudadano.apellidos} - <strong>${visualizarMulta.ciudadano.dni}</strong></div>                                                
                         <c:if test="${empty visualizarMulta.vehiculo}"><div class = "col rounded mb-2 ms-4 me-4" style="background-color: #bbddf5;">N/A</div></c:if>
-                        <c:if test="${not empty visualizarMulta.vehiculo}"><div class = "col rounded mb-2 ms-4 me-4" style="background-color: #bbddf5;">${visualizarMulta.vehiculo.modelo.marca} ${visualizarMulta.vehiculo.modelo.modelo} <strong>${visualizarMulta.vehiculo.matricula}</strong></div></c:if>
+                        <c:if test="${not empty visualizarMulta.vehiculo}"><div class = "col rounded mb-2 ms-4 me-4" style="background-color: #bbddf5;">${visualizarMulta.vehiculo.modelo.marca} ${visualizarMulta.vehiculo.modelo.modelo} - <strong>${visualizarMulta.vehiculo.matricula}</strong></div></c:if>
                         </div>
                         <div class ="row">
                             <div class = "col rounded ms-4">Ubicación</div>                        
