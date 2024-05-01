@@ -48,9 +48,6 @@ public class crearAgente extends HttpServlet {
                 request.setAttribute("listaCiudadanosFiltrada", listaCiudadanosFiltrada);
 
                 request.setAttribute("listaCiudadanos", listaCiudadanos);
-                AgenteDTO miAgente = listaAgentes.get(listaAgentes.size() - 1);
-                int idPlaca = miAgente.getPlaca() + 1;
-                request.setAttribute("idPlaca", idPlaca);
                 RequestDispatcher rd = request.getRequestDispatcher("/view/administracion/crearAgente.jsp");
                 rd.forward(request, response);
             } catch (SQLException ex) {
@@ -95,7 +92,14 @@ public class crearAgente extends HttpServlet {
 
             String imagen = request.getParameter("imagen");
             String halfPass = dni.substring(dni.length() - 3);
-            int placa = Integer.parseInt(request.getParameter("placa"));
+            int placa = 0; 
+            try{
+                List<AgenteDTO> listaAgentes = agenteDAO.selectAll();
+                AgenteDTO miAgente = listaAgentes.get(listaAgentes.size() - 1);
+                placa = miAgente.getPlaca() + 1;
+            }catch(SQLException ex){
+                ex.getStackTrace();
+            }
             request.setAttribute("placa", placa);
             String contrasena = placa + "-" + halfPass;
             request.setAttribute("rango", rango);
