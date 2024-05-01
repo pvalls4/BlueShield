@@ -18,12 +18,12 @@
                 <div class="col rounded ms-3 me-3 mb-2">
                   <input type="text" autocomplete="off" class="form-control input-form" list="ciudadanosOptions" name="dni" placeholder="DNI agente" aria-label="Buscar por DNI" aria-describedby="button-addon2">
                     <datalist id="ciudadanosOptions">
-                        <c:if test="${not empty listaCiudadanos}">
-                            <c:forEach items="${listaCiudadanos}" var="ciudadano">
+                        <c:if test="${not empty listaCiudadanosFiltrada}">
+                            <c:forEach items="${listaCiudadanosFiltrada}" var="ciudadano">
                                 <option value="${ciudadano.dni}">${ciudadano.dni} - ${ciudadano.nombre} ${ciudadano.apellidos}</option>
                             </c:forEach>
                         </c:if>
-                        <c:if test="${empty listaCiudadanos}">
+                        <c:if test="${empty listaCiudadanosFiltrada}">
                             <option value="Error en base de datos">
                         </c:if>
                     </datalist>
