@@ -1,9 +1,9 @@
 <%@ include file="../header.jsp" %>
-<div class="container bg-primary border border-dark rounded">
-    <form id="nuevaMulta" method="post" action="nuevaMulta" accept-charset="UTF-8">        
-        <div class="row" style="background-color: #9acbfd;">
+<div id="fondo" class="container bg-primary">      
+    <div class="row" style="background-color: #9acbfd;">
+        <form id="nuevaMulta" method="post" action="nuevaMulta" accept-charset="UTF-8">  
             <div class="row">
-                <div class="d-flex justify-content-center mt-2"><h2><strong><u>EMISION DE DENUNCIA</u></strong></h2></div>
+                <div class="d-flex justify-content-center mt-2"><h2><strong><u>EMISI&Oacute;N DE DENUNCIA</u></strong></h2></div>
             </div>
             <div class="row">
                 <div class="col-md-12 mb-2">
@@ -16,7 +16,7 @@
                             <datalist id="ciudadanosOptions">
                                 <c:if test="${not empty listaCiudadanos}">
                                     <c:forEach items="${listaCiudadanos}" var="ciudadano">
-                                        <option value="${ciudadano.dni}">
+                                        <option value="${ciudadano.dni}">${ciudadano.dni} - ${ciudadano.nombre} ${ciudadano.apellidos}</option>
                                     </c:forEach>
                                 </c:if>
                                 <c:if test="${empty listaCiudadanos}">
@@ -37,7 +37,7 @@
 
                     <div class="row">
                         <label for = "fechaEmision" class="col rounded ms-3 me-2">Fecha</label>                                  
-                        <label for = "vehiculo" class="col rounded ms-4 me-2">Vehiculo Implicado (Opcional)</label> 
+                        <label for = "vehiculo" class="col rounded ms-4 me-2">Veh&iacute;culo Implicado (Opcional)</label> 
                     </div>
                     <div class="row">
                         <div class="col rounded ms-3 me-2 mb-2"><input type="date" class="form-control input-form" id="fechaEmision" name="fechaEmision" required></div>                                         
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <label for= "ubicacion" class="col rounded ms-3 me-2">Ubicacion</label>                                                 
+                        <label for= "ubicacion" class="col rounded ms-3 me-2">Ubicaci&oacute;n</label>                                                 
                     </div>
                     <div class="row">
                         <div class="col rounded ms-3 mb-2 me-2"><input type="text" class="form-control input-form" id="ubicacion" name="ubicacion"></div>
@@ -99,7 +99,7 @@
                 <div class="accordion-item" style="background-color: #bbddf5;">
                     <h2 class="accordion-header" id="heading<%= capituloActual %>">
                         <button class="accordion-button <%= primerCapitulo ? "" : "collapsed" %>" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= capituloActual %>" aria-expanded="<%= primerCapitulo ? "true" : "false" %>" aria-controls="collapse<%= capituloActual %>" style="background-color: #1e549f; color: white;">
-                            Capítulo <%= capituloActual %>
+                            Cap&iacute;tulo <%= capituloActual %>
                         </button>
                     </h2>
                     <div id="collapse<%= capituloActual %>" class="accordion-collapse collapse<%= primerCapitulo ? " show" : "" %>" aria-labelledby="heading<%= capituloActual %>" data-bs-parent="#accordionArticulos">
@@ -261,7 +261,8 @@
                 }
             </script>
         </div>
-</div></div></div>
+</div></div>
 </form>
+                        </div>
 </div>      
 <%@ include file="../footer.jsp" %>
