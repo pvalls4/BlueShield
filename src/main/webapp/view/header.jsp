@@ -23,7 +23,7 @@
 
     <script>
         function redirigir(id) {
-            window.location.href = id
+            window.location.href = id;
         }
     </script>
     <body>
@@ -42,10 +42,10 @@
                             <c:if test="${not empty username}">
                                 <div class="d-flex flex-column mx-1 pb-2">
                                     <c:if test="${agente.isAdmin()}">
-                                        <p class="version mb-0 text-md-right">Version 1.0 - <a href="admin">ADMIN</a></p>
+                                        <p class="version mb-0 text-md-right">Versi&oacute;n 1.0 - <a href="admin">ADMIN</a></p>
                                     </c:if>
                                     <c:if test="${!agente.isAdmin()}">
-                                        <p class="version mb-0 text-md-right">Version 1.0</p>
+                                        <p class="version mb-0 text-md-right">Versi&oacute;n 1.0</p>
                                     </c:if>
                                     <a href="agente?placa=${agente.placa}">${agente.ciudadano.nombre} ${agente.ciudadano.apellidos} (${agente.placa})</a>
                                 </div>
@@ -55,7 +55,7 @@
                                 </a>
                             </c:if>
                             <c:if test="${empty username}">
-                                <h2 class="version mb-0 text-md-right">Version 1.0</h2>
+                                <h2 class="version mb-0 text-md-right">Versi&oacute;n 1.0</h2>
                             </c:if>
                         </div>
                     </div>
