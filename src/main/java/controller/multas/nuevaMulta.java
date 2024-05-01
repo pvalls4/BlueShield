@@ -86,7 +86,8 @@ public class nuevaMulta extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        request.setCharacterEncoding("UTF-8");
+        
         String dni = request.getParameter("dni");
         CiudadanoDTO ciudadano = null;
         CiudadanoDAO daoc = new CiudadanoDAO();
