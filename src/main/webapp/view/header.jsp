@@ -38,16 +38,16 @@
                     <div class="col-sm-12 col-md-3 text-center">
                         <div class="row align-items-center">
                             <%@ page import="model.DTO.AgenteDTO" %>
-                            <c:set var="agente" value="${username}"/>
+                            <c:set var="agentelogged" value="${username}"/>
                             <c:if test="${not empty username}">
                                 <div class="d-flex flex-column mx-1 pb-2">
-                                    <c:if test="${agente.isAdmin()}">
+                                    <c:if test="${agentelogged.isAdmin()}">
                                         <p class="version mb-0 text-md-right">Versi&oacute;n 1.0 - <a href="admin">ADMIN</a></p>
                                     </c:if>
-                                    <c:if test="${!agente.isAdmin()}">
+                                    <c:if test="${!agentelogged.isAdmin()}">
                                         <p class="version mb-0 text-md-right">Versi&oacute;n 1.0</p>
                                     </c:if>
-                                    <a href="agente?placa=${agente.placa}">${agente.ciudadano.nombre} ${agente.ciudadano.apellidos} (${agente.placa})</a>
+                                    <a href="agentelogged?placa=${agentelogged.placa}">${agentelogged.ciudadano.nombre} ${agentelogged.ciudadano.apellidos} (${agentelogged.placa})</a>
                                 </div>
                                 <a href='logout' class="mx-1">
                                     <button type="submit" class="btn btn-primary b-login mb-1">Cerrar Sesi&oacute;n</button>
