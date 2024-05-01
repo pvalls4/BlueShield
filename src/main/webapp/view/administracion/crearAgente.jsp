@@ -1,6 +1,6 @@
 <%@ include file="../header.jsp" %>
 <c:if test="${isAdmin}">
-    <div id="fondo" class="container rounded" style="background-color: #9acbfd">
+    <div class="container bg-primary border border-dark rounded">
         <form method="post" action="crearAgente">
             <div class="row" style="background-color: #9acbfd">
                 <div class="row">
