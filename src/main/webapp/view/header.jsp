@@ -23,7 +23,7 @@
 
     <script>
         function redirigir(id) {
-            window.location.href = id
+            window.location.href = id;
         }
     </script>
     <body>
@@ -31,9 +31,9 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-12 col-md-4 text-center d-flex">
-                        <img src="./images/logoBS.png" class="logo mb-3 mb-md-0 img-fluid max-width-100" alt="Logo" onclick="redirigir('dashboard')">
+                        <img src="./images/logoBS.png" class="mb-3 mb-md-0 logo" alt="Logo" onclick="redirigir('dashboard')">
                         <div class="d-flex flex-column justify-content-center">
-                            <img src="./images/blueshield.png" class="blueshield img-fluid " alt="BlueShield" onclick="redirigir('dashboard')">
+                            <img src="./images/blueshield.png" class="blueshield" alt="BlueShield" onclick="redirigir('dashboard')">
                         </div>
                     </div>
                     <div class="col-md-4 text-center"></div>
@@ -44,7 +44,7 @@
                             <c:if test="${not empty username}">
                                 <div class="d-flex flex-column mx-1 pb-2">
                                     <c:if test="${agente.isAdmin()}">
-                                        <p class="version mb-0 text-md-right">Version 1.0 - <a href="admin">ADMIN</a></p>
+                                        <p class="version mb-0 text-md-right">Versi&oacute;n 1.0 - <a href="admin">ADMIN</a></p>
                                     </c:if>
                                     <c:if test="${!agente.isAdmin()}">
                                         <p class="version mb-0 text-md-right">Version 1.0</p>
