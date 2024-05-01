@@ -18,7 +18,14 @@
         <div class="row p-3">
             <!-- Imagen a la izquierda -->
             <div class="col-md-3 border border-dark rounded m-0 p-0 d-flex align-items-center justify-content-center">
-                <img src="${agente.enlaceFotografico}" class="img-fluid" alt="FotoCiudadano" style="object-fit: cover; width: 100%; height: 100%;">
+                <div class="position-relative d-inline-block">
+                    <img src="${agente.enlaceFotografico}" class="img-fluid" alt="FotoCiudadano" style="object-fit: cover; width: 100%; height: 100%;">
+                    <c:if test="${agente.ciudadano.isDeceased}">
+                        <div class="position-absolute top-0 start-0">
+                            <img src="../images/fallecido.png" alt="FALLECIDO" class="img-fluid">
+                        </div>
+                    </c:if>
+                </div>
             </div>
 
             <!-- Contenedor para otros parámetros a la derecha -->

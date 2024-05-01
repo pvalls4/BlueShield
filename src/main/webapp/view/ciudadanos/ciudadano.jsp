@@ -14,26 +14,18 @@
                 <h2><strong><u>${ciudadano.nombre} ${ciudadano.apellidos} - ${ciudadano.dni}</u></strong></h2>
             </div>
         </div>
-        <!-- Segundo row con imagen y parámetros -->
         <div class="row p-3">
-            <!-- Imagen a la izquierda -->
-            <!-- <div class="col-md-3 border border-dark rounded m-0 p-0 d-flex align-items-center justify-content-center">
-                <img src="${ciudadano.enlaceFotografico}" class="img-fluid" alt="FotoCiudadano" style="object-fit: cover; width: 100%; height: 100%;">
-            </div> -->
-            
             <div class="col-md-3 border border-dark rounded m-0 p-0 d-flex align-items-center justify-content-center">
-                <div class="container">
-                    <div class="position-relative d-inline-block">
-                        <img src="${ciudadano.enlaceFotografico}" class="img-fluid" alt="FotoCiudadano" style="object-fit: cover; width: 100%; height: 100%;">
+                <div class="position-relative d-inline-block">
+                    <img src="${ciudadano.enlaceFotografico}" class="img-fluid" alt="FotoCiudadano" style="object-fit: cover; width: 100%; height: 100%;">
+                    <c:if test="${ciudadano.isDeceased}">
                         <div class="position-absolute top-0 start-0">
-                            <img src="../images/logoBS.png" alt="FALLECIDO" class="img-fluid">
+                            <img src="../images/fallecido.png" alt="FALLECIDO" class="img-fluid">
                         </div>
-                    </div>
+                    </c:if>
                 </div>
             </div>
-            <!-- Contenedor para otros parámetros a la derecha -->
             <div class="col-md-9">
-                <!-- Nueva fila para dividir los parámetros -->
                 <div class="row">
                     <div class="col-md-6 px-3">
                         <div class="col p-1">
