@@ -17,7 +17,7 @@
         <div class="col">
             <form action="ciudadanos" method="post">
                 <div class="input-group mb-3 p-4">
-                    <input type="text" class="form-control" list="ciudadanosOptions" name="dni" placeholder="Buscar por DNI" aria-label="Buscar por DNI" aria-describedby="button-addon2">
+                    <input type="text" autocomplete="off" class="form-control" list="ciudadanosOptions" name="dni" placeholder="Buscar por DNI" aria-label="Buscar por DNI" aria-describedby="button-addon2">
                     <datalist id="ciudadanosOptions">
                         <c:if test="${not empty listaCiudadanos}">
                             <c:forEach items="${listaCiudadanos}" var="ciudadano">

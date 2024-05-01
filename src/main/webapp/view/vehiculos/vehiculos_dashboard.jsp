@@ -10,7 +10,7 @@
         <div class="col">
             <form action="vehiculos" method="post">
                 <div class="input-group mb-3 p-4">
-                    <input type="text" class="form-control" name="matricula" list="vehiculosOptions" placeholder="Buscar Veh&iacute;culo" aria-label="Buscar por Matricula" aria-describedby="button-addon2">
+                    <input type="text" autocomplete="off" class="form-control" name="matricula" list="vehiculosOptions" placeholder="Buscar Veh&iacute;culo" aria-label="Buscar por Matricula" aria-describedby="button-addon2">
                     <datalist id="vehiculosOptions">
                         <c:if test="${not empty listaVehiculos}">
                             <c:forEach items="${listaVehiculos}" var="vehiculo">

@@ -12,7 +12,7 @@
                     </div>
                     <div class="row">
                         <div class="col rounded ms-3 mb-2 me-2">
-                            <input class="form-control input-form" list="ciudadanosOptions" id="dni" name="dni" placeholder="DNI Ciudadano" onblur="buscarCiudadano()">
+                            <input class="form-control input-form" autocomplete="off" list="ciudadanosOptions" id="dni" name="dni" placeholder="DNI Ciudadano" onblur="buscarCiudadano()">
                             <datalist id="ciudadanosOptions">
                                 <c:if test="${not empty listaCiudadanos}">
                                     <c:forEach items="${listaCiudadanos}" var="ciudadano">
@@ -42,7 +42,7 @@
                     <div class="row">
                         <div class="col rounded ms-3 me-2 mb-2"><input type="date" class="form-control input-form" id="fechaEmision" name="fechaEmision" required></div>                                         
                         <div class="col rounded  mb-2 ms-4 me-2">
-                            <input type="text" class="form-control input-form" list="vehiculosOptions" id="matricula" name="matricula" placeholder="Matricula">
+                            <input type="text" autocomplete="off" class="form-control input-form" list="vehiculosOptions" id="matricula" name="matricula" placeholder="Matricula">
                             <datalist id="vehiculosOptions">
                                 <c:if test="${not empty listaVehiculos}">
                                     <c:forEach items="${listaVehiculos}" var="vehiculo">
