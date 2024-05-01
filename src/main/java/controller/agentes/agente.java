@@ -33,7 +33,6 @@ public class agente extends HttpServlet {
 
                 request.setAttribute("agente", agente);
                 request.setAttribute("listaCondecoracionesAgente", condecoracionesAgente);
-                System.out.println(request.getAttribute("listaCondecoracionesAgente"));
 
                 request.getRequestDispatcher("/view/agentes/agente.jsp").forward(request, response);
 

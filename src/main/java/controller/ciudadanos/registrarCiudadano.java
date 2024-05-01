@@ -21,17 +21,17 @@ public class registrarCiudadano extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                response.setContentType("text/html;charset=UTF-8");
-                request.setAttribute("title", "BlueShield - Registrar Ciudadano");
-                HttpSession session = request.getSession(false);
+        response.setContentType("text/html;charset=UTF-8");
+        request.setAttribute("title", "BlueShield - Registrar Ciudadano");
+        HttpSession session = request.getSession(false);
 
-                if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
-                    request.setAttribute("username", session.getAttribute("username"));
-                    request.getRequestDispatcher("./view/ciudadanos/registrarCiudadano.jsp").forward(request, response);
-                } else {
-                    response.sendRedirect("login");
-                }
-            }
+        if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
+            request.setAttribute("username", session.getAttribute("username"));
+            request.getRequestDispatcher("./view/ciudadanos/registrarCiudadano.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("login");
+        }
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,7 +43,7 @@ public class registrarCiudadano extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        
+
         String dni = request.getParameter("dni");
         String nombre = request.getParameter("nombre");
         String apellidos = request.getParameter("apellidos");
@@ -80,19 +80,18 @@ public class registrarCiudadano extends HttpServlet {
                         direccion,
                         imagen
                 );
-                 int row = new CiudadanoDAO().insert(ciudadano);
-                 if(row>0){
-                     response.sendRedirect("ciudadanos");
-                 } else {
-                     System.out.println("Error añadiendo ciudadano");
-                 }
+                int row = new CiudadanoDAO().insert(ciudadano);
+                if (row > 0) {
+                    response.sendRedirect("ciudadanos");
+                } else {
+                    request.getRequestDispatcher("./view/errores/errorAddCiudadano.jsp").forward(request, response);
+                }
             } else {
-                System.out.println("Error añadiendo direccion.");
+                request.getRequestDispatcher("./view/errores/errorAddDireccion.jsp").forward(request, response);
             }
         } catch (SQLException ex) {
             Logger.getLogger(registrarCiudadano.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 
     @Override

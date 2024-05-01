@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Conexion {
+
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 //    private static final String connectionString = System.getenv("AZURE_MYSQL_CONNECTIONSTRING");
     private static final Properties properties = new Properties();
@@ -17,7 +18,7 @@ public class Conexion {
     static {
         try (InputStream inputStream = Conexion.class.getClassLoader().getResourceAsStream("./config/config.properties")) {
             properties.load(inputStream);
-       } catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -33,7 +34,6 @@ public class Conexion {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 //            conn = DriverManager.getConnection(connectionString);
         } catch (SQLException e) {
-            System.err.println("Error al conectar con la base de datos: " + e.getMessage());
             throw e;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);

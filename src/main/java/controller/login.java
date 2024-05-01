@@ -59,7 +59,6 @@ public class login extends HttpServlet {
             }
         } catch (SQLException ex) {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println(ex);
         }
         return null;
     }

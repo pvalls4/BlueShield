@@ -124,7 +124,6 @@ public class nuevaMulta extends HttpServlet {
 
         float importeTotal = 0.0f;
         String[] articulosSeleccionadosStr = request.getParameterValues("articuloSeleccionado");
-        System.out.println(articulosSeleccionadosStr);
 
         List<Integer> articulosIds = new ArrayList<>();
 
