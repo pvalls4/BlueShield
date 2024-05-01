@@ -4,7 +4,7 @@
 
     <c:if test="${empty vehiculo}">
         <div class="row justify-content-center text-center py-5 m-3" style="background-color: #bbddf5;color:#0757af;">
-            No se encontró este Vehiculo.   
+            Error en Vehiculo.   
         </div>
 
     </c:if>

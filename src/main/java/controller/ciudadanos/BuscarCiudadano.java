@@ -1,4 +1,4 @@
-package controller.multas;
+package controller.ciudadanos;
 
 import DAO.CiudadanoDAO;
 import java.io.IOException;
@@ -13,8 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DTO.CiudadanoDTO;
 
-@WebServlet(name = "BuscarCiudadanoDeMulta", urlPatterns = {"/BuscarCiudadanoDeMulta"})
-public class BuscarCiudadanoDeMulta extends HttpServlet {
+@WebServlet(name = "BuscarCiudadano", urlPatterns = {"/BuscarCiudadano"})
+public class BuscarCiudadano extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -39,7 +39,7 @@ public class BuscarCiudadanoDeMulta extends HttpServlet {
             out.close();
 
         } catch (SQLException ex) {
-            Logger.getLogger(BuscarCiudadanoDeMulta.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BuscarCiudadano.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

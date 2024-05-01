@@ -18,11 +18,12 @@ public class ModeloDAO {
     private static final String SQL_DELETE = "DELETE FROM modelos WHERE id=?";
 
     private ModeloDTO fromResultSet(ResultSet rs) throws SQLException {
+        int id = rs.getInt("id");
         String marca = rs.getString("marca");
         String modelo = rs.getString("modelo");
         String imagen = rs.getString("imagen");
 
-        ModeloDTO modeloDTO = new ModeloDTO(marca, modelo, imagen);
+        ModeloDTO modeloDTO = new ModeloDTO(id,marca, modelo, imagen);
 
         return modeloDTO;
     }
@@ -45,7 +46,7 @@ public class ModeloDAO {
                 }
             }
         } catch (SQLException ex) {
-            modelos=null;
+            modelos = null;
         }
 
         return modelos;
@@ -68,7 +69,7 @@ public class ModeloDAO {
                 }
             }
         } catch (SQLException ex) {
-            modeloDTO=null;
+            modeloDTO = null;
         }
 
         return modeloDTO;

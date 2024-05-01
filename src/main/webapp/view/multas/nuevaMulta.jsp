@@ -253,7 +253,7 @@
                                 }
                             }
                         };
-                        xhr.open('GET', 'BuscarCiudadanoDeMulta?id=' + encodeURIComponent(dni), true);
+                        xhr.open('GET', 'BuscarCiudadano?id=' + encodeURIComponent(dni), true);
                         xhr.send();
                     } else {
                         document.getElementById("nombreCiudadano").value = "";

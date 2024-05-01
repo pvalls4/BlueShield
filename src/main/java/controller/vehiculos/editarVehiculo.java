@@ -1,5 +1,6 @@
 package controller.vehiculos;
 
+import DAO.CiudadanoDAO;
 import DAO.VehiculoDAO;
 import DAO.ModeloDAO;
 import controller.ciudadanos.editarCiudadano;
@@ -12,8 +13,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.DTO.CiudadanoDTO;
+import model.DTO.ModeloDTO;
 import model.DTO.VehiculoDTO;
 
 @WebServlet(name = "editarVehiculo", urlPatterns = {"/editarVehiculo"})
@@ -41,11 +45,16 @@ public class editarVehiculo extends HttpServlet {
                 VehiculoDAO dao = new VehiculoDAO();
                 VehiculoDTO vehiculo = dao.select(bastidor);
 
+                List<ModeloDTO> listaModelos = new ModeloDAO().selectAll();
+                List<CiudadanoDTO> listaCiudadanos = new CiudadanoDAO().selectAll();
+
+                request.setAttribute("listaModelos", listaModelos);
+                request.setAttribute("listaCiudadanos", listaCiudadanos);
                 request.setAttribute("vehiculo", vehiculo);
                 request.getRequestDispatcher("/view/vehiculos/editarVehiculo.jsp").forward(request, response);
             } else {
                 response.sendRedirect("login");
-            } 
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -56,27 +65,18 @@ public class editarVehiculo extends HttpServlet {
             throws ServletException, IOException {
         try {
             String bastidor = request.getParameter("bastidor");
-            VehiculoDTO vehiculo= new VehiculoDAO().select(bastidor);
-            
-            String matricula = request.getParameter("matricula");
-            
-            vehiculo.setMatricula(matricula);
-            
-            String marca = request.getParameter("marca");
-            String modelo = request.getParameter("modelo");
-            String imagen = request.getParameter("imagen");
+            VehiculoDTO vehiculo = new VehiculoDAO().select(bastidor);
 
-            vehiculo.getModelo().setMarca(marca);
-            vehiculo.getModelo().setMarca(modelo);
-            vehiculo.getModelo().setImagen(imagen);
-            
-            new ModeloDAO().update(vehiculo.getModelo());
-            new VehiculoDAO().update(vehiculo);
-            
-            new VehiculoDAO().update(vehiculo);
-            
-            response.sendRedirect("vehiculo?id=" + bastidor);
-            
+            int idModelo = Integer.parseInt(request.getParameter("idModelo"));
+            ModeloDTO modeloDTO = new ModeloDAO().select(idModelo);
+            vehiculo.setModelo(modeloDTO);
+            int rows = new VehiculoDAO().update(vehiculo);
+            if (rows > 0) {
+                response.sendRedirect("vehiculo?id=" + vehiculo.getMatricula());
+            } else {
+                response.sendRedirect("vehiculo?id=-1");
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(editarCiudadano.class.getName()).log(Level.SEVERE, null, ex);
         }
