@@ -8,7 +8,7 @@
     <c:if test="${not empty agente}">
         <div class="row px-4">
             <div class="col-md-12 g-3 text-center">
-                <h2>${agente.ciudadano.nombre} ${agente.ciudadano.apellidos} - ${agente.placa}</h2>
+                <h2><Strong><u>${agente.ciudadano.nombre} ${agente.ciudadano.apellidos} - ${agente.placa}</u></Strong></h2>
             </div>
         </div>
         <div class="row p-3">
@@ -84,7 +84,7 @@
         <div class="row  mb-3 px-4">
             <div class="row px-4">
                 <div class="col-md-12 g-3 text-center">
-                    <h3>Condecoraciones</h3>
+                    <h3><Strong>Condecoraciones</strong></h3>
                 </div>
             </div>
             <div class="table-responsive">                

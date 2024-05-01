@@ -20,11 +20,9 @@ public class login extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
         request.setAttribute("title", "BlueShield - LogIn");
-        if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
-            response.sendRedirect("/dashboard");
-        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/view/login.jsp");
+        dispatcher.forward(request, response);
     }
 
     @Override
