@@ -32,7 +32,7 @@
                 <div class="row align-items-center mx-0 px-0">
                     <div class="col-sm-12 col-md-6 text-center">
                         <img src="./images/logoBS.png" class="img-fluid logo" alt="Logo" onclick="redirigir('dashboard')">
-                        <img src="./images/blueshield2.png" class="img-fluid blueshield" alt="BlueShield" onclick="redirigir('dashboard')">
+                        <img src="./images/blueshield.png" class="img-fluid blueshield" alt="BlueShield" onclick="redirigir('dashboard')">
                     </div>
                     <div class="col-sm-12 col-md-2 text-center"></div>
                     <div class="col-sm-12 col-md-3 text-center">
