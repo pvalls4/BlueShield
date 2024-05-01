@@ -1,5 +1,5 @@
 <%@ include file="../header.jsp"%>
-<div class="container bg-primary border border-dark rounded">
+<div id="fondo" class="container bg-primary rounded">
     <c:set var="formattedImporte" value="${String.format('%.2f', visualizarMulta.importe_total)}" />
     <c:if test="${empty visualizarMulta}">
         <div class="row justify-content-center text-center py-5 m-3" style="background-color: #bbddf5; color:#0757af;">

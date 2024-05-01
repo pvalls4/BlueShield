@@ -1,5 +1,5 @@
 <%@ include file="../header.jsp" %>
-<div class="container border border-dark rounded" style="background-color: #9acbfd">
+<div id="fondo" class="container rounded" style="background-color: #9acbfd">
     <div class="row">
         <!--        buscador-->
         <div class="col">

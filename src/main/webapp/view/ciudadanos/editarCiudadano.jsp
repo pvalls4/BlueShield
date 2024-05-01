@@ -1,6 +1,6 @@
 <%@ include file="../header.jsp" %>
 
-<div class="container border border-dark rounded" style="background-color: #9acbfd">
+<div id="fondo" class="container rounded" style="background-color: #9acbfd">
 
     <c:if test="${empty ciudadano}">
         <div class="row justify-content-center text-center py-5 m-3" style="background-color: #bbddf5;color:#0757af;">

@@ -1,5 +1,5 @@
 <%@ include file="../header.jsp" %>
-<div class="container border border-dark rounded" style="background-color: #9acbfd">
+<div id="fondo" class="container rounded" style="background-color: #9acbfd">
     <c:if test="${not empty listaMultasVehiculo}">
         <div class="row px-4">
             <div class="col-md-12 g-3 text-center">

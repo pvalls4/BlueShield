@@ -46,7 +46,7 @@
                             <datalist id="vehiculosOptions">
                                 <c:if test="${not empty listaVehiculos}">
                                     <c:forEach items="${listaVehiculos}" var="vehiculo">
-                                        <option value="${vehiculo.matricula}">${vehiculo.matricula} - ${vehiculo.modelo.modelo}</option>
+                                        <option value="${vehiculo.matricula}">${vehiculo.matricula} - ${vehiculo.modelo.modelo} (${vehiculo.ciudadano.nombre} ${vehiculo.ciudadano.apellidos})</option>
                                     </c:forEach>
                                 </c:if>
                                 <c:if test="${empty listaVehiculos}">

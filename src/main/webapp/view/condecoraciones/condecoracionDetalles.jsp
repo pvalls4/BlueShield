@@ -1,5 +1,5 @@
 <%@ include file="../header.jsp" %>
-<div class="container border border-dark rounded" style="background-color: #9acbfd">
+<div id="fondo" class="container rounded" style="background-color: #9acbfd">
     <div class="d-flex container-fluid justify-content-center m-5">
         <div class="d-flex flex-column justify-content-center m-3">
             <img class="img-fluid" src="${condecoracion.foto}">
