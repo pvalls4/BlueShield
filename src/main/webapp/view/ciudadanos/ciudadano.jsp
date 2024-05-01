@@ -1,12 +1,9 @@
 <%@ include file="../header.jsp" %>
-
 <div id="fondo" class="container rounded" style="background-color: #9acbfd">
-
     <c:if test="${empty ciudadano}">
         <div class="row justify-content-center text-center py-5 m-3" style="background-color: #bbddf5;color:#0757af;">
             No se encontró este ciudadano.   
         </div>
-
     </c:if>
     <c:if test="${not empty ciudadano}">
         <div class="row px-4">
@@ -66,7 +63,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row  mb-3 px-4">
             <div class="row px-4">
                 <div class="col-md-12 g-3 text-center">
@@ -107,14 +103,13 @@
                 </table>
             </div>
         </div>
-
         <div class="row justify-content-center text-center">
-            <div class="col-md-6 col-lg-4"> <!-- Tamaño alargado para dispositivos medianos y grandes -->
+            <div class="col-md-6 col-lg-4"> 
                 <a href="editarCiudadano?id=${ciudadano.dni}">
                     <button class="btn btn-primary btn-block m-1 px-5" style="background-color: #bbddf5;color:#0757af;">Editar perfil</button>
                 </a>
             </div>
-            <div class="col-md-6 col-lg-4"> <!-- Tamaño alargado para dispositivos medianos y grandes -->
+            <div class="col-md-6 col-lg-4"> 
                 <a href="listaMultas?id=${ciudadano.dni}"><button class="btn btn-primary btn-block m-1 mb-3 px-5" style="background-color: #bbddf5;color:#0757af;">Ver Multas</button></a>
             </div>
         </div>

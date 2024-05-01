@@ -14,69 +14,44 @@ import java.util.List;
 import model.DTO.AgenteDTO;
 import model.DTO.CondecoracionAgenteDTO;
 
-/**
- *
- * @author Mati
- */
 @WebServlet(name = "agente", urlPatterns = {"/agente"})
 public class agente extends HttpServlet {
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(false);
 
-                if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
-                    request.setAttribute("username", session.getAttribute("username"));
-                    try {
-                        int placa = Integer.parseInt(request.getParameter("placa"));
-                        request.setAttribute("title", "BlueShield - Agente " + placa);
+        if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
+            request.setAttribute("username", session.getAttribute("username"));
+            try {
+                int placa = Integer.parseInt(request.getParameter("placa"));
+                request.setAttribute("title", "BlueShield - Agente " + placa);
 
-                        AgenteDTO agente = new AgenteDAO().select(placa);
-                        List<CondecoracionAgenteDTO> condecoracionesAgente = new CondecoracionAgenteDAO().selectByAgente(agente.getPlaca());
-                        
-                        request.setAttribute("agente", agente);
-                        request.setAttribute("listaCondecoracionesAgente", condecoracionesAgente);
-                        System.out.println(request.getAttribute("listaCondecoracionesAgente"));
-                        
-                        request.getRequestDispatcher("/view/agentes/agente.jsp").forward(request, response);
+                AgenteDTO agente = new AgenteDAO().select(placa);
+                List<CondecoracionAgenteDTO> condecoracionesAgente = new CondecoracionAgenteDAO().selectByAgente(agente.getPlaca());
 
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
+                request.setAttribute("agente", agente);
+                request.setAttribute("listaCondecoracionesAgente", condecoracionesAgente);
+                System.out.println(request.getAttribute("listaCondecoracionesAgente"));
 
-                } else {
-                    response.sendRedirect("login");
-                }
+                request.getRequestDispatcher("/view/agentes/agente.jsp").forward(request, response);
 
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+        } else {
+            response.sendRedirect("login");
+        }
+
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

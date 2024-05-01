@@ -9,7 +9,6 @@
     <div class="d-flex container-fluid justify-content-center m-3">
         <p><strong>Descripción:</strong> ${condecoracion.descripcion}</p>
     </div>
-
     <div class="row mb-3 px-4">
         <c:if test="${isAdmin}">
             <div class="table-responsive">

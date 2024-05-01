@@ -82,7 +82,8 @@ public class MultaDAO {
         }
         return multas;
     }
-     public List<MultaDTO> selectBASTIDOR(String bastidor) throws SQLException {
+
+    public List<MultaDTO> selectBASTIDOR(String bastidor) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -177,7 +178,7 @@ public class MultaDAO {
             } else {
                 throw new SQLException("No se generó ningún ID.");
             }
-            int rowMI=new MultaInfraccionDAO().insertALL(generatedId, infracciones);
+            int rowMI = new MultaInfraccionDAO().insertALL(generatedId, infracciones);
         } catch (SQLException ex) {
             rows = 0;
         }
@@ -191,7 +192,6 @@ public class MultaDAO {
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setDate(1, multa.getFecha_emision());
             stmt.setDate(2, multa.getFecha_limite());
@@ -205,8 +205,6 @@ public class MultaDAO {
             stmt.setInt(10, multa.getId());
 
             rows = stmt.executeUpdate();
-            System.out.println("Registros actualizado:" + rows);
-
         } catch (SQLException ex) {
             rows = 0;
         }
@@ -221,11 +219,9 @@ public class MultaDAO {
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setInt(1, multa.getId());
             rows = stmt.executeUpdate();
-            System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
             rows = 0;
         }

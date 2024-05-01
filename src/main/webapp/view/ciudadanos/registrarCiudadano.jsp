@@ -5,7 +5,6 @@
             <h2><u><strong>REGISTRO DE CIUDADANO</strong></u></h2>
         </div>
     </div>
-
     <div class="row p-3">
         <div class="col-md-12">
             <form action="registrarCiudadano" id="registrarCiudadano" method="post">
@@ -87,7 +86,6 @@
                         <a href="ciudadanos"><button type="button" class="boton mx-4 mt-4">Cancelar</button></a>
                     </div>
                 </div>
-
             </form>
             <%@ include file="./modal_registroCiudadano.jsp" %>  
             <script>
@@ -175,13 +173,9 @@
                     xhr.send();
                     return xhr.responseText === "1";
                 }
-
             </script>
         </div>
     </div>
 </div>
-
-
-
 <%@ include file="../footer.jsp" %>
 

@@ -5,7 +5,6 @@
             <h2><u><strong>REGISTRO DE VEHICULO</strong></u></h2>
         </div>
     </div>
-
     <div class="row p-3">
         <div class="col-md-12">
             <form action="registrarVehiculo" id="registrarVehiculo" method="post">

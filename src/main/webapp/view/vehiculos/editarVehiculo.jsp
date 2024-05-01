@@ -1,12 +1,9 @@
 <%@ include file="../header.jsp" %>
-
 <div id="fondo" class="container rounded" style="background-color: #9acbfd">
-
     <c:if test="${empty vehiculo}">
         <div class="row justify-content-center text-center py-5 m-3" style="background-color: #bbddf5;color:#0757af;">
             Ha habido un problema en la base de datos.   
         </div>
-
     </c:if>
     <c:if test="${not empty vehiculo}">
         <div class="row px-4">
@@ -14,7 +11,6 @@
                 <h2><u><Strong>${vehiculo.modelo.modelo} - ${vehiculo.matricula} - ${vehiculo.bastidor}</Strong></u></h2>
             </div>
         </div>
-
         <div class="row p-3">
             <div class="col-md-12">
                 <form action="editarVehiculo" id="editarVehiculo" method="post">
@@ -34,14 +30,12 @@
                                 </c:if>
                         </datalist>
                     </div>
-
                     <div class="form-group row mx-3">
                         <label for="nombreCiudadano" class="col-form-label">Propietario Propietario</label>
                         <div class="col">
                             <input class="form-control input-form" autocomplete="off" id="nombreCiudadano" name="nombreCiudadano" placeholder="${vehiculo.ciudadano.nombre} ${vehiculo.ciudadano.apellidos}" required>
                         </div>
                     </div>
-
                     <div class="form-group row mx-3">
                         <label for="modelo" class="col-form-label">Modelo</label>
                         <div class="col">

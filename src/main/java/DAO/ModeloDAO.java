@@ -23,7 +23,7 @@ public class ModeloDAO {
         String modelo = rs.getString("modelo");
         String imagen = rs.getString("imagen");
 
-        ModeloDTO modeloDTO = new ModeloDTO(id,marca, modelo, imagen);
+        ModeloDTO modeloDTO = new ModeloDTO(id, marca, modelo, imagen);
 
         return modeloDTO;
     }
@@ -86,9 +86,7 @@ public class ModeloDAO {
             stmt.setString(2, modeloDTO.getModelo());
             stmt.setString(3, modeloDTO.getImagen());
 
-            System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
-            System.out.println("Registros afectados:" + rows);
         } catch (SQLException ex) {
             rows = 0;
         }
@@ -103,7 +101,6 @@ public class ModeloDAO {
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, modeloDTO.getMarca());
             stmt.setString(2, modeloDTO.getModelo());
@@ -111,8 +108,6 @@ public class ModeloDAO {
             stmt.setInt(4, modeloDTO.getId());
 
             rows = stmt.executeUpdate();
-            System.out.println("Registros actualizado:" + rows);
-
         } catch (SQLException ex) {
             rows = 0;
         }
@@ -127,15 +122,12 @@ public class ModeloDAO {
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setInt(1, modeloDTO.getId());
             rows = stmt.executeUpdate();
-            System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
             rows = 0;
         }
-
         return rows;
     }
 }

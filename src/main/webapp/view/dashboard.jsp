@@ -11,11 +11,9 @@
         <img id="admin" src="./images/admin1.png" class="dash-option m-3" onclick="redirigir(this.id)">
     </c:if>
 </div>
-
-
 <script>
     function redirigir(id) {
-    window.location.href = id;
+        window.location.href = id;
     }
 </script>
 <%@ include file="./footer.jsp" %>

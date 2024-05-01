@@ -22,32 +22,29 @@ public class visualizarMulta extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-                HttpSession session = request.getSession(false); // No crea una nueva sesión si no hay una existente
+        HttpSession session = request.getSession(false); // No crea una nueva sesión si no hay una existente
 
+        if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
+            request.setAttribute("username", session.getAttribute("username"));
+            String identifier = request.getParameter("id");
+            request.setAttribute("title", "BlueShield - Multa REF. " + identifier);
+            int id = Integer.parseInt(identifier);
 
-                if (session != null && (session.getAttribute("username") != null || session.getAttribute("admin") != null)) {
-                    request.setAttribute("username", session.getAttribute("username"));
-                    String identifier = request.getParameter("id");
-                    request.setAttribute("title", "BlueShield - Multa REF. " + identifier);
-                    int id = Integer.parseInt(identifier);
+            MultaDAO multaDao = new MultaDAO();
+            MultaDTO visualizarMulta = multaDao.select(id);
 
-                    MultaDAO multaDao = new MultaDAO();
-                    MultaDTO visualizarMulta = multaDao.select(id);
+            MultaInfraccionDAO multaInfraccionDao = new MultaInfraccionDAO();
+            List<MultaInfraccionDTO> infraccionesInfo = multaInfraccionDao.selectIdMulta(id);
 
-                    MultaInfraccionDAO multaInfraccionDao = new MultaInfraccionDAO();
-                    List<MultaInfraccionDTO> infraccionesInfo =  multaInfraccionDao.selectIdMulta(id);
+            request.setAttribute("infraccionesInfo", infraccionesInfo);
+            request.setAttribute("visualizarMulta", visualizarMulta);
+            RequestDispatcher rd = request.getRequestDispatcher("./view/multas/visualizarMulta.jsp");
 
-                    request.setAttribute("infraccionesInfo", infraccionesInfo);
-                    request.setAttribute("visualizarMulta", visualizarMulta);
-                    RequestDispatcher rd = request.getRequestDispatcher("./view/multas/visualizarMulta.jsp");
-
-                    rd.forward(request, response);
-                } else {
-                    // No hay una sesión activa o el usuario no está autenticado
-                    // Realiza la lógica correspondiente, como mostrar un formulario de inicio de sesión
-                    response.sendRedirect("view/login.jsp");
-                }
-            }
+            rd.forward(request, response);
+        } else {
+            response.sendRedirect("view/login.jsp");
+        }
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -62,8 +59,6 @@ public class visualizarMulta extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*String id = request.getParameter("id");
-        response.sendRedirect("visualizarMulta?id=" + id);*/
     }
 
     @Override

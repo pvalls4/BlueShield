@@ -1,7 +1,6 @@
 package controller.administracion;
 
 import DAO.AdminDAO;
-import DAO.AgenteDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -14,15 +13,9 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DTO.AdminDTO;
-import model.DTO.AgenteDTO;
-import utilidad.PasswordManager;
 import static utilidad.PasswordManager.hashPassword;
 import static utilidad.PasswordManager.verifyPassword;
 
-/**
- *
- * @author Mati
- */
 @WebServlet(name = "loginAdmin", urlPatterns = {"/loginAdmin"})
 public class loginAdmin extends HttpServlet {
     

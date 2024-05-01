@@ -6,7 +6,7 @@ import java.util.List;
 import model.DTO.*;
 
 public class AgenteDAO {
-   
+
     private static final String SQL_SELECT_ALL = "SELECT * FROM agentes";
     private static final String SQL_SELECT = "SELECT * FROM agentes WHERE placa = ?";
     private static final String SQL_SELECT_DNI = "SELECT * FROM agentes WHERE dniAgente = ?";
@@ -16,7 +16,7 @@ public class AgenteDAO {
 
     private AgenteDTO fromResultSet(ResultSet rs) throws SQLException {
         int placa = rs.getInt("placa");
-        
+
         String dniAgente = rs.getString("dniAgente");
         CiudadanoDTO ciudadano = new CiudadanoDAO().select(dniAgente);
 
@@ -25,7 +25,7 @@ public class AgenteDAO {
         String rango = rs.getString("rango");
         boolean isAdmin = rs.getBoolean("isAdmin");
 
-        AgenteDTO agente = new AgenteDTO(placa,ciudadano, password, imagen, rango, isAdmin);
+        AgenteDTO agente = new AgenteDTO(placa, ciudadano, password, imagen, rango, isAdmin);
 
         return agente;
     }
@@ -65,7 +65,7 @@ public class AgenteDAO {
                 stmt = conn.prepareStatement(SQL_SELECT);
                 stmt.setInt(1, placa);
                 rs = stmt.executeQuery();
-                
+
                 if (rs.next()) {
                     agente = fromResultSet(rs);
                 }
@@ -76,8 +76,8 @@ public class AgenteDAO {
 
         return agente;
     }
-    
-        public byte select(String dni) throws SQLException {
+
+    public byte select(String dni) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -89,7 +89,7 @@ public class AgenteDAO {
                 stmt = conn.prepareStatement(SQL_SELECT_DNI);
                 stmt.setString(1, dni);
                 rs = stmt.executeQuery();
-                
+
                 if (rs.next()) {
                     agente = fromResultSet(rs);
                     rows = 1;
@@ -115,9 +115,7 @@ public class AgenteDAO {
             stmt.setString(4, agente.getRango());
             stmt.setBoolean(5, agente.isAdmin());
 
-            System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
-            System.out.println("Registros afectados:" + rows);
         } catch (SQLException ex) {
             rows = 0;
         }
@@ -132,7 +130,6 @@ public class AgenteDAO {
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, agente.getCiudadano().getDni());
             stmt.setString(2, agente.getPassword());
@@ -142,7 +139,6 @@ public class AgenteDAO {
             stmt.setInt(6, agente.getPlaca());
 
             rows = stmt.executeUpdate();
-            System.out.println("Registros actualizado:" + rows);
 
         } catch (SQLException ex) {
             rows = 0;
@@ -158,15 +154,12 @@ public class AgenteDAO {
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setInt(1, agente.getPlaca());
             rows = stmt.executeUpdate();
-            System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
             rows = 0;
         }
-
         return rows;
     }
 }

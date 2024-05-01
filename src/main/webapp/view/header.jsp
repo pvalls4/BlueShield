@@ -49,7 +49,6 @@
                                     </c:if>
                                     <a href="agente?placa=${agente.placa}">${agente.ciudadano.nombre} ${agente.ciudadano.apellidos} (${agente.placa})</a>
                                 </div>
-
                                 <a href='logout' class="mx-1">
                                     <button type="submit" class="btn btn-primary b-login mb-1">Cerrar Sesi&oacute;n</button>
                                 </a>

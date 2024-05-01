@@ -5,8 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DireccionDAO{
-
+public class DireccionDAO {
 
     private static final String SQL_SELECT_ALL = "SELECT * FROM direcciones;";
     private static final String SQL_SELECT = "SELECT * FROM direcciones WHERE id = ?;";
@@ -20,14 +19,14 @@ public class DireccionDAO{
         String codigoPostal = rs.getString("codigo_postal");
         String calle = rs.getString("calle");
         String puerta = rs.getString("puerta");
-        String piso = rs.getString("piso"); 
+        String piso = rs.getString("piso");
         int numero = rs.getInt("numero");
-    
+
         DireccionDTO direccion = new DireccionDTO(id, municipio, codigoPostal, calle, piso, puerta, numero);
-            
+
         return direccion;
-    } 
-    
+    }
+
     public List<DireccionDTO> selectAll() throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -43,18 +42,18 @@ public class DireccionDAO{
                 direccion = fromResultSet(rs);
                 direcciones.add(direccion);
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             direcciones = null;
-        } 
+        }
         return direcciones;
     }
-     
+
     public DireccionDTO select(int idDireccion) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         DireccionDTO result = null;
-        
+
         try {
             conn = Conexion.getConnection();
             if (conn != null) {
@@ -65,7 +64,7 @@ public class DireccionDAO{
                     result = fromResultSet(rs);
                 }
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             result = null;
         }
         return result;
@@ -85,7 +84,6 @@ public class DireccionDAO{
             stmt.setString(5, direccion.getPuerta());
             stmt.setInt(6, direccion.getNumero());
 
-            System.out.println("ejecutando query:" + SQL_INSERT);
             stmt.executeUpdate();
             ResultSet generatedKeys = stmt.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -106,7 +104,6 @@ public class DireccionDAO{
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, direccion.getMunicipio());
             stmt.setString(2, direccion.getCodigoPostal());
@@ -117,8 +114,6 @@ public class DireccionDAO{
             stmt.setInt(7, direccion.getId());
 
             rows = stmt.executeUpdate();
-            System.out.println("Registros actualizado:" + rows);
-
         } catch (SQLException ex) {
             rows = 0;
         }
@@ -132,11 +127,9 @@ public class DireccionDAO{
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setInt(1, direccion.getId());
             rows = stmt.executeUpdate();
-            System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
             rows = 0;
         }

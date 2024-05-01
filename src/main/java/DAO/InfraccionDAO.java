@@ -5,8 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InfraccionDAO{
-
+public class InfraccionDAO {
 
     private static final String SQL_SELECT_ALL = "SELECT * FROM infracciones;";
     private static final String SQL_SELECT = "SELECT * FROM infracciones WHERE id = ?;";
@@ -20,12 +19,12 @@ public class InfraccionDAO{
         String codigoPostal = rs.getString("titulo");
         String descripcion = rs.getString("descripcion");
         float importe = rs.getFloat("importe");
-    
+
         InfraccionDTO infraccion = new InfraccionDTO(id, articulo, codigoPostal, descripcion, importe);
-            
+
         return infraccion;
-    } 
-    
+    }
+
     public List<InfraccionDTO> selectAll() throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -41,12 +40,12 @@ public class InfraccionDAO{
                 infraccion = fromResultSet(rs);
                 infracciones.add(infraccion);
             }
-        }catch (SQLException ex) {
-            infracciones=null;
+        } catch (SQLException ex) {
+            infracciones = null;
         }
         return infracciones;
     }
-     
+
     public InfraccionDTO select(int idInfraccion) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -62,8 +61,8 @@ public class InfraccionDAO{
                     infraccion = fromResultSet(rs);
                 }
             }
-        }catch (SQLException ex) {
-            infraccion=null;
+        } catch (SQLException ex) {
+            infraccion = null;
         }
         return infraccion;
     }
@@ -80,10 +79,8 @@ public class InfraccionDAO{
             stmt.setString(3, infraccion.getDescripcion());
             stmt.setFloat(4, infraccion.getImporte());
 
-            System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
-            System.out.println("Registros afectados:" + rows);
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             rows = 0;
         }
 
@@ -97,7 +94,6 @@ public class InfraccionDAO{
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, infraccion.getArticulo());
             stmt.setString(2, infraccion.getTitulo());
@@ -106,8 +102,6 @@ public class InfraccionDAO{
             stmt.setInt(5, infraccion.getId());
 
             rows = stmt.executeUpdate();
-            System.out.println("Registros actualizado:" + rows);
-
         } catch (SQLException ex) {
             rows = 0;
         }
@@ -122,12 +116,10 @@ public class InfraccionDAO{
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setInt(1, infraccion.getId());
             rows = stmt.executeUpdate();
-            System.out.println("Registros eliminados:" + rows);
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             rows = 0;
         }
 

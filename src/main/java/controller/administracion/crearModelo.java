@@ -1,13 +1,10 @@
 package controller.administracion;
 
-import DAO.AgenteDAO;
-import DAO.CiudadanoDAO;
 import DAO.ModeloDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import java.sql.SQLException;
-import java.util.List;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,13 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.DTO.AgenteDTO;
-import model.DTO.CiudadanoDTO;
 import model.DTO.ModeloDTO;
-import static utilidad.PasswordManager.hashPassword;
 
 @WebServlet(name = "crearModelo", urlPatterns = {"/crearModelo"})
 public class crearModelo extends HttpServlet {

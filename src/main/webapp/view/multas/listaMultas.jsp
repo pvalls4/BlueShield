@@ -1,7 +1,6 @@
 <%@ include file="../header.jsp" %>
 <div id="fondo" class="container rounded" style="background-color: #9acbfd">
     <div class="row">
-        <!--        buscador-->
         <div class="col">
             <form action="listaMultas" method="post">
                 <div class="input-group mb-3 p-4">

@@ -41,8 +41,7 @@ public class CondecoracionDAO {
                     condecoraciones.add(condecoracion);
                 }
             }
-        }  catch (SQLException ex) {
-            System.out.println(ex);
+        } catch (SQLException ex) {
             condecoraciones = null;
         }
 
@@ -102,8 +101,6 @@ public class CondecoracionDAO {
             stmt.setString(1, condecoracion.getTitulo());
             stmt.setString(2, condecoracion.getDescripcion());
             stmt.setString(3, condecoracion.getFoto());
-
-            //set del id a cambiar
             stmt.setInt(4, condecoracion.getId());
 
             rows = stmt.executeUpdate();

@@ -49,7 +49,6 @@ public class CiudadanoDAO {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println(ex);
             ciudadanos = null;
         }
 
@@ -74,7 +73,6 @@ public class CiudadanoDAO {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println(ex);
             dnis = null;
         }
         return dnis;
@@ -119,9 +117,7 @@ public class CiudadanoDAO {
             stmt.setString(8, ciudadano.getEnlaceFotografico());
             stmt.setInt(9, ciudadano.getDireccion().getId());
 
-            System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
-            System.out.println("Registros afectados:" + rows);
         } catch (SQLException ex) {
             rows = 0;
         }
@@ -136,7 +132,6 @@ public class CiudadanoDAO {
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, ciudadano.getNombre());
             stmt.setString(2, ciudadano.getApellidos());
@@ -147,12 +142,9 @@ public class CiudadanoDAO {
             stmt.setString(7, ciudadano.getEnlaceFotografico());
             stmt.setInt(8, ciudadano.getDireccion().getId());
 
-            //set del id a cambiar
             stmt.setString(9, ciudadano.getDni());
 
             rows = stmt.executeUpdate();
-            System.out.println("Registros actualizado:" + rows);
-
         } catch (SQLException ex) {
             rows = 0;
         }
@@ -167,11 +159,9 @@ public class CiudadanoDAO {
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setString(1, ciudadano.getDni());
             rows = stmt.executeUpdate();
-            System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
             rows = 0;
         }

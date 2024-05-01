@@ -46,7 +46,6 @@ public class CondecoracionAgenteDAO {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println(ex);
             condecoracionesAgentes = null;
         }
 
@@ -72,7 +71,6 @@ public class CondecoracionAgenteDAO {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println(ex);
             condecoracionesAgentes = null;
         }
 
@@ -156,8 +154,6 @@ public class CondecoracionAgenteDAO {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setDate(1, condecoracionAgente.getFecha_emision());
-
-            //set del id a cambiar
             stmt.setInt(2, condecoracionAgente.getCondecoracion().getId());
             stmt.setInt(3, condecoracionAgente.getAgente().getPlaca());
 

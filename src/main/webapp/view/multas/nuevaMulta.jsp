@@ -21,7 +21,7 @@
                                 </c:if>
                                 <c:if test="${empty listaCiudadanos}">
                                     <option value="Error en base de datos">
-                                </c:if>
+                                    </c:if>
                             </datalist>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                                 </c:if>
                                 <c:if test="${empty listaVehiculos}">
                                     <option value="Error en la base de datos">
-                                </c:if>
+                                    </c:if>
                             </datalist>
                         </div>
                     </div>
@@ -170,30 +170,25 @@
                 const btnEmitirDenuncia = document.querySelector("#emitirDenuncia");
                 const btnCancelar = document.querySelector("#cancelar");
                 const confirmar = document.querySelector("#confirmar");
-                const form = document.getElementById('nuevaMulta'); // Get the form by its id
-
+                const form = document.getElementById('nuevaMulta');
                 btnEmitirDenuncia.addEventListener("click", () => {
-                    // Verificar si todos los campos requeridos están llenos antes de mostrar el diálogo de confirmación
                     if (validarCamposRequeridos() && alMenosUnCheckboxMarcado()) {
-                        // Obtener los valores del DNI y la fecha de emisión
                         const dniDenunciado = document.getElementById("dni").value;
                         const fechaEmisionMulta = document.getElementById("fechaEmision").value;
                         const infraccionesSeleccionadas = [];
-                        let importeTotal = 0; // Importe total inicializado en 0
+                        let importeTotal = 0;
 
                         const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
                         checkboxes.forEach((checkbox) => {
-                            const jsonValue = JSON.parse(checkbox.value); // Parse the JSON string
-                            const importeArticulo = parseFloat(jsonValue.importe); // Get the importe value from JSON
-                            const articulo = (parseFloat(jsonValue.id)/100).toFixed(2); // Get the articuloId with format
-                            importeTotal += importeArticulo; // Sumar el importe al total
+                            const jsonValue = JSON.parse(checkbox.value); 
+                            const importeArticulo = parseFloat(jsonValue.importe); 
+                            const articulo = (parseFloat(jsonValue.id) / 100).toFixed(2); 
+                            importeTotal += importeArticulo; 
                             infraccionesSeleccionadas.push("Artículo: " + articulo);
                         });
 
-                        // Establecer los valores en el diálogo de confirmación
                         document.getElementById("infracciones").textContent = infraccionesSeleccionadas.join("\n");
-                        document.getElementById("importeTotal").textContent = importeTotal.toFixed(2) + ("\u20AC"); // Mostrar el importe total con 2 decimales
-
+                        document.getElementById("importeTotal").textContent = importeTotal.toFixed(2) + ("\u20AC"); 
                         document.getElementById("dniDenunciado").textContent = dniDenunciado;
                         document.getElementById("fechaEmisionMulta").textContent = fechaEmisionMulta;
 
@@ -202,33 +197,28 @@
                         alert('Por favor, completa todos los campos requeridos y marca al menos una opción.');
                     }
                 });
-                
+
                 btnCancelar.addEventListener("click", () => {
                     confirmar.close();
                 });
 
                 document.querySelector('#confirmarBtn').addEventListener("click", () => {
-                    // Verificar nuevamente si todos los campos requeridos están llenos antes de enviar el formulario
                     if (validarCamposRequeridos()) {
-                        // Formulario será enviado al servlet nuevaMulta
                         form.submit(); // Enviar el formulario
                     } else {
                         alert('Por favor, completa todos los campos requeridos.');
                     }
                 });
 
-                // Prevenir envío del formulario
                 form.addEventListener('submit', function (event) {
                     event.preventDefault();
                 });
 
-                // Función para verificar si al menos un checkbox está marcado
                 function alMenosUnCheckboxMarcado() {
                     var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
                     return checkboxes.length > 0;
                 }
 
-                // Función para validar que todos los campos requeridos estén llenos
                 function validarCamposRequeridos() {
                     var campos = form.querySelectorAll('[required]');
                     for (var i = 0; i < campos.length; i++) {
@@ -239,7 +229,6 @@
                     return true;
                 }
 
-                //funcion para autocompletar el nombre del denunciado con su dni
                 function buscarCiudadano() {
                     var dni = document.getElementById("dni").value;
                     if (dni.trim() !== '') {
@@ -260,9 +249,9 @@
                     }
                 }
             </script>
-        </div>
+    </div>
 </div></div>
 </form>
-                        </div>
+</div>
 </div>      
 <%@ include file="../footer.jsp" %>

@@ -76,7 +76,7 @@ public class VehiculoDAO {
 
         return vehiculo;
     }
-    
+
     public VehiculoDTO selectMATRICULA(String matricula) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -99,8 +99,7 @@ public class VehiculoDAO {
 
         return vehiculo;
     }
-    
-    
+
     public List<VehiculoDTO> selectDNI(String dniPropietario) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -123,7 +122,6 @@ public class VehiculoDAO {
         return vehiculos;
     }
 
-
     public int insert(VehiculoDTO vehiculo) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -136,11 +134,9 @@ public class VehiculoDAO {
             stmt.setString(3, vehiculo.getCiudadano().getDni());
             stmt.setInt(4, vehiculo.getModelo().getId());
 
-            System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
-            System.out.println("Registros afectados:" + rows);
         } catch (SQLException ex) {
-            rows=0;
+            rows = 0;
         }
 
         return rows;
@@ -153,19 +149,15 @@ public class VehiculoDAO {
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, vehiculo.getMatricula());
             stmt.setString(2, vehiculo.getCiudadano().getDni());
             stmt.setInt(3, vehiculo.getModelo().getId());
             stmt.setString(4, vehiculo.getBastidor());
 
-
             rows = stmt.executeUpdate();
-            System.out.println("Registros actualizado:" + rows);
-
         } catch (SQLException ex) {
-            rows=0;
+            rows = 0;
         }
 
         return rows;
@@ -178,13 +170,11 @@ public class VehiculoDAO {
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setString(1, vehiculo.getBastidor());
             rows = stmt.executeUpdate();
-            System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
-            rows=0;
+            rows = 0;
         }
         return rows;
     }

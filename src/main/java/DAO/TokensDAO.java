@@ -21,12 +21,12 @@ public class TokensDAO {
         String token = rs.getString("token");
         TokensDTO.Estado estado = TokensDTO.Estado.valueOf(rs.getString("estado"));
         TokensDTO.Tipo tipo = TokensDTO.Tipo.valueOf(rs.getString("tipo"));
-       
+
         int idAdmins = rs.getInt("idAdmins");
-        AdminDTO admin=new AdminDAO().select(idAdmins);
-        
+        AdminDTO admin = new AdminDAO().select(idAdmins);
+
         int idAgentes = rs.getInt("idAgentes");
-        AgenteDTO agente=null; //new AgenteDAO().select(idAgentes);
+        AgenteDTO agente = null; //new AgenteDAO().select(idAgentes);
 
         TokensDTO tokensDTO = new TokensDTO(id, token, estado, tipo, admin, agente);
 
@@ -69,7 +69,7 @@ public class TokensDAO {
                     tokenDTO = fromResultSet(rs);
                 }
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             tokenDTO = null;
         }
         return tokenDTO;
@@ -88,9 +88,7 @@ public class TokensDAO {
             stmt.setInt(4, tokens.getAdmin().getId());
             stmt.setInt(5, tokens.getAgente().getPlaca());
 
-            System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
-            System.out.println("Registros afectados:" + rows);
         } catch (SQLException ex) {
             rows = 0;
         }
@@ -105,7 +103,6 @@ public class TokensDAO {
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, tokens.getToken());
             stmt.setString(2, tokens.getEstado().name());
@@ -115,8 +112,6 @@ public class TokensDAO {
             stmt.setInt(6, tokens.getId());
 
             rows = stmt.executeUpdate();
-            System.out.println("Registros actualizado:" + rows);
-
         } catch (SQLException ex) {
             rows = 0;
         }
@@ -131,11 +126,9 @@ public class TokensDAO {
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setInt(1, tokens.getId());
             rows = stmt.executeUpdate();
-            System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
             rows = 0;
         }

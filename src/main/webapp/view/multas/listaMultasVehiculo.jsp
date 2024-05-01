@@ -6,9 +6,7 @@
                 <h2><strong><u>Multas de Vehículo: ${listaMultasVehiculo[0].vehiculo.matricula}</u></strong></h2>
             </div>
         </div>
-
         <div class="row">
-            <!--        buscador-->
             <div class="col">
                 <form action="listaMultasVehiculo" method="post">
                     <div class="input-group mb-3 p-4">

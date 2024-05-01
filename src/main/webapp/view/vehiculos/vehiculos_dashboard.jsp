@@ -13,7 +13,6 @@
         </div>
     </div>
     <div class="row">
-        <!--        buscador-->
         <div class="col">
             <form action="vehiculos" method="post">
                 <div class="input-group mb-3 p-4">

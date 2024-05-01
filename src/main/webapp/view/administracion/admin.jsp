@@ -9,12 +9,9 @@
                 </button>
                 <button onclick="ir(4)" class="boton m-3">
                     Crear Modelo
-                </button><!--
-                            <button onclick="ir(3)" class="boton m-3">
-                                Añadir Sanción
-                            </button>-->
+                </button>
                 <button onclick="ir(2)" class="boton m-3">
-                    Crear Condecoraci&oacuten
+                    Crear Condecoraci&oacute;n
                 </button>
             </div>
         </div>

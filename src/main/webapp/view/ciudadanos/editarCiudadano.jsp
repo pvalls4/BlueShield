@@ -1,12 +1,9 @@
 <%@ include file="../header.jsp" %>
-
 <div id="fondo" class="container rounded" style="background-color: #9acbfd">
-
     <c:if test="${empty ciudadano}">
         <div class="row justify-content-center text-center py-5 m-3" style="background-color: #bbddf5;color:#0757af;">
             Ha habido un problema en la base de datos.   
         </div>
-
     </c:if>
     <c:if test="${not empty ciudadano}">
         <div class="row px-4">
@@ -14,7 +11,6 @@
                 <h2>${ciudadano.nombre} ${ciudadano.apellidos} - ${ciudadano.dni}</h2>
             </div>
         </div>
-
         <div class="row p-3">
             <div class="col-md-12">
                 <form action="editarCiudadano" id="editarCiudadano" method="post">
@@ -36,7 +32,6 @@
                             <input type="email" class="form-control input-form"  id="email" name="email" value="${ciudadano.email}" required>
                         </div>
                     </div>
-
                     <div class="form-group row mx-3">
                         <div class="col-md-6">
                             <label for="calle" class="col-form-label">Calle</label>
@@ -47,8 +42,6 @@
                             <input type="text" class="form-control input-form"  id="municipio" name="municipio" value="${ciudadano.direccion.municipio}" required>
                         </div>
                     </div>
-
-
                     <div class="form-group row mx-3">
                         <div class="col-sm-3">
                             <label for="numero" class="col-form-label">Número</label>
@@ -76,8 +69,6 @@
                     </div>
                     <%@ include file="./modal_editarCiudadano.jsp" %>        
                     <script>
-
-
                         const btnToPopUp = document.querySelector("#toPopUp");
                         const btnCancelar = document.querySelector("#cancelar");
                         const confirmar = document.querySelector("#confirmar");
@@ -133,12 +124,10 @@
                             }
                             return true;
                         }
-
                     </script>
                 </form>
             </div>
         </div>
-
     </c:if>
 </div>
 <%@ include file="../footer.jsp" %>

@@ -5,8 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminDAO{
-
+public class AdminDAO {
 
     private static final String SQL_SELECT_ALL = "SELECT * FROM admins;";
     private static final String SQL_SELECT = "SELECT * FROM admins WHERE id = ?;";
@@ -19,12 +18,12 @@ public class AdminDAO{
         int id = rs.getInt("id");
         String email = rs.getString("email");
         String password = rs.getString("password");
-    
+
         AdminDTO admin = new AdminDTO(id, email, password);
-            
+
         return admin;
-    } 
-    
+    }
+
     public List<AdminDTO> selectAll() throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -45,13 +44,13 @@ public class AdminDAO{
         }
         return admines;
     }
-     
+
     public AdminDTO select(int idAdmin) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         AdminDTO result = null;
-        
+
         try {
             conn = Conexion.getConnection();
             if (conn != null) {
@@ -68,12 +67,12 @@ public class AdminDAO{
         return result;
     }
 
-        public AdminDTO select(String correoAdmin) throws SQLException {
+    public AdminDTO select(String correoAdmin) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         AdminDTO result = null;
-        
+
         try {
             conn = Conexion.getConnection();
             if (conn != null) {
@@ -89,7 +88,7 @@ public class AdminDAO{
         }
         return result;
     }
-        
+
     public int insert(AdminDTO admin) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -100,11 +99,9 @@ public class AdminDAO{
             stmt.setString(1, admin.getEmail());
             stmt.setString(2, admin.getPassword());
 
-            System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
-            System.out.println("Registros afectados:" + rows);
         } catch (SQLException ex) {
-            rows=0;
+            rows = 0;
         }
 
         return rows;
@@ -117,15 +114,12 @@ public class AdminDAO{
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, admin.getEmail());
             stmt.setString(2, admin.getPassword());
             stmt.setInt(3, admin.getId());
 
             rows = stmt.executeUpdate();
-            System.out.println("Registros actualizado:" + rows);
-
         } catch (SQLException ex) {
             rows = 0;
         }
@@ -140,11 +134,9 @@ public class AdminDAO{
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setInt(1, admin.getId());
             rows = stmt.executeUpdate();
-            System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
             rows = 0;
         }

@@ -6,7 +6,6 @@
         </div>
     </div>
     <div class="row">
-        <!--        buscador-->
         <div class="col">
             <form action="agentes" method="post">
                 <div class="input-group mb-3 p-4">

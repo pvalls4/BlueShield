@@ -127,9 +127,7 @@ public class MultaInfraccionDAO {
             stmt.setInt(1, multaInfraccion.getMulta().getId());
             stmt.setInt(2, multaInfraccion.getInfraccion().getId());
 
-            System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
-            System.out.println("Registros afectados:" + rows);
         } catch (SQLException ex) {
             rows = 0;
         }
@@ -169,14 +167,11 @@ public class MultaInfraccionDAO {
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setInt(1, multaInfraccion.getMulta().getId());
             stmt.setInt(2, multaInfraccion.getInfraccion().getId());
 
             rows = stmt.executeUpdate();
-            System.out.println("Registros actualizado:" + rows);
-
         } catch (SQLException ex) {
             rows = 0;
         }
@@ -191,12 +186,10 @@ public class MultaInfraccionDAO {
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setInt(1, multaInfraccion.getMulta().getId());
             stmt.setInt(2, multaInfraccion.getInfraccion().getId());
             rows = stmt.executeUpdate();
-            System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
             rows = 0;
         }
