@@ -164,7 +164,7 @@
                         var letras = 'TRWAGMYFPDXBNJZSQVHLCKE';
                         var residuo = numeroAleatorio % 23;
                         dni = numeroAleatorio.toString() + letras.charAt(residuo);
-                    } while (existeDNI(dni));
+                    } while (existeDNI(dni) && numeroAleatorio > 10000000 && numeroAleatorio < 99999999);
                     return dni;
                 }
                 function existeDNI(dni) {

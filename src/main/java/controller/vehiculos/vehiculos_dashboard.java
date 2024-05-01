@@ -46,7 +46,7 @@ public class vehiculos_dashboard extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ciudadanos_dashboard.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(vehiculos_dashboard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

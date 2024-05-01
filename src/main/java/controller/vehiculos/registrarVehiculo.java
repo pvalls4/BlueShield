@@ -65,7 +65,7 @@ public class registrarVehiculo extends HttpServlet {
                 VehiculoDTO vehiculo = new VehiculoDTO(bastidor, matricula, ciudadano, modeloDTO);
                 int rows = new VehiculoDAO().insert(vehiculo);
                 if (rows > 0 ) {
-                    response.sendRedirect("/vehiculos_dashboard");
+                    response.sendRedirect("/vehiculos");
                 }
             } else {
                 request.getRequestDispatcher("./view/errores/errorRegistroVehiculo.jsp").forward(request, response);
