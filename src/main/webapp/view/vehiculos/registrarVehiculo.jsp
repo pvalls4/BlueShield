@@ -2,7 +2,7 @@
 <div id="fondo" class="container rounded" style="background-color: #9acbfd">
     <div class="row px-4">
         <div class="col-md-12 g-3 text-center">
-            <h2><u><strong>REGISTRO DE VEHICULO</strong></u></h2>
+            <h2><u><strong>REGISTRO DE VEH&Iacute;CULO</strong></u></h2>
         </div>
     </div>
     <div class="row p-3">
@@ -11,11 +11,11 @@
                 <div class="form-group row mx-3">
                     <div class="col-md-6">
                         <label for="bastidor" class="col-form-label">Bastidor</label>
-                        <input type="text" autocomplete="off" class="form-control input-form"  id="bastidor" name="bastidor" placeholder="bastidor" required>
+                        <input type="text" autocomplete="off" class="form-control input-form"  id="bastidor" name="bastidor" placeholder="Bastidor" required>
                     </div>
                     <div class="col-md-6">
-                        <label for="matricula" class="col-form-label">Matricula</label>
-                        <input type="text" autocomplete="off" class="form-control input-form"  id="matricula" name="matricula" placeholder="matricula" required>
+                        <label for="matricula" class="col-form-label">Matr&iacute;cula</label>
+                        <input type="text" autocomplete="off" class="form-control input-form"  id="matricula" name="matricula" placeholder="Matr&iacute;cula" required>
                     </div>
                 </div>
                 <div class="form-group row mx-3">
@@ -35,7 +35,7 @@
                     </datalist>
                 </div>
                 <div class="form-group row mx-3">
-                    <label for="nombreCiudadano" class="col-form-label">Propietario Propietario</label>
+                    <label for="nombreCiudadano" class="col-form-label">Propietario</label>
                     <div class="col">
                         <input class="form-control input-form" autocomplete="off" id="nombreCiudadano" name="nombreCiudadano" placeholder="Nombre del propietario" required>
                     </div>
@@ -43,13 +43,13 @@
                 <div class="form-group row mx-3">
                     <label for="modelo" class="col-form-label">Modelo</label>
                     <div class="col">
-                        <input type="text" autocomplete="off" list="modeloOptions" class="form-control input-form"  id="modelo" name="modelo" placeholder="modelo" required >
+                        <input type="text" autocomplete="off" list="modeloOptions" class="form-control input-form"  id="modelo" name="modelo" placeholder="Modelo" required >
                         <input type="hidden" name="idModelo" id="idModelo">
                     </div>
                     <datalist id="modeloOptions">
                         <c:if test="${not empty listaModelos}">
                             <c:forEach items="${listaModelos}" var="modelod">
-                                <option value="${modelod.modelo} - ${modelod.marca}" data-id="${modelod.id}"</option>
+                                <option value="${modelod.marca} ${modelod.modelo}" data-id="${modelod.id}"</option>
                             </c:forEach>
                         </c:if>
                         <c:if test="${empty listaModelos}">

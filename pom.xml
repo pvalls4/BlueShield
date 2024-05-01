@@ -82,6 +82,7 @@
     </dependencies>
     
     <build>
+        <finalName>ROOT</finalName>
         <resources>
             <resource>
                 <directory>

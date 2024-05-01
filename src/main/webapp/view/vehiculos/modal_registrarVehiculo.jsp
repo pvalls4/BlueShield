@@ -1,5 +1,5 @@
 <dialog class="boton" id="confirmar"> 
-    <p class="text-center" style="font-weight: bold;">¿Confirmar Registro del vehiculo </p>
+    <p class="text-center" style="font-weight: bold;">¿Confirmar Registro del vehiculo?</p>
     <div class="row">
         <div class="col" style="color:black">
             Matricula: 
