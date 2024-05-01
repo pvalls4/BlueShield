@@ -69,7 +69,13 @@ public class editarVehiculo extends HttpServlet {
 
             int idModelo = Integer.parseInt(request.getParameter("idModelo"));
             ModeloDTO modeloDTO = new ModeloDAO().select(idModelo);
+            
+            String dniPropietario = request.getParameter("dni");
+            CiudadanoDTO ciudadano= new CiudadanoDAO().select(dniPropietario); 
+            
             vehiculo.setModelo(modeloDTO);
+            vehiculo.setCiudadano(ciudadano);
+            
             int rows = new VehiculoDAO().update(vehiculo);
             if (rows > 0) {
                 response.sendRedirect("vehiculo?id=" + vehiculo.getMatricula());

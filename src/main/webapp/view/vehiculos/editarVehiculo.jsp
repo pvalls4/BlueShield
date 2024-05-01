@@ -38,7 +38,7 @@
                     <div class="form-group row mx-3">
                         <label for="nombreCiudadano" class="col-form-label">Propietario Propietario</label>
                         <div class="col">
-                            <input class="form-control input-form"  id="nombreCiudadano" name="nombreCiudadano" placeholder="${vehiculo.ciudadano.nombre} ${vehiculo.ciudadano.apellidos}" required>
+                            <input class="form-control input-form" autocomplete="off" id="nombreCiudadano" name="nombreCiudadano" placeholder="${vehiculo.ciudadano.nombre} ${vehiculo.ciudadano.apellidos}" required>
                         </div>
                     </div>
 
@@ -59,58 +59,15 @@
                                 </c:if>
                         </datalist>
                     </div>    
-
-
                     <input type="hidden" name="bastidor" value="${vehiculo.bastidor}">
                     <div class="row justify-content-center text-center my-3 ">
                         <div class="col-md-6 col-lg-4">
-                            <button type="submit" class="boton mx-4 mt-4">Confirmar Edición</button>
-                            <a href="vehiculos"><button type="button" class="boton mx-4 mt-4">Cancelar</button></a>
+                            <button id="toPopUp" class="boton mx-4 mt-4">Confirmar Edición</button>
+                            <a href="vehiculos?id=${vehiculo.matricula}"><button type="button" class="boton mx-4 mt-4">Cancelar</button></a>
                         </div>
                     </div>
-                    <script>
-
-                        function buscarCiudadano() {
-                            var dni = document.getElementById("dni").value;
-                            if (dni.trim() !== '') {
-                                var xhr = new XMLHttpRequest();
-                                xhr.onreadystatechange = function () {
-                                    if (xhr.readyState === XMLHttpRequest.DONE) {
-                                        if (xhr.status === 200) {
-                                            document.getElementById("nombreCiudadano").value = xhr.responseText;
-                                        } else {
-                                            console.error('Error en la solicitud: ' + xhr.status);
-                                        }
-                                    }
-                                };
-                                xhr.open('GET', 'BuscarCiudadano?id=' + encodeURIComponent(dni), true);
-                                xhr.send();
-                            } else {
-                                document.getElementById("nombreCiudadano").value = "";
-                            }
-                        }
-                        
-                        document.getElementById('modelo').addEventListener('change', function () {
-                            var input = this;
-                            var dataList = input.list;
-                            var options = dataList.options;
-                            var selectedOption = null;
-
-                            for (var i = 0; i < options.length; i++) {
-                                if (options[i].value === input.value) {
-                                    selectedOption = options[i];
-                                    break;
-                                }
-                            }
-
-                            if (selectedOption) {
-                                var modeloId = selectedOption.getAttribute('data-id');
-                                document.getElementById('idModelo').value = modeloId;
-                            } else {
-                                document.getElementById('idModelo').value = '';
-                            }
-                        });
-                    </script>
+                    <%@ include file="./modal_editarVehiculo.jsp" %>
+                    <script src="../../js/modal_editarVehiculo.js"></script>
                 </form>
             </div>
         </div>
