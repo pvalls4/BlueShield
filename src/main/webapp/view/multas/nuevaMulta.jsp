@@ -59,7 +59,7 @@
                         <label for= "ubicacion" class="col rounded ms-3 me-2">Ubicaci&oacute;n</label>                                                 
                     </div>
                     <div class="row">
-                        <div class="col rounded ms-3 mb-2 me-2"><input type="text" class="form-control input-form" id="ubicacion" name="ubicacion"></div>
+                        <div class="col rounded ms-3 mb-2 me-2"><input type="text" class="form-control input-form" id="ubicacion" name="ubicacion" required></div>
                     </div>
                     <div class="row">
                         <label for= "observaciones" class="col rounded ms-3 me-2">Hechos</label>                        
