@@ -20,7 +20,7 @@
                     <img src="${ciudadano.enlaceFotografico}" class="img-fluid" alt="FotoCiudadano" style="object-fit: cover; width: 100%; height: 100%;">
                     <c:if test="${ciudadano.isDeceased}">
                         <div class="position-absolute top-0 start-0">
-                            <img src="../images/fallecido.png" alt="FALLECIDO" class="img-fluid">
+                            <img src="./images/fallecido.png" alt="FALLECIDO" class="img-fluid">
                         </div>
                     </c:if>
                 </div>
