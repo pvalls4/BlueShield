@@ -1,4 +1,4 @@
-package controller.ciudadanos;
+package controller.multas;
 
 import DAO.CiudadanoDAO;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DTO.CiudadanoDTO;
 
-@WebServlet(name = "BuscarCiudadano", urlPatterns = {"/BuscarCiudadano"})
+@WebServlet(name = "BuscarCiudadanoDeMulta", urlPatterns = {"/BuscarCiudadanoDeMulta"})
 public class BuscarCiudadano extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

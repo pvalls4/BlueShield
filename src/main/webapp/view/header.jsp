@@ -28,16 +28,14 @@
     </script>
     <body>
         <header>
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-12 col-md-4 text-center d-flex">
-                        <img src="./images/logoBS.png" class="logo mb-3 mb-md-0 img-fluid max-width-100" alt="Logo" onclick="redirigir('dashboard')">
-                        <div class="d-flex flex-column justify-content-center">
-                            <img src="./images/blueshield.png" class="blueshield img-fluid " alt="BlueShield" onclick="redirigir('dashboard')">
-                        </div>
+            <div class="container-fluid">
+                <div class="row align-items-center mx-0 px-0">
+                    <div class="col-sm-12 col-md-6 text-center">
+                        <img src="./images/logoBS.png" class="img-fluid logo" alt="Logo" onclick="redirigir('dashboard')">
+                        <img src="./images/blueshield2.png" class="img-fluid blueshield" alt="BlueShield" onclick="redirigir('dashboard')">
                     </div>
-                    <div class="col-md-4 text-center"></div>
-                    <div class="col-12 col-md-4 text-center">
+                    <div class="col-sm-12 col-md-2 text-center"></div>
+                    <div class="col-sm-12 col-md-3 text-center">
                         <div class="row align-items-center">
                             <%@ page import="model.DTO.AgenteDTO" %>
                             <c:set var="agente" value="${username}"/>
@@ -53,7 +51,7 @@
                                 </div>
 
                                 <a href='logout' class="mx-1">
-                                    <button type="submit" class="btn btn-primary b-login">Cerrar Sesi&oacute;n</button>
+                                    <button type="submit" class="btn btn-primary b-login mb-1">Cerrar Sesi&oacute;n</button>
                                 </a>
                             </c:if>
                             <c:if test="${empty username}">

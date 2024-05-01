@@ -5,6 +5,13 @@
             <h2><strong><u>REGISTRO CIVIL DE VEHÍCULOS</u></strong></h2>
         </div>
     </div>
+    <div class="row text-center ms-3">
+        <div class="col-md-12 d-flex justify-content-start">
+            <a href="registrarVehiculo">
+                <button class="btn btn-primary b-login">+ Registrar Vehiculo</button>
+            </a>
+        </div>
+    </div>
     <div class="row">
         <!--        buscador-->
         <div class="col">
@@ -19,7 +26,7 @@
                         </c:if>
                         <c:if test="${empty listaVehiculos}">
                             <option value="Error en la base de datos">
-                        </c:if>
+                            </c:if>
                     </datalist>
                     <button class="btn btn-primary" type="submit" id="button-addon2">
                         <i class="bi bi-search"></i>
