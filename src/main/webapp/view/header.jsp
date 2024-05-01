@@ -47,7 +47,7 @@
                                     <c:if test="${!agentelogged.isAdmin()}">
                                         <p class="version mb-0 text-md-right">Versi&oacute;n 1.0</p>
                                     </c:if>
-                                    <a href="agentelogged?placa=${agentelogged.placa}">${agentelogged.ciudadano.nombre} ${agentelogged.ciudadano.apellidos} (${agentelogged.placa})</a>
+                                    <a href="agente?placa=${agentelogged.placa}">${agentelogged.ciudadano.nombre} ${agentelogged.ciudadano.apellidos} (${agentelogged.placa})</a>
                                 </div>
                                 <a href='logout' class="mx-1">
                                     <button type="submit" class="btn btn-primary b-login mb-1">Cerrar Sesi&oacute;n</button>
