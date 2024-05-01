@@ -113,7 +113,7 @@ public class crearAgente extends HttpServlet {
             } catch (SQLException e) {
                 e.getStackTrace();
             }
-            request.setAttribute("idAgente",idPlaca);
+            request.setAttribute("idPlaca",idPlaca);
             request.setAttribute("dni", dni);
             request.setAttribute("dniInvalid", false);
             request.setAttribute("dni", dni);
