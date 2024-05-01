@@ -153,9 +153,6 @@
                                         document.getElementById('idModelo').value = '';
                                     }
                                 });
-
-
-
                     </script>
                 </form>
             </div>
