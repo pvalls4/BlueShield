@@ -30,7 +30,7 @@
     </div>
     <div class="row  mb-3 px-4">
         <div class="table-responsive">
-            <table class="table">
+            <table class="table align-middle text-center">
                 <thead>
                     <tr>
                         <th>Placa</th>
@@ -48,7 +48,7 @@
                                 <td>${agente.ciudadano.nombre} ${agente.ciudadano.apellidos}</td>
                                 <td>
                                     <a href="agente?placa=${agente.placa}">
-                                        <button class="btn btn-primary b-login mb-2">Ver</button>
+                                        <button class="btn btn-primary b-login">Ver</button>
                                     </a>
                                 </td>
                             </tr>
@@ -56,7 +56,7 @@
                     </c:if>
                     <c:if test="${empty listaAgentes}">
                         <tr>
-                            <td colspan="3">No hay agentes disponibles.</td>
+                            <td colspan="4">No hay agentes disponibles.</td>
                         </tr>
                     </c:if>
                 </tbody>

@@ -37,7 +37,7 @@
     </div>
     <div class="row  mb-3 px-4">
         <div class="table-responsive">
-            <table class="table">
+            <table class="table align-middle text-center">
                 <thead>
                     <tr>
                         <th>Bastidor</th>
@@ -58,7 +58,7 @@
 
                                 <td>
                                     <a href="vehiculo?id=${vehiculo.matricula}">
-                                        <button class="btn btn-primary b-login mb-2">Ver</button>
+                                        <button class="btn btn-primary b-login">Ver</button>
                                     </a>
                                 </td>
                             </tr>

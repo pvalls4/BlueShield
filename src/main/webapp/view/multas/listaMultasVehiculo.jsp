@@ -23,7 +23,7 @@
     </c:if>
     <div class="row  mb-3 px-4">
         <div class="table-responsive">
-            <table class="table">
+            <table class="table align-middle text-center">
                 <thead>
                     <tr>
                         <th>Num referencia</th>
@@ -45,15 +45,15 @@
                                 <td>${multa.fecha_limite}</td>
                                 <td>
                                     <a href="visualizarMulta?id=${multa.id}">
-                                        <button class="btn btn-primary b-login mb-2">Ver</button>
+                                        <button class="btn btn-primary b-login">Ver</button>
                                     </a>
                                 </td>
                             </tr>
                         </c:forEach>
                     </c:if>
                     <c:if test="${empty listaMultasVehiculo}">
-                        <tr>
-                            <td colspan="3">No hay multas disponibles.</td>
+                        <tr class>
+                            <td colspan="6">No hay multas disponibles.</td>
                         </tr>
                     </c:if>
                 </tbody>

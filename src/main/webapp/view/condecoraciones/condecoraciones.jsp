@@ -5,7 +5,7 @@
     </div>
     <div class="row  mb-3 px-4">
         <div class="table-responsive">
-            <table class="table">
+            <table class="table align-middle">
                 <thead>
                     <tr>
                         <th>Medalla</th>
@@ -23,7 +23,7 @@
                                 <td>${condecoracion.descripcion}</td>
                                 <td>
                                     <a href="condecoracionDetalles?id=${condecoracion.id}">
-                                        <button class="btn btn-primary b-login mb-2">Ver</button>
+                                        <button class="btn btn-primary b-login">Ver</button>
                                     </a>
                                 </td>
                             </tr>
@@ -31,7 +31,7 @@
                     </c:if>
                     <c:if test="${empty listaCondecoraciones}">
                         <tr>
-                            <td colspan="3">No hay condecoraciones disponibles.</td>
+                            <td colspan="4">No hay condecoraciones disponibles.</td>
                         </tr>
                     </c:if>
                 </tbody>

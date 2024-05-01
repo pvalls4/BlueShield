@@ -19,43 +19,45 @@
         </div>
     </div>
     <div class="row  mb-3 px-4">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Num referencia</th>
-                    <th>Ciudadano denunciado</th>
-                    <th>Fecha de emision</th>
-                    <th>Importe total</th>
-                    <th>Estado</th>
-                    <th>Fecha l&iacute;mite</th>
-                    <th>Detalles</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:if test="${not empty ultimasMultas}">
-                    <c:forEach items="${ultimasMultas}" var="multa">
-                        <tr>
-                            <td>${multa.id}</td>
-                            <td>${multa.ciudadano.nombre} ${multa.ciudadano.apellidos}</td>
-                            <td>${multa.fecha_emision}</td>
-                            <td>${String.format("%.2f", multa.importe_total)}&euro;</td>
-                            <td>${multa.isPagado ? 'Pagada' : 'No pagada'}</td>
-                            <td>${multa.fecha_limite}</td>
-                            <td>
-                                <a href="visualizarMulta?id=${multa.id}">
-                                    <button class="btn btn-primary b-login mb-2">Ver</button>
-                                </a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </c:if>
-                <c:if test="${empty ultimasMultas}">
+        <div class="table-responsive">
+            <table class="table align-middle text-center">
+                <thead>
                     <tr>
-                        <td colspan="3">No hay multas disponibles.</td>
+                        <th>Num referencia</th>
+                        <th>Ciudadano denunciado</th>
+                        <th>Fecha de emision</th>
+                        <th>Importe total</th>
+                        <th>Estado</th>
+                        <th>Fecha l&iacute;mite</th>
+                        <th>Detalles</th>
                     </tr>
-                </c:if>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <c:if test="${not empty ultimasMultas}">
+                        <c:forEach items="${ultimasMultas}" var="multa">
+                            <tr>
+                                <td>${multa.id}</td>
+                                <td>${multa.ciudadano.nombre} ${multa.ciudadano.apellidos}</td>
+                                <td>${multa.fecha_emision}</td>
+                                <td>${String.format("%.2f", multa.importe_total)}&euro;</td>
+                                <td>${multa.isPagado ? 'Pagada' : 'No pagada'}</td>
+                                <td>${multa.fecha_limite}</td>
+                                <td>
+                                    <a href="visualizarMulta?id=${multa.id}">
+                                        <button class="btn btn-primary b-login">Ver</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${empty ultimasMultas}">
+                        <tr>
+                            <td colspan="6">No hay multas disponibles.</td>
+                        </tr>
+                    </c:if>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <%@ include file="../footer.jsp" %>

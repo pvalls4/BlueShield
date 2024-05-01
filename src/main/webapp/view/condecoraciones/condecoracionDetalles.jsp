@@ -13,7 +13,7 @@
     <div class="row mb-3 px-4">
         <c:if test="${isAdmin}">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table align-middle">
                     <thead>
                         <tr class="text-center">
                             <th>Agente</th>
@@ -28,7 +28,7 @@
                                     <td><strong>${condecoracionAgente.agente.ciudadano.nombre} ${condecoracionAgente.agente.ciudadano.apellidos}</strong></td>
                                     <td>${condecoracionAgente.fecha_emision}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary b-login mb-2"  data-bs-toggle="modal" data-bs-target="#deleteModal" id="condecoracionAgente">Eliminar</button>
+                                        <button type="button" class="btn btn-primary b-login"  data-bs-toggle="modal" data-bs-target="#deleteModal" id="condecoracionAgente">Eliminar</button>
                                         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -53,7 +53,7 @@
                             </c:forEach>
                         </c:if>
                         <c:if test="${empty agentesCondecoracion}">
-                            <tr>
+                            <tr class="text-center">
                                 <td colspan="3">No hay condecoraciones disponibles.</td>
                             </tr>
                         </c:if>
@@ -81,7 +81,7 @@
                         </c:if>
                         <c:if test="${empty agentesCondecoracion}">
                             <tr class="text-center">
-                                <td colspan="3">No hay condecoraciones disponibles.</td>
+                                <td colspan="2">No hay condecoraciones disponibles.</td>
                             </tr>
                         </c:if>
                     </tbody>

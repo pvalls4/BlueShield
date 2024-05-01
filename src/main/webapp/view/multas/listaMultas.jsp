@@ -15,7 +15,7 @@
     </div>
     <div class="row  mb-3 px-4">
         <div class="table-responsive">
-            <table class="table">
+            <table class="table align-middle text-center">
                 <thead>
                     <tr>
                         <th>Num referencia</th>
@@ -37,7 +37,7 @@
                                 <td>${multa.fecha_limite}</td>
                                 <td>
                                     <a href="visualizarMulta?id=${multa.id}">
-                                        <button class="btn btn-primary b-login mb-2">Ver</button>
+                                        <button class="btn btn-primary b-login">Ver</button>
                                     </a>
                                 </td>
                             </tr>
@@ -45,7 +45,7 @@
                     </c:if>
                     <c:if test="${empty listaMultas}">
                         <tr>
-                            <td colspan="3">No hay multas disponibles.</td>
+                            <td colspan="6">No hay multas disponibles.</td>
                         </tr>
                     </c:if>
                 </tbody>
