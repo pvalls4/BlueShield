@@ -7,6 +7,5 @@
             <div class="col me-4 my-2"><a href="dashboard" class="col"><button type="submit" class="btn btn-primary b-login">Volver al men&uacute; principal</button></a></div>
         </div>
     </div>
-
 </div>
 <%@ include file="../footer.jsp" %>
