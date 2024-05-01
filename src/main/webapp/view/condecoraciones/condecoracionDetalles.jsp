@@ -9,23 +9,24 @@
     <div class="d-flex container-fluid justify-content-center m-3">
         <p><strong>Descripción:</strong> ${condecoracion.descripcion}</p>
     </div>
+
     <div class="row mb-3 px-4">
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Agente</th>
-                        <th>Fecha Emisión</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:if test="${not empty agentesCondecoracion}">
-                        <c:forEach items="${agentesCondecoracion}" var="condecoracionAgente">
-                            <tr>
-                                <td><strong>${condecoracionAgente.agente.ciudadano.nombre} ${condecoracionAgente.agente.ciudadano.apellidos}</strong></td>
-                                <td>${condecoracionAgente.fecha_emision}</td>
-                                <c:if test="${isAdmin}">
+        <c:if test="${isAdmin}">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr class="text-center">
+                            <th>Agente</th>
+                            <th>Fecha Emisión</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:if test="${not empty agentesCondecoracion}">
+                            <c:forEach items="${agentesCondecoracion}" var="condecoracionAgente">
+                                <tr class="text-center">
+                                    <td><strong>${condecoracionAgente.agente.ciudadano.nombre} ${condecoracionAgente.agente.ciudadano.apellidos}</strong></td>
+                                    <td>${condecoracionAgente.fecha_emision}</td>
                                     <td>
                                         <button type="button" class="btn btn-primary b-login mb-2"  data-bs-toggle="modal" data-bs-target="#deleteModal" id="condecoracionAgente">Eliminar</button>
                                         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -48,18 +49,45 @@
                                             </div>
                                         </div>
                                     </td>
-                                </c:if>
+                                </tr>
+                            </c:forEach>
+                        </c:if>
+                        <c:if test="${empty agentesCondecoracion}">
+                            <tr>
+                                <td colspan="3">No hay condecoraciones disponibles.</td>
                             </tr>
-                        </c:forEach>
-                    </c:if>
-                    <c:if test="${empty agentesCondecoracion}">
-                        <tr>
-                            <td colspan="3">No hay condecoraciones disponibles.</td>
+                        </c:if>
+                    </tbody>
+                </table>
+            </div>
+        </c:if>
+        <c:if test="${not isAdmin}">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr class="text-center">
+                            <th>Agente</th>
+                            <th>Fecha Emisión</th>
                         </tr>
-                    </c:if>
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        <c:if test="${not empty agentesCondecoracion}">
+                            <c:forEach items="${agentesCondecoracion}" var="condecoracionAgente">
+                                <tr class="text-center"> 
+                                    <td><strong>${condecoracionAgente.agente.ciudadano.nombre} ${condecoracionAgente.agente.ciudadano.apellidos}</strong></td>
+                                    <td>${condecoracionAgente.fecha_emision}</td>
+                                </tr>
+                            </c:forEach>
+                        </c:if>
+                        <c:if test="${empty agentesCondecoracion}">
+                            <tr class="text-center">
+                                <td colspan="3">No hay condecoraciones disponibles.</td>
+                            </tr>
+                        </c:if>
+                    </tbody>
+                </table>
+            </div>
+        </c:if>
     </div>
 </div>
 <%@ include file="../footer.jsp" %>
