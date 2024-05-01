@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.DTO.CiudadanoDTO;
 
-@WebServlet(name = "BuscarCiudadanoDeMulta", urlPatterns = {"/BuscarCiudadanoDeMulta"})
+@WebServlet(name = "BuscarCiudadano", urlPatterns = {"/BuscarCiudadano"})
 public class BuscarCiudadano extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
